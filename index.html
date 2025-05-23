@@ -1772,140 +1772,133 @@
                     <div id="error-msg" class="text-center text-red-400 mt-4 hidden"></div>
                 </div>
 
-               <!-- Dashboard (Visible After Login) -->
-<div id="dashboard" class="hidden max-w-4xl mx-auto">
-    <div class="card p-6">
-        <h2 class="text-2xl font-bold text-center font-space mb-6 gradient-text">OFFERWALLS</h2>
-        <p class="text-center opacity-70 mb-8">Access earning opportunities.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- CPX Research -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-12">
+                <!-- Dashboard (Visible After Login) -->
+                <div id="dashboard" class="hidden max-w-4xl mx-auto">
+                    <div class="card p-6">
+                        <h2 class="text-2xl font-bold text-center font-space mb-6 gradient-text">OFFERWALLS</h2>
+                         <p class="text-center opacity-70 mb-8">Access earning opportunities.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- Offerwall Buttons -->
+                            <!-- CPX Research -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallCPX" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+
+                            <!-- SushiAds Survey -->
+                            <div class="card p-6 hover:border-purple-500/30 transition-all">
+                                <div class="flex justify-center py-4 relative">
+                                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="sushiads Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallsads" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open Survey Wall
+                                </button>
+                            </div>
+
+                            <!-- SushiAds Offers -->
+                            <div class="card p-6 hover:border-purple-500/30 transition-all">
+                                <div class="flex justify-center py-4 relative">
+                                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="sushiads1 Logo" class="h-12">
+                                    <span class="absolute top-0 right-0 badge badge-warning">
+                                        Offers Only
+                                    </span>
+                                </div>
+                                <button id="openOfferWallsads1" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open Offer Wall
+                                </button>
+                            </div>
+
+                            <!-- KiwiWall -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://www.kiwiwall.com/img/logo.png" alt="kiwiwall Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallkiwi" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+
+                             <!-- BUXiQ Cashout -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://i.imgur.com/3CUrxKO.png" alt="buxiq Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallbuxiq" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Cashout
+                                </button>
+                            </div>
+
+                            <!-- BUXiQ Bonus -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://i.imgur.com/K5in0eX.png" alt="buxiq Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallbuxiqbonus" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Bonus
+                                </button>
+                            </div>
+
+                            <!-- Wannads -->
+                            <div class="card p-6 hover:border-purple-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" alt="Wannads Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallwannads" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+
+                            <!-- Chat (Linked from old code) -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://i.imgur.com/JNXYNqp.png" alt="Chat Icon" class="h-12">
+                                </div>
+                                <button id="openOfferWallchat" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open Chat
+                                </button>
+                            </div>
+
+                             <!-- TaskWall -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="http://publishers.taskwall.io//manager/uploads/logo-2.png" alt="TaskWall Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWalltaskwall" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+
+                            <!-- Porix -->
+                            <div class="card p-6 hover:border-purple-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://i.imgur.com/m3TMe67.png" alt="Porix Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallporix" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+
+                            <!-- Excentiv -->
+                            <div class="card p-6 hover:border-red-500/30 transition-all">
+                                <div class="flex justify-center py-4">
+                                    <img src="https://excentiv.com/images/app-logo.svg" alt="Excentiv Logo" class="h-12">
+                                </div>
+                                <button id="openOfferWallExcentiv" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
+                                    Open OfferWall
+                                </button>
+                            </div>
+                            <!-- Add more offerwall buttons here -->
+                        </div>
+                         <div class="mt-8 text-center">
+                             <button onclick="logout()" class="btn-accent py-2 px-4 rounded-lg">Logout</button>
+                         </div>
+                    </div>
                 </div>
-                <button id="openOfferWallCPX" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
             </div>
-
-            <!-- Revtoo -->
-            <div class="card p-6 hover:border-purple-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://i.imgur.com/fg7MRw0.jpeg" alt="Revtoo Logo" class="h-12">
-                </div>
-                <button id="openOfferWallRevtoo" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
-                    OPEN OFFERWALL
-                </button>
-            </div>
-
-            <!-- SushiAds Survey -->
-            <div class="card p-6 hover:border-purple-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Survey Logo" class="h-12">
-                </div>
-                <button id="openSushiSurvey" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
-                    Open Survey Wall
-                </button>
-            </div>
-
-            <!-- SushiAds Offers -->
-            <div class="card p-6 hover:border-purple-500/30 transition-all">
-                <div class="flex justify-center py-4 relative">
-                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Offers Logo" class="h-12">
-                    <span class="absolute top-0 right-0 badge badge-warning">Offers Only</span>
-                </div>
-                <button id="openSushiOffers" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
-                    Open Offer Wall
-                </button>
-            </div>
-
-            <!-- KiwiWall -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://www.kiwiwall.com/img/logo.png" alt="KiwiWall Logo" class="h-12">
-                </div>
-                <button id="openOfferWallKiwi" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
-            </div>
-
-            <!-- BUXiQ Cashout -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://i.imgur.com/3CUrxKO.png" alt="BUXiQ Cashout Logo" class="h-12">
-                </div>
-                <button id="openCashout" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Cashout
-                </button>
-            </div>
-
-            <!-- BUXiQ Bonus -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://i.imgur.com/K5in0eX.png" alt="BUXiQ Bonus Logo" class="h-12">
-                </div>
-                <button id="openBonus" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Bonus
-                </button>
-            </div>
-
-            <!-- Wannads -->
-            <div class="card p-6 hover:border-purple-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" alt="Wannads Logo" class="h-12">
-                </div>
-                <button id="openOfferWallWannads" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
-            </div>
-
-            <!-- Chat -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://i.imgur.com/JNXYNqp.png" alt="Chat Icon" class="h-12">
-                </div>
-                <button id="openChat" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Open Chat
-                </button>
-            </div>
-
-            <!-- TaskWall -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="http://publishers.taskwall.io//manager/uploads/logo-2.png" alt="TaskWall Logo" class="h-12">
-                </div>
-                <button id="openOfferWallTaskwall" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
-            </div>
-
-            <!-- Porix -->
-            <div class="card p-6 hover:border-purple-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://i.imgur.com/m3TMe67.png" alt="Porix Logo" class="h-12">
-                </div>
-                <button id="openOfferWallPorix" class="btn-accent w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
-            </div>
-
-            <!-- Excentiv -->
-            <div class="card p-6 hover:border-red-500/30 transition-all">
-                <div class="flex justify-center py-4">
-                    <img src="https://excentiv.com/images/app-logo.svg" alt="Excentiv Logo" class="h-12">
-                </div>
-                <button id="openOfferWallExcentiv" class="btn-primary w-full mt-4 py-2 px-4 rounded-lg">
-                    Open OfferWall
-                </button>
-            </div>
-        </div>
-
-        <div class="mt-8 text-center">
-            <button onclick="logout()" class="btn-accent py-2 px-4 rounded-lg">Logout</button>
-        </div>
-    </div>
-</div>
-
 
              <!-- Redeem Code Section -->
             <div id="earn" class="section hidden">
@@ -2352,8 +2345,6 @@
             'openOfferWallkiwi': (user) => `https://www.kiwiwall.com/wall/ICKEzWAlZv8O6QOXSxFdfJ7jLfU6RUtl/${user}`,
             'openOfferWalltaskwall': (user) => `https://wall.taskwall.io/?app_id=532d75c281c9725adc821ff7de18c199&userid=${user}`,
             'openOfferWallporix': (user) => `https://porix.org/app/iframe/10221/${user}`
-            'openOfferWallRevtoo': () => `https://revtoo.com/api/offers/?api_key=nlf4pfnq78bltlqw2yvlmnor36fdp2`
-
         };
 
         Object.keys(offerwallButtons).forEach(buttonId => {
