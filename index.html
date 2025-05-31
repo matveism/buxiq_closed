@@ -331,87 +331,142 @@ tailwind.config = {
                         <div id="error-msg" class="text-center text-red-400 mt-4 hidden"></div>
                     </div>
                     
-                    <!-- Dashboard (Visible After Login) -->
-                    <div id="dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm bg-opacity-90 border border-gray-700/50">
-                            <div class="p-8">
-                                <div class="text-center mb-10">
-                                    <h2 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 tracking-tight">
-                                        EARNING PORTAL
-                                    </h2>
-                                    <p class="mt-2 text-gray-400 font-light">Complete offers and surveys to earn rewards</p>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                                    <!-- Example Offer -->
-                                    <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                        <div class="relative z-10">
-                                            <div class="flex justify-center py-3">
-                                                <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                                            </div>
-                                            <button id="openOfferWallCPX" class="mt-4 w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/20">
-                                                Open OfferWall
-                                            </button>
-                                        </div>
-                                       <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-orange-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  <div class="relative z-10">
-    <div class="flex justify-center py-3">
-      <img src="https://sushiads.com/assets/images/logo-black.png" alt="Sushiads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-    </div>
-    <button id="openOfferWallsads" class="mt-4 w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-yellow-400/20">
-      Open OfferWall
-    </button>
-  </div>
-</div>
-<div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-green-400/30 group relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  <div class="relative z-10">
-    <div class="flex justify-center py-3">
-      <img src="https://www.wannads.com/assets/img/logo.svg" alt="Wannads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-    </div>
-    <button id="openOfferWallwannads" class="mt-4 w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-green-400/20">
-      Open OfferWall
-    </button>
-  </div>
-</div>
-<div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-pink-400/30 group relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  <div class="relative z-10">
-    <div class="flex justify-center py-3">
-      <img src="https://www.excentiv.com/wp-content/uploads/2023/10/excentiv-white.svg" alt="Excentiv Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-    </div>
-    <button id="openOfferWallExcentiv" class="mt-4 w-full bg-gradient-to-r from-pink-500 to-fuchsia-600 hover:from-pink-400 hover:to-fuchsia-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-pink-400/20">
-      Open OfferWall
-    </button>
-  </div>
-</div>
-<div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-lime-400/30 group relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-lime-400/10 to-green-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  <div class="relative z-10">
-    <div class="flex justify-center py-3">
-      <img src="https://www.kiwiwall.com/images/logo.png" alt="KiwiWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-    </div>
-    <button id="openOfferWallkiwi" class="mt-4 w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-black font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-lime-400/20">
-      Open OfferWall
-    </button>
-  </div>
-</div>
-
-                                    </div>
-                                </div>
-                                <div class="mt-12 text-center">
-                                    <button onclick="logout()" class="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg font-medium transition-all duration-200 border border-gray-600 hover:border-gray-500 shadow hover:shadow-lg">
-                                        Logout
-                                    </button>
-                                </div>
-                            </div>
+<!-- Dashboard (Visible After Login) -->
+<div id="dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm bg-opacity-90 border border-gray-700/50">
+        <div class="p-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 tracking-tight">
+                    EARNING PORTAL
+                </h2>
+                <p class="mt-2 text-gray-400 font-light">Complete offers and surveys to earn rewards</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- CPX Research Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
                         </div>
+                        <button id="openOfferWallCPX" class="mt-4 w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sushiads Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-orange-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://sushiads.com/assets/images/logo-black.png" alt="Sushiads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallsads" class="mt-4 w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-yellow-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Wannads Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-green-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://www.wannads.com/assets/img/logo.svg" alt="Wannads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallwannads" class="mt-4 w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-green-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Excentiv Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-pink-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://www.excentiv.com/wp-content/uploads/2023/10/excentiv-white.svg" alt="Excentiv Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallExcentiv" class="mt-4 w-full bg-gradient-to-r from-pink-500 to-fuchsia-600 hover:from-pink-400 hover:to-fuchsia-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-pink-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- KiwiWall Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-lime-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-lime-400/10 to-green-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://www.kiwiwall.com/images/logo.png" alt="KiwiWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallkiwi" class="mt-4 w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-black font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-lime-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- TaskWall Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-orange-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-red-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://taskwall.io/assets/images/taskwall-logo.png" alt="TaskWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWalltaskwall" class="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-orange-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Porix Offer -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-purple-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://porix.org/images/logo.png" alt="Porix Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallporix" class="mt-4 w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-400/20">
+                            Open OfferWall
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- BuxIQ Cashout -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-teal-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://i.imgur.com/5kXCilp.png" alt="BuxIQ Logo" class="h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallbuxiq" class="mt-4 w-full bg-gradient-to-r from-teal-400 to-cyan-500 hover:from-teal-300 hover:to-cyan-400 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-400/20">
+                            Go to Cashout
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- BuxIQ Bonus -->
+                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-amber-400/30 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-amber-400/10 to-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="flex justify-center py-3">
+                            <img src="https://i.imgur.com/5kXCilp.png" alt="BuxIQ Bonus" class="h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <button id="openOfferWallbuxiqbonus" class="mt-4 w-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-yellow-400/20">
+                            Claim Daily Bonus
+                        </button>
                     </div>
                 </div>
             </div>
+            <div class="mt-12 text-center">
+                <button onclick="logout()" class="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg font-medium transition-all duration-200 border border-gray-600 hover:border-gray-500 shadow hover:shadow-lg">
+                    Logout
+                </button>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
 
     <!-- Help Section -->
     <section id="section-help" class="hidden">
