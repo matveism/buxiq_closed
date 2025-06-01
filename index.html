@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,50 +13,61 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Your App Name">
 <title>Bux iQ</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        primary: '#3b82f6',
-        secondary: '#10b981',
-        dark: '#0f172a',
-        darker: '#020617',
-        card: '#1e293b',
-        accent: '#f59e0b',
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F77841',    /* 1st color */
+            secondary: '#F4475A',  /* 2nd color */
+            dark: '#0f172a',
+            darker: '#020617',
+            card: '#1e293b',
+            accent: '#f59e0b',
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(circle, rgba(255,255,255,0.1) 10%, rgba(0,0,0,0.1) 100%)',
+            'pattern': 'url(https://www.transparenttextures.com/patterns/black-linen.png)', /* Example pattern */
+          },
+          boxShadow: {
+            'card': '0 4px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+            'button': '0 4px 10px rgba(0, 0, 0, 0.2)',
+          },
+        }
       }
     }
-  }
-}
-</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-<style>
-/* Custom scrollbar styles */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 3px;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #3b82f6 #1e293b;
-}
-</style>
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Custom scrollbar styles */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #F77841;
+      border-radius: 3px;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: #F77841 #1e293b;
+    }
+
+
+  </style>
 </head>
+
 <body class="bg-dark text-white font-sans min-h-screen pb-16 md:pb-0">
 <div class="max-w-7xl mx-auto p-4">
 <!-- HEADER -->
@@ -348,124 +360,170 @@ tailwind.config = {
                 </h2>
                 <p class="mt-2 text-gray-400 font-light">Complete offers and surveys to earn rewards</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- CPX Research Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallCPX" class="mt-4 w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/20">
-                            Open OfferWall
-                        </button>
+            
+            <body class="bg-gray-900 text-white">
+    <!-- Main Container -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Iframe Container (hidden by default) -->
+        <div id="iframeContainer" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4">
+            <div class="relative w-full h-full max-w-6xl">
+                <button id="closeIframe" class="absolute -top-10 right-0 bg-red-600 hover:bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center z-50">
+                    ✕
+                </button>
+                <iframe id="dashboardIframe" class="w-full h-full rounded-lg border border-gray-700 bg-gray-900" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Offerwall Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- CPX Research -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
                     </div>
-                </div>
-                
-                <!-- Sushiads Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-cyan-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-orange-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://sushiads.com/assets/images/logo-black.png" alt="Sushiads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallsads" class="mt-4 w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-yellow-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Wannads Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-green-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://www.wannads.com/assets/img/logo.svg" alt="Wannads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallwannads" class="mt-4 w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-green-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Excentiv Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-pink-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://www.excentiv.com/wp-content/uploads/2023/10/excentiv-white.svg" alt="Excentiv Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallExcentiv" class="mt-4 w-full bg-gradient-to-r from-pink-500 to-fuchsia-600 hover:from-pink-400 hover:to-fuchsia-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-pink-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- KiwiWall Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-lime-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-lime-400/10 to-green-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://www.kiwiwall.com/images/logo.png" alt="KiwiWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallkiwi" class="mt-4 w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-black font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-lime-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- TaskWall Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-orange-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-red-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://taskwall.io/assets/images/taskwall-logo.png" alt="TaskWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWalltaskwall" class="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-orange-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Porix Offer -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-purple-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="https://porix.org/images/logo.png" alt="Porix Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallporix" class="mt-4 w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-400/20">
-                            Open OfferWall
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- BuxIQ Cashout -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-teal-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-cyan-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="#" alt="BuxIQ Logo" class="h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallbuxiq" class="mt-4 w-full bg-gradient-to-r from-teal-400 to-cyan-500 hover:from-teal-300 hover:to-cyan-400 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-400/20">
-                            Go to Cashout
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- BuxIQ Bonus -->
-                <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-amber-400/30 group relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-amber-400/10 to-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="flex justify-center py-3">
-                            <img src="#" alt="BuxIQ Bonus" class="h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <button id="openOfferWallbuxiqbonus" class="mt-4 w-full bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-yellow-400/20">
-                            Claim Daily Bonus
-                        </button>
-                    </div>
+                    <button id="openOfferWallCPX" class="mt-4 w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/20">
+                        Open OfferWall
+                    </button>
                 </div>
             </div>
+
+            <!-- SushiAds Survey -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-purple-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3 relative">
+                        <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="sushiads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallsads" class="mt-4 w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-500/20">
+                        Open Survey Wall
+                    </button>
+                </div>
+            </div>
+
+            <!-- SushiAds Offers -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-purple-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3 relative">
+                        <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="sushiads1 Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                        <span class="absolute top-0 right-0 bg-amber-500 text-gray-900 text-xs font-semibold px-2 py-1 rounded-full transform translate-x-1 -translate-y-1">
+                            Offers Only
+                        </span>
+                    </div>
+                    <button id="openOfferWallsads1" class="mt-4 w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-purple-500/20">
+                        Open Offer Wall
+                    </button>
+                </div>
+            </div>
+
+            <!-- KiwiWall -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-green-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://www.kiwiwall.com/img/logo.png" alt="kiwiwall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallkiwi" class="mt-4 w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-green-500/20">
+                        Open OfferWall
+                    </button>
+                </div>
+            </div>
+
+            <!-- BUXiQ Cashout -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-blue-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://i.imgur.com/3CUrxKO.png" alt="buxiq Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallbuxiq" class="mt-4 w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-blue-500/20">
+                        Cashout
+                    </button>
+                </div>
+            </div>
+
+            <!-- BUXiQ Bonus -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-blue-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://i.imgur.com/K5in0eX.png" alt="buxiq Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallbuxiqbonus" class="mt-4 w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-blue-500/20">
+                        Bonus
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wannads -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-orange-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" alt="Wannads Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallwannads" class="mt-4 w-full bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-orange-500/20">
+                        Open OfferWall
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-pink-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://i.imgur.com/JNXYNqp.png" alt="Chat Icon" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallchat" class="mt-4 w-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-pink-500/20">
+                        Open Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- TaskWall -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-teal-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="http://publishers.taskwall.io//manager/uploads/logo-2.png" alt="TaskWall Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWalltaskwall" class="mt-4 w-full bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-400 hover:to-cyan-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-teal-500/20">
+                        Open OfferWall
+                    </button>
+                </div>
+            </div>
+
+            <!-- Porix -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-violet-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://i.imgur.com/m3TMe67.png" alt="Porix Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallporix" class="mt-4 w-full bg-gradient-to-r from-violet-500 to-fuchsia-600 hover:from-violet-400 hover:to-fuchsia-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-violet-500/20">
+                        Open OfferWall
+                    </button>
+                </div>
+            </div>
+
+            <!-- Excentiv -->
+            <div class="bg-gray-800/50 hover:bg-gray-700/50 transition-all duration-300 rounded-xl p-5 border border-gray-700 hover:border-sky-400/30 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-sky-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <div class="flex justify-center py-3">
+                        <img src="https://excentiv.com/images/app-logo.svg" alt="Excentiv Logo" class="h-10 object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <button id="openOfferWallExcentiv" class="mt-4 w-full bg-gradient-to-r from-sky-500 to-cyan-600 hover:from-sky-400 hover:to-cyan-500 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg hover:shadow-sky-500/20">
+                        Open OfferWall
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <div class="mt-12 text-center">
                 <button onclick="logout()" class="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg font-medium transition-all duration-200 border border-gray-600 hover:border-gray-500 shadow hover:shadow-lg">
                     Logout
@@ -546,325 +604,428 @@ tailwind.config = {
 </div>
 
 <script>
-        // Load logs when page loads
-        document.addEventListener('DOMContentLoaded', fetchCSV);
-
-        async function fetchCSV() {
-            const logsContainer = document.querySelector('#logs div:last-child');
-            
-            try {
-                // Show loading state
-                logsContainer.innerHTML = `
-                    <div class="h-64 flex items-center justify-center">
-                        <div class="text-center text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-3 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            <p>Loading activity logs...</p>
-                        </div>
-                    </div>
-                `;
-
-                // Fetch CSV data
-                const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3p3daAnCETfJtrUUvaiNqoUreYkn9FIHus6rEyq-e8E8oLaV51L_NrVWjHp1CyTv3UqBqryq3aH-0/pub?gid=0&single=true&output=csv');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.text();
-                const rows = data.split('\n').slice(1); // Skip header row
-
-                // Clear container
-                logsContainer.innerHTML = '';
-
-                if (rows.length === 0 || (rows.length === 1 && rows[0].trim() === '')) {
-                    logsContainer.innerHTML = `
-                        <div class="h-64 flex items-center justify-center text-gray-400">
-                            <p>No activity logs found.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                // Process each row
-                let hasValidEntries = false;
-                
-                // Reverse to show newest first
-                rows.reverse().forEach((row, index) => {
-                    const columns = row.split(',').map(item => item.trim());
-                    
-                    // Check if row has required data (columns[2] = username, columns[6] = amount)
-                    if (columns.length >= 7 && columns[2] && columns[6]) {
-                        hasValidEntries = true;
-                        
-                        const timestamp = columns[0] || 'Recently';
-                        const username = columns[2];
-                        const offerName = columns[3] || 'Offer completed';
-                        const amount = columns[6];
-                        
-                        // Create color based on username
-                        const colors = ['bg-indigo-600', 'bg-pink-600', 'bg-emerald-600', 'bg-amber-600', 'bg-purple-600'];
-                        const randomColor = colors[username.charCodeAt(0) % colors.length];
-                        
-                        // Create log entry
-                        const logEntry = document.createElement('div');
-                        logEntry.className = `animate-fade-in opacity-0 flex items-center justify-between p-4 hover:bg-gray-700/50 transition-colors duration-200`;
-                        logEntry.style.animationDelay = `${index * 50}ms`;
-                        
-                        logEntry.innerHTML = `
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 flex items-center justify-center ${randomColor} rounded-full text-white font-bold">
-                                    ${username.charAt(0).toUpperCase()}
-                                </div>
-                                <div>
-                                    <div class="font-medium text-white">${username}</div>
-                                    <div class="text-xs text-gray-400">${offerName} • ${timestamp}</div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="font-semibold text-green-400">+${amount}</div>
-                                <div class="text-xs text-gray-400">Completed</div>
-                            </div>
-                        `;
-                        
-                        logsContainer.appendChild(logEntry);
-                    }
-                });
-
-                if (!hasValidEntries) {
-                    logsContainer.innerHTML = `
-                        <div class="h-64 flex items-center justify-center text-gray-400">
-                            <p>No valid activity entries found.</p>
-                        </div>
-                    `;
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                logsContainer.innerHTML = `
-                    <div class="h-64 flex flex-col items-center justify-center text-red-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p class="font-medium">Failed to load activity logs</p>
-                        <p class="text-xs text-gray-500 mt-1">${error.message}</p>
-                    </div>
-                `;
-            }
-        }
-   
-
-    // Section navigation
-    function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('section[id^="section-"]').forEach(section => {
-            section.classList.add('hidden');
-        });
-        
-        // Show selected section
-        document.getElementById(`section-${sectionId}`).classList.remove('hidden');
-        
-        // Update mobile nav active state
-        document.querySelectorAll('.nav-link-mobile').forEach(link => {
-            if (link.getAttribute('data-section') === sectionId) {
-                link.classList.remove('text-gray-400');
-                link.classList.add('text-blue-500');
-            } else {
-                link.classList.remove('text-blue-500');
-                link.classList.add('text-gray-400');
-            }
-        });
-    }
-
-    // Mobile navigation click handlers
-    document.querySelectorAll('.nav-link-mobile').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const section = link.getAttribute('data-section');
-            showSection(section);
-        });
-    });
-
-    // Iframe functions
-    function openIframe(url) {
-        document.getElementById('dashboardIframe').src = url;
-        document.getElementById('iframeContainer').classList.remove('hidden');
-    }
-
-    function closeIframe() {
-        document.getElementById('dashboardIframe').src = '';
-        document.getElementById('iframeContainer').classList.add('hidden');
-    }
-
-    // Login form handling
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add your login logic here
-        document.getElementById('login-container').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-    });
-
-    function logout() {
-        document.getElementById('dashboard').classList.add('hidden');
-        document.getElementById('login-container').classList.remove('hidden');
-    }
-
-    // Initial load
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchCSV();
-        showSection('earn'); // Show earn section by default
-        
-        // Set up offerwall button
-        document.getElementById('openOfferWallCPX').addEventListener('click', function() {
-            openIframe('https://www.cpx-research.com');
-        });
-    });
-</script>
-</body>
-</html>
-
-<script>
-// Navigation handler
-function showSection(section) {
-  const sections = ['earn', 'shop', 'leaders', 'profile', 'help', 'chat'];
-  sections.forEach(sec => {
-    document.getElementById('section-' + sec).classList.toggle('hidden', sec !== section);
-  });
-  // Highlight desktop nav links
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.toggle('bg-primary', link.dataset.section === section);
-    link.classList.toggle('text-white', link.dataset.section === section);
-    if (link.dataset.section === section) {
-      link.classList.remove('hover:bg-gray-700', 'text-gray-400');
-    } else {
-      link.classList.add('hover:bg-gray-700', 'text-gray-400');
-    }
-  });
-  // Highlight mobile nav links
-  document.querySelectorAll('.nav-link-mobile').forEach(link => {
-    link.classList.toggle('text-primary', link.dataset.section === section);
-    link.classList.toggle('text-gray-400', link.dataset.section !== section);
-  });
-}
-
-// Generate Captcha
+// Global variables
 let captchaCode = '';
+const offerwallButtons = {
+    'openOfferWallCPX': (user) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${user}&username=${user}&subid_1=&subid_2`,
+    'openOfferWallsads': (user) => `https://offerwall.sushiads.com/surveywall?apiKey=67e76c74ca62f460071524&userId=${user}`,
+    'openOfferWallchat': () => `https://bux-iq.netlify.app/chat.html`,
+    'openOfferWallwannads': (user) => `https://earn.wannads.com/wall?apiKey=67d3d43d63631681386947&userId=${user}`,
+    'openOfferWallsads1': (user) => `https://offerwall.sushiads.com/wall?apiKey=67e76c74ca62f460071524&userId=${user}`,
+    'openOfferWallExcentiv': (user) => `https://excentiv.com/offerwall/?&userid=${user}&key=q1v8KGQfCjmNeXnhsHyo`,
+    'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`,
+    'openOfferWallbuxiqbonus': () => `https://bux-iq.netlify.app/bonus.html`,
+    'openOfferWallkiwi': (user) => `https://www.kiwiwall.com/wall/ICKEzWAlZv8O6QOXSxFdfJ7jLfU6RUtl/${user}`,
+    'openOfferWalltaskwall': (user) => `https://wall.taskwall.io/?app_id=532d75c281c9725adc821ff7de18c199&userid=${user}`,
+    'openOfferWallporix': (user) => `https://porix.org/app/iframe/10221/${user}`
+};
 
-function generateCaptcha() {
-  captchaCode = Math.floor(10000 + Math.random() * 90000).toString();
-  const captchaEl = document.getElementById('captcha');
-  if (captchaEl) {
-    captchaEl.textContent = 'Enter: ' + captchaCode;
-  }
-  return captchaCode;
-}
-
-// Logout
-function logout() {
-  document.getElementById('dashboard').classList.add('hidden');
-  document.getElementById('login-container').classList.remove('hidden');
-  document.getElementById('account').value = '';
-  document.getElementById('clientid').value = '';
-  document.getElementById('captchaInput').value = '';
-  document.getElementById('error-msg').classList.add('hidden');
-  generateCaptcha();
-}
-
-// Event listeners for navigation
-document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    showSection(link.dataset.section);
-  });
+// DOM Content Loaded - Initialize everything
+document.addEventListener('DOMContentLoaded', function() {
+    // Generate initial CAPTCHA
+    generateCaptcha();
+    
+    // Show default section
+    showSection('earn');
+    
+    // Load activity logs
+    fetchCSV();
+    
+    // Set up chat functionality
+    setupChat();
+    
+    // Initialize all event listeners
+    initializeEventListeners();
+    
+    // Initialize offerwall buttons
+    initializeOfferwallButtons();
 });
 
-// Login form handler
-const loginForm = document.getElementById('loginForm');
-if (loginForm) {
-  loginForm.addEventListener('submit', async e => {
+// Initialize offerwall buttons
+function initializeOfferwallButtons() {
+    Object.keys(offerwallButtons).forEach(buttonId => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.addEventListener('click', function() {
+                const userAccount = document.getElementById('account').value.trim();
+                const urlGenerator = offerwallButtons[buttonId];
+                const url = urlGenerator(userAccount);
+                openIframe(url);
+            });
+        } else {
+            console.warn(`Button with ID '${buttonId}' not found.`);
+        }
+    });
+}
+
+// Initialize all event listeners
+function initializeEventListeners() {
+    // Navigation handlers
+    document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            showSection(link.dataset.section);
+        });
+    });
+    
+    // Login form handler
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLogin);
+    }
+    
+    // Iframe close button
+    const closeIframeBtn = document.getElementById('closeIframe');
+    if (closeIframeBtn) {
+        closeIframeBtn.addEventListener('click', closeIframe);
+    }
+    
+    // Logout button
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
+    
+    // Bonus code redemption
+    const redeemBtn = document.getElementById('redeemBonus');
+    if (redeemBtn) {
+        redeemBtn.addEventListener('click', redeemBonusCode);
+    }
+}
+
+// Iframe functions
+function openIframe(url) {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const dashboardIframe = document.getElementById('dashboardIframe');
+    if (iframeContainer && dashboardIframe) {
+        dashboardIframe.src = url;
+        iframeContainer.classList.remove('hidden');
+    } else {
+        console.warn("Iframe elements not found.");
+    }
+}
+
+function closeIframe() {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const dashboardIframe = document.getElementById('dashboardIframe');
+    if (iframeContainer && dashboardIframe) {
+        iframeContainer.classList.add('hidden');
+        dashboardIframe.src = '';
+    }
+}
+
+// Setup chat functionality
+function setupChat() {
+    // Send button
+    document.getElementById('send-chat')?.addEventListener('click', () => {
+        sendChatMessage();
+    });
+    
+    // Enter key in chat input
+    document.getElementById('chat-input')?.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendChatMessage();
+        }
+    });
+}
+
+function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const log = document.getElementById('chat-log');
+    if (input && log && input.value.trim() !== '') {
+        const msg = document.createElement('div');
+        msg.className = 'mb-2';
+        msg.innerHTML = `<span class="font-semibold text-primary">You:</span> ${input.value.trim()}`;
+        log.appendChild(msg);
+        input.value = '';
+        log.scrollTop = log.scrollHeight;
+    }
+}
+
+// Navigation handler
+function showSection(section) {
+    const sections = ['earn', 'shop', 'leaders', 'profile', 'help', 'chat'];
+    sections.forEach(sec => {
+        document.getElementById('section-' + sec).classList.toggle('hidden', sec !== section);
+    });
+    
+    // Highlight desktop nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('bg-primary', link.dataset.section === section);
+        link.classList.toggle('text-white', link.dataset.section === section);
+        if (link.dataset.section === section) {
+            link.classList.remove('hover:bg-gray-700', 'text-gray-400');
+        } else {
+            link.classList.add('hover:bg-gray-700', 'text-gray-400');
+        }
+    });
+    
+    // Highlight mobile nav links
+    document.querySelectorAll('.nav-link-mobile').forEach(link => {
+        link.classList.toggle('text-primary', link.dataset.section === section);
+        link.classList.toggle('text-gray-400', link.dataset.section !== section);
+    });
+}
+
+// Generate CAPTCHA
+function generateCaptcha() {
+    captchaCode = Math.floor(10000 + Math.random() * 90000).toString();
+    const captchaEl = document.getElementById('captcha');
+    if (captchaEl) {
+        captchaEl.textContent = 'Enter: ' + captchaCode;
+    }
+    return captchaCode;
+}
+
+// Login handler
+async function handleLogin(e) {
     e.preventDefault();
     const account = document.getElementById('login-account').value.trim();
     const clientid = document.getElementById('login-clientid').value.trim();
     const captchaInput = document.getElementById('captchaInput').value.trim();
     const errorMsg = document.getElementById('error-msg');
 
+    // Validate CAPTCHA
     if (captchaInput !== captchaCode) {
-      if (errorMsg) {
-        errorMsg.textContent = 'Invalid CAPTCHA';
-        errorMsg.classList.remove('hidden');
-      } else {
-        alert('Invalid CAPTCHA');
-      }
-      generateCaptcha();
-      document.getElementById('captchaInput').value = '';
-      return;
+        if (errorMsg) {
+            errorMsg.textContent = 'Invalid CAPTCHA';
+            errorMsg.classList.remove('hidden');
+        } else {
+            alert('Invalid CAPTCHA');
+        }
+        generateCaptcha();
+        document.getElementById('captchaInput').value = '';
+        return;
     }
 
     try {
-      const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-      if (!response.ok) throw new Error('Network response was not ok');
-      const data = await response.text();
-      const rows = data.trim().split('\n').map(row => row.split(','));
-      // Assume structure: Account#, ClientID, Status, Balance, Username, Avatar URL, Level
-      const user = rows.find(r => r[0] === account && r[1] === clientid);
-      if (user) {
-        const status = (user[2] || '').toLowerCase();
-        if (status === 'blocked') {
-          if (errorMsg) {
-            errorMsg.textContent = 'Your account is blocked.';
-            errorMsg.classList.remove('hidden');
-          } else {
-            alert('Your account is blocked.');
-          }
-          document.getElementById('login-account').value = '';
-          document.getElementById('login-clientid').value = '';
-          document.getElementById('captchaInput').value = '';
-          generateCaptcha();
-          return;
-        }
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
+        
+        // Find user in spreadsheet data
+        const user = rows.find(r => r[0] === account && r[1] === clientid);
+        
+        if (user) {
+            const status = (user[2] || '').toLowerCase();
+            if (status === 'blocked') {
+                if (errorMsg) {
+                    errorMsg.textContent = 'Your account is blocked.';
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    alert('Your account is blocked.');
+                }
+                document.getElementById('login-account').value = '';
+                document.getElementById('login-clientid').value = '';
+                document.getElementById('captchaInput').value = '';
+                generateCaptcha();
+                return;
+            }
 
-        // Update UI
-        const avatarUrl = user[5] || `https://ui-avatars.com/api/?background=c31432&color=fff&name=${encodeURIComponent(user[4] || 'User')}`;
-        document.getElementById('useravatar').src = avatarUrl;
-        document.getElementById('mobileUseravatar').src = avatarUrl;
-        document.getElementById('level').textContent = user[6] || '1';
-        document.getElementById('level').textContent = user[6] || '1';
-
-        document.getElementById('balance').innerHTML = `<span class="currency">$</span> ${user[3] || '0.00'}`;
-        document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $${user[3] || '0.00'}`;
-        document.getElementById('account').textContent = user[4] || 'User';
-
-        // Store in local storage if needed
-        localStorage.setItem('buxiq_account', account);
-
-        // Show dashboard
-        document.getElementById('login-container').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-        if (errorMsg) errorMsg.classList.add('hidden');
-      } else {
-        if (errorMsg) {
-          errorMsg.textContent = 'Invalid credentials';
-          errorMsg.classList.remove('hidden');
+            // Update UI with user data
+            updateUserUI(user);
+            
+            // Store in local storage if needed
+            localStorage.setItem('buxiq_account', account);
+            
+            // Show dashboard
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            if (errorMsg) errorMsg.classList.add('hidden');
         } else {
-          alert('Invalid credentials');
+            if (errorMsg) {
+                errorMsg.textContent = 'Invalid credentials';
+                errorMsg.classList.remove('hidden');
+            } else {
+                alert('Invalid credentials');
+            }
+            document.getElementById('captchaInput').value = '';
+            generateCaptcha();
+        }
+    } catch (err) {
+        console.error('Fetch error:', err);
+        if (errorMsg) {
+            errorMsg.textContent = 'Error loading data.';
+            errorMsg.classList.remove('hidden');
         }
         document.getElementById('captchaInput').value = '';
         generateCaptcha();
-      }
-    } catch (err) {
-      console.error('Fetch error:', err);
-      if (errorMsg) {
-        errorMsg.textContent = 'Error loading data.';
-        errorMsg.classList.remove('hidden');
-      }
-      document.getElementById('captchaInput').value = '';
-      generateCaptcha();
     }
-  });
 }
 
-// Offerwall Iframes
+// Update user UI after login
+function updateUserUI(user) {
+    const avatarUrl = user[5] || `https://ui-avatars.com/api/?background=c31432&color=fff&name=${encodeURIComponent(user[4] || 'User')}`;
+    
+    // Update avatars
+    document.getElementById('useravatar').src = avatarUrl;
+    document.getElementById('mobileUseravatar').src = avatarUrl;
+    
+    // Update level
+    document.getElementById('level').textContent = user[6] || '1';
+    
+    // Update balance
+    document.getElementById('balance').innerHTML = `<span class="currency">$</span> ${user[3] || '0.00'}`;
+    document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $${user[3] || '0.00'}`;
+    
+    // Update username
+    document.getElementById('account').textContent = user[4] || 'User';
+}
+
+// Logout function
+function logout() {
+    document.getElementById('dashboard').classList.add('hidden');
+    document.getElementById('login-container').classList.remove('hidden');
+    document.getElementById('login-account').value = '';
+    document.getElementById('login-clientid').value = '';
+    document.getElementById('captchaInput').value = '';
+    document.getElementById('error-msg').classList.add('hidden');
+    generateCaptcha();
+}
+
+// Update balance function
+async function updateBalance() {
+    const account = document.getElementById('account').value.trim();
+    const clientid = document.getElementById('clientid').value.trim();
+    if (!account || !clientid) return;
+
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network error');
+        
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(r => r.split(','));
+        const user = rows.find(r => r[0] === account && r[1] === clientid);
+        
+        if (user) {
+            document.getElementById('balance').innerHTML = `<span class="currency">$</span> ${user[3] || '0.00'}`;
+            document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $${user[3] || '0.00'}`;
+        } else {
+            document.getElementById('balance').innerHTML = `<span class="currency">$</span> 0.00`;
+            document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $0.00`;
+        }
+    } catch (err) {
+        console.error('Error updating balance:', err);
+    }
+}
+
+// Fetch CSV for activity logs
+async function fetchCSV() {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3p3daAnCETfJtrUUvaiNqoUreYkn9FIHus6rEyq-e8E8oLaV51L_NrVWjHp1CyTv3UqBqryq3aH-0/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network error');
+        
+        const data = await response.text();
+        const rows = data.trim().split('\n').slice(1); // skip header
+        const logsContainer = document.getElementById('logs')?.querySelector('div');
+        
+        if (!logsContainer) return;
+        logsContainer.innerHTML = '';
+
+        let hasLogs = false;
+        rows.forEach((row, index) => {
+            const cols = row.split(',').map(c => c.trim());
+            if (cols.length >= 7 && cols[2] && cols[6]) {
+                hasLogs = true;
+                const username = cols[2];
+                const amount = cols[6];
+                const logDiv = document.createElement('div');
+                logDiv.className = 'flex items-center justify-between p-3 mb-2 bg-white/10 rounded-lg text-sm';
+                logDiv.style.animationDelay = `${index * 50}ms`;
+                logDiv.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 flex items-center justify-center bg-red-600 rounded-full text-white">
+                            <span class="text-sm font-bold">${username.charAt(0).toUpperCase()}</span>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-white">${username}</div>
+                        </div>
+                    </div>
+                    <div class="text-green-400 font-semibold">+${amount}</div>
+                `;
+                logsContainer.prepend(logDiv);
+            }
+        });
+        
+        if (!hasLogs) {
+            logsContainer.innerHTML = '<div class="text-center h-full flex items-center justify-center opacity-70 font-medium"><p>Your activity log will appear here</p></div>';
+        }
+    } catch (err) {
+        console.error('Error fetching activity logs:', err);
+        const logsContainer = document.getElementById('logs')?.querySelector('div');
+        if (logsContainer) {
+            logsContainer.innerHTML = '<div class="text-center h-full flex items-center justify-center text-red-400 font-medium"><p>Error loading activity logs.</p></div>';
+        }
+    }
+}
+
+// Bonus code redemption
+async function redeemBonusCode() {
+    const username = document.getElementById('username').value.trim();
+    const bonusCode = document.getElementById('bonusCode').value.trim();
+    const amountLocalInput = document.getElementById('amountLocal');
+    const amountUsdInput = document.getElementById('amountUsd');
+
+    if (!username || !bonusCode) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    if (amountLocalInput) amountLocalInput.value = '';
+    if (amountUsdInput) amountUsdInput.value = '';
+
+    try {
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbxmqOnPJLPuHD6u_DD66bwY0R4MYQ8v9uF1Mv0pm8Sg9APSS4R4oXzbs3zin2FoTMK5/exec?username=${encodeURIComponent(username)}&bonusCode=${encodeURIComponent(bonusCode)}`);
+        const result = await response.text();
+        
+        if (result.includes('Error')) {
+            alert(result);
+        } else {
+            const [amountLocal, amountUsd] = result.split(',');
+            if (amountLocalInput) amountLocalInput.value = amountLocal.trim();
+            if (amountUsdInput) amountUsdInput.value = amountUsd.trim();
+            sendPostback(amountLocal, amountUsd, username, bonusCode);
+            alert('Bonus code redeemed successfully!');
+        }
+    } catch (err) {
+        console.error('Error redeeming bonus code:', err);
+        alert('Error redeeming bonus code. Please try again.');
+    }
+}
+
+// Postback function
+function sendPostback(amountLocal, amountUsd, username, bonusCode) {
+    const timestamp = Date.now();
+    const url = `https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status=success&trans_id=${timestamp}&user_id=${encodeURIComponent(username)}&bonusCode=${encodeURIComponent(bonusCode)}&sub_id=&sub_id_2=&amount_local=${encodeURIComponent(amountLocal)}&amount_usd=${encodeURIComponent(amountUsd)}&offer_id=bonus_redeem&hash=secure_hash_value&ip_click=192.168.1.1`;
+    
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log('Postback Success:', data))
+        .catch(err => console.error('Postback Error:', err));
+}
+  // Initialize offerwall buttons
+        function initializeOfferwallButtons() {
+            Object.keys(offerwallButtons).forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // For demo purposes, using a test user ID
+                        // In production, you would get this from your login system
+                        const testUserId = "test_user_123";
+                        const urlGenerator = offerwallButtons[buttonId];
+                        const url = urlGenerator(testUserId);
+                        openIframe(url);
+                    });
+                } else {
+                    console.warn(`Button with ID '${buttonId}' not found.`);
+                }
+            });
+        }
+
+        // Iframe functions
         function openIframe(url) {
             const iframeContainer = document.getElementById('iframeContainer');
             const dashboardIframe = document.getElementById('dashboardIframe');
@@ -872,242 +1033,33 @@ if (loginForm) {
                 dashboardIframe.src = url;
                 iframeContainer.classList.remove('hidden');
             } else {
-                 console.warn("Iframe elements not found.");
+                console.warn("Iframe elements not found.");
             }
         }
 
         function closeIframe() {
             const iframeContainer = document.getElementById('iframeContainer');
             const dashboardIframe = document.getElementById('dashboardIframe');
-             if (iframeContainer && dashboardIframe) {
+            if (iframeContainer && dashboardIframe) {
                 iframeContainer.classList.add('hidden');
-                dashboardIframe.src = ''; // Clear the iframe source
-             }
+                dashboardIframe.src = '';
+            }
         }
 
-        // Attach listeners to Offerwall buttons
-        const offerwallButtons = {
-            'openOfferWallCPX': (user) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${user}&username=${user}&subid_1=&subid_2`,
-            'openOfferWallsads': (user) => `https://offerwall.sushiads.com/surveywall?apiKey=67e76c74ca62f460071524&userId=${user}`,
-            'openOfferWallchat': () => `https://bux-iq.netlify.app/chat.html`, // Does not use user ID
-            'openOfferWallwannads': (user) => `https://earn.wannads.com/wall?apiKey=67d3d43d63631681386947&userId=${user}`,
-            'openOfferWallsads1': (user) => `https://offerwall.sushiads.com/wall?apiKey=67e76c74ca62f460071524&userId=${user}`,
-            'openOfferWallExcentiv': (user) => `https://excentiv.com/offerwall/?&userid=${user}&key=q1v8KGQfCjmNeXnhsHyo`,
-            'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`, // Does not use user ID
-            'openOfferWallbuxiqbonus': () => `https://bux-iq.netlify.app/bonus.html`, // Does not use user ID
-            'openOfferWallkiwi': (user) => `https://www.kiwiwall.com/wall/ICKEzWAlZv8O6QOXSxFdfJ7jLfU6RUtl/${user}`,
-            'openOfferWalltaskwall': (user) => `https://wall.taskwall.io/?app_id=532d75c281c9725adc821ff7de18c199&userid=${user}`,
-            'openOfferWallporix': (user) => `https://porix.org/app/iframe/10221/${user}`
-        };
-
-        Object.keys(offerwallButtons).forEach(buttonId => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.addEventListener('click', function() {
-                    const userAccount = document.getElementById('account').value.trim(); // Get account number from login form
-                    const urlGenerator = offerwallButtons[buttonId];
-                    const url = urlGenerator(userAccount); // Pass user account if needed
-                    openIframe(url);
-                });
-            } else {
-                 console.warn(`Button with ID '${buttonId}' not found.`);
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeOfferwallButtons();
+            
+            // Close iframe button
+            const closeIframeBtn = document.getElementById('closeIframe');
+            if (closeIframeBtn) {
+                closeIframeBtn.addEventListener('click', closeIframe);
             }
         });
-
-
-// Update balance function
-async function updateBalance() {
-  const account = document.getElementById('account').value.trim();
-  const clientid = document.getElementById('clientid').value.trim();
-  if (!account || !clientid) return;
-
-  try {
-    const response = await fetch('https://docs.google.com/spreadsheets/d/e/your_spreadsheet_url/pub?gid=0&single=true&output=csv');
-    if (!response.ok) throw new Error('Network error');
-    const data = await response.text();
-    const rows = data.trim().split('\n').map(r => r.split(','));
-    const user = rows.find(r => r[0] === account && r[1] === clientid);
-    if (user) {
-      document.getElementById('balance').innerHTML = `<span class="currency">$</span> ${user[3] || '0.00'}`;
-      document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $${user[3] || '0.00'}`;
-    } else {
-      document.getElementById('balance').innerHTML = `<span class="currency">$</span> 0.00`;
-      document.getElementById('mobileBalance').innerHTML = `<span class="material-symbols-rounded text-green-400 mr-1">savings</span> $0.00`;
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-// Fetch CSV for activity logs
-async function fetchCSV() {
-  try {
-    const response = await fetch('https://docs.google.com/spreadsheets/d/e/your_logs_spreadsheet_url/pub?gid=0&single=true&output=csv');
-    if (!response.ok) throw new Error('Network error');
-    const data = await response.text();
-    const rows = data.trim().split('\n').slice(1); // skip header
-    const logsContainer = document.getElementById('logs')?.querySelector('div');
-    if (!logsContainer) return;
-    logsContainer.innerHTML = '';
-
-    let hasLogs = false;
-    rows.forEach((row, index) => {
-      const cols = row.split(',').map(c => c.trim());
-      if (cols.length >= 7 && cols[2] && cols[6]) {
-        hasLogs = true;
-        const username = cols[2];
-        const amount = cols[6];
-        const logDiv = document.createElement('div');
-        logDiv.className = 'flex items-center justify-between p-3 mb-2 bg-white/10 rounded-lg text-sm';
-        logDiv.innerHTML = `
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 flex items-center justify-center bg-red-600 rounded-full text-white">
-              <span class="text-sm font-bold">${username.charAt(0).toUpperCase()}</span>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-white">${username}</div>
-            </div>
-          </div>
-          <div class="text-green-400 font-semibold">+${amount}</div>
-        `;
-        logsContainer.prepend(logDiv);
-      }
-    });
-    if (!hasLogs) {
-      logsContainer.innerHTML = '<div class="text-center h-full flex items-center justify-center opacity-70 font-medium"><p>Your activity log will appear here</p></div>';
-    }
-  } catch (err) {
-    console.error(err);
-    const logsContainer = document.getElementById('logs')?.querySelector('div');
-    if (logsContainer) {
-      logsContainer.innerHTML = '<div class="text-center h-full flex items-center justify-center text-red-400 font-medium"><p>Error loading activity logs.</p></div>';
-    }
-  }
-}
-
-// Bonus code redemption
-async function redeemBonusCode() {
-  const username = document.getElementById('username').value.trim();
-  const bonusCode = document.getElementById('bonusCode').value.trim();
-  const amountLocalInput = document.getElementById('amountLocal');
-  const amountUsdInput = document.getElementById('amountUsd');
-
-  if (!username || !bonusCode) {
-    alert('Please fill in all fields');
-    return;
-  }
-
-  if (amountLocalInput) amountLocalInput.value = '';
-  if (amountUsdInput) amountUsdInput.value = '';
-
-  try {
-    const response = await fetch(`https://script.google.com/macros/s/your_script_id/exec?username=${encodeURIComponent(username)}&bonusCode=${encodeURIComponent(bonusCode)}`);
-    const result = await response.text();
-    if (result.includes('Error')) {
-      alert(result);
-    } else {
-      const [amountLocal, amountUsd] = result.split(',');
-      if (amountLocalInput) amountLocalInput.value = amountLocal.trim();
-      if (amountUsdInput) amountUsdInput.value = amountUsd.trim();
-      sendPostback(amountLocal, amountUsd, username, bonusCode);
-      alert('Bonus code redeemed successfully!');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Error redeeming bonus code.');
-  }
-}
-
-// Postback
-function sendPostback(amountLocal, amountUsd, username, bonusCode) {
-  const timestamp = Date.now();
-  const url = `https://script.google.com/macros/s/your_postback_script_id/exec?status=success&trans_id=${timestamp}&user_id=${encodeURIComponent(username)}&bonusCode=${encodeURIComponent(bonusCode)}&amount_local=${encodeURIComponent(amountLocal)}&amount_usd=${encodeURIComponent(amountUsd)}`;
-  fetch(url)
-    .then(res => res.json())
-    .then(data => console.log('Postback:', data))
-    .catch(err => console.error('Postback error:', err));
-}
-
-// Initialize on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-  generateCaptcha();
-
-  // Show default section
-  showSection('earn');
-
-  // Load activity logs
-  fetchCSV();
-
-  // Set up chat send
-  document.getElementById('send-chat')?.addEventListener('click', () => {
-    const input = document.getElementById('chat-input');
-    const log = document.getElementById('chat-log');
-    if (input && log && input.value.trim() !== '') {
-      const msg = document.createElement('div');
-      msg.className = 'mb-2';
-      msg.innerHTML = `<span class="font-semibold text-primary">You:</span> ${input.value.trim()}`;
-      log.appendChild(msg);
-      input.value = '';
-      log.scrollTop = log.scrollHeight;
-    }
-  });
-  // Also send on Enter key
-  document.getElementById('chat-input')?.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      document.getElementById('send-chat')?.click();
-    }
-  });
-});
-// Attach event listeners
-Object.keys(offerwallButtons).forEach(id => {
-  const btn = document.getElementById(id);
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const url = offerwallButtons[id]();
-      openIframe(url);
-    });
-  }
-});
-// Show iframe overlay
-function openIframe(url) {
-  const container = document.getElementById('iframeContainer');
-  const iframe = document.getElementById('dashboardIframe');
-  if (container && iframe) {
-    iframe.src = url;
-    container.classList.remove('hidden');
-  }
-}
-
-// Hide iframe overlay
-function closeIframe() {
-  const container = document.getElementById('iframeContainer');
-  const iframe = document.getElementById('dashboardIframe');
-  if (iframe && container) {
-    iframe.src = '';
-    container.classList.add('hidden');
-  }
-}
-
-// Make sure to call generateCaptcha() on page load
-document.addEventListener('DOMContentLoaded', () => {
-  generateCaptcha();
-  // Optional: show default section
-  showSection('earn');
-});
-
-// Attach handlers for offerwall buttons
-Object.keys(offerwallButtons).forEach(id => {
-  const btn = document.getElementById(id);
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const url = offerwallButtons[id]();
-      openIframe(url);
-    });
-  }
-});
-
-
 </script>
-</body>
-</html>
+
+
+
+
+
+
