@@ -415,7 +415,7 @@
         }
 
         const userBalance = parseInt(user.balance || "0");
-        const userUSD = userBalance / 1000;
+        const userUSD = userBalance / 1;
         balanceBox.classList.remove("hidden");
         balanceBox.innerHTML = `Balance: <strong>${userBalance} pts / $${userUSD.toFixed(2)}</strong>`;
 
