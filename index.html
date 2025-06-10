@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Earn crypto, PayPal funds, and gift cards by completing offers and surveys" />
-<meta name="theme-color" content="#0f172a" />
+<meta name="theme-color" content="#0f0f1a" />
 <meta name="clckd" content="45663763f89113271aedcb23f063dab2" />
-<title>Bux iQ - Earn Rewards</title>
+<title>Bux iQ - Next-Gen Rewards Platform</title>
 
 <!-- Favicon and Apple Touch Icons -->
 <link rel="icon" type="image/png" href="https://i.imgur.com/wppiqAy.png" />
@@ -15,7 +15,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-title" content="Bux iQ" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<!-- Tailwind CSS -->
+
+<!-- 3D WebGL Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+
+<!-- Tailwind CSS with Extended Config -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -23,30 +28,53 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        primary: '#F77841',
-        secondary: '#F4475A',
-        dark: '#0f172a',
-        darker: '#020617',
-        card: '#1e293b',
+        primary: '#6d28d9',
+        secondary: '#ec4899',
+        dark: '#0f0f1a',
+        darker: '#050510',
+        card: '#1e1e2e',
         accent: '#f59e0b',
+        neon: '#00f0ff',
+        glow: 'rgba(0, 240, 255, 0.7)'
+      },
+      fontFamily: {
+        sans: ['"Exo 2"', 'sans-serif'],
+        mono: ['"Space Mono"', 'monospace']
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(circle, rgba(255,255,255,0.1) 10%, rgba(0,0,0,0.1) 100%)',
-        'pattern': 'url(https://www.transparenttextures.com/patterns/black-linen.png)',
+        'gradient-radial': 'radial-gradient(circle, rgba(109,40,217,0.2) 0%, rgba(0,0,0,0) 70%)',
+        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+        'circuit-pattern': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%239C92AC\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")'
       },
       boxShadow: {
-        'card': '0 4px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
-        'button': '0 4px 10px rgba(0, 0, 0, 0.2)',
-        'glow': '0 0 10px rgba(247, 120, 65, 0.5)',
+        'card': '0 8px 32px rgba(0, 0, 0, 0.3)',
+        'button': '0 4px 20px rgba(109, 40, 217, 0.5)',
+        'glow': '0 0 15px rgba(0, 240, 255, 0.7)',
+        'inner-glow': 'inset 0 0 10px rgba(0, 240, 255, 0.3)'
       },
       animation: {
-        'fade-in': 'fadeIn 0.3s ease-out forwards',
-        'pulse-slow': 'pulse 3s infinite',
+        'fade-in': 'fadeIn 0.5s ease-out forwards',
+        'pulse-slow': 'pulse 4s infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'neon-pulse': 'neonPulse 2s infinite alternate',
+        'hologram': 'hologram 8s linear infinite'
       },
       keyframes: {
         fadeIn: {
-          'from': { opacity: 0, transform: 'translateY(5px)' },
+          'from': { opacity: 0, transform: 'translateY(10px)' },
           'to': { opacity: 1, transform: 'translateY(0)' }
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
+        },
+        neonPulse: {
+          'from': { 'text-shadow': '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #6d28d9, 0 0 20px #6d28d9' },
+          'to': { 'text-shadow': '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ec4899, 0 0 40px #ec4899' }
+        },
+        hologram: {
+          '0%': { 'background-position': '0% 0%' },
+          '100%': { 'background-position': '100% 100%' }
         }
       }
     }
@@ -54,20 +82,25 @@ tailwind.config = {
 }
 </script>
 
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #1e1e2e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #F77841;
-  border-radius: 3px;
+  background: linear-gradient(to bottom, #6d28d9, #ec4899);
+  border-radius: 4px;
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -76,236 +109,333 @@ tailwind.config = {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 /* Gradient text */
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to right, #F77841, #F4475A);
+  background-image: linear-gradient(to right, #6d28d9, #ec4899);
 }
-/* Smooth transitions */
-.transition-slow {
+
+/* 3D Card effect */
+.card-3d {
+  transform-style: preserve-3d;
   transition: all 0.5s ease;
+  perspective: 1000px;
 }
-/* Card hover effect */
-.card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.card-3d:hover {
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
-/* Animation classes */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+
+/* Glowing border effect */
+.glow-border {
+  position: relative;
 }
-/* Custom scrollbar for logs */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: #F77841 #1e293b;
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #6d28d9, #ec4899, #00f0ff);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+.glow-border:hover::before {
+  opacity: 1;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #1e293b;
+
+/* Holographic effect */
+.holographic {
+  background: linear-gradient(135deg, rgba(30,30,46,0.8) 0%, rgba(109,40,217,0.2) 50%, rgba(30,30,46,0.8) 100%);
+  position: relative;
+  overflow: hidden;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #F77841;
-  border-radius: 3px;
+.holographic::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 240, 255, 0) 0%,
+    rgba(0, 240, 255, 0.1) 50%,
+    rgba(0, 240, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: hologram 8s linear infinite;
 }
+
+/* Custom button styles */
+.btn-futuristic {
+  background: linear-gradient(45deg, #6d28d9, #ec4899);
+  border: none;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+}
+.btn-futuristic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ec4899, #6d28d9);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn-futuristic:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(109, 40, 217, 0.6);
+}
+.btn-futuristic:hover::before {
+  opacity: 1;
+}
+
 /* Loading spinner */
 .spinner {
   width: 24px;
   height: 24px;
   border: 3px solid rgba(255,255,255,0.3);
   border-radius: 50%;
-  border-top-color: #F77841;
+  border-top-color: #6d28d9;
   animation: spin 1s ease-in-out infinite;
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* 3D Scene Container */
+#threejs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+/* Notification badge */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #ec4899, #f59e0b);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 10px rgba(236, 72, 153, 0.7);
+}
+
+/* Hexagon shape */
+.hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  background: rgba(0, 240, 255, 0.6);
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: float 15s infinite linear;
+}
+
+/* Terminal-like text effect */
+.terminal-text {
+  font-family: 'Space Mono', monospace;
+  color: #00f0ff;
+  text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
+}
 </style>
 </head>
-<body class="bg-dark text-white font-sans min-h-screen pb-16 md:pb-0 transition-colors duration-300">
+
+<body class="bg-dark text-white font-sans min-h-screen overflow-x-hidden" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==')">
+
+<!-- 3D Background Canvas -->
+<div id="threejs-container"></div>
+
+<!-- Floating Particles -->
+<div id="particles-container"></div>
 
 <!-- Main container -->
-<div class="max-w-7xl mx-auto p-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
 <!-- HEADER -->
-<header class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-  <!-- Logo -->
-  <div class="flex items-center justify-center">
-    <img src="https://i.imgur.com/rYiJAQn.png" alt="Bux iQ Logo" class="h-14 object-contain" loading="lazy" />
+<header class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 pt-8">
+  <!-- Logo with 3D effect -->
+  <div class="flex items-center justify-center relative group">
+    <div class="absolute -inset-2 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+    <img src="https://i.imgur.com/rYiJAQn.png" alt="Bux iQ Logo" class="h-16 object-contain transform group-hover:scale-105 transition duration-300" loading="lazy" />
+    
   </div>
 
   <!-- User Profile (Desktop) -->
   <div class="relative group hidden md:block cursor-pointer" id="user-profile">
-    <div class="flex items-center space-x-3 bg-card rounded-xl px-4 py-2 hover:bg-opacity-80 transition-all">
+    <div class="flex items-center space-x-3 bg-card rounded-xl px-4 py-2 hover:bg-opacity-80 transition-all glow-border">
       <div class="relative">
-        <img id="useravatar" src="https://ui-avatars.com/api/?background=c31432&color=fff&name=Guest" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-primary" loading="lazy" />
+        <img id="useravatar" src="https://ui-avatars.com/api/?background=6d28d9&color=fff&name=Guest" alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-primary" loading="lazy" />
       </div>
       <div>
         <p id="username" class="font-semibold"></p>
-        <p class="text-xs text-gray-400">Member</p>
+        <p class="text-xs text-gray-400 terminal-text">ID: GUEST-USER</p>
+      </div>
+    </div>
+    <!-- Dropdown menu -->
+    <div class="absolute right-0 mt-2 w-56 bg-card rounded-xl shadow-lg hidden group-hover:block transform transition-all duration-300 origin-top-right z-50 glow-border">
+      <div class="p-4">
+        <div class="flex items-center space-x-3 mb-4">
+          <img id="dropdown-avatar" src="https://ui-avatars.com/api/?background=6d28d9&color=fff&name=Guest" alt="User Avatar" class="w-10 h-10 rounded-full border border-primary" />
+          <div>
+            <p id="dropdown-username" class="font-medium">Guest User</p>
+            <p class="text-xs text-gray-400">Level: 0</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <a href="#" class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition">
+            <i class="fas fa-user-circle mr-2 text-primary"></i> Profile
+          </a>
+          <a href="#" class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition">
+            <i class="fas fa-cog mr-2 text-primary"></i> Settings
+          </a>
+          <a href="#" class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-800 transition">
+            <i class="fas fa-sign-out-alt mr-2 text-primary"></i> Logout
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Balance Indicators (Desktop) -->
   <div class="flex flex-wrap gap-3 hidden md:flex" id="balance-indicators">
-    <div class="bg-gradient-to-r from-primary to-blue-600 px-4 py-2 rounded-xl flex items-center shadow-md">
-      <i class="fas fa-coins mr-2 text-yellow-300"></i>
+    <div class="bg-gradient-to-r from-primary/20 to-blue-600/20 px-4 py-2 rounded-xl flex items-center shadow-md glow-border backdrop-blur-sm">
+      <div class="mr-3 relative">
+        <i class="fas fa-coins text-yellow-300 text-xl"></i>
+        <div class="absolute -inset-1 bg-yellow-300 rounded-full blur opacity-20"></div>
+      </div>
       <div>
-        <p class="text-xs text-gray-300">Balance</p>
-        <p id="balance" class="font-bold">$0.00</p>
+        <p class="text-xs text-gray-300">BALANCE</p>
+        <p id="balance" class="font-bold text-lg tracking-tighter">$0.00</p>
       </div>
     </div>
-    <div class="bg-gradient-to-r from-secondary to-green-600 px-4 py-2 rounded-xl flex items-center shadow-md">
-      <i class="fas fa-bolt mr-2 text-yellow-300"></i>
+    <div class="bg-gradient-to-r from-secondary/20 to-green-600/20 px-4 py-2 rounded-xl flex items-center shadow-md glow-border backdrop-blur-sm">
+      <div class="mr-3 relative">
+        <i class="fas fa-bolt text-yellow-300 text-xl"></i>
+        <div class="absolute -inset-1 bg-yellow-300 rounded-full blur opacity-20"></div>
+      </div>
       <div>
-        <p class="text-xs text-gray-300">Level</p>
-        <p id="level" class="font-bold">n/a</p>
+        <p class="text-xs text-gray-300">LEVEL</p>
+        <p id="level" class="font-bold text-lg tracking-tighter">0</p>
       </div>
     </div>
   </div>
 </header>
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    html {
-      box-sizing: border-box;
-      font-family: Poppins;
-      font-style: normal;
-    }
 
-    body {
-      box-sizing: border-box;
-      font-family: Poppins;
-      font-style: normal;
-      margin: 0px;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      width: 100vw;
-    }
-
-    .free-container {
-      box-sizing: border-box;
-      font-family: Poppins;
-      font-style: normal;
-      gap: 15px;
-      display: flex;
-      height: fit-content;
-      margin-bottom: 40px;
-      color: rgb(255, 255, 255);
-    }
-
-    .discord {
-      box-sizing: border-box;
-      font-family: Poppins;
-      font-style: normal;
-      background: rgb(33, 41, 77);
-      border-radius: 12px;
-      height: 100px;
-      max-height: 50px;
-      width: 100%;
-      min-width: 265px;
-      -webkit-box-pack: center;
-      justify-content: center;
-      display: flex;
-      -webkit-box-align: center;
-      align-items: center;
-      color: rgb(76, 174, 255);
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-    }
-
-    .highlight {
-      box-sizing: border-box;
-      font-family: Poppins;
-      font-style: normal;
-      color: rgb(114, 136, 220);
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <div class="free-container">
-    <div class="discord">
-      <p>
-        $1 = 200 PTS <span class="highlight">REQUIRED</span> IN ORDER TO CASHOUT WE TAKE (50%).
-      </p>
-      <br />
+<!-- Announcement Banner -->
+<div class="bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-2xl p-4 mb-6 border border-purple-500/30 glow-border backdrop-blur-sm">
+  <div class="flex items-center justify-center">
+    <div class="mr-3 text-yellow-300 animate-pulse">
+      <i class="fas fa-exclamation-triangle"></i>
     </div>
+    <p class="text-center font-medium">
+      <span class="text-neon">$1 = 200 PTS</span> <span class="text-white">REQUIRED TO CASHOUT</span> <span class="text-red-400">(50% FEE APPLIED)</span>
+    </p>
   </div>
-</body>
-</html>
+</div>
+
 <!-- Desktop Navigation -->
-<nav class="hidden md:flex justify-start space-x-2 bg-card p-2 rounded-xl mb-6 shadow-lg">
-  <a href="#" data-section="earn" class="nav-link px-6 py-3 rounded-lg bg-primary font-medium flex items-center transition-all">
+<nav class="hidden md:flex justify-start space-x-2 bg-card/50 p-2 rounded-xl mb-6 shadow-lg backdrop-blur-sm border border-gray-700/50">
+  <a href="#" data-section="earn" class="nav-link px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-secondary font-medium flex items-center transition-all btn-futuristic">
     <i class="fas fa-home mr-2"></i> Home
   </a>
-  <a href="#" data-section="shop" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center transition-all">
+  <a href="#" data-section="shop" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700/50 flex items-center transition-all glow-border">
     <i class="fas fa-shopping-bag mr-2"></i> Shop
   </a>
-  <a href="#" data-section="leaders" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center transition-all">
+  <a href="#" data-section="leaders" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700/50 flex items-center transition-all glow-border">
     <i class="fas fa-trophy mr-2"></i> Leaders
   </a>
-  <a href="#" data-section="profile" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center transition-all">
+  <a href="#" data-section="profile" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700/50 flex items-center transition-all glow-border">
     <i class="fas fa-money-bill-wave mr-2"></i> Earn
   </a>
-  <a href="#" data-section="help" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center transition-all">
+  <a href="#" data-section="help" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700/50 flex items-center transition-all glow-border">
     <i class="fas fa-question-circle mr-2"></i> Help
   </a>
-  <a href="#" data-section="chat" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center transition-all">
+  <a href="#" data-section="chat" class="nav-link px-6 py-3 rounded-lg hover:bg-gray-700/50 flex items-center transition-all glow-border">
     <i class="fas fa-comments mr-2"></i> Chat
+    <div class="notification-badge">3</div>
   </a>
 </nav>
 
 <!-- Mobile User Info Bar -->
-<div class="md:hidden flex items-center justify-between bg-card p-3 rounded-xl mb-4">
+<div class="md:hidden flex items-center justify-between bg-card/50 p-3 rounded-xl mb-4 backdrop-blur-sm border border-gray-700/50 glow-border">
   <div class="flex items-center space-x-3">
     <div class="relative">
-      <img id="mobileUseravatar" src="https://ui-avatars.com/api/?background=c31432&color=fff&name=User" alt="User Avatar" class="w-12 h-12 rounded-full avatar" />
+      <img id="mobileUseravatar" src="https://ui-avatars.com/api/?background=6d28d9&color=fff&name=User" alt="User Avatar" class="w-12 h-12 rounded-full avatar border-2 border-primary" />
+      <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-card"></div>
     </div>
     <div>
-      
-      <p class="text-xs text-gray-400"></p>
+      <p id="mobileUsername" class="font-medium">Guest</p>
+      <p class="text-xs text-gray-400 terminal-text">ID: MOBILE-USER</p>
     </div>
   </div>
   <div class="flex space-x-2">
-    <div class="bg-gradient-to-r from-primary to-blue-600 px-3 py-1 rounded-lg flex items-center">
+    <div class="bg-gradient-to-r from-primary/20 to-blue-600/20 px-3 py-1 rounded-lg flex items-center glow-border">
       <i class="fas fa-coins text-yellow-300 text-sm"></i>
       <span id="mobileBalance" class="ml-1 text-sm font-medium">0.00</span>
     </div>
-    <div class="bg-gradient-to-r from-secondary to-green-600 px-3 py-1 rounded-lg flex items-center">
+    <div class="bg-gradient-to-r from-secondary/20 to-green-600/20 px-3 py-1 rounded-lg flex items-center glow-border">
       <i class="fas fa-bolt text-yellow-300 text-sm"></i>
-      <span id="Level" class="ml-1 text-sm font-medium">ON DESKTOP LVL DISPLAY ONLY!</span>
+      <span id="Level" class="ml-1 text-sm font-medium">0</span>
     </div>
   </div>
 </div>
 
-<main class="container mx-auto px-4 py-8 md:py-12">
+<main class="container mx-auto px-4 py-8 md:py-12 relative z-10">
+
+  <main class="container mx-auto px-4 py-8 md:py-12">
 
   <!-- Activity Logs -->
 
-  <div id="logs" class="card mb-6 h-48 overflow-hidden bg-card rounded-xl shadow-lg">
+  <div id="logs" class="card mb-6 h-48 overflow-hidden bg-card rounded-xl shadow-lg">
 
-    <div class="p-4 h-full overflow-y-auto custom-scrollbar">
+    <div class="p-4 h-full overflow-y-auto custom-scrollbar">
 
-      <div class="text-center h-full flex items-center justify-center opacity-70 font-medium">
+      <div class="text-center h-full flex items-center justify-center opacity-70 font-medium">
 
-        <p>Your activity log will appear here</p>
+        <p>Your activity log will appear here</p>
 
-      </div>
+      </div>
 
-    </div>
+    </div>
 
-  </div>
+  </div>
 
   <!-- Section: Earn Crypto & Rewards -->
 
-  <section id="section-earn" class="animate-fade-in">
+  <section id="section-earn" class="animate-fade-in">
     <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 shadow-2xl mb-8 border border-gray-700">
       <div class="text-center mb-10">
         <h1 class="text-5xl font-extrabold mb-4" style="background-image: linear-gradient(to right, #8A2BE2, #00BFFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Elevate Your Earnings & Rewards</h1>
