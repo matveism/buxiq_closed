@@ -809,44 +809,86 @@ tailwind.config = {
   </section>
 
   <!-- Section: Chat -->
-  <section id="section-chat" class="hidden">
-    <div class="windows-xp-panel mb-6">
-      <div class="windows-xp-inner-panel p-4">
-        <h2 class="text-2xl font-bold mb-4 gradient-text">Community Chat</h2>
-        <div class="windows-xp-inner-panel p-3 h-64 overflow-y-auto mb-3">
-          <div class="space-y-2">
-            <div class="flex items-start">
-              <img src="https://ui-avatars.com/api/?name=Admin&background=316ac5&color=fff" class="w-8 h-8 rounded-sm mr-2" alt="Admin">
-              <div>
-                <p class="font-semibold text-sm text-black">Admin</p>
-                <p class="text-sm text-gray-700">Welcome to Bux IQ community chat! Please keep conversations friendly and on-topic.</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <img src="https://ui-avatars.com/api/?name=TopEarner&background=316ac5&color=fff" class="w-8 h-8 rounded-sm mr-2" alt="TopEarner">
-              <div>
-                <p class="font-semibold text-sm text-black">TopEarner</p>
-                <p class="text-sm text-gray-700">Just cashed out $50 PayPal! This site is legit!</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <img src="https://ui-avatars.com/api/?name=Newbie&background=316ac5&color=fff" class="w-8 h-8 rounded-sm mr-2" alt="Newbie">
-              <div>
-                <p class="font-semibold text-sm text-black">Newbie</p>
-                <p class="text-sm text-gray-700">Any tips for a new member?</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex">
-          <input type="text" placeholder="Type your message..." class="flex-1 windows-xp-inner-panel px-3 py-1 focus:outline-none">
-          <button class="windows-xp-button-active px-4 py-1 ml-2 hover:bg-blue-600">
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </div>
+<section id="section-chat" class="hidden">
+  <div class="windows-xp-panel mb-6">
+    <div class="windows-xp-inner-panel p-4">
+      <h2 class="text-2xl font-bold mb-4 gradient-text">Community Chat</h2>
+      <div id="chatDisplay" class="windows-xp-inner-panel p-3 h-64 overflow-y-auto mb-3 space-y-2 text-sm">
+        <!-- Messages will load here -->
+      </div>
+      <div class="flex">
+        
+        <input id="messageInput" type="text" placeholder="Type your message..." class="flex-1 windows-xp-inner-panel px-3 py-1 focus:outline-none">
+        <button id="sendBtn" class="windows-xp-button-active px-4 py-1 ml-2 hover:bg-blue-600">
+          <i class="fas fa-paper-plane"></i>
+        </button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  const sendBtn = document.getElementById('sendBtn');
+  const messageInput = document.getElementById('messageInput');
+  const chatDisplay = document.getElementById('chatDisplay');
+
+  // Simulated Account# after login (this should come from actual login logic)
+  const currentUser = localStorage.getItem('accountNumber'); // e.g., "R1Moodz"
+  if (!currentUser) {
+    alert("You must be logged in to use chat.");
+    sendBtn.disabled = true;
+  }
+
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbznWqZKZM0XiS3eNWDOwxHhnY7Lrnn6r6NTT3QZ518rr7LxvsV5l-A8yecfBwfqUEg/exec';
+  const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTMw2OEzCGbQOpzjj47sjvSlKqeLBC14FkZ6gGKnI3r4roaYapdByCLpYsLDFmbxbk87aCb5ChNjwZP/pub?gid=0&single=true&output=csv';
+
+  function displayMessage(name, msg) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'flex items-start';
+    wrapper.innerHTML = `
+      <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=316ac5&color=fff" class="w-8 h-8 rounded-sm mr-2" alt="${name}">
+      <div>
+        <p class="font-semibold text-black text-sm">${name}</p>
+        <p class="text-gray-700 text-sm">${msg}</p>
+      </div>
+    `;
+    chatDisplay.appendChild(wrapper);
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+  }
+
+  function fetchMessages() {
+    fetch(csvURL)
+      .then(res => res.text())
+      .then(csv => {
+        chatDisplay.innerHTML = '';
+        const lines = csv.trim().split('\n').slice(1);
+        lines.forEach(line => {
+          const [name, msg] = line.split(',').map(x => x.replace(/^"|"$/g, ''));
+          displayMessage(name, msg);
+        });
+      });
+  }
+
+  sendBtn.addEventListener('click', () => {
+    const message = messageInput.value.trim();
+    if (!currentUser || !message) return alert("You must be logged in and type a message.");
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify({ username: currentUser, message }),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(() => {
+      messageInput.value = '';
+      fetchMessages();
+    });
+  });
+
+  // Auto-refresh messages
+  setInterval(fetchMessages, 10000);
+  window.addEventListener('load', fetchMessages);
+</script>
+
+
 </main>
 
 <!-- Mobile Navigation -->
