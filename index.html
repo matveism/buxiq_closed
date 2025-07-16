@@ -315,7 +315,7 @@ tailwind.config = {
 </style>
 </head>
 
-<body class="bg-[#2556AB] font-sans text-gray-900 min-h-screen">
+<body class="bg-[black] font-sans text-gray-900 min-h-screen">
 <!-- 3D Background Canvas -->
 <div id="threejs-container"></div>
 
@@ -325,77 +325,74 @@ tailwind.config = {
 <!-- Main container -->
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-<!-- Windows XP Style Header -->
-<div class="windows-xp-panel p-1 mb-4">
-  <!-- Main Header Bar -->
-  <div class="flex flex-col md:flex-row items-center justify-between gap-2 windows-xp-header p-2">
+<!-- Main Header Bar -->
+  <div class="flex flex-col md:flex-row items-center justify-between gap-2 windows-xp-header p-2 bg-[#003366] border-2 border-[#001a33] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]">
     <!-- Logo -->
     <div class="flex items-center">
       <img src="https://i.postimg.cc/FH7W9fDT/Screenshot-2025-07-10-at-8-23-44-PM-removebg-preview.png" alt="Bux iQ Logo" class="h-12 object-contain" loading="lazy" />
     </div>
 
 
-    <!-- User Profile (Desktop) -->
-    <div class="relative group hidden md:block cursor-pointer" id="user-profile">
-      <div class="flex items-center space-x-3 windows-xp-inner-panel px-3 py-1">
-        <div class="relative">
-          <img id="useravatar" src="https://ui-avatars.com/api/?background=316ac5&color=fff&name=Guest" alt="User Avatar" class="w-10 h-10 rounded-sm border border-gray-400" loading="lazy" />
-        </div>
-        <div>
-          <p id="username" class="font-semibold text-black">Guest</p>
-          <p class="text-xs text-gray-600">ID: GUEST-123</p>
-        </div>
-      </div>
-      <!-- Dropdown menu -->
-      <div class="absolute right-0 mt-1 w-56 windows-xp-panel shadow-lg hidden group-hover:block z-50">
-        <div class="p-2">
-          <div class="flex items-center space-x-3 mb-2 pb-2 border-b border-gray-400">
-            <img id="dropdown-avatar" src="https://ui-avatars.com/api/?background=316ac5&color=fff&name=Guest" alt="User Avatar" class="w-8 h-8 rounded-sm border border-gray-400" />
-            <div>
-              <p id="dropdown-username" class="font-semibold text-black">Guest</p>
-              <p class="text-xs text-gray-600">ID: GUEST-123</p>
-            </div>
-          </div>
-          <div class="space-y-1">
-            <a href="#" class="flex items-center px-2 py-1 text-sm text-black hover:bg-[#316ac5] hover:text-white">
-              <i class="fas fa-user-circle mr-2 text-[#316ac5]"></i> Profile
-            </a>
-            <a href="#" class="flex items-center px-2 py-1 text-sm text-black hover:bg-[#316ac5] hover:text-white">
-              <i class="fas fa-cog mr-2 text-[#316ac5]"></i> Settings
-            </a>
-            <a href="#" class="flex items-center px-2 py-1 text-sm text-black hover:bg-[#316ac5] hover:text-white">
-              <i class="fas fa-sign-out-alt mr-2 text-[#316ac5]"></i> Logout
-            </a>
-          </div>
-        </div>
-      </div>
+    <!-- User Profile (Desktop) - Dark Theme -->
+<div class="relative group hidden md:block cursor-pointer" id="user-profile">
+  <div class="flex items-center space-x-3 bg-gray-800 border border-gray-700 px-3 py-1 rounded">
+    <div class="relative">
+      <img id="useravatar" src="https://ui-avatars.com/api/?background=4b5563&color=fff&name=Guest" alt="User Avatar" class="w-10 h-10 rounded-sm border border-gray-600" loading="lazy" />
     </div>
-
-    <!-- Balance Indicators (Desktop) -->
-    <div class="flex flex-wrap gap-2 hidden md:flex" id="balance-indicators">
-      <div class="windows-xp-inner-panel px-3 py-1 rounded-sm">
-        <div class="flex items-center">
-          <i class="fas fa-coins text-yellow-600 mr-2"></i>
-          <div>
-            <p class="text-xs text-gray-600">BALANCE</p>
-            <p id="balance" class="font-bold text-black">$0.00</p>
-          </div>
+    <div>
+      <p id="username" class="font-semibold text-gray-100">Guest</p>
+      <p class="text-xs text-gray-400">ID: GUEST-123</p>
+    </div>
+  </div>
+  <!-- Dropdown menu -->
+  <div class="absolute right-0 mt-1 w-56 bg-gray-800 border border-gray-700 shadow-lg hidden group-hover:block z-50 rounded">
+    <div class="p-2">
+      <div class="flex items-center space-x-3 mb-2 pb-2 border-b border-gray-700">
+        <img id="dropdown-avatar" src="https://ui-avatars.com/api/?background=4b5563&color=fff&name=Guest" alt="User Avatar" class="w-8 h-8 rounded-sm border border-gray-600" />
+        <div>
+          <p id="dropdown-username" class="font-semibold text-gray-100">Guest</p>
+          <p class="text-xs text-gray-400">ID: GUEST-123</p>
         </div>
       </div>
-      <div class="windows-xp-inner-panel px-3 py-1 rounded-sm">
-        <div class="flex items-center">
-          <i class="fas fa-bolt text-orange-500 mr-2"></i>
-          <div>
-            <p class="text-xs text-gray-600">LEVEL</p>
-            <p id="level" class="font-bold text-black">0</p>
-          </div>
-        </div>
+      <div class="space-y-1">
+        <a href="#" class="flex items-center px-2 py-1 text-sm text-gray-200 hover:bg-gray-700 hover:text-white rounded">
+          <i class="fas fa-user-circle mr-2 text-blue-400"></i> Profile
+        </a>
+        <a href="#" class="flex items-center px-2 py-1 text-sm text-gray-200 hover:bg-gray-700 hover:text-white rounded">
+          <i class="fas fa-cog mr-2 text-blue-400"></i> Settings
+        </a>
+        <a href="#" class="flex items-center px-2 py-1 text-sm text-gray-200 hover:bg-gray-700 hover:text-white rounded">
+          <i class="fas fa-sign-out-alt mr-2 text-blue-400"></i> Logout
+        </a>
       </div>
     </div>
   </div>
+</div>
 
+    <!-- Dark Balance Indicators (Desktop) -->
+<div class="flex flex-wrap gap-2 hidden md:flex" id="balance-indicators-dark">
+  <div class="dark-panel px-3 py-1 rounded-md bg-gray-800 border border-gray-700">
+    <div class="flex items-center">
+      <i class="fas fa-coins text-yellow-400 mr-2"></i>
+      <div>
+        <p class="text-xs text-gray-400">BALANCE</p>
+        <p id="balance-dark" class="font-bold text-white">$0.00</p>
+      </div>
+    </div>
+  </div>
+  <div class="dark-panel px-3 py-1 rounded-md bg-gray-800 border border-gray-700">
+    <div class="flex items-center">
+      <i class="fas fa-bolt text-orange-400 mr-2"></i>
+      <div>
+        <p class="text-xs text-gray-400">LEVEL</p>
+        <p id="level-dark" class="font-bold text-white">0</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
   <!-- Announcement Banner -->
-  <div class="bg-gradient-to-r from-[#ffa500] to-[#ff6347] p-2 mb-2 border-2 border-[#5d92b1]">
+  <div class="bg-gradient-to-r from-[black] to-[black] p-2 mb-2 border-2 border-[#5d92b1]">
     <div class="flex items-center justify-center">
       <div class="mr-2 text-white">
         <i class="fas fa-exclamation-triangle"></i>
@@ -406,56 +403,79 @@ tailwind.config = {
     </div>
   </div>
 
-  <!-- Desktop Navigation -->
-  <div class="hidden md:flex windows-xp-panel p-1 mb-2">
-    <a href="#" data-section="earn" class="nav-link px-4 py-2 mx-1 windows-xp-button-active">
-      <i class="fas fa-home mr-1"></i> Home
-    </a>
-    <a href="#" data-section="shop" class="nav-link px-4 py-2 mx-1 windows-xp-button">
-      <i class="fas fa-shopping-bag mr-1"></i> Shop
-    </a>
-    <a href="#" data-section="leaders" class="nav-link px-4 py-2 mx-1 windows-xp-button">
-      <i class="fas fa-trophy mr-1"></i> Leaders
-    </a>
-    <a href="#" data-section="profile" class="nav-link px-4 py-2 mx-1 windows-xp-button">
-      <i class="fas fa-money-bill-wave mr-1"></i> Earn
-    </a>
-    <a href="#" data-section="help" class="nav-link px-4 py-2 mx-1 windows-xp-button">
-      <i class="fas fa-question-circle mr-1"></i> Help
-    </a>
-    <a href="#" data-section="chat" class="nav-link px-4 py-2 mx-1 windows-xp-button relative">
-      <i class="fas fa-comments mr-1"></i> Chat
-      <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">3</div>
-    </a>
-  </div>
+  <!-- Dark Theme Desktop Navigation -->
+<div class="hidden md:flex dark-panel p-1 mb-2 bg-gray-900 border border-gray-700 rounded-lg">
+  <a href="#" data-section="earn" class="nav-link px-4 py-2 mx-1 dark-button-active bg-blue-600 text-white hover:bg-blue-700 rounded">
+    <i class="fas fa-home mr-1"></i> Home
+  </a>
+  <a href="#" data-section="shop" class="nav-link px-4 py-2 mx-1 dark-button bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white rounded">
+    <i class="fas fa-shopping-bag mr-1"></i> Shop
+  </a>
+  <a href="#" data-section="leaders" class="nav-link px-4 py-2 mx-1 dark-button bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white rounded">
+    <i class="fas fa-trophy mr-1"></i> Leaders
+  </a>
+  <a href="#" data-section="profile" class="nav-link px-4 py-2 mx-1 dark-button bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white rounded">
+    <i class="fas fa-money-bill-wave mr-1"></i> Earn
+  </a>
+  <a href="#" data-section="help" class="nav-link px-4 py-2 mx-1 dark-button bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white rounded">
+    <i class="fas fa-question-circle mr-1"></i> Help
+  </a>
+  <a href="#" data-section="chat" class="nav-link px-4 py-2 mx-1 dark-button bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white rounded relative">
+    <i class="fas fa-comments mr-1"></i> Chat
+    <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">3</div>
+  </a>
+</div>
 
-  <!-- Mobile User Info Bar -->
-  <div class="md:hidden flex items-center justify-between windows-xp-panel p-2 mb-2">
-    <div class="flex items-center space-x-2">
-      <div class="relative">
-        <img id="mobileUseravatar" src="https://ui-avatars.com/api/?background=316ac5&color=fff&name=User" alt="User Avatar" class="w-10 h-10 rounded-sm border border-gray-400" />
-      </div>
-      <div>
-        <p id="mobileUsername" class="font-medium text-black">Guest</p>
-        <p class="text-xs text-gray-600">ID: MOBILE-USER</p>
+  <!-- Dark XP Mobile User Info Bar -->
+<div class="md:hidden flex items-center justify-between windows-xp-panel-dark p-2 mb-2 bg-gray-900">
+  <div class="flex items-center space-x-2">
+    <div class="relative">
+      <img id="mobileUseravatar" src="https://ui-avatars.com/api/?background=1a3d7a&color=ccc&name=User" alt="User Avatar" 
+           class="w-10 h-10 rounded-sm border border-gray-600" />
+    </div>
+  </div>
+  <div class="flex space-x-1">
+    <div class="windows-xp-inner-panel-dark px-2 py-1 rounded-sm">
+      <div class="flex items-center">
+        <i class="fas fa-coins text-yellow-400 text-xs mr-1"></i>
+        <span id="mobileBalance" class="text-xs text-gray-200">0.00</span>
       </div>
     </div>
-    <div class="flex space-x-1">
-      <div class="windows-xp-inner-panel px-2 py-1 rounded-sm">
-        <div class="flex items-center">
-          <i class="fas fa-coins text-yellow-600 text-xs mr-1"></i>
-          <span id="mobileBalance" class="text-xs text-black">0.00</span>
-        </div>
-      </div>
-      <div class="windows-xp-inner-panel px-2 py-1 rounded-sm">
-        <div class="flex items-center">
-          <i class="fas fa-bolt text-orange-500 text-xs mr-1"></i>
-          <span id="mobileLevel" class="text-xs text-black">0</span>
-        </div>
+    <div class="windows-xp-inner-panel-dark px-2 py-1 rounded-sm">
+      <div class="flex items-center">
+        <i class="fas fa-bolt text-orange-400 text-xs mr-1"></i>
+        <span id="mobileLevel" class="text-xs text-gray-200">0</span>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .windows-xp-panel-dark {
+    border: 2px solid #003366;
+    background: linear-gradient(to right, #0d1a26, #1a2d45);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .windows-xp-inner-panel-dark {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 2px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .windows-xp-panel-dark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background: linear-gradient(to right, #003366, #004b8d, #003366);
+    border-radius: 2px 2px 0 0;
+  }
+</style>
 
 <!-- Activity Logs -->
 <div id="logs" class="card mb-6 h-48 overflow-hidden bg-card rounded-xl shadow-lg">
@@ -466,178 +486,273 @@ tailwind.config = {
   </div>
 </div>
 
-  <!-- Section: Earn Crypto & Rewards -->
-  <section id="section-earn" class="animate-fade-in">
-    <div class="windows-xp-panel mb-6">
-      <div class="windows-xp-inner-panel p-4">
-        <div class="text-center mb-6">
-          <h1 class="text-4xl font-extrabold mb-4 gradient-text">Elevate Your Earnings & Rewards</h1>
-          <p class="text-gray-700 text-lg max-w-2xl mx-auto">Engage with premium offers and insightful surveys to unlock substantial crypto and cash rewards.</p>
+  <!-- Section: Earn Crypto & Rewards - Dark XP Theme -->
+<section id="section-earn" class="animate-fade-in bg-gray-800">
+  <div class="windows-xp-panel-dark mb-6">
+    <div class="windows-xp-inner-panel-dark p-4">
+      <div class="text-center mb-6">
+        <h1 class="text-4xl font-extrabold mb-4 text-yellow-400">Elevate Your Earnings & Rewards</h1>
+        <p class="text-gray-300 text-lg max-w-2xl mx-auto">Engage with premium offers and insightful surveys to unlock substantial crypto and cash rewards.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 mb-6">
+        <div class="windows-xp-inner-panel-dark p-6 hover:border-purple-400 transition-all duration-300 transform hover:scale-[1.02]">
+          <h2 class="text-xl font-bold mb-4 text-purple-400 flex items-center">
+            <i class="fas fa-clipboard-list mr-3"></i>
+            Insightful Surveys
+          </h2>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Share valuable perspectives</li>
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Receive instant compensation</li>
+            <li class="italic text-gray-400">Seamlessly redeem via Crypto or PayPal.</li>
+          </ul>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-6 mb-6">
-          <div class="windows-xp-inner-panel p-6 hover:border-purple-600 transition-all duration-300 transform hover:scale-[1.02]">
-            <h2 class="text-xl font-bold mb-4 text-purple-600 flex items-center">
-              <i class="fas fa-clipboard-list mr-3"></i>
-              Insightful Surveys
-            </h2>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Share valuable perspectives</li>
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Receive instant compensation</li>
-              <li class="italic text-gray-600">Seamlessly redeem via Crypto or PayPal.</li>
-            </ul>
-          </div>
-
-          <div class="windows-xp-inner-panel p-6 hover:border-blue-600 transition-all duration-300 transform hover:scale-[1.02]">
-            <h2 class="text-xl font-bold mb-4 text-blue-600 flex items-center">
-              <i class="fas fa-gamepad mr-3"></i>
-              Engaging Games
-            </h2>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Monetize your playtime</li>
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Discover new rewarding experiences</li>
-            </ul>
-          </div>
-
-          <div class="windows-xp-inner-panel p-6 hover:border-teal-600 transition-all duration-300 transform hover:scale-[1.02]">
-            <h2 class="text-xl font-bold mb-4 text-teal-600 flex items-center">
-              <i class="fas fa-gift mr-3"></i>
-              Flexible Rewards
-            </h2>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Major Crypto Currencies</li>
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Direct PayPal Transfers</li>
-              <li class="flex items-center"><span class="text-green-600 mr-3">✔</span>Premium Gift Cards</li>
-            </ul>
-          </div>
+        <div class="windows-xp-inner-panel-dark p-6 hover:border-blue-400 transition-all duration-300 transform hover:scale-[1.02]">
+          <h2 class="text-xl font-bold mb-4 text-blue-400 flex items-center">
+            <i class="fas fa-gamepad mr-3"></i>
+            Engaging Games
+          </h2>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Monetize your playtime</li>
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Discover new rewarding experiences</li>
+          </ul>
         </div>
 
-        <div class="windows-xp-inner-panel p-6">
-          <h2 class="text-2xl font-bold mb-4 text-center text-black">Global Community Insights</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div class="windows-xp-inner-panel p-3">
-              <div class="text-2xl font-extrabold text-purple-600 mb-1">758,502+</div>
-              <div class="text-xs text-gray-600">Offers Completed</div>
-            </div>
-            <div class="windows-xp-inner-panel p-3">
-              <div class="text-2xl font-extrabold text-blue-600 mb-1">$362,630+</div>
-              <div class="text-xs text-gray-600">Total Value Distributed</div>
-            </div>
-            <div class="windows-xp-inner-panel p-3">
-              <div class="text-2xl font-extrabold text-teal-600 mb-1">58,236+</div>
-              <div class="text-xs text-gray-600">Active Members</div>
-            </div>
-            <div class="windows-xp-inner-panel p-3">
-              <div class="text-2xl font-extrabold text-green-600 mb-1">567</div>
-              <div class="text-xs text-gray-600">Currently Engaged</div>
-            </div>
-           <span id="serverTime"></span>
+        <div class="windows-xp-inner-panel-dark p-6 hover:border-teal-400 transition-all duration-300 transform hover:scale-[1.02]">
+          <h2 class="text-xl font-bold mb-4 text-teal-400 flex items-center">
+            <i class="fas fa-gift mr-3"></i>
+            Flexible Rewards
+          </h2>
+          <ul class="space-y-3 text-gray-300">
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Major Crypto Currencies</li>
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Direct PayPal Transfers</li>
+            <li class="flex items-center"><span class="text-green-400 mr-3">✔</span>Premium Gift Cards</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="windows-xp-inner-panel-dark p-6">
+        <h2 class="text-2xl font-bold mb-4 text-center text-yellow-400">Global Community Insights</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div class="windows-xp-inner-panel-dark p-3">
+            <div class="text-2xl font-extrabold text-purple-400 mb-1">758,502+</div>
+            <div class="text-xs text-gray-400">Offers Completed</div>
           </div>
+          <div class="windows-xp-inner-panel-dark p-3">
+            <div class="text-2xl font-extrabold text-blue-400 mb-1">$362,630+</div>
+            <div class="text-xs text-gray-400">Total Value Distributed</div>
+          </div>
+          <div class="windows-xp-inner-panel-dark p-3">
+            <div class="text-2xl font-extrabold text-teal-400 mb-1">58,236+</div>
+            <div class="text-xs text-gray-400">Active Members</div>
+          </div>
+          <div class="windows-xp-inner-panel-dark p-3">
+            <div class="text-2xl font-extrabold text-green-400 mb-1">567</div>
+            <div class="text-xs text-gray-400">Currently Engaged</div>
+          </div>
+         <span id="serverTime"></span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Section: Shop Rewards -->
-  <section id="section-shop" class="hidden animate-fade-in">
-    <div class="windows-xp-inner-panel p-4">
-        <h2 class="text-2xl font-bold mb-4 gradient-text">SHOP REWARDS</h2>
-        <div class="overflow-x-auto">
-    <!-- BUXiQ Cashout -->
-            <div class="windows-xp-inner-panel p-3 hover:border-blue-400 group relative">
-              <div class="flex justify-center py-2">
-                <img src="https://i.imgur.com/3CUrxKO.png" alt="BUXiQ Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallbuxiq"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-blue-500 hover:text-white"
-              >
-                Cashout
-              </button>
-            </div>
-  </section>
+<style>
+  .windows-xp-panel-dark {
+    border: 2px solid #0058a3;
+    background: linear-gradient(to right, #003366, #004080);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .windows-xp-inner-panel-dark {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #e0e0e0;
+  }
+  
+  .windows-xp-panel-dark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: linear-gradient(to right, #0058a3, #0078d7, #0058a3);
+    border-radius: 6px 6px 0 0;
+  }
+  
+  .windows-xp-inner-panel-dark:hover {
+    border-color: #555;
+  }
+</style>
 
-  <!-- Section: Leaderboard -->
-  <section id="section-leaders" class="hidden animate-fade-in">
-    <div class="windows-xp-panel mb-6">
-      <div class="windows-xp-inner-panel p-4">
-        <h2 class="text-2xl font-bold mb-4 gradient-text">Leaderboard</h2>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left">
-            <thead>
-              <tr class="border-b border-gray-400">
-                <th class="pb-2 text-black font-semibold">Rank</th>
-                <th class="pb-2 text-black font-semibold">Username</th>
-                <th class="pb-2 text-black font-semibold">Earnings</th>
-                <th class="pb-2 text-black font-semibold">Level</th>
-              </tr>
-            </thead>
-            <tbody id="leaderboardBody">
-              <tr class="border-b border-gray-300">
-                <td class="py-3 text-gray-700">1</td>
-                <td class="py-3 text-gray-700">TopEarner</td>
-                <td class="py-3 text-gray-700">$1,245.67</td>
-                <td class="py-3 text-gray-700">42</td>
-              </tr>
-              <tr class="border-b border-gray-300">
-                <td class="py-3 text-gray-700">2</td>
-                <td class="py-3 text-gray-700">SurveyKing</td>
-                <td class="py-3 text-gray-700">$987.32</td>
-                <td class="py-3 text-gray-700">38</td>
-              </tr>
-              <tr class="border-b border-gray-300">
-                <td class="py-3 text-gray-700">3</td>
-                <td class="py-3 text-gray-700">OfferMaster</td>
-                <td class="py-3 text-gray-700">$876.54</td>
-                <td class="py-3 text-gray-700">35</td>
-              </tr>
-              <tr>
-                <td class="py-3 text-gray-700">4</td>
-                <td class="py-3 text-gray-700">BuxPro</td>
-                <td class="py-3 text-gray-700">$765.43</td>
-                <td class="py-3 text-gray-700">32</td>
-              </tr>
-            </tbody>
-          </table>
+  <!-- Section: Shop Rewards - Dark XP Theme -->
+<section id="section-shop" class="hidden animate-fade-in bg-gray-900">
+  <div class="windows-xp-inner-panel-ultra-dark p-4">
+    <h2 class="text-2xl font-bold mb-4 text-purple-400">SHOP REWARDS</h2>
+    <div class="overflow-x-auto">
+      <!-- BUXiQ Cashout -->
+      <div class="windows-xp-inner-panel-ultra-dark p-3 hover:border-blue-600 group relative border border-gray-800">
+        <div class="flex justify-center py-2">
+          <img src="https://i.imgur.com/3CUrxKO.png" alt="BUXiQ Logo" 
+               class="h-8 object-contain opacity-80 group-hover:opacity-100 filter brightness-90" />
         </div>
+        <button
+          id="openOfferWallbuxiq"
+          class="mt-2 w-full windows-xp-button-dark py-1 text-sm hover:bg-blue-700 hover:text-white"
+        >
+          Cashout
+        </button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Section: Earn (Profile) -->
+<style>
+  .windows-xp-inner-panel-ultra-dark {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.7);
+    color: #e0e0e0;
+  }
+  
+  .windows-xp-button-dark {
+    background: linear-gradient(to bottom, #222, #111);
+    border: 1px solid #444;
+    color: #ccc;
+    text-shadow: 0 1px 1px #000;
+    transition: all 0.2s ease;
+  }
+  
+  .windows-xp-button-dark:hover {
+    background: linear-gradient(to bottom, #1a3d7a, #0d2b57);
+    border-color: #0058a3;
+    box-shadow: 0 0 5px rgba(0, 120, 215, 0.3);
+  }
+  
+  .windows-xp-inner-panel-ultra-dark:hover {
+    border-color: #0058a3;
+    box-shadow: inset 0 0 15px rgba(0, 90, 175, 0.2);
+  }
+</style>
+
+  <!-- Section: Leaderboard - Ultra Dark XP Theme -->
+<section id="section-leaders" class="hidden animate-fade-in bg-gray-900">
+  <div class="windows-xp-panel-ultra-dark mb-6">
+    <div class="windows-xp-inner-panel-ultra-dark p-4">
+      <h2 class="text-2xl font-bold mb-4 text-blue-400">Leaderboard</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-gray-700 bg-gray-800">
+              <th class="pb-2 px-4 py-3 text-gray-300 font-semibold">Rank</th>
+              <th class="pb-2 px-4 py-3 text-gray-300 font-semibold">Username</th>
+              <th class="pb-2 px-4 py-3 text-gray-300 font-semibold">Earnings</th>
+              <th class="pb-2 px-4 py-3 text-gray-300 font-semibold">Level</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+              <td class="px-4 py-3 text-gray-300">1</td>
+              <td class="px-4 py-3 text-blue-300">TopEarner</td>
+              <td class="px-4 py-3 text-green-400">$1,245.67</td>
+              <td class="px-4 py-3 text-yellow-400">42</td>
+            </tr>
+            <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+              <td class="px-4 py-3 text-gray-300">2</td>
+              <td class="px-4 py-3 text-blue-300">SurveyKing</td>
+              <td class="px-4 py-3 text-green-400">$987.32</td>
+              <td class="px-4 py-3 text-yellow-400">38</td>
+            </tr>
+            <tr class="border-b border-gray-800 hover:bg-gray-800/50">
+              <td class="px-4 py-3 text-gray-300">3</td>
+              <td class="px-4 py-3 text-blue-300">OfferMaster</td>
+              <td class="px-4 py-3 text-green-400">$876.54</td>
+              <td class="px-4 py-3 text-yellow-400">35</td>
+            </tr>
+            <tr class="hover:bg-gray-800/50">
+              <td class="px-4 py-3 text-gray-300">4</td>
+              <td class="px-4 py-3 text-blue-300">BuxPro</td>
+              <td class="px-4 py-3 text-green-400">$765.43</td>
+              <td class="px-4 py-3 text-yellow-400">32</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .windows-xp-panel-ultra-dark {
+    border: 2px solid #002244;
+    background: linear-gradient(to right, #0a0e15, #121a25);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  .windows-xp-inner-panel-ultra-dark {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+  }
+  
+  .windows-xp-panel-ultra-dark::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: linear-gradient(to right, #002244, #003366, #002244);
+    border-radius: 4px 4px 0 0;
+  }
+  
+  tr:hover {
+    transition: background-color 0.2s ease;
+  }
+</style>
+
+  <!-- Section: Earn (Profile) - Dark Theme -->
   <section id="section-profile" class="hidden">
-    <div class="windows-xp-panel mb-6">
-      <div class="windows-xp-inner-panel p-4">
+    <div class="windows-xp-dark-panel mb-6">
+      <div class="windows-xp-dark-inner-panel p-4">
         <div id="login-container">
-          <h2 class="text-2xl font-bold text-center mb-4 gradient-text">LOGIN</h2>
-          <form id="loginForm" class="space-y-4 p-4 windows-xp-inner-panel">
+          <h2 class="text-2xl font-bold text-center mb-4 gradient-text-dark">LOGIN</h2>
+          <form id="loginForm" class="space-y-4 p-4 windows-xp-dark-inner-panel">
             <div>
-              <label for="login-account" class="block text-sm font-semibold text-gray-700 mb-1">Account #</label>
+              <label for="login-account" class="block text-sm font-semibold text-gray-300 mb-1">Account #</label>
               <input
                 id="login-account"
                 type="text"
                 required
                 placeholder="Enter your account number"
-                class="w-full px-3 py-2 rounded windows-xp-inner-panel focus:outline-none focus:ring-1 focus:ring-blue-500"
+                class="w-full px-3 py-2 rounded windows-xp-dark-inner-panel focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-200 placeholder-gray-500"
                 aria-label="Account number"
               />
             </div>
             <div>
-              <label for="login-clientid" class="block text-sm font-semibold text-gray-700 mb-1">Client ID</label>
+              <label for="login-clientid" class="block text-sm font-semibold text-gray-300 mb-1">Client ID</label>
               <input
                 id="login-clientid"
                 type="text"
                 required
                 placeholder="Enter your client ID"
-                class="w-full px-3 py-2 rounded windows-xp-inner-panel focus:outline-none focus:ring-1 focus:ring-blue-500"
+                class="w-full px-3 py-2 rounded windows-xp-dark-inner-panel focus:outline-none focus:ring-1 focus:ring-blue-700 text-gray-200 placeholder-gray-500"
                 aria-label="Client ID"
               />
             </div>
             <div>
-              <label for="captchaInput" class="block text-sm font-semibold text-gray-700 mb-1">CAPTCHA</label>
+              <label for="captchaInput" class="block text-sm font-semibold text-gray-300 mb-1">CAPTCHA</label>
               <div
                 id="captcha"
-                class="select-none text-center text-yellow-600 font-mono text-lg tracking-widest mb-2 rounded windows-xp-inner-panel py-2"
+                class="select-none text-center text-yellow-400 font-mono text-lg tracking-widest mb-2 rounded windows-xp-dark-inner-panel py-2"
                 aria-live="polite"
                 aria-atomic="true"
               ></div>
@@ -646,123 +761,195 @@ tailwind.config = {
                 type="text"
                 required
                 placeholder="Enter CAPTCHA"
-                class="w-full px-3 py-2 rounded windows-xp-inner-panel focus:outline-none focus:ring-1 focus:ring-yellow-500"
+                class="w-full px-3 py-2 rounded windows-xp-dark-inner-panel focus:outline-none focus:ring-1 focus:ring-yellow-700 text-gray-200 placeholder-gray-500"
                 aria-label="Enter CAPTCHA"
               />
             </div>
             <button
               type="submit"
-              class="w-full py-2 rounded windows-xp-button-active font-semibold flex items-center justify-center gap-2 transition-colors"
+              class="w-full py-2 rounded windows-xp-dark-button-active font-semibold flex items-center justify-center gap-2 transition-colors text-gray-900 hover:bg-blue-600"
             >
               <span>Login</span>
             </button>
           </form>
-          <div id="error-msg" class="text-center text-red-600 mt-2 hidden" aria-live="assertive"></div>
+          <div id="error-msg" class="text-center text-red-400 mt-2 hidden" aria-live="assertive"></div>
         </div>
+<style>
+/* Dark Theme Styles */
+.windows-xp-dark-panel {
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
 
-        <div id="dashboard" class="hidden">
-          <div class="text-center mb-4">
-            <h2 class="text-2xl font-bold gradient-text tracking-tight">
-              EARNING PORTAL
-            </h2>
-            <p class="mt-1 text-gray-700">Complete offers and surveys to earn rewards</p>
-          </div>
+.windows-xp-dark-inner-panel {
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  border-radius: 3px;
+}
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="offerwall-grid">
-            <!-- CPX Research -->
-            <div class="windows-xp-inner-panel p-3 hover:border-cyan-400 group relative">
-              <div class="flex justify-center py-2">
-                <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallCPX"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-blue-500 hover:text-white"
-              >
-                Open OfferWall
-              </button>
-            </div>
+.windows-xp-dark-button-active {
+  background-color: #3a6ea5;
+  border-top: 1px solid #4a8bd6;
+  border-left: 1px solid #4a8bd6;
+  border-right: 1px solid #1e4d7a;
+  border-bottom: 1px solid #1e4d7a;
+}
 
-            <!-- SushiAds -->
-            <div class="windows-xp-inner-panel p-3 hover:border-purple-400 group relative">
-              <div class="flex justify-center py-2 relative">
-                <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallsads"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-purple-500 hover:text-white"
-              >
-                Open Survey Wall
-              </button>
-            </div>
+.windows-xp-dark-button-active:hover {
+  background-color: #4a7eb5;
+}
 
-            <!-- SushiAds Offers -->
-            <div class="windows-xp-inner-panel p-3 hover:border-purple-400 group relative">
-              <div class="flex justify-center py-2 relative">
-                <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-                <span class="absolute top-0 right-0 bg-amber-500 text-gray-900 text-xs font-semibold px-1 py-0.5 rounded-full"> Offers Only </span>
-              </div>
-              <button
-                id="openOfferWallsads1"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-purple-500 hover:text-white"
-              >
-                Open Offer Wall
-              </button>
-            </div>
+.gradient-text-dark {
+  background: linear-gradient(to right, #4a8bd6, #3a6ea5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 5px rgba(74, 139, 214, 0.3);
+}
+        </style>
 
-            <!-- Cheddar.tv -->
-            <div class="windows-xp-inner-panel p-3 hover:border-purple-400 group relative">
-              <div class="flex justify-center py-2 relative">
-                <img src="https://i.imgur.com/ynkX1XI.png" alt="Cheddar Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-                <span class="absolute top-0 right-0 bg-amber-500 text-gray-900 text-xs font-semibold px-1 py-0.5 rounded-full"> VIDEOS ONLY </span>
-              </div>
-              <button
-                id="openOfferWallcheddar"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-purple-500 hover:text-white"
-              >
-                Open Cheddar.tv
-              </button>
-            </div>
+        <div id="dashboard" class="hidden bg-gray-900">
+  <div class="text-center mb-4">
+    <h2 class="text-2xl font-bold text-blue-400 tracking-tight">
+      EARNING PORTAL
+    </h2>
+    <p class="mt-1 text-gray-400">Complete offers and surveys to earn rewards</p>
+  </div>
+</div>
 
-            <!-- KiwiWall -->
-            <div class="windows-xp-inner-panel p-3 hover:border-green-400 group relative">
-              <div class="flex justify-center py-2">
-                <img src="https://www.kiwiwall.com/img/logo.png" alt="KiwiWall Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallkiwi"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-green-500 hover:text-white"
-              >
-                Open OfferWall
-              </button>
-            </div>
+<style>
+  #dashboard {
+    background: linear-gradient(135deg, #0a0a0a 0%, #121212 100%);
+    border-bottom: 1px solid #333;
+  }
+  
+  .text-blue-400 {
+    text-shadow: 0 0 8px rgba(56, 182, 255, 0.3);
+  }
+</style>
 
-            
+          <!-- Dark Windows XP Theme -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-gray-900">
 
-            <!-- BUXiQ Bonus -->
-            <div class="windows-xp-inner-panel p-3 hover:border-blue-400 group relative">
-              <div class="flex justify-center py-2">
-                <img src="https://i.imgur.com/K5in0eX.png" alt="BUXiQ Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallbuxiqbonus"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-blue-500 hover:text-white"
-              >
-                Bonus
-              </button>
-            </div>
+    <!-- CPX Research -->
+    <div class="dark-xp-inner-panel p-3 hover:border-cyan-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2">
+            <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+        </div>
+        <button
+            id="openOfferWallCPX"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-blue-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open OfferWall
+        </button>
+    </div>
 
-            <!-- Wannads -->
-            <div class="windows-xp-inner-panel p-3 hover:border-orange-400 group relative">
-              <div class="flex justify-center py-2">
-                <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" alt="Wannads Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              </div>
-              <button
-                id="openOfferWallwannads"
-                class="mt-2 w-full windows-xp-button py-1 text-sm hover:bg-orange-500 hover:text-white"
-              >
-                Open OfferWall
-              </button>
-            </div>
+    <!-- SushiAds -->
+    <div class="dark-xp-inner-panel p-3 hover:border-purple-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2 relative">
+            <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+        </div>
+        <button
+            id="openOfferWallsads"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-purple-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open Survey Wall
+        </button>
+    </div>
+
+    <!-- SushiAds Offers -->
+    <div class="dark-xp-inner-panel p-3 hover:border-purple-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2 relative">
+            <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" alt="SushiAds Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+            <span class="absolute top-0 right-0 bg-amber-400 text-gray-900 text-xs font-semibold px-1 py-0.5 rounded-full"> Offers Only </span>
+        </div>
+        <button
+            id="openOfferWallsads1"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-purple-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open Offer Wall
+        </button>
+    </div>
+
+    <!-- Cheddar.tv -->
+    <div class="dark-xp-inner-panel p-3 hover:border-purple-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2 relative">
+            <img src="https://i.imgur.com/ynkX1XI.png" alt="Cheddar Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+            <span class="absolute top-0 right-0 bg-amber-400 text-gray-900 text-xs font-semibold px-1 py-0.5 rounded-full"> VIDEOS ONLY </span>
+        </div>
+        <button
+            id="openOfferWallcheddar"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-purple-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open Cheddar.tv
+        </button>
+    </div>
+
+    <!-- KiwiWall -->
+    <div class="dark-xp-inner-panel p-3 hover:border-green-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2">
+            <img src="https://www.kiwiwall.com/img/logo.png" alt="KiwiWall Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+        </div>
+        <button
+            id="openOfferWallkiwi"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-green-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open OfferWall
+        </button>
+    </div>
+
+    <!-- BUXiQ Bonus -->
+    <div class="dark-xp-inner-panel p-3 hover:border-blue-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2">
+            <img src="https://i.imgur.com/K5in0eX.png" alt="BUXiQ Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+        </div>
+        <button
+            id="openOfferWallbuxiqbonus"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-blue-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Bonus
+        </button>
+    </div>
+
+    <!-- Wannads -->
+    <div class="dark-xp-inner-panel p-3 hover:border-orange-400 group relative bg-gray-800 border-gray-700">
+        <div class="flex justify-center py-2">
+            <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" alt="Wannads Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+        </div>
+        <button
+            id="openOfferWallwannads"
+            class="mt-2 w-full dark-xp-button py-1 text-sm hover:bg-orange-600 hover:text-white bg-gray-700 text-gray-200"
+        >
+            Open OfferWall
+        </button>
+    </div>
+
+</div>
+
+<style>
+    .dark-xp-inner-panel {
+        border: 1px solid;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark-xp-button {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark-xp-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+</style>
+       
 
             
           </div>
@@ -779,35 +966,34 @@ tailwind.config = {
 
   <!-- Section: Help -->
   <section id="section-help" class="hidden">
-    <div class="windows-xp-panel mb-6">
-      <div class="windows-xp-inner-panel p-4">
-        <h2 class="text-2xl font-bold mb-4 gradient-text">Help & Support</h2>
-        <h3 class="font-semibold mb-3 text-black">Frequently Asked Questions</h3>
+    <div class="dark-panel mb-6 bg-gray-900 border border-gray-700 rounded-lg">
+      <div class="p-4">
+        <h2 class="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">Help & Support</h2>
+        <h3 class="font-semibold mb-3 text-gray-300">Frequently Asked Questions</h3>
         <div class="space-y-3">
-          <div class="windows-xp-inner-panel p-3">
-            <h4 class="font-medium mb-1 flex items-center"><i class="fas fa-question-circle text-blue-600 mr-2"></i>How do I earn points?</h4>
-            <p class="text-sm text-gray-700">Complete surveys, offers, and tasks in the Earn section to accumulate points that can be redeemed for rewards.</p>
+          <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+            <h4 class="font-medium mb-1 flex items-center text-gray-200"><i class="fas fa-question-circle text-purple-400 mr-2"></i>How do I earn points?</h4>
+            <p class="text-sm text-gray-400">Complete surveys, offers, and tasks in the Earn section to accumulate points that can be redeemed for rewards.</p>
           </div>
-          <div class="windows-xp-inner-panel p-3">
-            <h4 class="font-medium mb-1 flex items-center"><i class="fas fa-question-circle text-blue-600 mr-2"></i>How can I redeem rewards?</h4>
-            <p class="text-sm text-gray-700">Once you've accumulated enough points, visit the Shop section to select and redeem your preferred reward.</p>
+          <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+            <h4 class="font-medium mb-1 flex items-center text-gray-200"><i class="fas fa-question-circle text-purple-400 mr-2"></i>How can I redeem rewards?</h4>
+            <p class="text-sm text-gray-400">Once you've accumulated enough points, visit the Shop section to select and redeem your preferred reward.</p>
           </div>
-          <div class="windows-xp-inner-panel p-3">
-            <h4 class="font-medium mb-1 flex items-center"><i class="fas fa-question-circle text-blue-600 mr-2"></i>Bonus code redeem HOLD</h4>
-            <p class="text-sm text-gray-700">EACH REDEEMED!  <strong>BONUS CODE</strong> Will be on hold when you complete 9 tasks it will be released! (If you getting 1 pts from survey we do not count as a task completed)</p>
-            
-          <div class="windows-xp-inner-panel p-3">
-            <h4 class="font-medium mb-1 flex items-center"><i class="fas fa-question-circle text-blue-600 mr-2"></i>Who do I contact for support?</h4>
-            <p class="text-sm text-gray-700">Our support team is available 24/7. Click the button below to contact us.</p>
+          <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+            <h4 class="font-medium mb-1 flex items-center text-gray-200"><i class="fas fa-question-circle text-purple-400 mr-2"></i>Bonus code redeem HOLD</h4>
+            <p class="text-sm text-gray-400">EACH REDEEMED!  <strong class="text-purple-300">BONUS CODE</strong> Will be on hold when you complete 9 tasks it will be released! (If you getting 1 pts from survey we do not count as a task completed)</p>
+          </div>
+          <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+            <h4 class="font-medium mb-1 flex items-center text-gray-200"><i class="fas fa-question-circle text-purple-400 mr-2"></i>Who do I contact for support?</h4>
+            <p class="text-sm text-gray-400">Our support team is available 24/7. Click the button below to contact us.</p>
           </div>
         </div>
-        <button id="contact-support-btn" class="mt-4 windows-xp-button-active px-6 py-1.5 hover:bg-blue-600">
+        <button id="contact-support-btn" class="mt-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-md hover:from-purple-700 hover:to-blue-700 transition-all duration-200">
           <i class="fas fa-headset mr-2"></i>Contact Support
         </button>
       </div>
     </div>
   </section>
-
 
 
 
