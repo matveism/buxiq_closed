@@ -1,387 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quantum Cashout Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Rewards</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS (optional) -->
     <script src="https://cdn.tailwindcss.com"></script>
-<!-- Tailwind CSS with Extended Config -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        primary: '#6d28d9',
-        secondary: '#ec4899',
-        dark: '#0f0f1a',
-        darker: '#050510',
-        card: '#1e1e2e',
-        accent: '#f59e0b',
-        neon: '#00f0ff',
-        glow: 'rgba(0, 240, 255, 0.7)'
-      },
-      fontFamily: {
-        sans: ['"Exo 2"', 'sans-serif'],
-        mono: ['"Space Mono"', 'monospace']
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(circle, rgba(109,40,217,0.2) 0%, rgba(0,0,0,0) 70%)',
-        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-        'circuit-pattern': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%239C92AC\' fill-opacity=\'0.05\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")'
-      },
-      boxShadow: {
-        'card': '0 8px 32px rgba(0, 0, 0, 0.3)',
-        'button': '0 4px 20px rgba(109, 40, 217, 0.5)',
-        'glow': '0 0 15px rgba(0, 240, 255, 0.7)',
-        'inner-glow': 'inset 0 0 10px rgba(0, 240, 255, 0.3)'
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'pulse-slow': 'pulse 4s infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'neon-pulse': 'neonPulse 2s infinite alternate',
-        'hologram': 'hologram 8s linear infinite'
-      },
-      keyframes: {
-        fadeIn: {
-          'from': { opacity: 0, transform: 'translateY(10px)' },
-          'to': { opacity: 1, transform: 'translateY(0)' }
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' }
-        },
-        neonPulse: {
-          'from': { 'text-shadow': '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #6d28d9, 0 0 20px #6d28d9' },
-          'to': { 'text-shadow': '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ec4899, 0 0 40px #ec4899' }
-        },
-        hologram: {
-          '0%': { 'background-position': '0% 0%' },
-          '100%': { 'background-position': '100% 100%' }
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-      }
-    }
-  }
-}
-</script>
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-<style>
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #1e1e2e;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #6d28d9, #ec4899);
-  border-radius: 4px;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Gradient text */
-.gradient-text {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #6d28d9, #ec4899);
-}
-
-/* 3D Card effect */
-.card-3d {
-  transform-style: preserve-3d;
-  transition: all 0.5s ease;
-  perspective: 1000px;
-}
-.card-3d:hover {
-  transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-}
-
-/* Glowing border effect */
-.glow-border {
-  position: relative;
-}
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(45deg, #6d28d9, #ec4899, #00f0ff);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.glow-border:hover::before {
-  opacity: 1;
-}
-
-/* Holographic effect */
-.holographic {
-  background: linear-gradient(135deg, rgba(30,30,46,0.8) 0%, rgba(109,40,217,0.2) 50%, rgba(30,30,46,0.8) 100%);
-  position: relative;
-  overflow: hidden;
-}
-.holographic::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  background: linear-gradient(
-    to bottom right,
-    rgba(0, 240, 255, 0) 0%,
-    rgba(0, 240, 255, 0.1) 50%,
-    rgba(0, 240, 255, 0) 100%
-  );
-  transform: rotate(30deg);
-  animation: hologram 8s linear infinite;
-}
-
-/* Custom button styles */
-.btn-futuristic {
-  background: linear-gradient(45deg, #6d28d9, #ec4899);
-  border: none;
-  color: white;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
-}
-.btn-futuristic::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, #ec4899, #6d28d9);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.btn-futuristic:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(109, 40, 217, 0.6);
-}
-.btn-futuristic:hover::before {
-  opacity: 1;
-}
-
-/* Loading spinner */
-.spinner {
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  border-top-color: #6d28d9;
-  animation: spin 1s ease-in-out infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* 3D Scene Container */
-#threejs-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.15;
-  background-color: #2556AB;
-}
-
-/* Notification badge */
-.notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(45deg, #ec4899, #f59e0b);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: bold;
-  color: white;
-  box-shadow: 0 0 10px rgba(236, 72, 153, 0.7);
-}
-
-/* Hexagon shape */
-.hexagon {
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-}
-
-/* Floating particles */
-.particle {
-  position: absolute;
-  background: rgba(0, 240, 255, 0.6);
-  border-radius: 50%;
-  filter: blur(1px);
-  animation: float 15s infinite linear;
-}
-
-/* Terminal-like text effect */
-.terminal-text {
-  font-family: 'Space Mono', monospace;
-  color: #00f0ff;
-  text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-}
-
-/* Windows XP specific styles */
-.windows-xp-header {
-  background: linear-gradient(to bottom, #316ac5, #1e4d9b);
-  border: 2px solid #5d92b1;
-  box-shadow: inset 1px 1px 0px 0px rgba(255,255,255,0.5);
-}
-
-.windows-xp-button {
-  background: linear-gradient(to bottom, #ece9d8, #d6d3c4);
-  border: 2px solid #5d92b1;
-  box-shadow: inset 1px 1px 0px 0px rgba(255,255,255,0.5);
-  color: black;
-}
-
-.windows-xp-button-active {
-  background: linear-gradient(to bottom, #316ac5, #1e4d9b);
-  color: white;
-}
-
-.windows-xp-panel {
-  background-color: #ece9d8;
-  border: 2px solid #5d92b1;
-  box-shadow: inset 1px 1px 0px 0px rgba(255,255,255,0.5);
-}
-
-.windows-xp-inner-panel {
-  background-color: #ece9d8;
-  border: 2px solid #5d92b1;
-  box-shadow: inset 1px 1px 0px 0px rgba(255,255,255,0.5);
-}
-
-/* Custom animations */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.blink {
-  animation: blink 1.5s infinite;
-}
-</style>
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #0f172a;
+        }
+        .reward-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .reward-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .reward-card.selected {
+            border: 2px solid #8B5CF6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .modal-content {
+            background-color: #1e293b;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+        }
+    </style>
 </head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
 
-<body class="bg-[#2556AB] font-sans text-gray-900 min-h-screen">
-<!-- 3D Background Canvas -->
-<div id="threejs-container"></div>
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <div class="max-w-3xl mx-auto bg-gray-800 bg-opacity-80 rounded-xl shadow-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-purple-900 to-blue-900 p-6 text-center">
+                <h1 class="text-3xl font-bold">Quantum Rewards</h1>
+                <p class="mt-2 text-purple-200">Redeem your points for exclusive rewards</p>
+            </div>
 
-<!-- Floating Particles -->
-<div id="particles-container"></div>
+            <!-- Progress Steps -->
+            <div class="px-6 pt-6 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div id="step-indicator-1" class="w-4 h-4 rounded-full bg-purple-600"></div>
+                    <div id="step-indicator-2" class="w-4 h-4 rounded-full bg-gray-700"></div>
+                    <div id="step-indicator-3" class="w-4 h-4 rounded-full bg-gray-700"></div>
+                </div>
+                <span id="step-label" class="text-sm font-medium text-gray-400">Step 1 of 3</span>
+            </div>
 
-<!-- Main container -->
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Form Steps -->
+            <div class="p-6">
+                <!-- Step 1: Account Verification -->
+                <div class="form-step">
+                    <div class="mb-6">
+                        <label for="account" class="block text-sm font-medium text-gray-300 mb-2">Account ID</label>
+                        <input type="text" id="account" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your account ID">
+                    </div>
+                    <div id="message" class="text-center mt-4 font-medium text-sm"></div>
+                </div>
 
-<!-- Windows XP Style Header -->
-<div class="windows-xp-panel p-1 mb-4">
-  <!-- Main Header Bar -->
-  <div class="flex flex-col md:flex-row items-center justify-between gap-2 windows-xp-header p-2">
+                <!-- Step 2: Reward Selection -->
+                <div class="form-step hidden">
+                    <h2 class="text-xl font-semibold mb-4 text-center">Select Your Reward</h2>
+                    <div id="rewards-container" class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                        <!-- Rewards will be loaded here -->
+                        <div class="text-center py-8">
+                            <i class="fas fa-spinner fa-spin text-2xl mb-2 text-purple-400"></i>
+                            <p class="text-gray-400">Loading rewards...</p>
+                        </div>
+                    </div>
+                    <div id="message" class="text-center mt-4 font-medium text-sm"></div>
+                </div>
 
-    <div class="bg-gradient-to-r from-purple-800/30 to-rose-500/30 text-white text-center py-3 px-6 rounded-xl mb-8 border border-purple-600/50 shadow-lg animate-pulse">
-        <p class="font-semibold text-sm md:text-base flex items-center justify-center">
-            <i class="fas fa-info-circle mr-3"></i> Please let the Owner know what type of cashout you've requested!
-        </p>
-    </div>
+                <!-- Step 3: Confirmation -->
+                <div class="form-step hidden">
+                    <div class="bg-gray-700 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-4">
+                            <img id="selected-reward-logo" src="https://via.placeholder.com/50" alt="Reward" class="w-12 h-12 object-contain rounded-lg mr-4">
+                            <div>
+                                <h3 id="selected-reward-name" class="font-bold text-lg">Reward Name</h3>
+                                <p id="selected-reward-amount" class="text-purple-400">0 points</p>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="note" class="block text-sm font-medium text-gray-300 mb-2">Note (Optional)</label>
+                            <textarea id="note" rows="3" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Any special instructions..."></textarea>
+                        </div>
+                        <div id="balance" class="text-center py-2 text-sm bg-gray-800 rounded">Your Balance: <strong class="text-purple-400">0 pts</strong></div>
+                    </div>
+                    <div id="message" class="text-center mt-4 font-medium text-sm"></div>
+                </div>
 
-    <div class="quantum-card w-full max-w-md p-8 shadow-2xl animate-fadeIn">
-        <h2 class="text-2xl font-orbitron font-bold text-quantum-primary mb-6 text-center neon-text">
-            <i class="fas fa-dollar-sign mr-2"></i> Instant Cashout
-        </h2>
-
-        <div class="mb-6 flex justify-between items-center">
-            <span id="step-label" class="text-md font-medium text-quantum-accent">Step 1 of 4</span>
-            <div class="flex space-x-2">
-                <div id="step-indicator-1" class="w-3 h-3 rounded-full bg-quantum-primary"></div>
-                <div id="step-indicator-2" class="w-3 h-3 rounded-full bg-gray-700"></div>
-                <div id="step-indicator-3" class="w-3 h-3 rounded-full bg-gray-700"></div>
-                <div id="step-indicator-4" class="w-3 h-3 rounded-full bg-gray-700"></div>
+                <!-- Navigation Buttons -->
+                <div class="mt-8 flex justify-between">
+                    <button id="prev-btn" class="hidden px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button id="next-btn" class="ml-auto px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition">
+                        Next <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
             </div>
         </div>
-
-        <div id="step-1" class="form-step transition-all duration-300 ease-in-out">
-            <label for="account" class="block text-quantum-light text-sm font-medium mb-2">1. Enter your Account ID:</label>
-            <input type="text" id="account" placeholder="e.g. quantumUser789" class="w-full p-3 rounded-lg bg-quantum-dark border border-gray-700 focus:border-quantum-primary focus:ring-1 focus:ring-quantum-primary text-quantum-light transition-colors">
-        </div>
-
-        <div id="step-2" class="form-step hidden transition-all duration-300 ease-in-out">
-            <label for="cashout-type" class="block text-quantum-light text-sm font-medium mb-2">2. Select Cashout Option:</label>
-            <select id="cashout-type" class="w-full p-3 rounded-lg bg-quantum-dark border border-gray-700 focus:border-quantum-primary focus:ring-1 focus:ring-quantum-primary text-quantum-light appearance-none pr-8 transition-colors">
-                <option value="amazon">AMAZON UK </option>
-                <option value="aldi">ALDI Gift Card</option>
-                <option value="tesco">TESCO Gift Card</option>
-            </select>
-        </div>
-
-        <div id="step-3" class="form-step hidden transition-all duration-300 ease-in-out">
-            <label for="amount" class="block text-quantum-light text-sm font-medium mb-2">3. Choose Amount:</label>
-            <select id="amount" class="w-full p-3 rounded-lg bg-quantum-dark border border-gray-700 focus:border-quantum-primary focus:ring-1 focus:ring-quantum-primary text-quantum-light appearance-none pr-8 transition-colors">
-                <option value="1.00" data-points="200">200 points / $1.00</option>
-                <option value="2.50" data-points="2500">2500 points / $2.50</option>
-                <option value="5.00" data-points="5000">5000 points / $5.00</option>
-                <option value="10.00" data-points="10000">10000 points / $10.00</option>
-            </select>
-        </div>
-
-        <div id="step-4" class="form-step hidden transition-all duration-300 ease-in-out">
-            <label for="note" class="block text-quantum-light text-sm font-medium mb-2">4. Add a Note (Optional):</label>
-            <input type="text" id="note" placeholder="e.g. Faster payout preferred..." class="w-full p-3 rounded-lg bg-quantum-dark border border-gray-700 focus:border-quantum-primary focus:ring-1 focus:ring-quantum-primary text-quantum-light transition-colors">
-        </div>
-
-        <button id="next-btn" class="w-full mt-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold text-lg hover:from-purple-700 hover:to-indigo-800 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-105">
-            Next <i class="fas fa-arrow-right ml-2"></i>
-        </button>
-        <button id="prev-btn" class="w-full mt-3 py-2 rounded-lg bg-gray-700 text-gray-300 font-semibold text-sm hover:bg-gray-600 transition-colors hidden">
-            <i class="fas fa-arrow-left mr-2"></i> Previous
-        </button>
-
-        <div id="balance" class="balance text-sm text-gray-400 mt-4 text-center hidden"></div>
-        <div id="message" class="text-center mt-4 font-medium text-sm"></div>
     </div>
 
+    <!-- Claim Modal -->
+    <div id="claim-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="text-center">
+                <div class="flex justify-center mb-4">
+                    <img id="modal-reward-logo" src="https://via.placeholder.com/80" alt="Reward" class="w-20 h-20 object-contain rounded-lg">
+                </div>
+                <h3 id="modal-reward-name" class="text-xl font-bold mb-1">Reward Name</h3>
+                <p id="modal-reward-amount" class="text-purple-400 mb-6">0 points</p>
+                
+                <div class="bg-gray-700 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-gray-300 mb-2">Your redemption code:</p>
+                    <div id="claim-code-display" class="font-mono text-xl font-bold p-3 bg-gray-800 rounded break-all">CODE-HERE</div>
+                </div>
+                
+                <button id="copy-code" class="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium mb-4">
+                    <i class="fas fa-copy mr-2"></i> Copy Code
+                </button>
+                <button id="close-modal" class="w-full px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Initialize particles.js
-        document.addEventListener('DOMContentLoaded', function() {
+    
+<!-- Main Script -->
+<script>
+    // Initialize everything when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize particles.js if container exists
+        if (document.getElementById('particles-js') && typeof particlesJS === 'function') {
             particlesJS("particles-js", {
                 "particles": {
                     "number": {
@@ -452,28 +244,55 @@ tailwind.config = {
                 },
                 "retina_detect": true
             });
-        });
+        }
 
-        const csvURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv';
+        // Initialize the reward system
+        initRewardSystem();
+    });
+
+    // Reward System
+    function initRewardSystem() {
+        // Reward data from Google Sheets
+        const rewardsCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPFdYsa7nBY6co_sbvqxVR1l9fEHDX7bNbqTqoBhlDXrwuApwFRMKH42Jkqa2zt6FwvN6SEJHqgJOD/pub?gid=0&single=true&output=csv';
+        const userDataCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv';
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec';
 
         let currentStep = 1;
-        const totalSteps = 4;
+        const totalSteps = 3;
+        let selectedReward = null;
+        let userBalance = 0;
+        let rewardsData = [];
 
+        // DOM Elements
         const nextBtn = document.getElementById("next-btn");
         const prevBtn = document.getElementById("prev-btn");
-        const messageBox = document.getElementById("message");
+        const messageBoxes = document.querySelectorAll("#message");
         const stepLabel = document.getElementById("step-label");
         const stepIndicators = [
             document.getElementById("step-indicator-1"),
             document.getElementById("step-indicator-2"),
-            document.getElementById("step-indicator-3"),
-            document.getElementById("step-indicator-4")
+            document.getElementById("step-indicator-3")
         ];
+        const rewardsContainer = document.getElementById("rewards-container");
+        const selectedRewardName = document.getElementById("selected-reward-name");
+        const selectedRewardAmount = document.getElementById("selected-reward-amount");
+        const selectedRewardLogo = document.getElementById("selected-reward-logo");
+        const balanceBox = document.getElementById("balance");
+        const claimModal = document.getElementById("claim-modal");
+        const closeModalBtn = document.getElementById("close-modal");
+        const copyCodeBtn = document.getElementById("copy-code");
+        const claimCodeDisplay = document.getElementById("claim-code-display");
+        const modalRewardName = document.getElementById("modal-reward-name");
+        const modalRewardAmount = document.getElementById("modal-reward-amount");
+        const modalRewardLogo = document.getElementById("modal-reward-logo");
 
-        nextBtn.addEventListener("click", handleStep);
-        prevBtn.addEventListener("click", prevStep);
+        // Event Listeners
+        if (nextBtn) nextBtn.addEventListener("click", handleStep);
+        if (prevBtn) prevBtn.addEventListener("click", prevStep);
+        if (closeModalBtn) closeModalBtn.addEventListener("click", () => claimModal.classList.remove("active"));
+        if (copyCodeBtn) copyCodeBtn.addEventListener("click", copyClaimCode);
 
+        // Functions
         function updateStepUI() {
             document.querySelectorAll('.form-step').forEach((step, index) => {
                 if (index + 1 === currentStep) {
@@ -485,63 +304,188 @@ tailwind.config = {
                 }
             });
 
-            stepLabel.textContent = `Step ${currentStep} of ${totalSteps}`;
+            if (stepLabel) stepLabel.textContent = `Step ${currentStep} of ${totalSteps}`;
 
             stepIndicators.forEach((indicator, index) => {
+                if (!indicator) return;
+                
                 if (index < currentStep) {
                     indicator.classList.remove("bg-gray-700");
-                    indicator.classList.add("bg-quantum-primary");
+                    indicator.classList.add("bg-purple-600");
                 } else {
-                    indicator.classList.remove("bg-quantum-primary");
+                    indicator.classList.remove("bg-purple-600");
                     indicator.classList.add("bg-gray-700");
                 }
             });
 
-            if (currentStep === totalSteps) {
-                nextBtn.innerHTML = 'Submit <i class="fas fa-check-circle ml-2"></i>';
-                prevBtn.classList.remove("hidden");
-            } else if (currentStep === 1) {
-                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
-                prevBtn.classList.add("hidden");
-            } else {
-                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
-                prevBtn.classList.remove("hidden");
+            if (nextBtn) {
+                if (currentStep === totalSteps) {
+                    nextBtn.innerHTML = 'Redeem <i class="fas fa-gift ml-2"></i>';
+                    if (prevBtn) prevBtn.classList.remove("hidden");
+                } else if (currentStep === 1) {
+                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
+                    if (prevBtn) prevBtn.classList.add("hidden");
+                } else {
+                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
+                    if (prevBtn) prevBtn.classList.remove("hidden");
+                }
             }
         }
 
-        async function fetchCSVData() {
+        async function loadRewardsData() {
             try {
-                const res = await fetch(csvURL);
-                if (!res.ok) throw new Error('Failed to fetch user data');
-                const text = await res.text();
+                const response = await fetch(rewardsCSVURL);
+                if (!response.ok) throw new Error('Failed to fetch rewards data');
+                const text = await response.text();
                 const rows = text.trim().split('\n').map(row => row.split(','));
                 const headers = rows.shift().map(h => h.trim().toLowerCase());
 
-                return rows.map(row => {
+                rewardsData = rows.map(row => {
                     const obj = {};
                     headers.forEach((header, i) => {
                         obj[header] = row[i] ? row[i].trim() : '';
                     });
                     return obj;
                 });
+
+                displayRewards();
             } catch (error) {
-                console.error('Error fetching CSV data:', error);
+                console.error('Error loading rewards:', error);
+                if (rewardsContainer) {
+                    rewardsContainer.innerHTML = `
+                        <div class="text-center py-8 text-red-400">
+                            <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+                            <p>Failed to load rewards. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function displayRewards() {
+            if (!rewardsContainer) return;
+            
+            if (rewardsData.length === 0) {
+                rewardsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fas fa-box-open text-2xl mb-2"></i>
+                        <p>No rewards available at this time.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            rewardsContainer.innerHTML = rewardsData.map(reward => `
+                <div class="reward-card bg-gray-700 rounded-lg p-4 flex items-center" 
+                     data-reward-name="${reward.rewardname || 'Reward'}" 
+                     data-reward-amount="${reward.amount || '0'}"
+                     data-reward-logo="${reward.rewardlogourl || ''}"
+                     data-claim-code="${reward.claimcode || ''}">
+                    <img src="${reward.rewardlogourl || 'https://via.placeholder.com/50'}" 
+                         alt="${reward.rewardname || 'Reward'}" 
+                         class="w-12 h-12 object-contain rounded-lg mr-4">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-white">${reward.rewardname || 'Reward'}</h3>
+                        <p class="text-sm text-purple-400">${reward.amount || '0'}</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            `).join('');
+
+            // Add click event to reward cards
+            document.querySelectorAll('.reward-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from all cards
+                    document.querySelectorAll('.reward-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Set selected reward
+                    selectedReward = {
+                        name: this.getAttribute('data-reward-name'),
+                        amount: this.getAttribute('data-reward-amount'),
+                        logo: this.getAttribute('data-reward-logo'),
+                        claimCode: this.getAttribute('data-claim-code')
+                    };
+                });
+            });
+        }
+
+        async function fetchUserData(accountId) {
+            try {
+                const res = await fetch(userDataCSVURL);
+                if (!res.ok) throw new Error('Failed to fetch user data');
+                const text = await res.text();
+                const rows = text.trim().split('\n').map(row => row.split(','));
+                const headers = rows.shift().map(h => h.trim().toLowerCase());
+
+                const users = rows.map(row => {
+                    const obj = {};
+                    headers.forEach((header, i) => {
+                        obj[header] = row[i] ? row[i].trim() : '';
+                    });
+                    return obj;
+                });
+
+                return users.find(u => u['account#'] && u['account#'].toLowerCase() === accountId.toLowerCase());
+            } catch (error) {
+                console.error('Error fetching user data:', error);
                 showError("Failed to load user data. Please try again later.");
-                return [];
+                return null;
             }
         }
 
         async function handleStep() {
-            messageBox.textContent = "";
-            messageBox.className = "text-center mt-4 font-medium text-sm";
+            clearMessages();
 
             // Validate current step before proceeding
             if (currentStep === 1) {
-                const account = document.getElementById("account").value.trim();
+                const account = document.getElementById("account")?.value.trim();
                 if (!account) {
                     showError("Please enter your Account ID.");
                     return;
                 }
+                
+                // Fetch user data
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Verifying...';
+                }
+                
+                const user = await fetchUserData(account);
+                
+                if (nextBtn) {
+                    nextBtn.disabled = false;
+                    nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
+                }
+                
+                if (!user) {
+                    showError("Account ID not found.");
+                    return;
+                }
+                
+                userBalance = parseInt(user.balance || "0");
+            }
+
+            if (currentStep === 2) {
+                if (!selectedReward) {
+                    showError("Please select a reward to continue.");
+                    return;
+                }
+                
+                // Update the selected reward display
+                if (selectedRewardName) selectedRewardName.textContent = selectedReward.name;
+                if (selectedRewardAmount) selectedRewardAmount.textContent = selectedReward.amount;
+                if (selectedRewardLogo) {
+                    selectedRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
+                    selectedRewardLogo.alt = selectedReward.name;
+                }
+                
+                // Show user balance
+                if (balanceBox) balanceBox.innerHTML = `Your Balance: <strong class="text-purple-400">${userBalance} pts</strong>`;
             }
 
             if (currentStep < totalSteps) {
@@ -549,92 +493,125 @@ tailwind.config = {
                 updateStepUI();
             } else {
                 // Final submit logic
-                const account = document.getElementById("account").value.trim().toLowerCase();
-                const type = document.getElementById("cashout-type").value;
-                const amountSelect = document.getElementById("amount");
-                const amountUSD = parseFloat(amountSelect.value);
-                const amountPoints = parseInt(amountSelect.options[amountSelect.selectedIndex].getAttribute('data-points'));
-                const note = document.getElementById("note").value.trim();
-                const balanceBox = document.getElementById("balance");
-
-                try {
-                    nextBtn.disabled = true;
-                    nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
-
-                    const users = await fetchCSVData();
-                    if (users.length === 0) {
-                        showError("No user data available. Please try again later.");
-                        nextBtn.disabled = false;
-                        nextBtn.innerHTML = 'Submit <i class="fas fa-check-circle ml-2"></i>';
-                        return;
-                    }
-
-                    const user = users.find(u => u['account#'] && u['account#'].toLowerCase() === account);
-
-                    if (!user) {
-                        showError("Account ID not found.");
-                        nextBtn.disabled = false;
-                        nextBtn.innerHTML = 'Submit <i class="fas fa-check-circle ml-2"></i>';
-                        return;
-                    }
-
-                    const userBalance = parseInt(user.balance || "0");
-                    balanceBox.classList.remove("hidden");
-                    balanceBox.innerHTML = `Current Balance: <strong class="text-quantum-primary">${userBalance} pts / $${(userBalance / 1000).toFixed(2)}</strong>`;
-
-                    if (userBalance < amountPoints) {
-                        showError("Insufficient balance for this cashout amount.");
-                        nextBtn.disabled = false;
-                        nextBtn.innerHTML = 'Submit <i class="fas fa-check-circle ml-2"></i>';
-                        return;
-                    }
-
-                    const transID = "cashout_" + Date.now();
-                    const secureHash = generateHash(`${account}${transID}${amountUSD}${amountPoints}${type}${note}`);
-
-                    const params = new URLSearchParams({
-                        user_id: account,
-                        cashout_type: type,
-                        amount_usd: (-amountUSD).toFixed(2),
-                        amount_local: -amountPoints,
-                        trans_id: transID,
-                        status: "cashout",
-                        note: note,
-                        offer_id: btoa(`type=${type}&note=${note}`),
-                        secure_hash: secureHash
-                    });
-
-                    const res = await fetch(`${scriptURL}?${params.toString()}`);
-                    if (res.ok) {
-                        showSuccess("Cashout request submitted successfully!");
-                        // Reset form after successful submission
-                        setTimeout(() => {
-                            document.getElementById("account").value = "";
-                            document.getElementById("note").value = "";
-                            currentStep = 1;
-                            updateStepUI();
-                            balanceBox.classList.add("hidden");
-                            nextBtn.disabled = false;
-                            nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right ml-2"></i>';
-                        }, 2000);
-                    } else {
-                        throw new Error('Server responded with error');
-                    }
-                } catch (err) {
-                    console.error('Submission error:', err);
-                    showError("Failed to process request. Please try again.");
-                    nextBtn.disabled = false;
-                    nextBtn.innerHTML = 'Submit <i class="fas fa-check-circle ml-2"></i>';
+                const account = document.getElementById("account")?.value.trim();
+                const note = document.getElementById("note")?.value.trim();
+                
+                // Check if user has enough balance (if needed)
+                const rewardCost = parseInt(selectedReward.amount.replace(/[^0-9]/g, '')) || 0;
+                
+                if (userBalance < rewardCost) {
+                    showError("Insufficient balance for this reward.");
+                    return;
                 }
+                
+                // Show the claim code modal
+                showClaimModal();
             }
+        }
+
+        function showClaimModal() {
+            if (!selectedReward) return;
+            
+            if (modalRewardName) modalRewardName.textContent = selectedReward.name;
+            if (modalRewardAmount) modalRewardAmount.textContent = selectedReward.amount;
+            if (modalRewardLogo) {
+                modalRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
+                modalRewardLogo.alt = selectedReward.name;
+            }
+            if (claimCodeDisplay) claimCodeDisplay.textContent = selectedReward.claimCode || 'CODE-NOT-FOUND';
+            
+            if (claimModal) claimModal.classList.add("active");
+            
+            // Submit to Google Sheets
+            submitRedemption();
+        }
+
+        async function submitRedemption() {
+            const account = document.getElementById("account")?.value.trim();
+            const note = document.getElementById("note")?.value.trim();
+            if (!account || !selectedReward) return;
+
+            try {
+                const response = await fetch(rewardsCSVURL);
+                const csvData = await response.text();
+                const rewards = parseCSV(csvData);
+
+                const rewardData = rewards.find(r => 
+                    r.rewardname && r.rewardname.trim().toLowerCase() === selectedReward.name.trim().toLowerCase()
+                );
+                
+                let amountUSD = '0';
+                let amountLocal = '0';
+                let amountPoints = 0;
+                
+                if (rewardData) {
+                    amountUSD = rewardData.amount_usd || rewardData.usd_amount || '0';
+                    amountLocal = rewardData.amount_local || rewardData.local_amount || '0';
+                    
+                    if (amountUSD === '0' && rewardData.amount) {
+                        amountUSD = rewardData.amount;
+                        amountLocal = rewardData.amount;
+                    }
+
+                    amountPoints = Math.floor(parseFloat(amountUSD) * 400);
+                }
+
+                const transID = "reward_" + Date.now();
+                const secureHash = generateHash(`${account}${transID}${selectedReward.name}${amountUSD}${amountLocal}${note}`);
+
+                const params = new URLSearchParams({
+                    user_id: account,
+                    cashout_type: selectedReward.name,
+                    amount_usd: -Math.abs(parseFloat(amountUSD)),
+                    amount_local: -Math.abs(parseFloat(amountLocal)),
+                    amount_points: -Math.abs(amountPoints),
+                    trans_id: transID,
+                    status: "reward_claimed",
+                    note: note || '',
+                    offer_id: btoa(`reward=${selectedReward.name}`),
+                    secure_hash: secureHash
+                });
+
+                await fetch(`${scriptURL}?${params.toString()}`);
+            } catch (err) {
+                console.error('Error in redemption:', err);
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            if (lines.length < 2) return [];
+            
+            const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/ /g, '_'));
+            
+            return lines.slice(1).map(line => {
+                const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+                return headers.reduce((obj, header, i) => {
+                    obj[header] = values[i] || '';
+                    return obj;
+                }, {});
+            });
+        }
+
+        function copyClaimCode() {
+            if (!claimCodeDisplay) return;
+            
+            const code = claimCodeDisplay.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                if (copyCodeBtn) {
+                    copyCodeBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
+                    setTimeout(() => {
+                        copyCodeBtn.innerHTML = '<i class="fas fa-copy mr-2"></i> Copy Code';
+                    }, 2000);
+                }
+            });
         }
 
         function prevStep() {
             if (currentStep > 1) {
                 currentStep--;
                 updateStepUI();
-                messageBox.textContent = "";
-                messageBox.className = "text-center mt-4 font-medium text-sm";
+                clearMessages();
             }
         }
 
@@ -648,17 +625,36 @@ tailwind.config = {
         }
 
         function showError(msg) {
-            messageBox.textContent = msg;
-            messageBox.className = "text-center mt-4 font-medium text-sm text-red-400 animate-fadeIn";
+            messageBoxes.forEach(box => {
+                if (box) {
+                    box.textContent = msg;
+                    box.className = "text-center mt-4 font-medium text-sm text-red-400 animate-fadeIn";
+                }
+            });
         }
 
         function showSuccess(msg) {
-            messageBox.textContent = msg;
-            messageBox.className = "text-center mt-4 font-medium text-sm text-green-400 animate-fadeIn";
+            messageBoxes.forEach(box => {
+                if (box) {
+                    box.textContent = msg;
+                    box.className = "text-center mt-4 font-medium text-sm text-green-400 animate-fadeIn";
+                }
+            });
         }
 
-        // Initialize UI on load
-        document.addEventListener("DOMContentLoaded", updateStepUI);
-    </script>
+        function clearMessages() {
+            messageBoxes.forEach(box => {
+                if (box) {
+                    box.textContent = "";
+                    box.className = "text-center mt-4 font-medium text-sm";
+                }
+            });
+        }
+
+        // Initial load
+        updateStepUI();
+        loadRewardsData();
+    }
+</script>
 </body>
 </html>
