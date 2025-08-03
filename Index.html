@@ -1903,21 +1903,76 @@ function updateUserUI(user) {
         if (levelEl) levelEl.textContent = user[6] || '1';
         if (mobileLevelEl) mobileLevelEl.textContent = user[6] || '1';
 
-        // Update balance
+        // Update balance and all metrics
         updateBalance();
 
         // Update username
         const usernameEl = document.getElementById('mobileUsername');
         if (usernameEl) usernameEl.textContent = user[4] || 'User';
         
-        // Update desktop balance display
-        const balanceEl = document.getElementById('balance');
-        if (balanceEl) {
-            const balance = parseFloat(user[3] || '0').toFixed(2);
-            balanceEl.textContent = `$${balance}`;
-        }
+        // Update desktop balance display with all metrics
+        updateBalanceDisplay(user);
     } catch (error) {
         console.error('Error updating user UI:', error);
+    }
+}
+
+// Update the balance display with all metrics
+function updateBalanceDisplay(user) {
+    try {
+        const balanceEl = document.getElementById('balance');
+        if (!balanceEl) return;
+
+        // Extract all required metrics from the user data
+        // Assuming these are in columns 7-12 (adjust indices as needed)
+        const acceptanceRate = user[7] || '0.00%';
+        const pts = user[8] || '0.00 PTS';
+        const usd = user[9] || '$0.00';
+        const gbp = user[10] || '£0.00';
+        const hold = user[11] || '0.00';
+        const adj = user[12] || '0.00';
+
+        // Create the dropdown HTML
+        balanceEl.innerHTML = `
+            <div class="group relative">
+                <div class="flex items-center space-x-2 bg-gray-800/50 px-3 py-1.5 rounded-full border border-gray-700 cursor-pointer">
+                    <i class="fas fa-coins text-yellow-400"></i>
+                    <span class="font-medium">${usd}</span>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 transition-transform group-hover:rotate-180"></i>
+                </div>
+                
+                <div class="absolute right-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                    <div class="p-3 space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Acceptance Rate:</span>
+                            <span class="font-medium">${acceptanceRate}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">PTS:</span>
+                            <span class="font-medium">${pts}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">USD:</span>
+                            <span class="font-medium">${usd}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">GBP:</span>
+                            <span class="font-medium">${gbp}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Hold:</span>
+                            <span class="font-medium">${hold}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Adj:</span>
+                            <span class="font-medium">${adj}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error updating balance display:', error);
     }
 }
 
@@ -2046,16 +2101,20 @@ async function updateBalance() {
         // Find user by account and clientid for accuracy
         const user = rows.find(r => r[0] === account && r[1] === clientid); 
 
-        const balanceEl = document.getElementById('balance');
         const mobileBalanceEl = document.getElementById('mobileBalance');
 
         if (user) {
+            // Update current user data
+            currentUser = user;
+            
+            // Update all metrics display
+            updateBalanceDisplay(user);
+            
+            // Update mobile balance
             const balance = parseFloat(user[3] || '0').toFixed(2);
-            if (balanceEl) balanceEl.textContent = `$${balance}`;
             if (mobileBalanceEl) mobileBalanceEl.textContent = balance;
         } else {
             // If user not found (e.g., after logout), reset balance display to 0
-            if (balanceEl) balanceEl.textContent = '$0.00';
             if (mobileBalanceEl) mobileBalanceEl.textContent = '0.00';
         }
     } catch (err) {
