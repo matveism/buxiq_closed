@@ -1797,7 +1797,7 @@ function logout() {
         // Reset balance display
         const balanceEl = document.getElementById('balance');
         const mobileBalanceEl = document.getElementById('mobileBalance');
-        if (balanceEl) balanceEl.textContent = '$0.00';
+        if (balanceEl) balanceEl.textContent = '0.00';
         if (mobileBalanceEl) mobileBalanceEl.textContent = '0.00';
         
         // Reset username
@@ -1901,7 +1901,7 @@ async function updateBalance() {
 
         if (user) {
             const balance = parseFloat(user[3] || '0').toFixed(2);
-            if (balanceEl) balanceEl.textContent = `$${balance}`;
+            if (balanceEl) balanceEl.textContent = `${balance}`;
             if (mobileBalanceEl) mobileBalanceEl.textContent = balance;
         } else {
             // If user not found (e.g., after logout), reset balance display to 0
