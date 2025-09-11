@@ -704,47 +704,50 @@ tailwind.config = {
 <!-- Floating Particles -->
 <div id="particles-container"></div>
 
+
 <!-- Modern Header Bar -->
 <header class="navbar sticky top-0 z-40 carbon-fiber">
   <div class="container mx-auto px-4">
-    <div class="flex items-center justify-between h-8">
+    <div class="flex items-center justify-between h-10">
       <!-- Logo -->
       <div class="flex items-center space-x-2">
         <img src="https://i.postimg.cc/gkN7XyzR/Screenshot-2025-09-07-at-9-57-00-PM-removebg-preview.png" 
              alt="Bux iQ Logo" 
-             class="h-12 object-contain" 
+             class="h-14 object-contain" 
              loading="lazy" />
-        <span class="text-xl font-bold text-white hidden md:block"></span>
+        
       </div>
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center space-x-1">
-                    <a href="#" data-section="earn" class="navbar-item text-white active">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                    <a href="#" data-section="shop" class="navbar-item text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-shopping-bag"></i> Shop
-                    </a>
-                    <a href="#" data-section="leaders" class="navbar-item text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-trophy"></i> Leaders
-                    </a>
-                    <a href="#" data-section="profile" class="navbar-item text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-money-bill-wave"></i> Earn
-                    </a>
-                    <a href="#" data-section="help" class="navbar-item text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-question-circle"></i> Help
-                    </a>
-                    <a href="#" data-section="chat" class="navbar-item text-gray-400 hover:text-white transition-colors relative">
-                        <i class="fas fa-comments"></i> Chat
-                        <span class="notification-badge">3</span>
-                    </a>
-                </nav>
+        <a href="#" data-section="earn" class="navbar-item text-white hover:text-red-300 transition-colors">
+          <i class="fas fa-home mr-2"></i> Home
+        </a>
+        <a href="#" data-section="shop" class="navbar-item text-gray-400 hover:text-white transition-colors">
+          <i class="fas fa-shopping-bag mr-2"></i> Shop
+        </a>
+        <a href="#" data-section="leaders" class="navbar-item text-gray-400 hover:text-white transition-colors">
+          <i class="fas fa-trophy mr-2"></i> Leaders
+        </a>
+        <a href="#" data-section="profile" class="navbar-item text-gray-400 hover:text-white transition-colors">
+          <i class="fas fa-money-bill-wave mr-2"></i> Earn
+        </a>
+        <a href="#" data-section="help" class="navbar-item text-gray-400 hover:text-white transition-colors">
+          <i class="fas fa-question-circle mr-2"></i> Help
+        </a>
+        <a href="#" data-section="chat" class="navbar-item text-gray-400 hover:text-white transition-colors relative">
+          <i class="fas fa-comments mr-2"></i> Chat
+          <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+        </a>
+      </nav>
 
       <!-- User Balance - Desktop -->
       <div class="hidden md:flex items-center space-x-4">
         <div class="flex items-center space-x-2 bg-gray-800/50 px-3 py-1.5 rounded-full border border-gray-700">
-          <i class="fas fa-coins text-yellow-400"></i>
-          <span id="balance" class="font-medium">$0.00</span>
+          <i class="fas fa-star text-yellow-400"></i>
+          <span id="balance" class="font-medium">0,00</span>
+
+
         </div>
         <div class="flex items-center space-x-2 bg-gray-800/50 px-3 py-1.5 rounded-full border border-gray-700">
           <i class="fas fa-bolt text-red-400"></i>
@@ -767,7 +770,7 @@ tailwind.config = {
       <div class="flex items-center space-x-2">
         <img src="https://i.postimg.cc/gkN7XyzR/Screenshot-2025-09-07-at-9-57-00-PM-removebg-preview.png" 
              alt="Bux iQ Logo" 
-             class="h-12 object-contain" 
+             class="h-8 object-contain" 
              loading="lazy" />
         <span class="text-lg font-bold text-white"></span>
       </div>
@@ -794,7 +797,7 @@ tailwind.config = {
     <div class="p-4 border-b border-gray-800">
       <div class="grid grid-cols-2 gap-3">
         <div class="bg-gray-800/50 p-3 rounded-lg flex items-center space-x-2">
-          <i class="fas fa-coins text-yellow-400"></i>
+          <i class="fas fa-star text-yellow-400"></i>
           <div>
             <p class="text-xs text-gray-400">Balance</p>
             <p id="mobileBalance" class="font-medium">0.00</p>
@@ -811,30 +814,30 @@ tailwind.config = {
     </div>
     
     <!-- Mobile Navigation -->
-    
+    <nav class="flex-1 overflow-y-auto p-4 space-y-2">
       <a href="#" data-section="earn" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-white bg-red-900/30">
-        
+        <i class="fas fa-home w-6 text-center"></i>
         <span>Home</span>
-        
+        <span class="indicator"></span>
       </a>
       <a href="#" data-section="shop" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50">
-        
+        <i class="fas fa-shopping-bag w-6 text-center"></i>
         <span>Shop</span>
       </a>
       <a href="#" data-section="leaders" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50">
-        
+        <i class="fas fa-trophy w-6 text-center"></i>
         <span>Leaders</span>
       </a>
       <a href="#" data-section="profile" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50">
-        
+        <i class="fas fa-money-bill-wave w-6 text-center"></i>
         <span>Earn</span>
       </a>
       <a href="#" data-section="help" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50">
-        
+        <i class="fas fa-question-circle w-6 text-center"></i>
         <span>Help</span>
       </a>
       <a href="#" data-section="chat" class="mobile-nav-item flex items-center space-x-3 p-3 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 relative">
-        
+        <i class="fas fa-comments w-6 text-center"></i>
         <span>Chat</span>
         <span class="absolute right-4 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
       </a>
@@ -852,11 +855,11 @@ tailwind.config = {
 <!-- Announcement Banner -->
 <div class="bg-gradient-to-r from-red-900/80 to-red-800/80 p-3 border-b border-red-500/30">
   <div class="container mx-auto flex items-center justify-center">
-    <div class="mr-3 text-black-300">
+    <div class="mr-3 text-red-300">
       <i class="fas fa-exclamation-circle"></i>
     </div>
     <p class="text-center font-medium text-white text-sm md:text-base">
-      <span class="font-bold">$1 = 325 PTS</span> REQUIRED TO CASHOUT (NO FEE, CLEAN PAYOUT)
+      <span class="font-bold">[$1.00]</span> 0.01 pts = 1 CENTS
     </p>
   </div>
 </div>
@@ -879,226 +882,113 @@ tailwind.config = {
     <div class="absolute right-10 top-10 w-32 h-32 bg-red-600/10 rounded-full blur-3xl"></div>
     <div class="absolute left-10 bottom-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl"></div>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        
-        
-        .modern-card {
-            background: rgba(26, 26, 42, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .modern-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(239, 68, 68, 0) 0%, rgba(239, 68, 68, 0.8) 50%, rgba(239, 68, 68, 0) 100%);
-        }
-        
-        .modern-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(239, 68, 68, 0.4);
-            box-shadow: 0 15px 35px rgba(239, 68, 68, 0.1);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 50%, #dc2626 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .crypto-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(239, 68, 68, 0.6);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .shine-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .shine-effect::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: rotate(30deg);
-            animation: shine 5s ease-in-out infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
-        }
-    </style>
-</head>
-<body>
-    <section class="max-w-6xl mx-auto px-4 py-12 relative">
-        <!-- Animated background particles -->
-        <div class="crypto-particles">
-            <div class="particle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
-            <div class="particle" style="top: 20%; left: 15%; animation-delay: 1s;"></div>
-            <div class="particle" style="top: 5%; left: 30%; animation-delay: 2s;"></div>
-            <div class="particle" style="top: 15%; left: 80%; animation-delay: 3s;"></div>
-            <div class="particle" style="top: 65%; left: 10%; animation-delay: 4s;"></div>
-            <div class="particle" style="top: 80%; left: 70%; animation-delay: 5s;"></div>
-            <div class="particle" style="top: 60%; left: 90%; animation-delay: 6s;"></div>
-            <div class="particle" style="top: 30%; left: 55%; animation-delay: 7s;"></div>
+    <!-- Header content -->
+    <div class="text-center mb-8 relative z-10">
+      <span class="inline-block px-4 py-2 text-xs font-semibold rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/20 mb-4">
+        CRYPTO REWARDS PLATFORM
+      </span>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-red-300">Maximize Your Earnings</span>
+      </h1>
+      <p class="text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        Participate in premium opportunities and convert your engagement into valuable crypto assets and cash rewards.
+      </p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+      <!-- Survey Card -->
+      <div class="modern-card rounded-xl p-6 group hover:border-red-500/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-4 shadow-lg shadow-red-500/20">
+          <i class="fas fa-chart-line text-xl"></i>
         </div>
+        <h2 class="text-xl font-bold mb-4 text-white">Market Research</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Share professional insights with leading brands</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Competitive compensation rates</span>
+          </li>
+          <li class="text-xs text-gray-400 mt-4 pt-3 border-t border-gray-700/50">
+            Instant redemption in 15+ cryptocurrencies or fiat
+          </li>
+        </ul>
+      </div>
 
-        <!-- Header content -->
-        <div class="text-center mb-16 relative z-10">
-            <div class="inline-block mb-6 shine-effect">
-                <span class="inline-block px-5 py-2.5 text-sm font-bold rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg shadow-red-500/30 mb-2 relative overflow-hidden">
-                    <span class="relative z-10">CRYPTO REWARDS PLATFORM</span>
-                </span>
-            </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-                <span class="gradient-text">Maximize Your Crypto Earnings</span>
-            </h1>
-            <p class="text-gray-300 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed">
-                Participate in premium opportunities and convert your engagement into valuable crypto assets and cash rewards.
-            </p>
+      <!-- Games Card -->
+      <div class="modern-card rounded-xl p-6 group hover:border-red-500/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-4 shadow-lg shadow-red-500/20">
+          <i class="fas fa-gamepad text-xl"></i>
         </div>
+        <h2 class="text-xl font-bold mb-4 text-white">Gaming Rewards</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Earn while playing top-rated games</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Exclusive in-game NFT opportunities</span>
+          </li>
+          <li class="text-xs text-gray-400 mt-4 pt-3 border-t border-gray-700/50">
+            Performance-based bonus rewards system
+          </li>
+        </ul>
+      </div>
 
-        <!-- Cards grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-            <!-- Survey Card -->
-            <div class="modern-card rounded-2xl p-7 group">
-                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-5 shadow-lg shadow-red-500/30 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-chart-line text-xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-5 text-white">Market Research</h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Share professional insights with leading brands</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Competitive compensation rates</span>
-                    </li>
-                    <li class="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-700/50 flex items-center">
-                        <i class="fas fa-bolt text-red-400 mr-2"></i>
-                        Instant redemption in 15+ cryptocurrencies or fiat
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Games Card -->
-            <div class="modern-card rounded-2xl p-7 group">
-                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-5 shadow-lg shadow-red-500/30 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-gamepad text-xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-5 text-white">Gaming Rewards</h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Earn while playing top-rated games</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Exclusive in-game NFT opportunities</span>
-                    </li>
-                    <li class="text-sm text-gray-400 mt-5 pt-4 border-t border-gray-700/50 flex items-center">
-                        <i class="fas fa-star text-red-400 mr-2"></i>
-                        Performance-based bonus rewards system
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Rewards Card -->
-            <div class="modern-card rounded-2xl p-7 group">
-                <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-5 shadow-lg shadow-red-500/30 group-hover:scale-110 transition-transform">
-                    <i class="fas fa-wallet text-xl"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-5 text-white">Multi-Channel Payouts</h2>
-                <ul class="space-y-4 text-gray-300">
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">BTC, ETH, SOL and 12+ other cryptocurrencies</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Direct bank transfers & PayPal deposits</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-red-400 mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
-                        <span class="flex-1">Digital gift cards (Amazon, Steam, etc.)</span>
-                    </li>
-                </ul>
-            </div>
+      <!-- Rewards Card -->
+      <div class="modern-card rounded-xl p-6 group hover:border-red-500/50 transition-all">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center text-white mb-4 shadow-lg shadow-red-500/20">
+          <i class="fas fa-wallet text-xl"></i>
         </div>
+        <h2 class="text-xl font-bold mb-4 text-white">Multi-Channel Payouts</h2>
+        <ul class="space-y-3 text-gray-300">
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">BTC, ETH, SOL and 12+ other cryptocurrencies</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Direct bank transfers & PayPal deposits</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-red-400 mr-2 mt-1"><i class="fas fa-check-circle"></i></span>
+            <span class="flex-1">Digital gift cards (Amazon, Steam, etc.)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        <!-- CTA Button -->
-        <div class="text-center mt-16 relative z-10">
-            <button class="px-8 py-4 bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold rounded-xl shadow-lg shadow-red-500/30 hover:shadow-red-500/40 hover:from-red-500 hover:to-red-600 transition-all duration-300 transform hover:-translate-y-1">
-                Start Earning Now
-                <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-            <p class="text-gray-400 text-sm mt-4">Join thousands of users earning crypto rewards daily</p>
+  <!-- Section: Shop Rewards -->
+  <section id="section-shop" class="hidden">
+    <div class="modern-card rounded-xl p-6 mb-6 circuit-pattern">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <i class="fas fa-shopping-bag mr-3 text-red-400"></i>
+        <span class="red-gradient-text">SHOP REWARDS</span>
+      </h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- BUXiQ Cashout -->
+        <div class="modern-card p-4 hover:border-red-400 group relative">
+          <div class="flex justify-center py-2">
+            <img src="https://i.imgur.com/3CUrxKO.png" alt="BUXiQ Logo" class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+          </div>
+          <button
+            id="openOfferWallbuxiq"
+            class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
+          >
+            <i class="fas fa-money-bill-wave mr-2"></i> Cashout
+          </button>
         </div>
-    </section>
-
-    <script>
-        // Simple animation for particles
-        document.addEventListener('DOMContentLoaded', function() {
-            const particles = document.querySelectorAll('.particle');
-            particles.forEach(particle => {
-                const delay = Math.random() * 5;
-                particle.style.animationDelay = `${delay}s`;
-            });
-        });
-    </script>
-</body>
-</html>
+        
+        <!-- More reward items can be added here -->
+      </div>
+    </div>
+  </section>
 
   <!-- Section: Leaderboard -->
   <section id="section-leaders" class="hidden">
@@ -1247,7 +1137,7 @@ tailwind.config = {
             <div class="flex justify-center py-2">
               <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" 
                    alt="CPX Research Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+                   class="h-14 object-contain opacity-90 group-hover:opacity-100" />
             </div>
             <button
               id="openOfferWallCPX"
@@ -1257,74 +1147,20 @@ tailwind.config = {
             </button>
           </div>
 
-          <!-- SushiAds -->
-          <div class="modern-card p-4 hover:border-purple-400 group relative">
-            <div class="flex justify-center py-2 relative">
-              <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" 
-                   alt="SushiAds Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWallsads"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-poll mr-2"></i> Open Survey Wall
-            </button>
-          </div>
+          
 
-          <!-- SushiAds Offers -->
-          <div class="modern-card p-4 hover:border-purple-400 group relative">
-            <div class="flex justify-center py-2 relative">
-              <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/sushiads-logo-horizontal.png" 
-                   alt="SushiAds Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              <span class="absolute top-0 right-0 bg-amber-500 text-gray-900 text-xs font-semibold px-2 py-0.5 rounded-full">Offers Only</span>
-            </div>
-            <button
-              id="openOfferWallsads1"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-ad mr-2"></i> Open Offer Wall
-            </button>
-          </div>
+          
 
-          <!-- Cheddar.tv -->
-          <div class="modern-card p-4 hover:border-purple-400 group relative">
-            <div class="flex justify-center py-2 relative">
-              <img src="https://i.imgur.com/ynkX1XI.png" 
-                   alt="Cheddar Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-              <span class="absolute top-0 right-0 bg-amber-500 text-gray-900 text-xs font-semibold px-2 py-0.5 rounded-full">VIDEOS ONLY</span>
-            </div>
-            <button
-              id="openOfferWallcheddar"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-play mr-2"></i> Open Cheddar.tv
-            </button>
-          </div>
+          
 
-          <!-- KiwiWall -->
-          <div class="modern-card p-4 hover:border-green-400 group relative">
-            <div class="flex justify-center py-2">
-              <img src="https://www.kiwiwall.com/img/logo.png" 
-                   alt="KiwiWall Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWallkiwi"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-external-link-alt mr-2"></i> Open OfferWall
-            </button>
-          </div>
+          
 
           <!-- BUXiQ Bonus -->
           <div class="modern-card p-4 hover:border-blue-400 group relative">
             <div class="flex justify-center py-2">
-              <img src="https://i.imgur.com/K5in0eX.png" 
+              <img src="https://lh3.googleusercontent.com/rd-gg-dl/AJfQ9KRLx4L0xdZbGM77CZ-fwHXIIyrXgbkqMVVKYWWtX8DAOc23wAprD5gUmA-sglLQNSEmKF5jflHCDC4bfsVq5rcOxOWboTxyvUWVHSt4e0Xrb4679zUZYVOBV7MkbM3OK8442oVKBiV7T0EvMcZqwJzc9gAjUPiz4jQ2LjQxQM7_lHLo7_B1TzY_50neiofxa89DGAFw7pYcffQD9d7iCPczGbm8LGUuvpdD2PLxqktDhmOEYMbXdoqdDhqryo6ASnwldllyE7mk3Wr-1eCU73lC84VjEcqms6NEvx6crqHf-FaDhe_sNb-ha8FWHOc8bTikVSBnolMZ7eN3nIJea__mh5m8i5ke3uVpkE2AIdG1Z8_Rjwjt5RFLUFm3pnbb378dcHcwWnXHtxpq1GLbqjzSP0ODFmu65hlXKYrg1xezeIntyJFyVosPuVNF74nzYJ_o6p4N_K-NmGhrMlvo-xg0BuHGr8JNNKzo_pq3la_72tCtcXvkckbbkaA-n5o3cvf--SV9e26mDY17egWS5qxYT_DGzJb4uQSPbinxj3pI8OlfepxCOjfABSVbadLpCzQ2sqsSdO_vsWbkDus-GlzvLSnk0cHlu_ed9jHekbhNVZXKXD8i02v02Vker5pq2Cv5bl1q3YD_YoCNIttGACuyO0e8mu262pnMBhlbcbk3T4rstyzPe0zJpRH5nQNDoVftEKaRO_LsdRLux4s0CHjGlKnPcgt9D8oEhd8vxqc4sJkk4X7cHHWna-acJEgbnmfeci89aj6ma2uhSUiBrGjOu6d2FjNC3sIql2Hfr4lStPqpmHzLgJTvMpK_NG-U2IEGQQ0wfHjJM3PTFPbAbvfiNj63P3TAcZuGxq90aPfKr5WV06sAl-uvPmf_03stE3VXuLqlmFydKBOK3gWYBt73jyYpKepuNy7r2zpT__N6ktGkTDyULZn6YV7-mhAGSaz9ufvdUCwm0Imhd8GbqjpaVxpj23YJvCIumsDyf5O1emultIi7-4E61j6DCc6B3P5eZjN7grNrdjdozOCYipFMzCNf2vy0oBKAYdQ8BjZ3KKoQKte9M8jiNsT3EzpiktCdMVwAhp2fXv83pWOiLOXPLWqhqkDO7VBGjNBazjmHkP_XvxdhIys11JKGkGtd1HBt0w6KqEeRFRTqMsQdxpt1wu3iWyeFbqKPdcOsEbAS4StQjzC8yzCOTZA=s1024" 
                    alt="BUXiQ Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
+                   class="h-14 object-contain opacity-90 group-hover:opacity-100" />
             </div>
             <button
               id="openOfferWallbuxiqbonus"
@@ -1334,65 +1170,11 @@ tailwind.config = {
             </button>
           </div>
 
-          <!-- Wannads -->
-          <div class="modern-card p-4 hover:border-orange-400 group relative">
-            <div class="flex justify-center py-2">
-              <img src="https://affi-plat.s3.us-east-2.amazonaws.com/platforms/wannads-ogotipo-naranja.png" 
-                   alt="Wannads Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWallwannads"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-external-link-alt mr-2"></i> Open OfferWall
-            </button>
-          </div>
+          
 
-          <!-- Porix -->
-          <div class="modern-card p-4 hover:border-blue-400 group relative">
-            <div class="flex justify-center py-2">
-              <img src="https://porix.com/wp-content/uploads/2022/01/porix-logo.png" 
-                   alt="Porix Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWallporix"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-external-link-alt mr-2"></i> Open OfferWall
-            </button>
-          </div>
-
-          <!-- Excentiv -->
-          <div class="modern-card p-4 hover:border-purple-400 group relative">
-            <div class="flex justify-center py-2">
-              <img src="https://excentiv.com/wp-content/uploads/2022/01/excentiv-logo.png" 
-                   alt="Excentiv Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWallexcentiv"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-external-link-alt mr-2"></i> Open OfferWall
-            </button>
-          </div>
-
-          <!-- TaskWall -->
-          <div class="modern-card p-4 hover:border-green-400 group relative">
-            <div class="flex justify-center py-2">
-              <img src="https://taskwall.com/wp-content/uploads/2022/01/taskwall-logo.png" 
-                   alt="TaskWall Logo" 
-                   class="h-8 object-contain opacity-90 group-hover:opacity-100" />
-            </div>
-            <button
-              id="openOfferWalltaskwall"
-              class="mt-3 w-full modern-btn py-2 text-sm rounded-lg"
-            >
-              <i class="fas fa-tasks mr-2"></i> Open OfferWall
-            </button>
-          </div>
+          
+          
+          
         </div>
 
         <div class="mt-6 text-center">
@@ -1543,10 +1325,10 @@ tailwind.config = {
         </h3>
         <div class="grid grid-cols-3 gap-2 mb-4">
           <div class="bg-gray-800 p-2 rounded flex items-center justify-center">
-            <i class="fab fa-amazon text-orange-400 text-xl"></i>
+            <i class="fab fa-bitcoin text-orange-400 text-xl"></i>
           </div>
           <div class="bg-gray-800 p-2 rounded flex items-center justify-center">
-            <i class="fab fa-crypto text-purple-400 text-xl"></i>
+            <i class="fab fa-ethereum text-purple-400 text-xl"></i>
           </div>
           <div class="bg-gray-800 p-2 rounded flex items-center justify-center">
             <i class="fab fa-paypal text-blue-400 text-xl"></i>
@@ -1582,7 +1364,6 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- JavaScript -->
 <script>
 // Global variables
 let captchaCode = '';
@@ -2235,7 +2016,5 @@ function sendPostback(amountLocal, amountUsd, username, bonusCode) {
     }
 }
 </script>
-</body>
-</html>
 </body>
 </html>
