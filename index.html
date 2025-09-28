@@ -2344,5 +2344,258 @@ window.buxiqApp = {
 
 console.log('BuxIQ script loaded successfully');
 </script>
+   <script>
+        // Configuration
+        const CRYSTALS_PER_VERIFICATION = 5;
+        const CRYSTAL_VALUE_USD = 0.001;
+        const POSTBACK_URL = "https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec";
+
+        // State variables
+        let words = [];
+        let currentWordIndex = 0;
+        let crystals = 0;
+        let verifiedCount = 0;
+        let failedCount = 0;
+        let skippedCount = 0;
+        let userId = "user_" + Math.random().toString(36).substr(2, 9); // Mock user ID
+        let currentWord = "";
+        let hiddenLetters = [];
+        let hiddenPositions = [];
+
+        // DOM elements
+        const csvUrlInput = document.getElementById('csvUrl');
+        const loadCsvBtn = document.getElementById('loadCsvBtn');
+        const wordText = document.getElementById('wordText');
+        const lastLetterInput = document.getElementById('lastLetterInput');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const resultMessage = document.getElementById('resultMessage');
+        const crystalCount = document.getElementById('crystalCount');
+        const usdValue = document.getElementById('usdValue');
+        const verifiedCountElem = document.getElementById('verifiedCount');
+        const failedCountElem = document.getElementById('failedCount');
+        const skippedCountElem = document.getElementById('skippedCount');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const gameSection = document.getElementById('gameSection');
+
+        // Event Listeners
+        loadCsvBtn.addEventListener('click', loadCsvData);
+        verifyBtn.addEventListener('click', verifyWord);
+        skipBtn.addEventListener('click', skipWord);
+        logoutBtn.addEventListener('click', logout);
+
+        // Load CSV data from URL
+        function loadCsvData() {
+            const url = csvUrlInput.value.trim();
+            if (!url) {
+                showResult('Please enter a valid CSV URL', 'error');
+                return;
+            }
+
+            showResult('Loading words...', 'info');
+            
+            Papa.parse(url, {
+                download: true,
+                complete: function(results) {
+                    if (results.errors.length > 0) {
+                        showResult('Error loading CSV: ' + results.errors[0].message, 'error');
+                        return;
+                    }
+                    
+                    // Extract words from CSV (assuming first column contains words)
+                    words = results.data
+                        .flat() // Flatten the array
+                        .filter(word => word && word.trim().length > 0) // Remove empty entries
+                        .map(word => word.trim()); // Trim whitespace
+                    
+                    if (words.length === 0) {
+                        showResult('No valid words found in CSV', 'error');
+                        return;
+                    }
+                    
+                    showResult(`Loaded ${words.length} words successfully!`, 'success');
+                    gameSection.classList.remove('hidden');
+                    resetVerification();
+                    displayRandomWord();
+                },
+                error: function(error) {
+                    showResult('Error loading CSV: ' + error.message, 'error');
+                }
+            });
+        }
+
+        // Display a random word with up to 3 letters hidden
+        function displayRandomWord() {
+            if (words.length === 0) {
+                wordText.textContent = '---';
+                return;
+            }
+            
+            currentWordIndex = Math.floor(Math.random() * words.length);
+            currentWord = words[currentWordIndex];
+            
+            // Hide up to 3 letters (but at least 1 if word length allows)
+            const wordLength = currentWord.length;
+            const maxHidden = Math.min(3, Math.max(1, wordLength - 2)); // Ensure at least 2 letters remain visible
+            
+            // Randomly select positions to hide
+            hiddenPositions = [];
+            hiddenLetters = [];
+            
+            // Create an array of indices to choose from
+            let indices = Array.from({length: wordLength}, (_, i) => i);
+            
+            // Shuffle the indices
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indices[i], indices[j]] = [indices[j], indices[i]];
+            }
+            
+            // Select up to maxHidden positions to hide
+            for (let i = 0; i < Math.min(maxHidden, indices.length); i++) {
+                hiddenPositions.push(indices[i]);
+                hiddenLetters.push(currentWord[indices[i]]);
+            }
+            
+            // Sort positions to maintain word order
+            hiddenPositions.sort((a, b) => a - b);
+            
+            // Create the display word with hidden letters
+            let displayWord = "";
+            for (let i = 0; i < wordLength; i++) {
+                if (hiddenPositions.includes(i)) {
+                    displayWord += `<span class="hidden-letter">${currentWord[i]}</span>`;
+                } else {
+                    displayWord += currentWord[i];
+                }
+            }
+            
+            wordText.innerHTML = displayWord;
+            lastLetterInput.value = '';
+            lastLetterInput.focus();
+        }
+
+        // Verify the hidden letters of the current word
+        function verifyWord() {
+            if (words.length === 0) {
+                showResult('Please load words first', 'error');
+                return;
+            }
+            
+            const userInput = lastLetterInput.value.trim().toLowerCase();
+            const correctLetters = hiddenLetters.map(letter => letter.toLowerCase()).join('');
+            
+            if (!userInput) {
+                showResult('Please enter the hidden letters', 'error');
+                return;
+            }
+            
+            if (userInput === correctLetters) {
+                // Correct verification
+                crystals += CRYSTALS_PER_VERIFICATION;
+                verifiedCount++;
+                updateUI();
+                showResult(`Correct! +${CRYSTALS_PER_VERIFICATION} crystals earned`, 'success');
+                
+                // Send postback
+                sendPostback('completed', CRYSTALS_PER_VERIFICATION, CRYSTALS_PER_VERIFICATION * CRYSTAL_VALUE_USD);
+                
+                // Success animation
+                document.getElementById('wordDisplay').classList.add('success-animation');
+                setTimeout(() => {
+                    document.getElementById('wordDisplay').classList.remove('success-animation');
+                }, 1000);
+            } else {
+                // Incorrect verification
+                failedCount++;
+                updateUI();
+                showResult(`Incorrect! The hidden letters were "${hiddenLetters.join('')}"`, 'error');
+            }
+            
+            // Move to next word after a delay
+            setTimeout(displayRandomWord, 2000);
+        }
+
+        // Skip the current word
+        function skipWord() {
+            if (words.length === 0) {
+                showResult('Please load words first', 'error');
+                return;
+            }
+            
+            skippedCount++;
+            updateUI();
+            showResult('Word skipped', 'info');
+            displayRandomWord();
+        }
+
+        // Update UI with current stats
+        function updateUI() {
+            crystalCount.textContent = crystals;
+            usdValue.textContent = (crystals * CRYSTAL_VALUE_USD).toFixed(3);
+            verifiedCountElem.textContent = verifiedCount;
+            failedCountElem.textContent = failedCount;
+            skippedCountElem.textContent = skippedCount;
+        }
+
+        // Show result message
+        function showResult(message, type) {
+            resultMessage.textContent = message;
+            resultMessage.className = 'mt-4 p-3 rounded-lg';
+            
+            switch(type) {
+                case 'success':
+                    resultMessage.classList.add('bg-green-900', 'text-green-300');
+                    break;
+                case 'error':
+                    resultMessage.classList.add('bg-red-900', 'text-red-300');
+                    break;
+                case 'info':
+                    resultMessage.classList.add('bg-blue-900', 'text-blue-300');
+                    break;
+            }
+            
+            resultMessage.classList.remove('hidden');
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                resultMessage.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Reset verification state
+        function resetVerification() {
+            currentWordIndex = 0;
+            crystals = 0;
+            verifiedCount = 0;
+            failedCount = 0;
+            skippedCount = 0;
+            updateUI();
+        }
+
+        // Send postback to the provided URL
+        function sendPostback(status, amountLocal, amountUsd) {
+            const transId = "trans_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5);
+            const offerId = "word_verification";
+            
+            // Create postback URL with parameters
+            const postbackUrl = `${POSTBACK_URL}?status=${status}&trans_id=${transId}&user_id=${userId}&sub_id=&sub_id_2=&amount_local=${amountLocal}&amount_usd=${amountUsd}&offer_id=${offerId}&hash=&ip_click=`;
+            
+            // Send postback using an image pixel (avoids CORS issues)
+            const img = new Image();
+            img.src = postbackUrl;
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                alert('Logged out successfully');
+                // In a real app, you would redirect to login page or clear session
+            }
+        }
+
+        // Initialize with a sample CSV URL (optional)
+        csvUrlInput.value = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT8of_K1AFAQpPr4njDakBaBA8GC1qQTYj5r7pbLfhdAKEpOVCbXhxS-hL2tRF1MwEV3dTAsTnhXVae/pub?gid=0&single=true&output=csv';
+    </script>
 </body>
 </html>
