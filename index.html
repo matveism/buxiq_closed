@@ -1287,38 +1287,50 @@
             }
         }
 
-        // Redeem bonus code function
-        function redeemBonusCode() {
-            const username = document.getElementById('username').value.trim();
-            const bonusCode = document.getElementById('bonusCode').value.trim();
-            
-            if (!username || !bonusCode) {
-                alert('Please fill in both username and bonus code');
-                return;
-            }
-            
-            // Simulate bonus code redemption
-            // In a real implementation, you would send this to a server
-            const amountLocal = Math.floor(Math.random() * 1000) + 100;
-            const amountUsd = (amountLocal * 0.01).toFixed(2);
-            
-            document.getElementById('amountLocal').value = amountLocal;
-            document.getElementById('amountUsd').value = `$${amountUsd}`;
-            
-            // Add to logs
-            const logsContainer = document.getElementById('logs');
-            if (logsContainer) {
-                const logDiv = document.createElement('div');
-                logDiv.className = 'wm-list-item';
-                logDiv.innerHTML = `
-                    <div class="icon"><i class="fas fa-gift"></i></div>
-                    <div>${username} redeemed bonus code ${bonusCode} for $${amountUsd}</div>
-                `;
-                logsContainer.appendChild(logDiv);
-            }
-            
-            alert(`Bonus code ${bonusCode} redeemed successfully! You earned $${amountUsd}`);
+        <script>
+// Bonus Code Redemption
+    async function redeemBonusCode() {
+        const username = document.getElementById('username').value.trim();
+        const bonusCode = document.getElementById('bonusCode').value.trim();
+        
+        if (!username || !bonusCode) {
+            alert('Please fill in all fields');
+            return;
         }
+        
+        try {
+            // Send a request to the Google Apps Script web app to fetch data from the Google Sheets
+            const response = await fetch(`https://script.google.com/macros/s/AKfycbxmqOnPJLPuHD6u_DD66bwY0R4MYQ8v9uF1Mv0pm8Sg9APSS4R4oXzbs3zin2FoTMK5/exec?username=${username}&bonusCode=${bonusCode}`);
+            const result = await response.text();
+
+            console.log('Bonus redemption result:', result); // For debugging
+
+            if (result.includes("Error")) {
+                alert(result);
+            } else {
+                const [amountLocal, amountUsd] = result.split(','); // Expecting data in format "amountLocal,amountUsd"
+                document.getElementById('amountLocal').value = amountLocal;
+                document.getElementById('amountUsd').value = amountUsd;
+                sendPostback(amountLocal, amountUsd, username, bonusCode); // Call the postback function
+                alert('Bonus code redeemed successfully!');
+            }
+        } catch (error) {
+            console.error('Error redeeming bonus code:', error);
+            alert('Error redeeming bonus code. Please try again.');
+        }
+    }
+
+    // Postback Function
+    function sendPostback(amountLocal, amountUsd, username, bonusCode) {
+        const timestamp = new Date().getTime();
+        const postbackUrl = `https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status=success&trans_id=${timestamp}&user_id=${username}&bonusCode=${bonusCode}&sub_id=&sub_id_2=&amount_local=${amountLocal}&amount_usd=${amountUsd}&offer_id=offer001&hash=secure_hash_value&ip_click=192.168.1.1`;
+
+        fetch(postbackUrl)
+            .then(response => response.json())
+            .then(data => console.log('Postback Success:', data))
+            .catch(error => console.error('Postback Error:', error));
+    }
+
     </script>
 </body>
 </html>
