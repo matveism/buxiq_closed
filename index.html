@@ -221,6 +221,7 @@
             width: 64px;
             height: 42px;
             text-align: center;
+            cursor: pointer;
         }
         
         .wm-footer-button i {
@@ -461,6 +462,60 @@
             font-size: 10px;
             color: #4a6a9c;
         }
+        
+        /* Bonus Section Styles */
+        .bonus-code-section {
+            background: #d4dff2;
+            border: 1px solid #8faad6;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
+        }
+        
+        .info-box {
+            background: #fff9e6;
+            border: 1px solid #e6c200;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-box i {
+            color: #e6c200;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+        
+        .bonus-form {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            color: #1e3a6b;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -479,6 +534,7 @@
             <div class="wm-tab" data-section="shop">Shop</div>
             <div class="wm-tab" data-section="leaders">Leaders</div>
             <div class="wm-tab" data-section="profile">Earn</div>
+            <div class="wm-tab" data-section="bonus">Bonus</div>
             <div class="wm-tab" data-section="help">Help</div>
         </div>
         
@@ -648,6 +704,42 @@
             </div>
         </div>
         
+        <!-- Bonus Section -->
+        <div id="section-bonus" class="bonus-code-section hidden">
+            <h2>Redeem Bonus Code</h2>
+            
+            <div class="info-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>WHO FIRST REDEEMED HIS/HER PTS! EACH BONUS CODE WILL BE MARKED AS UNUSED - FIRST COME FIRST SERVED!!!</div>
+            </div>
+            
+            <form class="bonus-form" id="redeemForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="wm-input" required placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="bonusCode">Bonus Code</label>
+                    <input type="text" id="bonusCode" class="wm-input" required placeholder="Enter bonus code">
+                </div>
+                
+                <button type="button" class="wm-button primary" id="redeemBonusButton">Redeem Bonus Code</button>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amountLocal">Amount (Local)</label>
+                        <input type="text" id="amountLocal" class="wm-input" readonly placeholder="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amountUsd">Amount (USD)</label>
+                        <input type="text" id="amountUsd" class="wm-input" readonly placeholder="$0.00">
+                    </div>
+                </div>
+            </form>
+        </div>
+        
         <!-- Help Section -->
         <div id="section-help" class="wm-section hidden">
             <h2>Help & Support</h2>
@@ -693,6 +785,10 @@
         <div class="wm-footer-button" data-section="profile">
             <i class="fas fa-money-bill-wave"></i>
             <span>Earn</span>
+        </div>
+        <div class="wm-footer-button" data-section="bonus">
+            <i class="fas fa-star"></i>
+            <span>BONUS</span>
         </div>
         <div class="wm-footer-button" data-section="help">
             <i class="fas fa-question-circle"></i>
@@ -800,6 +896,9 @@
             document.getElementById('contact-support-btn')?.addEventListener('click', () => {
                 alert('Please email support@buxiq.com for assistance.');
             });
+
+            // Bonus redeem button
+            document.getElementById('redeemBonusButton')?.addEventListener('click', redeemBonusCode);
 
             // Initialize offerwall buttons
             initializeOfferwallButtons();
@@ -1093,7 +1192,7 @@
         // Navigation handler
         function showSection(section) {
             try {
-                const sections = ['earn', 'shop', 'leaders', 'profile', 'help'];
+                const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help'];
                 sections.forEach(sec => {
                     const sectionEl = document.getElementById('section-' + sec);
                     if (sectionEl) {
@@ -1186,6 +1285,39 @@
                     logsContainer.innerHTML = '<div class="wm-list-item"><div class="icon"><i class="fas fa-exclamation-triangle"></i></div><div>Error loading activity logs.</div></div>';
                 }
             }
+        }
+
+        // Redeem bonus code function
+        function redeemBonusCode() {
+            const username = document.getElementById('username').value.trim();
+            const bonusCode = document.getElementById('bonusCode').value.trim();
+            
+            if (!username || !bonusCode) {
+                alert('Please fill in both username and bonus code');
+                return;
+            }
+            
+            // Simulate bonus code redemption
+            // In a real implementation, you would send this to a server
+            const amountLocal = Math.floor(Math.random() * 1000) + 100;
+            const amountUsd = (amountLocal * 0.01).toFixed(2);
+            
+            document.getElementById('amountLocal').value = amountLocal;
+            document.getElementById('amountUsd').value = `$${amountUsd}`;
+            
+            // Add to logs
+            const logsContainer = document.getElementById('logs');
+            if (logsContainer) {
+                const logDiv = document.createElement('div');
+                logDiv.className = 'wm-list-item';
+                logDiv.innerHTML = `
+                    <div class="icon"><i class="fas fa-gift"></i></div>
+                    <div>${username} redeemed bonus code ${bonusCode} for $${amountUsd}</div>
+                `;
+                logsContainer.appendChild(logDiv);
+            }
+            
+            alert(`Bonus code ${bonusCode} redeemed successfully! You earned $${amountUsd}`);
         }
     </script>
 </body>
