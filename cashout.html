@@ -5,305 +5,795 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantum Rewards</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Windows Mobile 6.5 Style -->
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Windows Mobile 6.5 Style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
         }
-        .animate-fadeIn {
-            animation: fadeIn 0.3s ease-in-out;
+        
+        body {
+            background: #5d7ca6;
+            color: #000;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
-        #particles-js {
-            position: absolute;
+        
+        /* Header */
+        .wm-header {
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            color: white;
+            height: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid #0f1f3a;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            z-index: 1000;
         }
-        .reward-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        .wm-header .start {
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .wm-header .title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
+        }
+        
+        .wm-header .time {
+            font-size: 14px;
+        }
+        
+        /* Main Content */
+        .wm-content {
+            margin-top: 32px;
+            margin-bottom: 52px;
+            padding: 8px;
+            background: #5d7ca6;
+            min-height: calc(100vh - 84px);
+        }
+        
+        /* Windows Mobile Tabs */
+        .wm-tabs {
+            display: flex;
+            background: #4a6a9c;
+            border-bottom: 1px solid #2c4163;
+            overflow-x: auto;
+        }
+        
+        .wm-tab {
+            padding: 8px 16px;
+            background: #6b8cc0;
+            border: 1px solid #4a6a9c;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 2px;
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .reward-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.2);
-            border-color: rgba(139, 92, 246, 0.3);
+        
+        .wm-tab.active {
+            background: #8faad6;
+            color: #000;
         }
-        .reward-card.selected {
-            border: 2px solid #8B5CF6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-            background: rgba(139, 92, 246, 0.05);
+        
+        /* Content Sections */
+        .wm-section {
+            background: #d4dff2;
+            border: 1px solid #8faad6;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
         }
-        .reward-card.locked {
-            opacity: 0.6;
-            cursor: not-allowed;
-            position: relative;
+        
+        .wm-section h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e3a6b;
+            border-bottom: 1px solid #8faad6;
+            padding-bottom: 4px;
+        }
+        
+        /* Windows Mobile Buttons */
+        .wm-button {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d4d4d4 100%);
+            border: 1px solid #808080;
+            border-radius: 3px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #000;
+            cursor: pointer;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a0a0a0;
+            margin: 4px 0;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .wm-button:active {
+            background: linear-gradient(to bottom, #d4d4d4 0%, #f0f0f0 100%);
+            box-shadow: inset 1px 1px 0 #a0a0a0, inset -1px -1px 0 #fff;
+        }
+        
+        .wm-button.primary {
+            background: linear-gradient(to bottom, #4a6a9c 0%, #2c4163 100%);
+            color: white;
+            border-color: #1e3a6b;
+            box-shadow: inset 1px 1px 0 #6b8cc0, inset -1px -1px 0 #1e3a6b;
+        }
+        
+        .wm-button.primary:active {
+            background: linear-gradient(to bottom, #2c4163 0%, #4a6a9c 100%);
+            box-shadow: inset 1px 1px 0 #1e3a6b, inset -1px -1px 0 #6b8cc0;
+        }
+        
+        /* Input Fields */
+        .wm-input {
+            background: white;
+            border: 1px solid #808080;
+            border-radius: 3px;
+            padding: 6px 8px;
+            font-size: 14px;
+            width: 100%;
+            box-shadow: inset 1px 1px 0 #e0e0e0;
+            margin: 4px 0;
+        }
+        
+        /* List Items */
+        .wm-list {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
             overflow: hidden;
+            margin: 8px 0;
         }
-        .reward-card.locked::after {
-            content: '';
-            position: absolute;
+        
+        .wm-list-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #d4dff2;
+            display: flex;
+            align-items: center;
+        }
+        
+        .wm-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .wm-list-item .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #4a6a9c;
+            color: white;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        /* Footer Navigation */
+        .wm-footer {
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            height: 52px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            border-top: 1px solid #0f1f3a;
+            z-index: 1000;
+        }
+        
+        .wm-footer-button {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            width: 64px;
+            height: 42px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .wm-footer-button i {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        
+        .wm-footer-button.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        
+        /* Status Bar */
+        .wm-status-bar {
+            background: #4a6a9c;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #2c4163;
+            border-bottom: 1px solid #2c4163;
+            margin-top: 8px;
+        }
+        
+        /* Hidden sections */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Logs Section */
+        .wm-logs {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            height: 120px;
+            overflow-y: auto;
+            padding: 8px;
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            margin: 8px 0;
+        }
+        
+        /* Login Form */
+        .wm-login-form {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .wm-login-form label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            color: #1e3a6b;
+        }
+        
+        /* CAPTCHA */
+        .wm-captcha {
+            background: #e8eef7;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 8px;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 8px 0;
+        }
+        
+        /* Offer Wall Grid */
+        .wm-offer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 8px 0;
+        }
+        
+        .wm-offer-item {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .wm-offer-item img {
+            max-width: 100%;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        
+        /* Leaderboard */
+        .wm-leaderboard {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        
+        .wm-leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .wm-leaderboard th {
+            background: #4a6a9c;
+            color: white;
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: bold;
+            border-right: 1px solid #2c4163;
+        }
+        
+        .wm-leaderboard th:last-child {
+            border-right: none;
+        }
+        
+        .wm-leaderboard td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #d4dff2;
+        }
+        
+        .wm-leaderboard tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* FAQ Items */
+        .wm-faq-item {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        
+        .wm-faq-item h4 {
+            color: #1e3a6b;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        
+        /* Iframe Container */
+        .wm-iframe-container {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            display: none;
         }
-        .reward-card.locked::before {
+        
+        .wm-iframe-header {
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            color: white;
+            height: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid #0f1f3a;
+        }
+        
+        .wm-iframe-content {
+            height: calc(100% - 32px);
+        }
+        
+        .wm-iframe-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Notification Badge */
+        .wm-notification-badge {
+            background: #ff0000;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -2px;
+            right: -2px;
+        }
+        
+        /* User Info */
+        .wm-user-info {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .wm-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            margin-right: 8px;
+            border: 1px solid #8faad6;
+        }
+        
+        .wm-user-details {
+            flex-grow: 1;
+        }
+        
+        .wm-user-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        
+        .wm-stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .wm-stat-value {
+            font-weight: bold;
+            font-size: 16px;
+            color: #1e3a6b;
+        }
+        
+        .wm-stat-label {
+            font-size: 10px;
+            color: #4a6a9c;
+        }
+        
+        /* Bonus Section Styles */
+        .bonus-code-section {
+            background: #d4dff2;
+            border: 1px solid #8faad6;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
+        }
+        
+        .info-box {
+            background: #fff9e6;
+            border: 1px solid #e6c200;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-box i {
+            color: #e6c200;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+        
+        .bonus-form {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            color: #1e3a6b;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Quantum Rewards Specific Styles */
+        .reward-card {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reward-card:hover {
+            background: #e8eef7;
+        }
+        
+        .reward-card.selected {
+            background: #d4dff2;
+            border-color: #4a6a9c;
+            box-shadow: 0 0 0 2px #4a6a9c;
+        }
+        
+        .reward-card.locked {
+            background: #f0f0f0;
+            color: #808080;
+            cursor: not-allowed;
+            position: relative;
+        }
+        
+        .reward-card.locked::after {
             content: '🔒 Level Required: 0';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(139, 92, 246, 0.9);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
             font-weight: bold;
-            z-index: 2;
-            white-space: nowrap;
         }
+        
+        .level-badge {
+            background: #4a6a9c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        
         .modal-overlay {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1500;
+            display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
         }
+        
         .modal-overlay.active {
             display: flex;
-            animation: fadeIn 0.3s ease-in-out;
         }
+        
         .modal-content {
-            background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-            border-radius: 12px;
+            background: #d4dff2;
+            border: 1px solid #8faad6;
+            border-radius: 4px;
             width: 90%;
-            max-width: 500px;
-            padding: 2rem;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            padding: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
-        .form-input {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .form-input:focus {
-            border-color: #8B5CF6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-        }
+        
         .progress-step {
-            width: 36px;
-            height: 36px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .progress-step.active {
-            background: #8B5CF6;
-            border-color: #8B5CF6;
+            background: #6b8cc0;
+            border: 2px solid #4a6a9c;
+            font-size: 12px;
+            font-weight: bold;
             color: white;
         }
-        .progress-step.completed {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: #8B5CF6;
-            color: #8B5CF6;
+        
+        .progress-step.active {
+            background: #4a6a9c;
+            border-color: #2c4163;
         }
+        
+        .progress-step.completed {
+            background: #2c4163;
+            border-color: #1e3a6b;
+        }
+        
         .progress-connector {
             height: 2px;
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 0 8px;
+            background: #6b8cc0;
+            margin: 0 4px;
         }
+        
         .progress-connector.active {
-            background: #8B5CF6;
+            background: #4a6a9c;
         }
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+        
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
         }
-        @media (max-width: 640px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .level-badge {
-            background: linear-gradient(145deg, #8B5CF6, #6366F1);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
-    <!-- Particles.js Container -->
-    <div id="particles-js"></div>
+<body>
+    <!-- Windows Mobile Header -->
+    <div class="wm-header">
+        <div class="start">Start</div>
+        <div class="title">Quantum Rewards</div>
+        <div class="time" id="current-time">12:00 PM</div>
+    </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-12 relative z-10">
-        <div class="max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm border border-gray-700">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 p-8 text-center">
-                <div class="flex items-center justify-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
-                        <i class="fas fa-gift text-2xl text-white"></i>
+    <div class="wm-content">
+        <!-- Progress Steps -->
+        <div class="wm-section">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center flex-1">
+                    <div class="progress-step active">
+                        <span>1</span>
                     </div>
-                    <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">Quantum Rewards</h1>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step">
+                        <span>2</span>
+                    </div>
+                    <div class="progress-connector"></div>
+                    <div class="progress-step">
+                        <span>3</span>
+                    </div>
                 </div>
-                <p class="mt-2 text-purple-200 text-lg">Redeem your points for exclusive rewards</p>
+                <span class="text-sm font-medium" style="margin-left: 8px;">Step <span style="color: #1e3a6b; font-weight: bold;">1</span> of 3</span>
             </div>
+        </div>
 
-            <!-- Progress Steps -->
-            <div class="px-8 pt-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div class="flex items-center flex-1">
-                        <div class="progress-step active">
-                            <span>1</span>
-                        </div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step">
-                            <span>2</span>
-                        </div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step">
-                            <span>3</span>
-                        </div>
+        <!-- Form Steps -->
+        <!-- Step 1: Account Verification -->
+        <div class="form-step">
+            <div class="wm-section">
+                <h2>Account Verification</h2>
+                <div class="form-group">
+                    <label for="account">Account ID</label>
+                    <div class="relative">
+                        <input type="text" id="account" class="wm-input" placeholder="Enter your account ID">
                     </div>
-                    <span class="text-sm font-medium text-gray-400 ml-4">Step <span class="text-purple-400">1</span> of 3</span>
+                    <p style="margin-top: 4px; font-size: 12px; color: #4a6a9c;">Enter your registered account ID to verify eligibility</p>
                 </div>
+                <div id="message" class="text-center mt-6 font-medium text-sm"></div>
             </div>
+        </div>
 
-            <!-- Form Steps -->
-            <div class="p-8">
-                <!-- Step 1: Account Verification -->
-                <div class="form-step">
-                    <div class="max-w-md mx-auto">
-                        <div class="mb-8">
-                            <label for="account" class="block text-sm font-medium text-gray-300 mb-3">Account ID</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-user text-gray-500"></i>
-                                </div>
-                                <input type="text" id="account" class="w-full pl-10 pr-4 py-3 form-input rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your account ID">
-                            </div>
-                            <p class="mt-2 text-xs text-gray-400">Enter your registered account ID to verify eligibility</p>
-                        </div>
-                        <div id="message" class="text-center mt-6 font-medium text-sm"></div>
+        <!-- Step 2: Reward Selection -->
+        <div class="form-step hidden">
+            <div class="wm-section">
+                <h2>Select Your Reward</h2>
+                <p style="margin-bottom: 12px; color: #4a6a9c;">Choose from our exclusive rewards catalog. Your current balance will be shown after verification.</p>
+                
+                <div id="rewards-container" class="grid-container">
+                    <!-- Rewards will be loaded here -->
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #4a6a9c; margin-bottom: 8px;"></i>
+                        <p style="color: #4a6a9c;">Loading rewards catalog...</p>
                     </div>
                 </div>
+                <div id="message" class="text-center mt-6 font-medium text-sm"></div>
+            </div>
+        </div>
 
-                <!-- Step 2: Reward Selection -->
-                <div class="form-step hidden">
-                    <h2 class="text-2xl font-semibold mb-6 text-center">Select Your Reward</h2>
-                    <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Choose from our exclusive rewards catalog. Your current balance will be shown after verification.</p>
+        <!-- Step 3: Confirmation -->
+        <div class="form-step hidden">
+            <div class="wm-section">
+                <h2>Confirm Your Redemption</h2>
+                
+                <div style="background: white; border: 1px solid #8faad6; border-radius: 3px; padding: 12px; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                        <img id="selected-reward-logo" src="https://via.placeholder.com/60" alt="Reward" style="width: 60px; height: 60px; object-fit: contain; margin-right: 12px;">
+                        <div>
+                            <h3 id="selected-reward-name" style="font-weight: bold; font-size: 16px;">Reward Name</h3>
+                            <p id="selected-reward-amount" style="color: #4a6a9c; font-size: 14px;">0 points</p>
+                            <p id="selected-reward-level" style="font-size: 12px; color: #808080; margin-top: 4px;">Level required: 0</p>
+                        </div>
+                    </div>
                     
-                    <div id="rewards-container" class="grid-container">
-                        <!-- Rewards will be loaded here -->
-                        <div class="col-span-full text-center py-12">
-                            <i class="fas fa-spinner fa-spin text-3xl mb-4 text-purple-400"></i>
-                            <p class="text-gray-400">Loading rewards catalog...</p>
-                        </div>
+                    <div style="margin-bottom: 12px;">
+                        <label for="note" style="display: block; margin-bottom: 4px; font-weight: bold; color: #1e3a6b;">Special Instructions (Optional)</label>
+                        <textarea id="note" rows="3" class="wm-input" placeholder="Any special delivery instructions or notes..."></textarea>
                     </div>
-                    <div id="message" class="text-center mt-6 font-medium text-sm"></div>
-                </div>
-
-                <!-- Step 3: Confirmation -->
-                <div class="form-step hidden">
-                    <div class="max-w-2xl mx-auto">
-                        <h2 class="text-2xl font-semibold mb-6 text-center">Confirm Your Redemption</h2>
-                        
-                        <div class="bg-gray-700 rounded-xl p-6 mb-8 border border-gray-600">
-                            <div class="flex items-center mb-6">
-                                <img id="selected-reward-logo" src="https://via.placeholder.com/80" alt="Reward" class="w-16 h-16 object-contain rounded-lg mr-6">
-                                <div>
-                                    <h3 id="selected-reward-name" class="font-bold text-xl">Reward Name</h3>
-                                    <p id="selected-reward-amount" class="text-purple-400 text-lg">0 points</p>
-                                    <p id="selected-reward-level" class="text-sm text-gray-400 mt-1">Level required: 0</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="note" class="block text-sm font-medium text-gray-300 mb-3">Special Instructions (Optional)</label>
-                                <textarea id="note" rows="3" class="w-full px-4 py-3 form-input rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Any special delivery instructions or notes..."></textarea>
-                            </div>
-                            
-                            <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3 mb-4">
-                                <span class="text-sm text-gray-300">Your Balance</span>
-                                <span class="font-bold text-purple-400 text-lg"><span id="user-balance">0</span> pts</span>
-                            </div>
-                            
-                            <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-                                <span class="text-sm text-gray-300">Your Level</span>
-                                <span class="font-bold text-purple-400 text-lg"><span id="user-level">0</span></span>
-                            </div>
-                        </div>
-                        
-                        <div id="message" class="text-center mt-6 font-medium text-sm"></div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: between; background: #e8eef7; border-radius: 3px; padding: 8px; margin-bottom: 8px;">
+                        <span style="font-size: 12px; color: #4a6a9c;">Your Balance</span>
+                        <span style="font-weight: bold; color: #1e3a6b; font-size: 14px;"><span id="user-balance">0</span> pts</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: between; background: #e8eef7; border-radius: 3px; padding: 8px;">
+                        <span style="font-size: 12px; color: #4a6a9c;">Your Level</span>
+                        <span style="font-weight: bold; color: #1e3a6b; font-size: 14px;"><span id="user-level">0</span></span>
                     </div>
                 </div>
-
-                <!-- Navigation Buttons -->
-                <div class="mt-12 flex justify-between border-t border-gray-700 pt-8">
-                    <button id="prev-btn" class="hidden px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium transition flex items-center">
-                        <i class="fas fa-arrow-left mr-3"></i> Back
-                    </button>
-                    <button id="next-btn" class="ml-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg font-medium transition flex items-center shadow-lg shadow-purple-500/10">
-                        Next <i class="fas fa-arrow-right ml-3"></i>
-                    </button>
-                </div>
+                
+                <div id="message" class="text-center mt-6 font-medium text-sm"></div>
             </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; border-top: 1px solid #8faad6; padding-top: 12px;">
+            <button id="prev-btn" class="wm-button hidden">
+                <i class="fas fa-arrow-left" style="margin-right: 4px;"></i> Back
+            </button>
+            <button id="next-btn" class="wm-button primary" style="margin-left: auto;">
+                Next <i class="fas fa-arrow-right" style="margin-left: 4px;"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <div class="wm-footer">
+        <div class="wm-footer-button active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-gift"></i>
+            <span>Rewards</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
         </div>
     </div>
 
     <!-- Claim Modal -->
     <div id="claim-modal" class="modal-overlay">
         <div class="modal-content">
-            <div class="text-center">
-                <div class="flex justify-center mb-6">
-                    <div class="w-24 h-24 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <img id="modal-reward-logo" src="https://via.placeholder.com/80" alt="Reward" class="w-16 h-16 object-contain rounded-lg">
+            <div style="text-align: center;">
+                <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(to bottom, #4a6a9c 0%, #2c4163 100%); display: flex; align-items: center; justify-content: center;">
+                        <img id="modal-reward-logo" src="https://via.placeholder.com/50" alt="Reward" style="width: 50px; height: 50px; object-fit: contain;">
                     </div>
                 </div>
-                <h3 id="modal-reward-name" class="text-2xl font-bold mb-2">Reward Name</h3>
-                <p id="modal-reward-amount" class="text-purple-400 text-lg mb-8">0 points</p>
+                <h3 id="modal-reward-name" style="font-size: 18px; font-weight: bold; margin-bottom: 4px;">Reward Name</h3>
+                <p id="modal-reward-amount" style="color: #4a6a9c; font-size: 14px; margin-bottom: 16px;">0 points</p>
                 
-                <div class="bg-gray-700 rounded-xl p-5 mb-8 border border-gray-600">
-                    <p class="text-sm text-gray-300 mb-3">Your redemption code:</p>
-                    <div id="claim-code-display" class="font-mono text-2xl font-bold p-4 bg-gray-800 rounded-lg break-all tracking-wider border border-gray-600">CODE-HERE</div>
-                    <p class="text-xs text-gray-400 mt-3">This code will be valid for 30 days</p>
+                <div style="background: white; border: 1px solid #8faad6; border-radius: 3px; padding: 12px; margin-bottom: 16px;">
+                    <p style="font-size: 12px; color: #4a6a9c; margin-bottom: 8px;">Your redemption code:</p>
+                    <div id="claim-code-display" style="font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold; padding: 8px; background: #e8eef7; border-radius: 3px; border: 1px solid #8faad6; word-break: break-all;">CODE-HERE</div>
+                    <p style="font-size: 10px; color: #808080; margin-top: 8px;">This code will be valid for 30 days</p>
                 </div>
                 
-                <div class="flex space-x-4">
-                    <button id="copy-code" class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg font-medium flex items-center justify-center shadow-lg shadow-purple-500/10">
-                        <i class="fas fa-copy mr-2"></i> Copy Code
+                <div style="display: flex; gap: 8px;">
+                    <button id="copy-code" class="wm-button primary" style="flex: 1;">
+                        <i class="fas fa-copy" style="margin-right: 4px;"></i> Copy Code
                     </button>
-                    <button id="close-modal" class="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center">
+                    <button id="close-modal" class="wm-button" style="flex: 1;">
                         Close
                     </button>
                 </div>
@@ -311,87 +801,20 @@
         </div>
     </div>
 
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
     <!-- Main Script -->
     <script>
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize particles.js if container exists
-            if (document.getElementById('particles-js') && typeof particlesJS === 'function') {
-                particlesJS("particles-js", {
-                    "particles": {
-                        "number": {
-                            "value": 80,
-                            "density": {
-                                "enable": true,
-                                "value_area": 800
-                            }
-                        },
-                        "color": {
-                            "value": "#8B5CF6"
-                        },
-                        "shape": {
-                            "type": "circle",
-                            "stroke": {
-                                "width": 0,
-                                "color": "#000000"
-                            }
-                        },
-                        "opacity": {
-                            "value": 0.5,
-                            "random": false
-                        },
-                        "size": {
-                            "value": 3,
-                            "random": true
-                        },
-                        "line_linked": {
-                            "enable": true,
-                            "distance": 150,
-                            "color": "#4B5563",
-                            "opacity": 0.4,
-                            "width": 1
-                        },
-                        "move": {
-                            "enable": true,
-                            "speed": 3,
-                            "direction": "none",
-                            "random": false,
-                            "straight": false,
-                            "out_mode": "out"
-                        }
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "grab"
-                            },
-                            "onclick": {
-                                "enable": true,
-                                "mode": "push"
-                            },
-                            "resize": true
-                        },
-                        "modes": {
-                            "grab": {
-                                "distance": 140,
-                                "line_linked": {
-                                    "opacity": 1
-                                }
-                            },
-                            "push": {
-                                "particles_nb": 4
-                            }
-                        }
-                    },
-                    "retina_detect": true
-                });
+            // Update time in header
+            function updateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                document.getElementById('current-time').textContent = timeString;
             }
-
+            
+            updateTime();
+            setInterval(updateTime, 60000);
+            
             // Initialize the reward system
             initRewardSystem();
         });
@@ -414,7 +837,6 @@
             const nextBtn = document.getElementById("next-btn");
             const prevBtn = document.getElementById("prev-btn");
             const messageBoxes = document.querySelectorAll("#message");
-            const stepLabel = document.querySelector("#step-label");
             const progressSteps = document.querySelectorAll(".progress-step");
             const progressConnectors = document.querySelectorAll(".progress-connector");
             const rewardsContainer = document.getElementById("rewards-container");
@@ -456,7 +878,7 @@
                     if (index + 1 < currentStep) {
                         step.classList.remove("active");
                         step.classList.add("completed");
-                        step.innerHTML = '<i class="fas fa-check"></i>';
+                        step.innerHTML = '<i class="fas fa-check" style="font-size: 10px;"></i>';
                     } else if (index + 1 === currentStep) {
                         step.classList.add("active");
                         step.classList.remove("completed");
@@ -479,13 +901,13 @@
                 // Update next/prev buttons
                 if (nextBtn) {
                     if (currentStep === totalSteps) {
-                        nextBtn.innerHTML = '<i class="fas fa-gift mr-2"></i> Redeem Now';
+                        nextBtn.innerHTML = '<i class="fas fa-gift" style="margin-right: 4px;"></i> Redeem Now';
                         if (prevBtn) prevBtn.classList.remove("hidden");
                     } else if (currentStep === 1) {
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right" style="margin-left: 4px;"></i>';
                         if (prevBtn) prevBtn.classList.add("hidden");
                     } else {
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right" style="margin-left: 4px;"></i>';
                         if (prevBtn) prevBtn.classList.remove("hidden");
                     }
                 }
@@ -512,9 +934,9 @@
                     console.error('Error loading rewards:', error);
                     if (rewardsContainer) {
                         rewardsContainer.innerHTML = `
-                            <div class="col-span-full text-center py-12 text-red-400">
-                                <i class="fas fa-exclamation-triangle text-3xl mb-4"></i>
-                                <p class="text-lg">Failed to load rewards. Please try again later.</p>
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: #ff0000;">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 8px;"></i>
+                                <p>Failed to load rewards. Please try again later.</p>
                             </div>
                         `;
                     }
@@ -526,9 +948,9 @@
                 
                 if (rewardsData.length === 0) {
                     rewardsContainer.innerHTML = `
-                        <div class="col-span-full text-center py-12 text-gray-400">
-                            <i class="fas fa-box-open text-3xl mb-4"></i>
-                            <p class="text-lg">No rewards available at this time.</p>
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: #808080;">
+                            <i class="fas fa-box-open" style="font-size: 24px; margin-bottom: 8px;"></i>
+                            <p>No rewards available at this time.</p>
                         </div>
                     `;
                     return;
@@ -539,27 +961,27 @@
                     const isLocked = userLevel < requiredLevel;
                     
                     return `
-                    <div class="reward-card bg-gray-800 rounded-xl p-6 flex flex-col h-full ${isLocked ? 'locked' : ''}" 
+                    <div class="reward-card ${isLocked ? 'locked' : ''}" 
                          data-reward-name="${reward.rewardname || 'Reward'}" 
                          data-reward-amount="${reward.amount || '0'}"
                          data-reward-logo="${reward.rewardlogourl || ''}"
                          data-claim-code="${reward.claimcode || ''}"
                          data-required-level="${requiredLevel}">
-                        <div class="flex items-center mb-4">
-                            <img src="${reward.rewardlogourl || 'https://via.placeholder.com/50'}" 
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <img src="${reward.rewardlogourl || 'https://via.placeholder.com/40'}" 
                                  alt="${reward.rewardname || 'Reward'}" 
-                                 class="w-12 h-12 object-contain rounded-lg mr-4">
-                            <div class="flex-1">
-                                <h3 class="font-bold text-white text-lg">${reward.rewardname || 'Reward'}</h3>
-                                <p class="text-purple-400">${reward.amount || '0'}</p>
-                                ${requiredLevel > 0 ? `<span class="level-badge mt-1">Level ${requiredLevel}+</span>` : ''}
+                                 style="width: 40px; height: 40px; object-fit: contain; margin-right: 8px;">
+                            <div style="flex: 1;">
+                                <h3 style="font-weight: bold; font-size: 14px;">${reward.rewardname || 'Reward'}</h3>
+                                <p style="color: #4a6a9c; font-size: 12px;">${reward.amount || '0'}</p>
+                                ${requiredLevel > 0 ? `<span class="level-badge">Level ${requiredLevel}+</span>` : ''}
                             </div>
                         </div>
-                        <div class="mt-auto pt-4 border-t border-gray-700 flex justify-between items-center">
-                            <span class="text-sm ${isLocked ? 'text-red-400' : 'text-gray-400'}">${isLocked ? 'Level locked' : 'Available'}</span>
-                            <button class="text-sm ${isLocked ? 'text-gray-500 cursor-not-allowed' : 'text-purple-400 hover:text-purple-300'}">
-                                ${isLocked ? 'Locked' : 'Select'} <i class="fas ${isLocked ? 'fa-lock' : 'fa-chevron-right'} ml-1"></i>
-                            </button>
+                        <div style="padding-top: 8px; border-top: 1px solid #d4dff2; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 10px; ${isLocked ? 'color: #ff0000;' : 'color: #808080;'}">${isLocked ? 'Level locked' : 'Available'}</span>
+                            <span style="font-size: 10px; ${isLocked ? 'color: #808080;' : 'color: #4a6a9c;'}">
+                                ${isLocked ? 'Locked' : 'Select'} <i class="fas ${isLocked ? 'fa-lock' : 'fa-chevron-right'}" style="margin-left: 2px;"></i>
+                            </span>
                         </div>
                     </div>
                 `}).join('');
@@ -625,14 +1047,14 @@
                     // Fetch user data
                     if (nextBtn) {
                         nextBtn.disabled = true;
-                        nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Verifying...';
+                        nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 4px;"></i> Verifying...';
                     }
                     
                     const user = await fetchUserData(account);
                     
                     if (nextBtn) {
                         nextBtn.disabled = false;
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right" style="margin-left: 4px;"></i>';
                     }
                     
                     if (!user) {
@@ -791,9 +1213,9 @@
                 const code = claimCodeDisplay.textContent;
                 navigator.clipboard.writeText(code).then(() => {
                     if (copyCodeBtn) {
-                        copyCodeBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
+                        copyCodeBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 4px;"></i> Copied!';
                         setTimeout(() => {
-                            copyCodeBtn.innerHTML = '<i class="fas fa-copy mr-2"></i> Copy Code';
+                            copyCodeBtn.innerHTML = '<i class="fas fa-copy" style="margin-right: 4px;"></i> Copy Code';
                         }, 2000);
                     }
                 });
@@ -820,7 +1242,8 @@
                 messageBoxes.forEach(box => {
                     if (box) {
                         box.textContent = msg;
-                        box.className = "text-center mt-6 font-medium text-sm text-red-400 animate-fadeIn";
+                        box.style.color = "#ff0000";
+                        box.classList.add("animate-fadeIn");
                     }
                 });
             }
@@ -829,693 +1252,8 @@
                 messageBoxes.forEach(box => {
                     if (box) {
                         box.textContent = msg;
-                        box.className = "text-center mt-6 font-medium text-sm text-green-400 animate-fadeIn";
-                    }
-                });
-            }
-
-            function clearMessages() {
-                messageBoxes.forEach(box => {
-                    if (box) {
-                        box.textContent = "";
-                        box.className = "text-center mt-6 font-medium text-sm";
-                    }
-                });
-            }
-
-            // Initial load
-            updateStepUI();
-            loadRewardsData();
-        }
-    </script>
-</body>
-</html>
-
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-12 relative z-10">
-        <div class="max-w-6xl mx-auto bg-gray-800 bg-opacity-80 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-sm border border-gray-700">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 p-8 text-center">
-                <div class="flex items-center justify-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center mr-4">
-                        <i class="fas fa-gift text-2xl text-white"></i>
-                    </div>
-                    <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200">Quantum Rewards</h1>
-                </div>
-                <p class="mt-2 text-purple-200 text-lg">Redeem your points for exclusive rewards</p>
-            </div>
-
-            <!-- Progress Steps -->
-            <div class="px-8 pt-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div class="flex items-center flex-1">
-                        <div class="progress-step active">
-                            <span>1</span>
-                        </div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step">
-                            <span>2</span>
-                        </div>
-                        <div class="progress-connector"></div>
-                        <div class="progress-step">
-                            <span>3</span>
-                        </div>
-                    </div>
-                    <span class="text-sm font-medium text-gray-400 ml-4">Step <span class="text-purple-400">1</span> of 3</span>
-                </div>
-            </div>
-
-            <!-- Form Steps -->
-            <div class="p-8">
-                <!-- Step 1: Account Verification -->
-                <div class="form-step">
-                    <div class="max-w-md mx-auto">
-                        <div class="mb-8">
-                            <label for="account" class="block text-sm font-medium text-gray-300 mb-3">Account ID</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <i class="fas fa-user text-gray-500"></i>
-                                </div>
-                                <input type="text" id="account" class="w-full pl-10 pr-4 py-3 form-input rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Enter your account ID">
-                            </div>
-                            <p class="mt-2 text-xs text-gray-400">Enter your registered account ID to verify eligibility</p>
-                        </div>
-                        <div id="message" class="text-center mt-6 font-medium text-sm"></div>
-                    </div>
-                </div>
-
-                <!-- Step 2: Reward Selection -->
-                <div class="form-step hidden">
-                    <h2 class="text-2xl font-semibold mb-6 text-center">Select Your Reward</h2>
-                    <p class="text-center text-gray-400 mb-8 max-w-2xl mx-auto">Choose from our exclusive rewards catalog. Your current balance will be shown after verification.</p>
-                    
-                    <div id="rewards-container" class="grid-container">
-                        <!-- Rewards will be loaded here -->
-                        <div class="col-span-full text-center py-12">
-                            <i class="fas fa-spinner fa-spin text-3xl mb-4 text-purple-400"></i>
-                            <p class="text-gray-400">Loading rewards catalog...</p>
-                        </div>
-                    </div>
-                    <div id="message" class="text-center mt-6 font-medium text-sm"></div>
-                </div>
-
-                <!-- Step 3: Confirmation -->
-                <div class="form-step hidden">
-                    <div class="max-w-2xl mx-auto">
-                        <h2 class="text-2xl font-semibold mb-6 text-center">Confirm Your Redemption</h2>
-                        
-                        <div class="bg-gray-700 rounded-xl p-6 mb-8 border border-gray-600">
-                            <div class="flex items-center mb-6">
-                                <img id="selected-reward-logo" src="https://via.placeholder.com/80" alt="Reward" class="w-16 h-16 object-contain rounded-lg mr-6">
-                                <div>
-                                    <h3 id="selected-reward-name" class="font-bold text-xl">Reward Name</h3>
-                                    <p id="selected-reward-amount" class="text-purple-400 text-lg">0 points</p>
-                                    <p id="selected-reward-level" class="text-sm text-gray-400 mt-1">Level required: 0</p>
-                                </div>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label for="note" class="block text-sm font-medium text-gray-300 mb-3">Special Instructions (Optional)</label>
-                                <textarea id="note" rows="3" class="w-full px-4 py-3 form-input rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Any special delivery instructions or notes..."></textarea>
-                            </div>
-                            
-                            <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3 mb-4">
-                                <span class="text-sm text-gray-300">Your Balance</span>
-                                <span class="font-bold text-purple-400 text-lg"><span id="user-balance">0</span> pts</span>
-                            </div>
-                            
-                            <div class="flex items-center justify-between bg-gray-800 rounded-lg px-4 py-3">
-                                <span class="text-sm text-gray-300">Your Level</span>
-                                <span class="font-bold text-purple-400 text-lg"><span id="user-level">0</span></span>
-                            </div>
-                        </div>
-                        
-                        <div id="message" class="text-center mt-6 font-medium text-sm"></div>
-                    </div>
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="mt-12 flex justify-between border-t border-gray-700 pt-8">
-                    <button id="prev-btn" class="hidden px-8 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium transition flex items-center">
-                        <i class="fas fa-arrow-left mr-3"></i> Back
-                    </button>
-                    <button id="next-btn" class="ml-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg font-medium transition flex items-center shadow-lg shadow-purple-500/10">
-                        Next <i class="fas fa-arrow-right ml-3"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Claim Modal -->
-    <div id="claim-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="text-center">
-                <div class="flex justify-center mb-6">
-                    <div class="w-24 h-24 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center shadow-lg">
-                        <img id="modal-reward-logo" src="https://via.placeholder.com/80" alt="Reward" class="w-16 h-16 object-contain rounded-lg">
-                    </div>
-                </div>
-                <h3 id="modal-reward-name" class="text-2xl font-bold mb-2">Reward Name</h3>
-                <p id="modal-reward-amount" class="text-purple-400 text-lg mb-8">0 points</p>
-                
-                <div class="bg-gray-700 rounded-xl p-5 mb-8 border border-gray-600">
-                    <p class="text-sm text-gray-300 mb-3">Your redemption code:</p>
-                    <div id="claim-code-display" class="font-mono text-2xl font-bold p-4 bg-gray-800 rounded-lg break-all tracking-wider border border-gray-600">CODE-HERE</div>
-                    <p class="text-xs text-gray-400 mt-3">This code will be valid for 30 days</p>
-                </div>
-                
-                <div class="flex space-x-4">
-                    <button id="copy-code" class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg font-medium flex items-center justify-center shadow-lg shadow-purple-500/10">
-                        <i class="fas fa-copy mr-2"></i> Copy Code
-                    </button>
-                    <button id="close-modal" class="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium flex items-center justify-center">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <!-- Main Script -->
-    <script>
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize particles.js if container exists
-            if (document.getElementById('particles-js') && typeof particlesJS === 'function') {
-                particlesJS("particles-js", {
-                    "particles": {
-                        "number": {
-                            "value": 80,
-                            "density": {
-                                "enable": true,
-                                "value_area": 800
-                            }
-                        },
-                        "color": {
-                            "value": "#8B5CF6"
-                        },
-                        "shape": {
-                            "type": "circle",
-                            "stroke": {
-                                "width": 0,
-                                "color": "#000000"
-                            }
-                        },
-                        "opacity": {
-                            "value": 0.5,
-                            "random": false
-                        },
-                        "size": {
-                            "value": 3,
-                            "random": true
-                        },
-                        "line_linked": {
-                            "enable": true,
-                            "distance": 150,
-                            "color": "#4B5563",
-                            "opacity": 0.4,
-                            "width": 1
-                        },
-                        "move": {
-                            "enable": true,
-                            "speed": 3,
-                            "direction": "none",
-                            "random": false,
-                            "straight": false,
-                            "out_mode": "out"
-                        }
-                    },
-                    "interactivity": {
-                        "detect_on": "canvas",
-                        "events": {
-                            "onhover": {
-                                "enable": true,
-                                "mode": "grab"
-                            },
-                            "onclick": {
-                                "enable": true,
-                                "mode": "push"
-                            },
-                            "resize": true
-                        },
-                        "modes": {
-                            "grab": {
-                                "distance": 140,
-                                "line_linked": {
-                                    "opacity": 1
-                                }
-                            },
-                            "push": {
-                                "particles_nb": 4
-                            }
-                        }
-                    },
-                    "retina_detect": true
-                });
-            }
-
-            // Initialize the reward system
-            initRewardSystem();
-        });
-
-        // Reward System
-        function initRewardSystem() {
-            // Reward data from Google Sheets
-            const rewardsCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPFdYsa7nBY6co_sbvqxVR1l9fEHDX7bNbqTqoBhlDXrwuApwFRMKH42Jkqa2zt6FwvN6SEJHqgJOD/pub?gid=0&single=true&output=csv';
-            const userDataCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv';
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec';
-
-            let currentStep = 1;
-            const totalSteps = 3;
-            let selectedReward = null;
-            let userBalance = 0;
-            let userLevel = 0;
-            let rewardsData = [];
-
-            // DOM Elements
-            const nextBtn = document.getElementById("next-btn");
-            const prevBtn = document.getElementById("prev-btn");
-            const messageBoxes = document.querySelectorAll("#message");
-            const stepLabel = document.querySelector("#step-label");
-            const progressSteps = document.querySelectorAll(".progress-step");
-            const progressConnectors = document.querySelectorAll(".progress-connector");
-            const rewardsContainer = document.getElementById("rewards-container");
-            const selectedRewardName = document.getElementById("selected-reward-name");
-            const selectedRewardAmount = document.getElementById("selected-reward-amount");
-            const selectedRewardLogo = document.getElementById("selected-reward-logo");
-            const selectedRewardLevel = document.getElementById("selected-reward-level");
-            const userBalanceDisplay = document.getElementById("user-balance");
-            const userLevelDisplay = document.getElementById("user-level");
-            const claimModal = document.getElementById("claim-modal");
-            const closeModalBtn = document.getElementById("close-modal");
-            const copyCodeBtn = document.getElementById("copy-code");
-            const claimCodeDisplay = document.getElementById("claim-code-display");
-            const modalRewardName = document.getElementById("modal-reward-name");
-            const modalRewardAmount = document.getElementById("modal-reward-amount");
-            const modalRewardLogo = document.getElementById("modal-reward-logo");
-
-            // Event Listeners
-            if (nextBtn) nextBtn.addEventListener("click", handleStep);
-            if (prevBtn) prevBtn.addEventListener("click", prevStep);
-            if (closeModalBtn) closeModalBtn.addEventListener("click", () => claimModal.classList.remove("active"));
-            if (copyCodeBtn) copyCodeBtn.addEventListener("click", copyClaimCode);
-
-            // Functions
-            function updateStepUI() {
-                // Show/hide form steps
-                document.querySelectorAll('.form-step').forEach((step, index) => {
-                    if (index + 1 === currentStep) {
-                        step.classList.remove("hidden");
-                        step.classList.add("animate-fadeIn");
-                    } else {
-                        step.classList.add("hidden");
-                        step.classList.remove("animate-fadeIn");
-                    }
-                });
-
-                // Update progress steps
-                progressSteps.forEach((step, index) => {
-                    if (index + 1 < currentStep) {
-                        step.classList.remove("active");
-                        step.classList.add("completed");
-                        step.innerHTML = '<i class="fas fa-check"></i>';
-                    } else if (index + 1 === currentStep) {
-                        step.classList.add("active");
-                        step.classList.remove("completed");
-                        step.innerHTML = `<span>${index + 1}</span>`;
-                    } else {
-                        step.classList.remove("active", "completed");
-                        step.innerHTML = `<span>${index + 1}</span>`;
-                    }
-                });
-
-                // Update progress connectors
-                progressConnectors.forEach((connector, index) => {
-                    if (index + 1 < currentStep) {
-                        connector.classList.add("active");
-                    } else {
-                        connector.classList.remove("active");
-                    }
-                });
-
-                // Update next/prev buttons
-                if (nextBtn) {
-                    if (currentStep === totalSteps) {
-                        nextBtn.innerHTML = '<i class="fas fa-gift mr-2"></i> Redeem Now';
-                        if (prevBtn) prevBtn.classList.remove("hidden");
-                    } else if (currentStep === 1) {
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
-                        if (prevBtn) prevBtn.classList.add("hidden");
-                    } else {
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
-                        if (prevBtn) prevBtn.classList.remove("hidden");
-                    }
-                }
-            }
-
-            async function loadRewardsData() {
-                try {
-                    const response = await fetch(rewardsCSVURL);
-                    if (!response.ok) throw new Error('Failed to fetch rewards data');
-                    const text = await response.text();
-                    const rows = text.trim().split('\n').map(row => row.split(','));
-                    const headers = rows.shift().map(h => h.trim().toLowerCase());
-
-                    rewardsData = rows.map(row => {
-                        const obj = {};
-                        headers.forEach((header, i) => {
-                            obj[header] = row[i] ? row[i].trim() : '';
-                        });
-                        return obj;
-                    });
-
-                    displayRewards();
-                } catch (error) {
-                    console.error('Error loading rewards:', error);
-                    if (rewardsContainer) {
-                        rewardsContainer.innerHTML = `
-                            <div class="col-span-full text-center py-12 text-red-400">
-                                <i class="fas fa-exclamation-triangle text-3xl mb-4"></i>
-                                <p class="text-lg">Failed to load rewards. Please try again later.</p>
-                            </div>
-                        `;
-                    }
-                }
-            }
-
-            function displayRewards() {
-                if (!rewardsContainer) return;
-                
-                if (rewardsData.length === 0) {
-                    rewardsContainer.innerHTML = `
-                        <div class="col-span-full text-center py-12 text-gray-400">
-                            <i class="fas fa-box-open text-3xl mb-4"></i>
-                            <p class="text-lg">No rewards available at this time.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                rewardsContainer.innerHTML = rewardsData.map(reward => {
-                    const requiredLevel = parseInt(reward.level || reward.minlevel || "0");
-                    const isLocked = userLevel < requiredLevel;
-                    
-                    return `
-                    <div class="reward-card bg-gray-800 rounded-xl p-6 flex flex-col h-full ${isLocked ? 'locked' : ''}" 
-                         data-reward-name="${reward.rewardname || 'Reward'}" 
-                         data-reward-amount="${reward.amount || '0'}"
-                         data-reward-logo="${reward.rewardlogourl || ''}"
-                         data-claim-code="${reward.claimcode || ''}"
-                         data-required-level="${requiredLevel}">
-                        <div class="flex items-center mb-4">
-                            <img src="${reward.rewardlogourl || 'https://via.placeholder.com/50'}" 
-                                 alt="${reward.rewardname || 'Reward'}" 
-                                 class="w-12 h-12 object-contain rounded-lg mr-4">
-                            <div class="flex-1">
-                                <h3 class="font-bold text-white text-lg">${reward.rewardname || 'Reward'}</h3>
-                                <p class="text-purple-400">${reward.amount || '0'}</p>
-                                ${requiredLevel > 0 ? `<span class="level-badge mt-1">Level ${requiredLevel}+</span>` : ''}
-                            </div>
-                        </div>
-                        <div class="mt-auto pt-4 border-t border-gray-700 flex justify-between items-center">
-                            <span class="text-sm ${isLocked ? 'text-red-400' : 'text-gray-400'}">${isLocked ? 'Level locked' : 'Available'}</span>
-                            <button class="text-sm ${isLocked ? 'text-gray-500 cursor-not-allowed' : 'text-purple-400 hover:text-purple-300'}">
-                                ${isLocked ? 'Locked' : 'Select'} <i class="fas ${isLocked ? 'fa-lock' : 'fa-chevron-right'} ml-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                `}).join('');
-
-                // Add click event to reward cards (only for unlocked ones)
-                document.querySelectorAll('.reward-card:not(.locked)').forEach(card => {
-                    card.addEventListener('click', function() {
-                        // Remove selected class from all cards
-                        document.querySelectorAll('.reward-card').forEach(c => {
-                            c.classList.remove('selected');
-                        });
-                        
-                        // Add selected class to clicked card
-                        this.classList.add('selected');
-                        
-                        // Set selected reward
-                        selectedReward = {
-                            name: this.getAttribute('data-reward-name'),
-                            amount: this.getAttribute('data-reward-amount'),
-                            logo: this.getAttribute('data-reward-logo'),
-                            claimCode: this.getAttribute('data-claim-code'),
-                            requiredLevel: parseInt(this.getAttribute('data-required-level') || "0")
-                        };
-                    });
-                });
-            }
-
-            async function fetchUserData(accountId) {
-                try {
-                    const res = await fetch(userDataCSVURL);
-                    if (!res.ok) throw new Error('Failed to fetch user data');
-                    const text = await res.text();
-                    const rows = text.trim().split('\n').map(row => row.split(','));
-                    const headers = rows.shift().map(h => h.trim().toLowerCase());
-
-                    const users = rows.map(row => {
-                        const obj = {};
-                        headers.forEach((header, i) => {
-                            obj[header] = row[i] ? row[i].trim() : '';
-                        });
-                        return obj;
-                    });
-
-                    return users.find(u => u['account#'] && u['account#'].toLowerCase() === accountId.toLowerCase());
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
-                    showError("Failed to load user data. Please try again later.");
-                    return null;
-                }
-            }
-
-            async function handleStep() {
-                clearMessages();
-
-                // Validate current step before proceeding
-                if (currentStep === 1) {
-                    const account = document.getElementById("account")?.value.trim();
-                    if (!account) {
-                        showError("Please enter your Account ID.");
-                        return;
-                    }
-                    
-                    // Fetch user data
-                    if (nextBtn) {
-                        nextBtn.disabled = true;
-                        nextBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Verifying...';
-                    }
-                    
-                    const user = await fetchUserData(account);
-                    
-                    if (nextBtn) {
-                        nextBtn.disabled = false;
-                        nextBtn.innerHTML = 'Continue <i class="fas fa-arrow-right ml-2"></i>';
-                    }
-                    
-                    if (!user) {
-                        showError("Account ID not found. Please check and try again.");
-                        return;
-                    }
-                    
-                    userBalance = parseInt(user.balance || "0");
-                    userLevel = parseInt(user.level || "0");
-                    
-                    if (userBalanceDisplay) userBalanceDisplay.textContent = userBalance;
-                    if (userLevelDisplay) userLevelDisplay.textContent = userLevel;
-                    
-                    // Reload rewards with user's level
-                    displayRewards();
-                }
-
-                if (currentStep === 2) {
-                    if (!selectedReward) {
-                        showError("Please select a reward to continue.");
-                        return;
-                    }
-                    
-                    // Check if user has the required level
-                    if (userLevel < selectedReward.requiredLevel) {
-                        showError(`You need to be at least level ${selectedReward.requiredLevel} to redeem this reward. Your current level is ${userLevel}.`);
-                        return;
-                    }
-                    
-                    // Update the selected reward display
-                    if (selectedRewardName) selectedRewardName.textContent = selectedReward.name;
-                    if (selectedRewardAmount) selectedRewardAmount.textContent = selectedReward.amount;
-                    if (selectedRewardLogo) {
-                        selectedRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
-                        selectedRewardLogo.alt = selectedReward.name;
-                    }
-                    if (selectedRewardLevel) {
-                        selectedRewardLevel.textContent = `Level required: ${selectedReward.requiredLevel}`;
-                    }
-                }
-
-                if (currentStep < totalSteps) {
-                    currentStep++;
-                    updateStepUI();
-                } else {
-                    // Final submit logic
-                    const account = document.getElementById("account")?.value.trim();
-                    const note = document.getElementById("note")?.value.trim();
-                    
-                    // Check if user has enough balance (if needed)
-                    const rewardCost = parseInt(selectedReward.amount.replace(/[^0-9]/g, '')) || 0;
-                    
-                    if (userBalance < rewardCost) {
-                        showError("Insufficient balance for this reward.");
-                        return;
-                    }
-                    
-                    // Check level requirement again (just in case)
-                    if (userLevel < selectedReward.requiredLevel) {
-                        showError(`You need to be at least level ${selectedReward.requiredLevel} to redeem this reward. Your current level is ${userLevel}.`);
-                        return;
-                    }
-                    
-                    // Show the claim code modal
-                    showClaimModal();
-                }
-            }
-
-            function showClaimModal() {
-                if (!selectedReward) return;
-                
-                if (modalRewardName) modalRewardName.textContent = selectedReward.name;
-                if (modalRewardAmount) modalRewardAmount.textContent = selectedReward.amount;
-                if (modalRewardLogo) {
-                    modalRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
-                    modalRewardLogo.alt = selectedReward.name;
-                }
-                if (claimCodeDisplay) claimCodeDisplay.textContent = selectedReward.claimCode || 'CODE-NOT-FOUND';
-                
-                if (claimModal) claimModal.classList.add("active");
-                
-                // Submit to Google Sheets
-                submitRedemption();
-            }
-
-            async function submitRedemption() {
-                const account = document.getElementById("account")?.value.trim();
-                const note = document.getElementById("note")?.value.trim();
-                if (!account || !selectedReward) return;
-
-                try {
-                    const response = await fetch(rewardsCSVURL);
-                    const csvData = await response.text();
-                    const rewards = parseCSV(csvData);
-
-                    const rewardData = rewards.find(r => 
-                        r.rewardname && r.rewardname.trim().toLowerCase() === selectedReward.name.trim().toLowerCase()
-                    );
-                    
-                    let amountUSD = '0';
-                    let amountLocal = '0';
-                    let amountPoints = 0;
-                    
-                    if (rewardData) {
-                        amountUSD = rewardData.amount_usd || rewardData.usd_amount || '0';
-                        amountLocal = rewardData.amount_local || rewardData.local_amount || '0';
-                        
-                        if (amountUSD === '0' && rewardData.amount) {
-                            amountUSD = rewardData.amount;
-                            amountLocal = rewardData.amount;
-                        }
-
-                        amountPoints = Math.floor(parseFloat(amountUSD) * 400);
-                    }
-
-                    const transID = "reward_" + Date.now();
-                    const secureHash = generateHash(`${account}${transID}${selectedReward.name}${amountUSD}${amountLocal}${note}`);
-
-                    const params = new URLSearchParams({
-                        user_id: account,
-                        cashout_type: selectedReward.name,
-                        amount_usd: -Math.abs(parseFloat(amountUSD)),
-                        amount_local: -Math.abs(parseFloat(amountLocal)),
-                        amount_points: -Math.abs(amountPoints),
-                        trans_id: transID,
-                        status: "reward_claimed",
-                        note: note || '',
-                        offer_id: btoa(`reward=${selectedReward.name}`),
-                        secure_hash: secureHash
-                    });
-
-                    await fetch(`${scriptURL}?${params.toString()}`);
-                } catch (err) {
-                    console.error('Error in redemption:', err);
-                }
-            }
-
-            function parseCSV(csv) {
-                const lines = csv.split('\n');
-                if (lines.length < 2) return [];
-                
-                const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/ /g, '_'));
-                
-                return lines.slice(1).map(line => {
-                    const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-                    return headers.reduce((obj, header, i) => {
-                        obj[header] = values[i] || '';
-                        return obj;
-                    }, {});
-                });
-            }
-
-            function copyClaimCode() {
-                if (!claimCodeDisplay) return;
-                
-                const code = claimCodeDisplay.textContent;
-                navigator.clipboard.writeText(code).then(() => {
-                    if (copyCodeBtn) {
-                        copyCodeBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
-                        setTimeout(() => {
-                            copyCodeBtn.innerHTML = '<i class="fas fa-copy mr-2"></i> Copy Code';
-                        }, 2000);
-                    }
-                });
-            }
-
-            function prevStep() {
-                if (currentStep > 1) {
-                    currentStep--;
-                    updateStepUI();
-                    clearMessages();
-                }
-            }
-
-            function generateHash(inputString) {
-                let hash = 0;
-                for (let i = 0; i < inputString.length; i++) {
-                    const char = inputString.charCodeAt(i);
-                    hash = (hash << 5) - hash + char;
-                }
-                return hash.toString(16);
-            }
-
-            function showError(msg) {
-                messageBoxes.forEach(box => {
-                    if (box) {
-                        box.textContent = msg;
-                        box.className = "text-center mt-6 font-medium text-sm text-red-400 animate-fadeIn";
-                    }
-                });
-            }
-
-            function showSuccess(msg) {
-                messageBoxes.forEach(box => {
-                    if (box) {
-                        box.textContent = msg;
-                        box.className = "text-center mt-6 font-medium text-sm text-green-400 animate-fadeIn";
+                        box.style.color = "#008000";
+                        box.classList.add("animate-fadeIn");
                     }
                 });
             }
