@@ -1300,38 +1300,37 @@ async function addNewBonus() {
     
     showLoading(true);
     
-    try {
-        const formData = new FormData();
-        formData.append('action', 'addBonusCode');
-        formData.append('account', account);
-        formData.append('clientId', clientId);
-        formData.append('status', 'Active');
-        formData.append('balance', ''); // Changed from 'UNUSED' to '0'
+try {
+    const formData = new FormData();
+    formData.append('action', 'addBonusCode');
+    formData.append('account', account);
+    formData.append('clientId', clientId);
+    formData.append('status', 'Active');
+    formData.append('balance', 'UNUSED'); // Changed to string 'UNUSED'
+    
+    const response = await fetch(WEB_APP_URL, {
+        method: 'POST',
+        body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (result.status === 'success') {
+        // Clear form
+        document.getElementById('new-bonus-account').value = '';
+        document.getElementById('new-bonus-client-id').value = '10.00';
         
-        const response = await fetch(WEB_APP_URL, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const result = await response.json();
-        
-        if (result.status === 'success') {
-            // Clear form
-            document.getElementById('new-bonus-account').value = '';
-            document.getElementById('new-bonus-client-id').value = '10.00';
-            
-            showNotification('✅ Bonus code added successfully!', 'success');
-            loadBonusData();
-            switchTab('bonus-codes');
-        } else {
-            throw new Error(result.message || 'Failed to add bonus code');
-        }
-    } catch (error) {
-        console.error('Error adding bonus code:', error);
-        showNotification('❌ Error adding bonus code: ' + error.message, 'error');
-    } finally {
-        showLoading(false);
+        showNotification('✅ Bonus code added successfully!', 'success');
+        loadBonusData();
+        switchTab('bonus-codes');
+    } else {
+        throw new Error(result.message || 'Failed to add bonus code');
     }
+} catch (error) {
+    console.error('Error adding bonus code:', error);
+    showNotification('❌ Error adding bonus code: ' + error.message, 'error');
+} finally {
+    showLoading(false);
 }
         
         // Delete user
