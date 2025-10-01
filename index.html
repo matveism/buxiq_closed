@@ -1078,12 +1078,43 @@ function checkExistingSession() {
         simulateGoogleLoginRestore(googleUser);
     } else if (savedAccount) {
         // Handle manual login session restoration
-        document.getElementById('login-account').value = savedAccount;
-        document.getElementById('captchaInput').value = 'auto_login_temp';
-        handleLogin(new Event('auto'));
+        restoreManualSession(savedAccount);
     } else {
         // Show default section if no session
         showSection('earn');
+    }
+}
+
+// Restore manual session
+async function restoreManualSession(account) {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
+
+        // Find user by account number
+        const user = rows.find(r => r[0] === account);
+
+        if (user) {
+            currentUser = user;
+            updateUserUI(user);
+            
+            // Show dashboard
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            // Update balance
+            await updateBalance();
+            
+            addToLogs(`Welcome back ${user[4] || 'User'}! Session restored.`);
+        } else {
+            // Clear invalid session
+            localStorage.removeItem('buxiq_account');
+        }
+    } catch (err) {
+        console.error('Error restoring session:', err);
     }
 }
 
@@ -1151,6 +1182,14 @@ async function processGoogleLogin(googleUser) {
             // Existing user - login
             currentUser = user;
             await completeLogin(user);
+            
+            // Store session for Google user
+            localStorage.setItem('buxiq_google_user', JSON.stringify({
+                id: googleUser.id,
+                email: googleUser.email,
+                name: googleUser.name,
+                picture: googleUser.picture
+            }));
         } else {
             // New user - auto-register
             await registerGoogleUser(googleUser);
@@ -1281,17 +1320,11 @@ async function handleLogin(e) {
             // Store current user globally
             currentUser = user;
 
-            // Add user to logged-in users
-            loggedInUsers[account] = {
-                loginTime: new Date().toISOString(),
-                clientid: clientid
-            };
+            // Store in local storage
+            localStorage.setItem('buxiq_account', account);
 
             // Update UI with user data
             updateUserUI(user);
-
-            // Store in local storage
-            localStorage.setItem('buxiq_account', account);
 
             // Show dashboard
             document.getElementById('login-container')?.classList.add('hidden');
@@ -1304,6 +1337,8 @@ async function handleLogin(e) {
             // Load additional data
             fetchCSV(); // For activity logs
             updateBalance(); // Update balance immediately after login
+            
+            addToLogs(`Welcome back ${user[4] || 'User'}!`);
         } else {
             showError(errorMsg, 'Invalid credentials');
             // Clear CAPTCHA input and generate new CAPTCHA on invalid credentials
@@ -1333,15 +1368,6 @@ async function completeLogin(user) {
     document.getElementById('userAvatar').src = avatarUrl;
     document.getElementById('userName').textContent = user[4] || 'User';
     document.getElementById('userLevel').textContent = user[6] || '1';
-    
-    // Store login
-    loggedInUsers[user[0]] = {
-        loginTime: new Date().toISOString(),
-        clientid: user[1],
-        isGoogle: !!user[7] // Mark as Google login
-    };
-    
-    localStorage.setItem('buxiq_account', user[0]);
     
     // Show dashboard
     document.getElementById('login-container').classList.add('hidden');
@@ -1393,9 +1419,6 @@ function updateUserUI(user) {
 function logout() {
     try {
         if (currentUser) {
-            // Remove user from logged-in users
-            delete loggedInUsers[currentUser[0]];
-            
             // If it's a Google user, remove Google data too
             if (currentUser[7]) { // Google ID exists
                 localStorage.removeItem('buxiq_google_user');
@@ -1609,6 +1632,6 @@ function sendPostback(amountLocal, amountUsd, username, bonusCode) {
         .then(data => console.log('Postback Success:', data))
         .catch(error => console.error('Postback Error:', error));
 }
-</script>
+    </script>
 </body>
 </html>
