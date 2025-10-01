@@ -723,11 +723,16 @@
                     data-client_id="387422659555-007kjhq0c41f2lq39e075ib5mtpf3q9o.apps.googleusercontent.com"
                     data-context="signin"
                     data-ux_mode="popup"
-                    data-login_uri="https://your-backend.example.com/auth/google"
+                    data-callback="handleGoogleCredentialResponse"
                     data-auto_prompt="false">
                 </div>
 
-                <div class="g_id_signin google-login-btn" data-type="standard" data-theme="filled_blue" data-text="signin_with" data-shape="rectangular" data-logo_alignment="left">
+                <div class="g_id_signin google-login-btn" 
+                     data-type="standard" 
+                     data-theme="filled_blue" 
+                     data-text="signin_with" 
+                     data-shape="rectangular" 
+                     data-logo_alignment="left">
                 </div>
                 
                 <div class="divider">
@@ -885,16 +890,8 @@ let captchaCode = '';
 let currentUser = null;
 let loggedInUsers = {};
 
-// Google Sheets structure:
-// Column A: Account #
-// Column B: Client ID
-// Column C: Status
-// Column D: Balance
-// Column E: Username
-// Column F: Avatar URL
-// Column G: Level
-// Column H: Google ID
-// Column I: Google Email
+// Google Apps Script URL for posting data to Google Sheets
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3X7gQZQbC5X6X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5/exec';
 
 // DOM Content Loaded - Initialize everything
 document.addEventListener('DOMContentLoaded', function() {
@@ -914,81 +911,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update header time
     updateHeaderTime();
     setInterval(updateHeaderTime, 60000);
-    
-    // Initialize Google Sign-In
-    initializeGoogleSignIn();
 });
-
-// Initialize Google Sign-In
-function initializeGoogleSignIn() {
-    // Google Sign-In is initialized via the g_id_onload div
-    // The response is handled by handleGoogleCredentialResponse
-}
-
-// Handle Google Sign-In response
-function handleGoogleCredentialResponse(response) {
-    console.log("Google Sign-In response:", response);
-    
-    // Decode the JWT token to get user info
-    const responsePayload = parseJwt(response.credential);
-    
-    console.log("Google user info:", responsePayload);
-    
-    // Process Google login with the user info
-    processGoogleLogin({
-        id: responsePayload.sub,
-        email: responsePayload.email,
-        name: responsePayload.name,
-        picture: responsePayload.picture
-    });
-}
-
-// Parse JWT token
-function parseJwt(token) {
-    try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        
-        return JSON.parse(jsonPayload);
-    } catch (e) {
-        console.error("Error parsing JWT:", e);
-        return null;
-    }
-}
-
-// Check for existing user session
-function checkExistingSession() {
-    const savedAccount = localStorage.getItem('buxiq_account');
-    const savedGoogleUser = localStorage.getItem('buxiq_google_user');
-    
-    if (savedGoogleUser) {
-        // Handle Google user session restoration
-        const googleUser = JSON.parse(savedGoogleUser);
-        simulateGoogleLoginRestore(googleUser);
-    } else if (savedAccount) {
-        // Handle manual login session restoration
-        document.getElementById('login-account').value = savedAccount;
-        document.getElementById('captchaInput').value = 'auto_login_temp';
-        handleLogin(new Event('auto'));
-    } else {
-        // Show default section if no session
-        showSection('earn');
-    }
-}
-
-// Simulate Google login restore
-function simulateGoogleLoginRestore(googleUser) {
-    const simulatedUser = {
-        email: googleUser.email,
-        name: googleUser.name,
-        id: googleUser.id,
-        picture: googleUser.picture
-    };
-    processGoogleLogin(simulatedUser);
-}
 
 // Initialize all event listeners
 function initializeEventListeners() {
@@ -1140,23 +1063,74 @@ function updateHeaderTime() {
 const offerwallButtons = {
     'openOfferWallCPX': (user) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${user}&username=${user}&subid_1=&subid_2`,
     'openOfferWallSPARKWALL': (user) => `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${user}&username=${user}&subid_1=&subid_2`,
-    'openOfferWallsads': (user) => `https://offerwall.sushiads.com/surveywall?apiKey=67e76c74ca62f460071524&userId=${user}`,
     'openOfferWallowm': (user) => `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${user}`,
-    'openOfferWallwannads': (user) => `https://earn.wannads.com/wall?apiKey=67d3d43d63631681386947&userId=${user}`,
-    'openOfferWallsads1': (user) => `https://offerwall.sushiads.com/wall?apiKey=67e76c74ca62f460071524&userId=${user}`,
-    'openOfferWallExcentiv': (user) => `https://excentiv.com/offerwall/?&userid=${user}&key=q1v8KGQfCjmNeXnhsHyo`,
-    'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`,
-    'openOfferWallbuxiqbonus': () => `https://bux-iq.netlify.app/bonus.html`,
-    'openOfferWallkiwi': (user) => `https://www.kiwiwall.com/wall/ICKEzWAlZv8O6QOXSxFdfJ7jLfU6RUtl/${user}`,
-    'openOfferWalltaskwall': (user) => `https://wall.taskwall.io/?app_id=532d75c281c9725adc821ff7de18c199&userid=${user}`,
-    'openOfferWallporix': (user) => `https://porix.org/app/iframe/10221/${user}`,
-    'openOfferWallcheddar': (user) => {
-        const url = `https://revtoo.com/redirect?api_key=m7l0au6f6w8tzh0ghly11tur1oucce&offer_id=479&user_id=${user}`;
-        console.log('Opening URL:', url);
-        setTimeout(() => window.open(url, '_blank'), 100);
-    },
-    'openOfferWallrevtoo': (user) => `https://revtoo.com/offerwall/m7l0au6f6w8tzh0ghly11tur1oucce/${user}`
+    'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`
 };
+
+// Check for existing user session
+function checkExistingSession() {
+    const savedAccount = localStorage.getItem('buxiq_account');
+    const savedGoogleUser = localStorage.getItem('buxiq_google_user');
+    
+    if (savedGoogleUser) {
+        // Handle Google user session restoration
+        const googleUser = JSON.parse(savedGoogleUser);
+        simulateGoogleLoginRestore(googleUser);
+    } else if (savedAccount) {
+        // Handle manual login session restoration
+        document.getElementById('login-account').value = savedAccount;
+        document.getElementById('captchaInput').value = 'auto_login_temp';
+        handleLogin(new Event('auto'));
+    } else {
+        // Show default section if no session
+        showSection('earn');
+    }
+}
+
+// Simulate Google login restore
+function simulateGoogleLoginRestore(googleUser) {
+    const simulatedUser = {
+        email: googleUser.email,
+        name: googleUser.name,
+        id: googleUser.id,
+        picture: googleUser.picture
+    };
+    processGoogleLogin(simulatedUser);
+}
+
+// Handle Google Sign-In response
+function handleGoogleCredentialResponse(response) {
+    console.log("Google Sign-In response:", response);
+    
+    // Decode the JWT token to get user info
+    const responsePayload = parseJwt(response.credential);
+    
+    console.log("Google user info:", responsePayload);
+    
+    // Process Google login with the user info
+    processGoogleLogin({
+        id: responsePayload.sub,
+        email: responsePayload.email,
+        name: responsePayload.name,
+        picture: responsePayload.picture
+    });
+}
+
+// Parse JWT token
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error("Error parsing JWT:", e);
+        return null;
+    }
+}
 
 // Process Google Login
 async function processGoogleLogin(googleUser) {
@@ -1206,6 +1180,9 @@ async function registerGoogleUser(googleUser) {
         googleUser.email  // 8: Google Email
     ];
     
+    // Post new user to Google Sheets
+    await postUserToSheets(newUser);
+    
     // In a real implementation, you would send this to your backend/Google Apps Script
     // For now, we'll use the new user data directly
     currentUser = newUser;
@@ -1224,6 +1201,41 @@ async function registerGoogleUser(googleUser) {
     
     // Show welcome message for new users
     addToLogs(`Welcome ${googleUser.name}! Your account has been created.`);
+}
+
+// Post user data to Google Sheets
+async function postUserToSheets(userData) {
+    try {
+        // Prepare data for Google Sheets
+        const formData = new FormData();
+        formData.append('action', 'addUser');
+        formData.append('account', userData[0]);
+        formData.append('clientId', userData[1]);
+        formData.append('status', userData[2]);
+        formData.append('balance', userData[3]);
+        formData.append('username', userData[4]);
+        formData.append('avatar', userData[5]);
+        formData.append('level', userData[6]);
+        formData.append('googleId', userData[7]);
+        formData.append('googleEmail', userData[8]);
+        
+        // Send POST request to Google Apps Script
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (response.ok) {
+            console.log('User data successfully posted to Google Sheets');
+            return true;
+        } else {
+            console.error('Failed to post user data to Google Sheets');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error posting user data to Google Sheets:', error);
+        return false;
+    }
 }
 
 // Login handler
