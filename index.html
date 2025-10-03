@@ -14,7 +14,8 @@
     <meta name="apple-mobile-web-app-title" content="Bux iQ" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://v1.mychips.io/SDK/latest/my-chips-sdk.bundle.js"></script><script>myChipsSDK('init', {userId: '{{user_id}}'})</<script>
+    <script src="https://v1.mychips.io/SDK/latest/my-chips-sdk.bundle.js"></script>
+    
     <style>
         /* Windows Mobile 6.5 Style */
         * {
@@ -748,6 +749,11 @@
                         <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo">
                         <div class="wm-button primary" id="openOfferWallCPX">Open OfferWall</div>
                     </div>
+                    <div class="wm-offer-grid" id="offerwall-grid">
+                    <div class="wm-offer-item">
+                        <img src="https://maf.ad/wp-content/uploads/2024/05/mychips-logo-colored-dark-straight.png" alt="CPX Research Logo">
+                        <div class="wm-button primary" id="openOfferWallmychips">Open OfferWall</div>
+                    </div>
                     <div class="wm-offer-item">
                         <img src="https://www.spark-wall.com/images/logo.png" alt="SparWall Logo">
                         <div class="wm-button primary" id="openOfferWallSPARKWALL">Open OfferWall</div>
@@ -1068,6 +1074,7 @@ function updateHeaderTime() {
 // Object with offerwall URLs and open functions
 const offerwallButtons = {
     'openOfferWallCPX': (user) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${user}&username=${user}&subid_1=&subid_2`,
+    'openOfferWallmychips': (user) => `https://sdk.mychips.io/content?content_id=&user_id=${user}`,
     'openOfferWallSPARKWALL': (user) => `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${user}&username=${user}&subid_1=&subid_2`,
     'openOfferWallowm': (user) => `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${user}`,
     'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`
