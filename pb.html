@@ -21,7 +21,7 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.1);
       padding: 25px;
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
       box-sizing: border-box;
     }
     h1 {
@@ -40,24 +40,6 @@
     .data-item span {
       font-weight: bold;
       color: #34495e;
-    }
-    .status-success {
-      color: green;
-      font-weight: bold;
-      text-align: center;
-      padding: 10px;
-      background-color: #e8f5e9;
-      border-radius: 6px;
-      margin-top: 15px;
-    }
-    .status-error {
-      color: red;
-      font-weight: bold;
-      text-align: center;
-      padding: 10px;
-      background-color: #ffebee;
-      border-radius: 6px;
-      margin-top: 15px;
     }
     @media (max-width: 600px) {
       .container {
@@ -80,15 +62,12 @@
     const statusMessage = document.getElementById('status-message');
 
     // Google Apps Script URL with placeholders
-    const postbackUrl = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status={status}&trans_id={trans_id}&user_id={user_id}&sub_id={subid}&sub_id_2={subid_2}&amount_local={amount_local}&amount_usd={amount_usd}&offer_id={offer_id}&hash={secure_hash}&ip_click={ip_click}&payout={payout}&subId={subId}&transId={transId}&offer_name={offer_name}&offer_type={offer_type}&reward={reward}&reward_name={reward_name}&reward_value={reward_value}&userIp={userIp}&country={country}&debug={debug}&signature={signature}';
+    const postbackUrl = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status={status}&trans_id={trans_id}&user_id={user_id}&sub_id={subid}&sub_id_2={subid_2}&amount_local={amount_local}&amount_usd={amount_usd}&offer_id={offer_id}&hash={secure_hash}&ip_click={ip_click}';
 
-    // Keys for URL params - updated with new parameters
+    // Keys for URL params
     const keys = [
       'status', 'trans_id', 'user_id', 'sub_id', 'sub_id_2',
-      'amount_local', 'amount_usd', 'offer_id', 'hash', 'ip_click',
-      'payout', 'subId', 'transId', 'offer_name', 'offer_type',
-      'reward', 'reward_name', 'reward_value', 'userIp', 'country',
-      'debug', 'signature'
+      'amount_local', 'amount_usd', 'offer_id', 'hash', 'ip_click'
     ];
 
     // Build the actual URL with the real parameter values
@@ -100,13 +79,7 @@
       // Display data on the page
       const div = document.createElement('div');
       div.className = 'data-item';
-      
-      // Format the key for display (replace underscores with spaces and capitalize)
-      const displayKey = key.replace(/_/g, ' ')
-                          .replace(/([A-Z])/g, ' $1')
-                          .replace(/^./, str => str.toUpperCase());
-      
-      div.innerHTML = `<span>${displayKey}:</span> ${value}`;
+      div.innerHTML = `<span>${key.replace(/_/g, ' ')}:</span> ${value}`;
       displayDiv.appendChild(div);
     });
 
@@ -116,12 +89,12 @@
         const response = await fetch(getUrl);
 
         if (response.ok) {
-          statusMessage.innerHTML = '<div class="status-success">Postback Sent Successfully!</div>';
+          statusMessage.innerHTML = '<span style="color: green;">Postback Sent Successfully!</span>';
         } else {
-          statusMessage.innerHTML = '<div class="status-error">Failed to Send Postback.</div>';
+          statusMessage.innerHTML = '<span style="color: red;">Failed to Send Postback.</span>';
         }
       } catch (error) {
-        statusMessage.innerHTML = '<div class="status-error">Error sending postback: ' + error.message + '</div>';
+        statusMessage.innerHTML = '<span style="color: red;">Error sending postback: ' + error.message + '</span>';
       }
     };
 
