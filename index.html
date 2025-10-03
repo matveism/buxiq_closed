@@ -741,31 +741,30 @@
             </div>
             
             <div id="dashboard" class="hidden">
-    <h2>Earning Portal</h2>
-    <p style="margin-bottom: 12px; text-align: center;">Complete offers and surveys to earn rewards</p>
-    
-    <div class="wm-offer-grid" id="offerwall-grid">
-        <div class="wm-offer-item">
-            <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo">
-            <div class="wm-button primary" id="openOfferWallCPX">Open OfferWall</div>
-        </div>
-        
-        <div class="wm-offer-item">
-            <img src="https://maf.ad/wp-content/uploads/2024/05/mychips-logo-colored-dark-straight.png" alt="MyChips Logo">
-            <div class="wm-button primary" id="openOfferWallmc">Open OfferWall</div>
-        </div>
-        
-        <div class="wm-offer-item">
-            <img src="https://www.spark-wall.com/images/logo.png" alt="SparkWall Logo">
-            <div class="wm-button primary" id="openOfferWallSPARKWALL">Open OfferWall</div>
-        </div>
-        
-        <div class="wm-offer-item">
-            <img src="https://offerwallmedia.com/assets/cwdash/img/logo.png" alt="OfferWall Media Logo">
-            <div class="wm-button primary" id="openOfferWallowm">Open OfferWall</div>
-        </div>
-    </div>
-</div>
+                <h2>Earning Portal</h2>
+                <p style="margin-bottom: 12px; text-align: center;">Complete offers and surveys to earn rewards</p>
+                
+                <div class="wm-offer-grid" id="offerwall-grid">
+                    <div class="wm-offer-item">
+                        <img src="https://www.cpx-research.com/main/en/assets/img/logo.svg" alt="CPX Research Logo">
+                        <div class="wm-button primary" id="openOfferWallCPX">Open OfferWall</div>
+                    </div>
+                    
+                    <div class="wm-offer-item">
+                        <img src="https://maf.ad/wp-content/uploads/2024/05/mychips-logo-colored-dark-straight.png" alt="MyChips Logo">
+                        <div class="wm-button primary" id="openOfferWallmc">Open OfferWall</div>
+                    </div>
+                    
+                    <div class="wm-offer-item">
+                        <img src="https://www.spark-wall.com/images/logo.png" alt="SparkWall Logo">
+                        <div class="wm-button primary" id="openOfferWallSPARKWALL">Open OfferWall</div>
+                    </div>
+                    
+                    <div class="wm-offer-item">
+                        <img src="https://offerwallmedia.com/assets/cwdash/img/logo.png" alt="OfferWall Media Logo">
+                        <div class="wm-button primary" id="openOfferWallowm">Open OfferWall</div>
+                    </div>
+                </div>
                 
                 <div class="wm-button" style="width: 100%; margin-top: 12px;" id="logoutBtn">Logout</div>
             </div>
@@ -880,6 +879,7 @@
 // Global variables
 let captchaCode = '';
 let currentUser = null;
+const adUnit = 'default_ad_unit'; // Added missing adUnit variable
 
 // Google Apps Script URL for posting data to Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLwW7NEXLMSDPh1A_PJbTjAucIuji6JtsgVu2xAdaMzXthTKsgk2xyWy83Dx8dO53Rrg/exec';
@@ -908,25 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load leaderboard
     loadLeaderboard();
-    
-    // Create stars background
-    createStars();
 });
-
-// Create stars background
-function createStars() {
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.width = Math.random() * 2 + 'px';
-        star.style.height = star.style.width;
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 5 + 's';
-        starsContainer.appendChild(star);
-    }
-}
 
 // Initialize all event listeners
 function initializeEventListeners() {
