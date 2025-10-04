@@ -17,16 +17,16 @@
     <script src="https://v1.mychips.io/SDK/latest/my-chips-sdk.bundle.js"></script>
     
     <style>
-        /* Modern Windows Mobile 6.5 Style */
+        /* Windows Mobile 6.5 Style */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #5d7ca6 0%, #3a5a8c 100%);
+            background: #5d7ca6;
             color: #000;
             font-size: 14px;
             line-height: 1.4;
@@ -36,34 +36,32 @@
         
         /* Header */
         .wm-header {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6b 50%, #0f1f3a 100%);
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
             color: white;
-            height: 40px;
+            height: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 8px;
             border-bottom: 1px solid #0f1f3a;
             font-weight: bold;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .wm-header .start {
-            font-size: 18px;
+            font-size: 16px;
             display: flex;
             align-items: center;
         }
         
         .wm-header .title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             text-align: center;
             flex-grow: 1;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .wm-header .time {
@@ -72,109 +70,88 @@
         
         /* Main Content */
         .wm-content {
-            margin-top: 40px;
-            margin-bottom: 60px;
-            padding: 12px;
-            min-height: calc(100vh - 100px);
+            margin-top: 32px;
+            margin-bottom: 52px;
+            padding: 8px;
+            background: #5d7ca6;
+            min-height: calc(100vh - 84px);
         }
         
         /* Windows Mobile Tabs */
         .wm-tabs {
             display: flex;
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 100%);
+            background: #4a6a9c;
             border-bottom: 1px solid #2c4163;
             overflow-x: auto;
-            border-radius: 6px 6px 0 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .wm-tab {
-            padding: 10px 16px;
-            background: linear-gradient(135deg, #6b8cc0 0%, #4a6a9c 100%);
+            padding: 8px 16px;
+            background: #6b8cc0;
             border: 1px solid #4a6a9c;
             border-bottom: none;
-            border-radius: 6px 6px 0 0;
+            border-radius: 4px 4px 0 0;
             margin-right: 2px;
             color: white;
             font-weight: bold;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .wm-tab:hover {
-            background: linear-gradient(135deg, #7b9cd0 0%, #5a7aac 100%);
         }
         
         .wm-tab.active {
-            background: linear-gradient(135deg, #8faad6 0%, #6b8cc0 100%);
+            background: #8faad6;
             color: #000;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5);
         }
         
         /* Content Sections */
         .wm-section {
-            background: linear-gradient(135deg, #e8eef7 0%, #d4dff2 100%);
+            background: #d4dff2;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
         }
         
         .wm-section h2 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             color: #1e3a6b;
-            border-bottom: 2px solid #8faad6;
-            padding-bottom: 6px;
-            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #8faad6;
+            padding-bottom: 4px;
         }
         
         /* Windows Mobile Buttons */
         .wm-button {
-            background: linear-gradient(135deg, #f0f0f0 0%, #d4d4d4 50%, #b8b8b8 100%);
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d4d4d4 100%);
             border: 1px solid #808080;
-            border-radius: 4px;
-            padding: 8px 16px;
+            border-radius: 3px;
+            padding: 6px 12px;
             font-size: 14px;
             color: #000;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            margin: 6px 0;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a0a0a0;
+            margin: 4px 0;
             display: inline-block;
             text-align: center;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .wm-button:hover {
-            background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 50%, #c8c8c8 100%);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
         }
         
         .wm-button:active {
-            background: linear-gradient(135deg, #d4d4d4 0%, #b8b8b8 50%, #a0a0a0 100%);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #d4d4d4 0%, #f0f0f0 100%);
+            box-shadow: inset 1px 1px 0 #a0a0a0, inset -1px -1px 0 #fff;
         }
         
         .wm-button.primary {
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 50%, #1e3a6b 100%);
+            background: linear-gradient(to bottom, #4a6a9c 0%, #2c4163 100%);
             color: white;
             border-color: #1e3a6b;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-        }
-        
-        .wm-button.primary:hover {
-            background: linear-gradient(135deg, #5a7aac 0%, #3c5173 50%, #2e4a7b 100%);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 1px 1px 0 #6b8cc0, inset -1px -1px 0 #1e3a6b;
         }
         
         .wm-button.primary:active {
-            background: linear-gradient(135deg, #3a5a8c 0%, #1c3153 50%, #0e2a5b 100%);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom, #2c4163 0%, #4a6a9c 100%);
+            box-shadow: inset 1px 1px 0 #1e3a6b, inset -1px -1px 0 #6b8cc0;
         }
         
         /* Google Login Button */
@@ -182,18 +159,16 @@
             background: #4285f4;
             color: white;
             border: 1px solid #4285f4;
-            border-radius: 4px;
-            padding: 10px 16px;
+            border-radius: 3px;
+            padding: 8px 12px;
             font-size: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            font-weight: 600;
+            margin: 8px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         .google-login-btn i {
@@ -203,12 +178,11 @@
         
         .google-login-btn:hover {
             background: #3367d6;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
         }
         
         .divider {
             text-align: center;
-            margin: 16px 0;
+            margin: 12px 0;
             color: #4a6a9c;
             position: relative;
         }
@@ -226,7 +200,7 @@
         
         .divider span {
             background: #d4dff2;
-            padding: 0 12px;
+            padding: 0 8px;
             position: relative;
             z-index: 2;
         }
@@ -235,41 +209,28 @@
         .wm-input {
             background: white;
             border: 1px solid #808080;
-            border-radius: 4px;
-            padding: 8px 12px;
+            border-radius: 3px;
+            padding: 6px 8px;
             font-size: 14px;
             width: 100%;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-            margin: 6px 0;
-            transition: all 0.3s ease;
-        }
-        
-        .wm-input:focus {
-            border-color: #4a6a9c;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 0 5px rgba(74, 106, 156, 0.5);
-            outline: none;
+            box-shadow: inset 1px 1px 0 #e0e0e0;
+            margin: 4px 0;
         }
         
         /* List Items */
         .wm-list {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
+            border-radius: 3px;
             overflow: hidden;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
         }
         
         .wm-list-item {
-            padding: 10px 14px;
+            padding: 8px 12px;
             border-bottom: 1px solid #d4dff2;
             display: flex;
             align-items: center;
-            transition: background 0.3s ease;
-        }
-        
-        .wm-list-item:hover {
-            background: #f0f5ff;
         }
         
         .wm-list-item:last-child {
@@ -277,33 +238,31 @@
         }
         
         .wm-list-item .icon {
-            width: 28px;
-            height: 28px;
-            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 100%);
+            background: #4a6a9c;
             color: white;
-            border-radius: 4px;
-            font-size: 14px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            font-size: 12px;
         }
         
         /* Footer Navigation */
         .wm-footer {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6b 50%, #0f1f3a 100%);
-            height: 60px;
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            height: 52px;
             position: fixed;
             bottom: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 8px;
             border-top: 1px solid #0f1f3a;
             z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .wm-footer-button {
@@ -314,38 +273,32 @@
             justify-content: center;
             font-size: 10px;
             width: 64px;
-            height: 48px;
+            height: 42px;
             text-align: center;
             cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
         }
         
         .wm-footer-button i {
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-        
-        .wm-footer-button:hover {
-            background: rgba(255, 255, 255, 0.1);
+            font-size: 16px;
+            margin-bottom: 2px;
         }
         
         .wm-footer-button.active {
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
         }
         
         /* Status Bar */
         .wm-status-bar {
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 100%);
+            background: #4a6a9c;
             color: white;
-            padding: 8px 12px;
+            padding: 4px 8px;
             font-size: 12px;
             display: flex;
             justify-content: space-between;
-            border-radius: 4px;
-            margin-top: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid #2c4163;
+            border-bottom: 1px solid #2c4163;
+            margin-top: 8px;
         }
         
         /* Hidden sections */
@@ -357,29 +310,27 @@
         .wm-logs {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            height: 140px;
+            border-radius: 3px;
+            height: 120px;
             overflow-y: auto;
-            padding: 10px;
+            padding: 8px;
             font-family: "Courier New", monospace;
             font-size: 12px;
-            margin: 10px 0;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
         }
         
         /* Login Form */
         .wm-login-form {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
         }
         
         .wm-login-form label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: bold;
             color: #1e3a6b;
         }
@@ -388,55 +339,46 @@
         .wm-captcha {
             background: #e8eef7;
             border: 1px solid #8faad6;
-            border-radius: 4px;
-            padding: 10px;
+            border-radius: 3px;
+            padding: 8px;
             text-align: center;
             font-family: "Courier New", monospace;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            letter-spacing: 3px;
-            margin: 10px 0;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            letter-spacing: 2px;
+            margin: 8px 0;
         }
         
         /* Offer Wall Grid */
         .wm-offer-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 10px 0;
+            gap: 8px;
+            margin: 8px 0;
         }
         
         .wm-offer-item {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 12px;
+            border-radius: 3px;
+            padding: 8px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .wm-offer-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
         
         .wm-offer-item img {
             max-width: 100%;
-            height: 50px;
+            height: 40px;
             object-fit: contain;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         /* Leaderboard */
         .wm-leaderboard {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
+            border-radius: 3px;
             overflow: hidden;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
         }
         
         .wm-leaderboard table {
@@ -445,9 +387,9 @@
         }
         
         .wm-leaderboard th {
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 100%);
+            background: #4a6a9c;
             color: white;
-            padding: 8px 10px;
+            padding: 6px 8px;
             text-align: left;
             font-weight: bold;
             border-right: 1px solid #2c4163;
@@ -458,7 +400,7 @@
         }
         
         .wm-leaderboard td {
-            padding: 8px 10px;
+            padding: 6px 8px;
             border-bottom: 1px solid #d4dff2;
         }
         
@@ -466,23 +408,18 @@
             border-bottom: none;
         }
         
-        .wm-leaderboard tr:hover {
-            background: #f0f5ff;
-        }
-        
         /* FAQ Items */
         .wm-faq-item {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 12px;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
         }
         
         .wm-faq-item h4 {
             color: #1e3a6b;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: bold;
         }
         
@@ -499,18 +436,18 @@
         }
         
         .wm-iframe-header {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6b 100%);
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
             color: white;
-            height: 40px;
+            height: 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 12px;
+            padding: 0 8px;
             border-bottom: 1px solid #0f1f3a;
         }
         
         .wm-iframe-content {
-            height: calc(100% - 40px);
+            height: calc(100% - 32px);
         }
         
         .wm-iframe-content iframe {
@@ -524,8 +461,8 @@
             background: #ff0000;
             color: white;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             font-size: 10px;
             display: flex;
             align-items: center;
@@ -539,21 +476,19 @@
         .wm-user-info {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 12px;
-            margin: 10px 0;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .wm-user-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 6px;
-            margin-right: 12px;
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            margin-right: 8px;
             border: 1px solid #8faad6;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
         .wm-user-details {
@@ -563,7 +498,7 @@
         .wm-user-stats {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .wm-stat {
@@ -573,234 +508,67 @@
         
         .wm-stat-value {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
             color: #1e3a6b;
         }
         
         .wm-stat-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #4a6a9c;
         }
         
         /* Bonus Section Styles */
         .bonus-code-section {
-            background: linear-gradient(135deg, #e8eef7 0%, #d4dff2 100%);
+            background: #d4dff2;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
         }
         
         .info-box {
             background: #fff9e6;
             border: 1px solid #e6c200;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 10px 0;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
             display: flex;
             align-items: flex-start;
         }
         
         .info-box i {
             color: #e6c200;
-            margin-right: 10px;
+            margin-right: 8px;
             margin-top: 2px;
         }
         
         .bonus-form {
             background: white;
             border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            padding: 12px;
+            margin: 8px 0;
         }
         
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             font-weight: bold;
             color: #1e3a6b;
         }
         
         .form-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .form-row .form-group {
             flex: 1;
-        }
-        
-        /* Game Styles */
-        .game-container {
-            background: white;
-            border: 1px solid #8faad6;
-            border-radius: 6px;
-            padding: 16px;
-            margin: 10px 0;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .game-title {
-            color: #1e3a6b;
-            margin-bottom: 12px;
-            font-weight: bold;
-        }
-        
-        .game-description {
-            margin-bottom: 16px;
-            color: #4a6a9c;
-        }
-        
-        .bet-input-container {
-            margin-bottom: 16px;
-        }
-        
-        .bet-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #8faad6;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        
-        .bet-info {
-            font-size: 12px;
-            color: #4a6a9c;
-        }
-        
-        .game-roller {
-            width: 100%;
-            height: 60px;
-            background: linear-gradient(135deg, #4a6a9c 0%, #2c4163 100%);
-            border-radius: 6px;
-            margin: 16px 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .roller-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .game-result {
-            margin: 16px 0;
-            padding: 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            display: none;
-        }
-        
-        .win {
-            background: #d4ffd4;
-            color: #006400;
-            border: 1px solid #006400;
-        }
-        
-        .lose {
-            background: #ffd4d4;
-            color: #8b0000;
-            border: 1px solid #8b0000;
-        }
-        
-        .cooldown-message {
-            margin: 10px 0;
-            padding: 8px;
-            background: #fff9e6;
-            border: 1px solid #e6c200;
-            border-radius: 4px;
-            color: #8b7500;
-            display: none;
-        }
-        
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-            display: none;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .modal-header {
-            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6b 100%);
-            color: white;
-            padding: 16px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .modal-header h2 {
-            margin: 0;
-            font-size: 18px;
-        }
-        
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        
-        .modal-body {
-            padding: 16px;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-        
-        .modal-body h3 {
-            color: #1e3a6b;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .modal-body p {
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        
-        .modal-body ul {
-            margin-left: 20px;
-            margin-bottom: 12px;
         }
     </style>
 </head>
@@ -822,8 +590,6 @@
             <div class="wm-tab" data-section="profile">Earn</div>
             <div class="wm-tab" data-section="bonus">Bonus</div>
             <div class="wm-tab" data-section="help">Help</div>
-            <div class="wm-tab" data-section="privacy">Privacy</div>
-            <div class="wm-tab" data-section="tos">TOS</div>
         </div>
         
         <!-- Status Bar -->
@@ -995,10 +761,7 @@
                         <img src="https://excentiv.com/images/app-logo.svg" alt="Excentiv Logo">
                         <div class="wm-button primary" id="openOfferWallexcentiv">Open OfferWall</div>
                     </div>
-                    <div class="wm-offer-item">
-                        <img src="https://i.imgur.com/wppiqAy.png" alt="Bux iQ Game">
-                        <div class="wm-button primary" id="playGameButton">Play Game</div>
-                    </div>
+                    
                 </div>
                 
                 <div class="wm-button" style="width: 100%; margin-top: 12px;" id="logoutBtn">Logout</div>
@@ -1069,71 +832,6 @@
             
             <div class="wm-button primary" style="width: 100%;" id="contact-support-btn">Contact Support</div>
         </div>
-        
-        <!-- Privacy Policy Section -->
-        <div id="section-privacy" class="wm-section hidden">
-            <h2>Privacy Policy</h2>
-            
-            <div class="wm-faq-item">
-                <h4>Information We Collect</h4>
-                <p>We collect information you provide directly to us, such as when you create an account, complete surveys, or contact us for support.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>How We Use Your Information</h4>
-                <p>We use the information we collect to provide, maintain, and improve our services, process your transactions, and communicate with you.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Information Sharing</h4>
-                <p>We do not sell your personal information to third parties. We may share information with trusted partners who assist us in operating our platform.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Data Security</h4>
-                <p>We implement appropriate security measures to protect your personal information from unauthorized access and disclosure.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Your Choices</h4>
-                <p>You can access, update, or delete your personal information by contacting us. You may also opt out of promotional communications.</p>
-            </div>
-        </div>
-        
-        <!-- Terms of Service Section -->
-        <div id="section-tos" class="wm-section hidden">
-            <h2>Terms of Service</h2>
-            
-            <div class="wm-faq-item">
-                <h4>Acceptance of Terms</h4>
-                <p>By accessing or using Bux iQ, you agree to be bound by these Terms of Service and our Privacy Policy.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Eligibility</h4>
-                <p>You must be at least 18 years old to use our services. By using Bux iQ, you represent that you meet this requirement.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>User Accounts</h4>
-                <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Prohibited Activities</h4>
-                <p>You agree not to engage in any fraudulent activities, use automated systems, or attempt to circumvent our security measures.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Rewards and Payments</h4>
-                <p>Rewards are subject to verification and may be revoked if fraud is detected. We reserve the right to modify or discontinue any reward program.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Termination</h4>
-                <p>We may suspend or terminate your account at any time for violations of these terms or for any other reason at our sole discretion.</p>
-            </div>
-        </div>
     </div>
     
     <!-- Footer Navigation -->
@@ -1162,14 +860,6 @@
             <i class="fas fa-question-circle"></i>
             <span>Help</span>
         </div>
-        <div class="wm-footer-button" data-section="privacy">
-            <i class="fas fa-shield-alt"></i>
-            <span>Privacy</span>
-        </div>
-        <div class="wm-footer-button" data-section="tos">
-            <i class="fas fa-file-contract"></i>
-            <span>TOS</span>
-        </div>
     </div>
     
     <!-- Iframe Container -->
@@ -1183,49 +873,188 @@
         </div>
     </div>
     
-    <!-- Game Modal -->
-    <div class="modal-overlay" id="gameModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Bux iQ Game</h2>
-                <button class="modal-close" id="closeGameModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="game-container">
-                    <h3 class="game-title">Swipe Roller Game</h3>
-                    <p class="game-description">Place your bet and swipe the roller to test your luck!</p>
-                    
-                    <div class="bet-input-container">
-                        <input type="number" class="bet-input" id="betAmount" min="0.25" step="0.25" value="0.25" placeholder="Enter bet amount">
-                        <div class="bet-info">Minimum bet: $0.25</div>
-                    </div>
-                    
-                    <div class="game-roller" id="gameRoller">
-                        <div class="roller-content" id="rollerContent">Swipe to Play</div>
-                    </div>
-                    
-                    <div class="game-result" id="gameResult"></div>
-                    
-                    <div class="cooldown-message" id="cooldownMessage">
-                        <i class="fas fa-clock"></i> You can play again in <span id="cooldownTimer">00:00:00</span>
-                    </div>
-                    
-                    <div class="wm-button primary" id="playGameBtn" style="width: 100%;">Play Game</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+// Global variables
+let captchaCode = '';
+let currentUser = null;
+const adUnit = 'default_ad_unit'; // Added missing adUnit variable
+
+// Google Apps Script URL for posting data to Google Sheets
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLwW7NEXLMSDPh1A_PJbTjAucIuji6JtsgVu2xAdaMzXthTKsgk2xyWy83Dx8dO53Rrg/exec';
+
+// DOM Content Loaded - Initialize everything
+document.addEventListener('DOMContentLoaded', function() {
+    // Generate initial CAPTCHA
+    generateCaptcha();
+
+    // Check for existing session
+    checkExistingSession();
+
+    // Initialize all event listeners
+    initializeEventListeners();
+
+    // Start server time updates
+    updateServerTime();
+    setInterval(updateServerTime, 1000);
     
-<script>
-    // Global variables
-    let captchaCode = '';
-    let currentUser = null;
-    const adUnit = 'default_ad_unit';
+    // Update header time
+    updateHeaderTime();
+    setInterval(updateHeaderTime, 60000);
+    
+    // Load activity logs
+    fetchCSV();
+    
+    // Load leaderboard
+    loadLeaderboard();
+});
 
-    // Google Apps Script URL for posting data to Google Sheets
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLwW7NEXLMSDPh1A_PJbTjAucIuji6JtsgVu2xAdaMzXthTKsgk2xyWy83Dx8dO53Rrg/exec';
+// Initialize all event listeners
+function initializeEventListeners() {
+    // Tab click handlers
+    document.querySelectorAll('.wm-tab').forEach(tab => {
+        tab.addEventListener('click', e => {
+            e.preventDefault();
+            showSection(tab.dataset.section);
+            
+            // Update active tab
+            document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        });
+    });
 
-    // Object with offerwall URLs and open functions
+    // Footer navigation handlers
+    document.querySelectorAll('.wm-footer-button').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault();
+            showSection(button.dataset.section);
+            
+            // Update active footer button
+            document.querySelectorAll('.wm-footer-button').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
+
+    // Login button
+    document.getElementById('loginButton')?.addEventListener('click', () => {
+        showSection('profile');
+        document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector('.wm-tab[data-section="profile"]').classList.add('active');
+        document.querySelectorAll('.wm-footer-button').forEach(b => b.classList.remove('active'));
+        document.querySelector('.wm-footer-button[data-section="profile"]').classList.add('active');
+    });
+
+    // Login form handler
+    document.getElementById('loginFormButton')?.addEventListener('click', handleLogin);
+
+    // Iframe close button
+    document.getElementById('closeIframe')?.addEventListener('click', closeIframe);
+
+    // Logout button
+    document.getElementById('logoutBtn')?.addEventListener('click', logout);
+
+    // Contact support button
+    document.getElementById('contact-support-btn')?.addEventListener('click', () => {
+        alert('Please email support@buxiq.com for assistance.');
+    });
+
+    // Bonus redeem button
+    document.getElementById('redeemBonusButton')?.addEventListener('click', redeemBonusCode);
+
+    // Initialize offerwall buttons
+    initializeOfferwallButtons();
+}
+
+// Initialize offerwall buttons with user validation
+function initializeOfferwallButtons() {
+    Object.keys(offerwallButtons).forEach(buttonId => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            // Remove any existing listeners to prevent duplicates
+            button.removeEventListener('click', offerwallClickHandler);
+            // Add new listener
+            button.addEventListener('click', offerwallClickHandler);
+        }
+    });
+}
+
+// Handler for offerwall button clicks
+function offerwallClickHandler(e) {
+    e.preventDefault();
+
+    if (!currentUser) {
+        alert('Please login first to access offerwalls');
+        showSection('profile');
+        return;
+    }
+
+    const buttonId = this.id;
+    const urlGenerator = offerwallButtons[buttonId];
+
+    if (!urlGenerator) {
+        console.error('No URL generator found for button:', buttonId);
+        return;
+    }
+
+    // Use user[4] (username) or user[0] (account) as fallback
+    const username = currentUser[4] || currentUser[0] || 'user';
+    const url = typeof urlGenerator === 'function' ? urlGenerator(username) : urlGenerator;
+
+    console.log(`Opening offerwall ${buttonId} for user ${username}`);
+    openIframe(url);
+}
+
+// Enhanced iframe functions
+function openIframe(url) {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const dashboardIframe = document.getElementById('dashboardIframe');
+
+    if (!iframeContainer || !dashboardIframe) {
+        console.error('Iframe elements not found');
+        return;
+    }
+
+    dashboardIframe.src = url;
+    iframeContainer.style.display = 'block';
+}
+
+function closeIframe() {
+    const iframeContainer = document.getElementById('iframeContainer');
+    const dashboardIframe = document.getElementById('dashboardIframe');
+
+    if (iframeContainer && dashboardIframe) {
+        iframeContainer.style.display = 'none';
+        dashboardIframe.src = '';
+    }
+}
+
+// Update server time display
+function updateServerTime() {
+    const now = new Date();
+
+    // Convert to PST (UTC-8) or PDT (UTC-7) depending on daylight saving
+    const pstOffset = now.getTimezoneOffset() >= 480 ? -8 * 60 : -7 * 60; // PST is UTC-8, PDT is UTC-7
+    const pstTime = new Date(now.getTime() + (now.getTimezoneOffset() - pstOffset) * 60000);
+
+    // Format as HH:MM:SS
+    const hours = String(pstTime.getHours()).padStart(2, '0');
+    const minutes = String(pstTime.getMinutes()).padStart(2, '0');
+    const seconds = String(pstTime.getSeconds()).padStart(2, '0');
+
+    document.getElementById('serverTime').textContent = `Server Time: ${hours}:${minutes}:${seconds} PST`;
+}
+
+// Update header time
+function updateHeaderTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    
+    document.getElementById('headerTime').textContent = `${displayHours}:${minutes} ${ampm}`;
+}
+
+// Object with offerwall URLs and open functions
     const offerwallButtons = {
         'openOfferWallCPX': (user) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${user}&username=${user}&subid_1=&subid_2`,
         'openOfferWallexcentiv': (user) => `https://excentiv.com/offerwall/?userid=${user}&key=q1v8KGQfCjmNeXnhsHyo`,
@@ -1237,1095 +1066,672 @@
         'openOfferWallnotik': (user) => `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${user}`
     };
 
-    // DOM Content Loaded - Initialize everything
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded - initializing app');
+// Check for existing user session
+function checkExistingSession() {
+    const savedAccount = localStorage.getItem('buxiq_account');
+    const savedGoogleUser = localStorage.getItem('buxiq_google_user');
+    
+    if (savedGoogleUser) {
+        // Handle Google user session restoration with blocked check
+        checkAndRestoreGoogleSession(savedGoogleUser);
+    } else if (savedAccount) {
+        // Handle manual login session restoration
+        restoreManualSession(savedAccount);
+    } else {
+        // Show default section if no session
+        showSection('earn');
+    }
+}
+
+// Check and restore Google session with blocked validation
+async function checkAndRestoreGoogleSession(savedGoogleUser) {
+    try {
+        const googleUser = JSON.parse(savedGoogleUser);
         
-        // Generate initial CAPTCHA
-        generateCaptcha();
+        // Check if user still exists and is not blocked
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
 
-        // Check for existing session
-        checkExistingSession();
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
 
-        // Initialize all event listeners
-        initializeEventListeners();
+        // Find user by Google ID or email
+        const user = rows.find(r => r[7] === googleUser.id || r[8] === googleUser.email);
 
-        // Start server time updates
-        updateServerTime();
-        setInterval(updateServerTime, 1000);
-        
-        // Update header time
-        updateHeaderTime();
-        setInterval(updateHeaderTime, 60000);
-        
-        // Load activity logs
-        fetchCSV();
-        
-        // Load leaderboard
-        loadLeaderboard();
-    });
-
-    // Initialize all event listeners
-    function initializeEventListeners() {
-        console.log('Initializing event listeners');
-        
-        // Tab click handlers
-        document.querySelectorAll('.wm-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                const section = this.getAttribute('data-section');
-                if (section) {
-                    showSection(section);
-                    
-                    // Update active tab
-                    document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // Footer navigation handlers
-        document.querySelectorAll('.wm-footer-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const section = this.getAttribute('data-section');
-                if (section) {
-                    showSection(section);
-                    
-                    // Update active footer button
-                    document.querySelectorAll('.wm-footer-button').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-
-        // Login button
-        const loginButton = document.getElementById('loginButton');
-        if (loginButton) {
-            loginButton.addEventListener('click', function() {
-                showSection('profile');
-                updateActiveNavigation('profile');
-            });
-        }
-
-        // Login form handler
-        const loginFormButton = document.getElementById('loginFormButton');
-        if (loginFormButton) {
-            loginFormButton.addEventListener('click', handleLogin);
-        }
-
-        // Iframe close button
-        const closeIframeBtn = document.getElementById('closeIframe');
-        if (closeIframeBtn) {
-            closeIframeBtn.addEventListener('click', closeIframe);
-        }
-
-        // Logout button
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', logout);
-        }
-
-        // Contact support button
-        const contactSupportBtn = document.getElementById('contact-support-btn');
-        if (contactSupportBtn) {
-            contactSupportBtn.addEventListener('click', function() {
-                alert('Please email support@buxiq.com for assistance.');
-            });
-        }
-
-        // Bonus redeem button
-        const redeemBonusButton = document.getElementById('redeemBonusButton');
-        if (redeemBonusButton) {
-            redeemBonusButton.addEventListener('click', redeemBonusCode);
-        }
-
-        // Game button
-        const playGameButton = document.getElementById('playGameButton');
-        if (playGameButton) {
-            playGameButton.addEventListener('click', function() {
-                if (!currentUser) {
-                    alert('Please login first to play the game');
-                    showSection('profile');
-                    updateActiveNavigation('profile');
-                    return;
-                }
-                document.getElementById('gameModal').style.display = 'flex';
-            });
-        }
-
-        // Close game modal
-        const closeGameModal = document.getElementById('closeGameModal');
-        if (closeGameModal) {
-            closeGameModal.addEventListener('click', function() {
-                document.getElementById('gameModal').style.display = 'none';
-            });
-        }
-
-        // Play game button in modal
-        const playGameBtn = document.getElementById('playGameBtn');
-        if (playGameBtn) {
-            playGameBtn.addEventListener('click', playGame);
-        }
-
-        // Initialize offerwall buttons
-        initializeOfferwallButtons();
-    }
-
-    // Update active navigation across tabs and footer
-    function updateActiveNavigation(section) {
-        // Update tabs
-        document.querySelectorAll('.wm-tab').forEach(tab => {
-            if (tab.getAttribute('data-section') === section) {
-                tab.classList.add('active');
-            } else {
-                tab.classList.remove('active');
-            }
-        });
-        
-        // Update footer buttons
-        document.querySelectorAll('.wm-footer-button').forEach(button => {
-            if (button.getAttribute('data-section') === section) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
-        });
-    }
-
-    // Initialize offerwall buttons with user validation
-    function initializeOfferwallButtons() {
-        Object.keys(offerwallButtons).forEach(buttonId => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                // Remove any existing listeners to prevent duplicates
-                const newButton = button.cloneNode(true);
-                button.parentNode.replaceChild(newButton, button);
-                
-                // Add new listener with proper binding
-                newButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Offerwall button clicked:', this.id);
-
-                    if (!currentUser) {
-                        alert('Please login first to access offerwalls');
-                        showSection('profile');
-                        updateActiveNavigation('profile');
-                        return;
-                    }
-
-                    const buttonId = this.id;
-                    const urlGenerator = offerwallButtons[buttonId];
-
-                    if (!urlGenerator) {
-                        console.error('No URL generator found for button:', buttonId);
-                        alert('This offerwall is not available at the moment.');
-                        return;
-                    }
-
-                    // Use user[4] (username) or user[0] (account) as fallback
-                    const username = currentUser[4] || currentUser[0] || 'user';
-                    const url = typeof urlGenerator === 'function' ? urlGenerator(username) : urlGenerator;
-
-                    console.log(`Opening offerwall ${buttonId} for user ${username}`);
-                    openIframe(url);
-                });
-            }
-        });
-    }
-
-    // Enhanced iframe functions
-    function openIframe(url) {
-        const iframeContainer = document.getElementById('iframeContainer');
-        const dashboardIframe = document.getElementById('dashboardIframe');
-
-        if (!iframeContainer || !dashboardIframe) {
-            console.error('Iframe elements not found');
-            return;
-        }
-
-        dashboardIframe.src = url;
-        iframeContainer.style.display = 'block';
-        console.log('Iframe opened with URL:', url);
-    }
-
-    function closeIframe() {
-        const iframeContainer = document.getElementById('iframeContainer');
-        const dashboardIframe = document.getElementById('dashboardIframe');
-
-        if (iframeContainer && dashboardIframe) {
-            iframeContainer.style.display = 'none';
-            dashboardIframe.src = '';
-            console.log('Iframe closed');
-        }
-    }
-
-    // Update server time display
-    function updateServerTime() {
-        try {
-            const now = new Date();
-
-            // Convert to PST (UTC-8) or PDT (UTC-7) depending on daylight saving
-            const pstOffset = now.getTimezoneOffset() >= 480 ? -8 * 60 : -7 * 60;
-            const pstTime = new Date(now.getTime() + (now.getTimezoneOffset() - pstOffset) * 60000);
-
-            // Format as HH:MM:SS
-            const hours = String(pstTime.getHours()).padStart(2, '0');
-            const minutes = String(pstTime.getMinutes()).padStart(2, '0');
-            const seconds = String(pstTime.getSeconds()).padStart(2, '0');
-
-            const serverTimeEl = document.getElementById('serverTime');
-            if (serverTimeEl) {
-                serverTimeEl.textContent = `Server Time: ${hours}:${minutes}:${seconds} PST`;
-            }
-        } catch (error) {
-            console.error('Error updating server time:', error);
-        }
-    }
-
-    // Update header time
-    function updateHeaderTime() {
-        try {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const displayHours = hours % 12 || 12;
-            
-            const headerTimeEl = document.getElementById('headerTime');
-            if (headerTimeEl) {
-                headerTimeEl.textContent = `${displayHours}:${minutes} ${ampm}`;
-            }
-        } catch (error) {
-            console.error('Error updating header time:', error);
-        }
-    }
-
-    // Check for existing user session
-    function checkExistingSession() {
-        console.log('Checking for existing session...');
-        const savedAccount = localStorage.getItem('buxiq_account');
-        const savedGoogleUser = localStorage.getItem('buxiq_google_user');
-        
-        if (savedGoogleUser) {
-            console.log('Found Google user session');
-            checkAndRestoreGoogleSession(savedGoogleUser);
-        } else if (savedAccount) {
-            console.log('Found manual login session');
-            restoreManualSession(savedAccount);
-        } else {
-            console.log('No existing session found');
-            showSection('earn');
-        }
-    }
-
-    // Check and restore Google session with blocked validation
-    async function checkAndRestoreGoogleSession(savedGoogleUser) {
-        try {
-            const googleUser = JSON.parse(savedGoogleUser);
-            console.log('Restoring Google session for:', googleUser.email);
-            
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network response was not ok');
-
-            const data = await response.text();
-            const rows = data.trim().split('\n').map(row => {
-                // Handle CSV parsing more robustly
-                const cells = row.split(',');
-                return cells.map(cell => cell.trim().replace(/^"|"$/g, ''));
-            });
-
-            // Find user by Google ID or email
-            const user = rows.find(r => (r[7] === googleUser.id || r[8] === googleUser.email));
-
-            if (user) {
-                // Check if user is blocked
-                const status = (user[2] || '').toLowerCase();
-                if (status === 'blocked') {
-                    console.log('User is blocked, clearing session');
-                    localStorage.removeItem('buxiq_google_user');
-                    showSection('earn');
-                    return;
-                }
-                
-                // User is valid, restore session
-                simulateGoogleLoginRestore(googleUser);
-            } else {
-                console.log('Google user not found in database');
+        if (user) {
+            // Check if user is blocked
+            const status = (user[2] || '').toLowerCase();
+            if (status === 'blocked') {
+                // Clear blocked user session
                 localStorage.removeItem('buxiq_google_user');
+                showSection('earn');
+                return;
             }
-        } catch (err) {
-            console.error('Error checking Google session:', err);
+            
+            // User is valid, restore session
+            simulateGoogleLoginRestore(googleUser);
+        } else {
+            // User not found in database, clear session
             localStorage.removeItem('buxiq_google_user');
         }
+    } catch (err) {
+        console.error('Error checking Google session:', err);
+        // On error, clear session to be safe
+        localStorage.removeItem('buxiq_google_user');
     }
+}
 
-    // Restore manual session
-    async function restoreManualSession(account) {
-        try {
-            console.log('Restoring manual session for account:', account);
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network response was not ok');
+// Restore manual session
+async function restoreManualSession(account) {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
 
-            const data = await response.text();
-            const rows = data.trim().split('\n').map(row => {
-                const cells = row.split(',');
-                return cells.map(cell => cell.trim().replace(/^"|"$/g, ''));
-            });
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
 
-            // Find user by account number
-            const user = rows.find(r => r[0] === account);
+        // Find user by account number
+        const user = rows.find(r => r[0] === account);
 
-            if (user) {
-                // Check if user is blocked
-                const status = (user[2] || '').toLowerCase();
-                if (status === 'blocked') {
-                    console.log('User is blocked, clearing session');
-                    localStorage.removeItem('buxiq_account');
-                    return;
-                }
-                
-                currentUser = user;
-                updateUserUI(user);
-                
-                // Show dashboard
-                document.getElementById('login-container').classList.add('hidden');
-                document.getElementById('dashboard').classList.remove('hidden');
-                
-                // Update balance
-                await updateBalance();
-                
-                addToLogs(`Session restored for ${user[4] || 'User'}`);
-                console.log('Manual session restored successfully');
-            } else {
-                console.log('Manual user not found in database');
+        if (user) {
+            // Check if user is blocked
+            const status = (user[2] || '').toLowerCase();
+            if (status === 'blocked') {
+                // Clear blocked user session
                 localStorage.removeItem('buxiq_account');
+                return;
             }
-        } catch (err) {
-            console.error('Error restoring manual session:', err);
+            
+            currentUser = user;
+            updateUserUI(user);
+            
+            // Show dashboard
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            // Update balance
+            await updateBalance();
+            
+            addToLogs(`Session restored for ${user[4] || 'User'}`);
+        } else {
+            // Clear invalid session
+            localStorage.removeItem('buxiq_account');
         }
+    } catch (err) {
+        console.error('Error restoring session:', err);
     }
+}
 
-    // Simulate Google login restore
-    function simulateGoogleLoginRestore(googleUser) {
-        console.log('Simulating Google login restore for:', googleUser.email);
-        const simulatedUser = {
-            email: googleUser.email,
-            name: googleUser.name,
-            id: googleUser.id,
-            picture: googleUser.picture
-        };
-        processGoogleLogin(simulatedUser);
-    }
+// Simulate Google login restore
+function simulateGoogleLoginRestore(googleUser) {
+    const simulatedUser = {
+        email: googleUser.email,
+        name: googleUser.name,
+        id: googleUser.id,
+        picture: googleUser.picture
+    };
+    processGoogleLogin(simulatedUser);
+}
 
-    // Handle Google Sign-In response
-    function handleGoogleCredentialResponse(response) {
-        console.log("Google Sign-In response received");
+// Handle Google Sign-In response
+function handleGoogleCredentialResponse(response) {
+    console.log("Google Sign-In response:", response);
+    
+    // Decode the JWT token to get user info
+    const responsePayload = parseJwt(response.credential);
+    
+    console.log("Google user info:", responsePayload);
+    
+    // Process Google login with the user info
+    processGoogleLogin({
+        id: responsePayload.sub,
+        email: responsePayload.email,
+        name: responsePayload.name,
+        picture: responsePayload.picture
+    });
+}
+
+// Parse JWT token
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
         
-        try {
-            const responsePayload = parseJwt(response.credential);
-            
-            console.log("Google user info:", responsePayload);
-            
-            processGoogleLogin({
-                id: responsePayload.sub,
-                email: responsePayload.email,
-                name: responsePayload.name,
-                picture: responsePayload.picture
-            });
-        } catch (error) {
-            console.error("Error processing Google credential:", error);
-            showError(document.getElementById('error-msg'), 'Error with Google Sign-In. Please try again.');
-        }
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error("Error parsing JWT:", e);
+        return null;
     }
+}
 
-    // Parse JWT token
-    function parseJwt(token) {
-        try {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            
-            return JSON.parse(jsonPayload);
-        } catch (e) {
-            console.error("Error parsing JWT:", e);
-            return null;
-        }
-    }
+// Process Google Login
+async function processGoogleLogin(googleUser) {
+    const errorMsg = document.getElementById('error-msg');
+    
+    try {
+        // Check if user exists in Google Sheets
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
 
-    // Process Google Login
-    async function processGoogleLogin(googleUser) {
-        const errorMsg = document.getElementById('error-msg');
-        
-        try {
-            console.log('Processing Google login for:', googleUser.email);
-            
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
 
-            const data = await response.text();
-            const rows = data.trim().split('\n').map(row => {
-                const cells = row.split(',');
-                return cells.map(cell => cell.trim().replace(/^"|"$/g, ''));
-            });
+        // Look for user by Google ID or email
+        const user = rows.find(r => r[7] === googleUser.id || r[8] === googleUser.email);
 
-            // Look for user by Google ID or email
-            const user = rows.find(r => r[7] === googleUser.id || r[8] === googleUser.email);
-
-            if (user) {
-                // Check if user is blocked
-                const status = (user[2] || '').toLowerCase();
-                if (status === 'blocked') {
-                    showError(errorMsg, 'Your account is blocked.');
-                    localStorage.removeItem('buxiq_google_user');
-                    return;
-                }
-
-                // Existing user - login
-                currentUser = user;
-                await completeLogin(user);
-                
-                // Store session for Google user
-                localStorage.setItem('buxiq_google_user', JSON.stringify({
-                    id: googleUser.id,
-                    email: googleUser.email,
-                    name: googleUser.name,
-                    picture: googleUser.picture
-                }));
-                
-                console.log('Google login successful');
-            } else {
-                // New user - auto-register
-                await registerGoogleUser(googleUser);
+        if (user) {
+            // Check if user is blocked
+            const status = (user[2] || '').toLowerCase();
+            if (status === 'blocked') {
+                showError(errorMsg, 'Your account is blocked.');
+                // Clear any stored Google session data
+                localStorage.removeItem('buxiq_google_user');
+                return;
             }
-        } catch (err) {
-            console.error('Google login processing error:', err);
-            showError(errorMsg, 'Error during Google login. Please try again.');
-        }
-    }
 
-    // Register new Google user
-    async function registerGoogleUser(googleUser) {
-        console.log('Registering new Google user:', googleUser.email);
-        
-        // Generate unique account number and client ID
-        const accountNumber = 'G' + Math.random().toString(36).substr(2, 8).toUpperCase();
-        const clientId = 'GC' + Math.random().toString(36).substr(2, 6).toUpperCase();
-        
-        // Create new user data
-        const newUser = [
-            accountNumber,      // 0: Account #
-            clientId,          // 1: Client ID
-            'active',          // 2: Status
-            '0.00',           // 3: Balance
-            googleUser.name,   // 4: Username
-            googleUser.picture, // 5: Avatar URL (Google profile picture)
-            '1',              // 6: Level
-            googleUser.id,    // 7: Google ID
-            googleUser.email  // 8: Google Email
-        ];
-        
-        // Post new user to Google Sheets
-        const success = await postUserToSheets(newUser);
-        
-        if (success) {
-            currentUser = newUser;
+            // Existing user - login
+            currentUser = user;
+            await completeLogin(user);
             
-            // Store in localStorage
+            // Store session for Google user
             localStorage.setItem('buxiq_google_user', JSON.stringify({
                 id: googleUser.id,
                 email: googleUser.email,
                 name: googleUser.name,
-                picture: googleUser.picture,
-                account: accountNumber,
-                clientId: clientId
+                picture: googleUser.picture
             }));
-            
-            await completeLogin(newUser);
-            
-            // Show welcome message for new users
-            addToLogs(`Welcome ${googleUser.name}! Your account has been created.`);
-            console.log('New Google user registered successfully');
         } else {
-            console.error('Failed to register new Google user');
-            showError(document.getElementById('error-msg'), 'Failed to create account. Please try again.');
+            // New user - auto-register
+            await registerGoogleUser(googleUser);
         }
+    } catch (err) {
+        console.error('Google login processing error:', err);
+        showError(errorMsg, 'Error during Google login. Please try again.');
     }
+}
 
-    // Post user data to Google Sheets
-    async function postUserToSheets(userData) {
-        try {
-            // Prepare data for Google Sheets
-            const formData = new FormData();
-            formData.append('action', 'addUser');
-            formData.append('account', userData[0]);
-            formData.append('clientId', userData[1]);
-            formData.append('status', userData[2]);
-            formData.append('balance', userData[3]);
-            formData.append('username', userData[4]);
-            formData.append('avatar', userData[5]);
-            formData.append('level', userData[6]);
-            formData.append('googleId', userData[7]);
-            formData.append('googleEmail', userData[8]);
-            
-            // Send POST request to Google Apps Script
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (response.ok) {
-                console.log('User data successfully posted to Google Sheets');
-                return true;
-            } else {
-                console.error('Failed to post user data to Google Sheets');
-                return false;
-            }
-        } catch (error) {
-            console.error('Error posting user data to Google Sheets:', error);
+// Register new Google user
+async function registerGoogleUser(googleUser) {
+    // Generate unique account number and client ID
+    const accountNumber = 'G' + Math.random().toString(36).substr(2, 8).toUpperCase();
+    const clientId = 'GC' + Math.random().toString(36).substr(2, 6).toUpperCase();
+    
+    // Create new user data
+    const newUser = [
+        accountNumber,      // 0: Account #
+        clientId,          // 1: Client ID
+        'active',          // 2: Status
+        '0.00',           // 3: Balance
+        googleUser.name,   // 4: Username
+        googleUser.picture, // 5: Avatar URL (Google profile picture)
+        '1',              // 6: Level
+        googleUser.id,    // 7: Google ID
+        googleUser.email  // 8: Google Email
+    ];
+    
+    // Post new user to Google Sheets
+    await postUserToSheets(newUser);
+    
+    // In a real implementation, you would send this to your backend/Google Apps Script
+    // For now, we'll use the new user data directly
+    currentUser = newUser;
+    
+    // Store in localStorage
+    localStorage.setItem('buxiq_google_user', JSON.stringify({
+        id: googleUser.id,
+        email: googleUser.email,
+        name: googleUser.name,
+        picture: googleUser.picture,
+        account: accountNumber,
+        clientId: clientId
+    }));
+    
+    await completeLogin(newUser);
+    
+    // Show welcome message for new users
+    addToLogs(`Welcome ${googleUser.name}! Your account has been created.`);
+}
+
+// Post user data to Google Sheets
+async function postUserToSheets(userData) {
+    try {
+        // Prepare data for Google Sheets
+        const formData = new FormData();
+        formData.append('action', 'addUser');
+        formData.append('account', userData[0]);
+        formData.append('clientId', userData[1]);
+        formData.append('status', userData[2]);
+        formData.append('balance', userData[3]);
+        formData.append('username', userData[4]);
+        formData.append('avatar', userData[5]);
+        formData.append('level', userData[6]);
+        formData.append('googleId', userData[7]);
+        formData.append('googleEmail', userData[8]);
+        
+        // Send POST request to Google Apps Script
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (response.ok) {
+            console.log('User data successfully posted to Google Sheets');
+            return true;
+        } else {
+            console.error('Failed to post user data to Google Sheets');
             return false;
         }
+    } catch (error) {
+        console.error('Error posting user data to Google Sheets:', error);
+        return false;
+    }
+}
+
+// Login handler
+async function handleLogin(e) {
+    e.preventDefault();
+
+    const account = document.getElementById('login-account')?.value?.trim() || '';
+    const clientid = document.getElementById('login-clientid')?.value?.trim() || '';
+    const captchaInput = document.getElementById('captchaInput')?.value?.trim() || '';
+    const errorMsg = document.getElementById('error-msg');
+
+    // For auto-login, allow a temporary bypass for CAPTCHA verification
+    const isAutoLogin = e.type === 'auto';
+    if (!isAutoLogin && captchaInput !== captchaCode) {
+        showError(errorMsg, 'Invalid CAPTCHA');
+        generateCaptcha();
+        document.getElementById('captchaInput').value = '';
+        return;
     }
 
-    // Login handler
-    async function handleLogin(e) {
-        if (e) e.preventDefault();
-        console.log('Login attempt');
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network response was not ok');
 
-        const account = document.getElementById('login-account')?.value?.trim() || '';
-        const clientid = document.getElementById('login-clientid')?.value?.trim() || '';
-        const captchaInput = document.getElementById('captchaInput')?.value?.trim() || '';
-        const errorMsg = document.getElementById('error-msg');
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(row => row.split(','));
 
-        // Validate inputs
-        if (!account || !clientid) {
-            showError(errorMsg, 'Please enter both Account and Client ID');
-            return;
-        }
+        // Find user in spreadsheet data based on account and clientid (if not auto-login)
+        const user = rows.find(r => r[0] === account && (isAutoLogin || r[1] === clientid));
 
-        if (captchaInput !== captchaCode) {
-            showError(errorMsg, 'Invalid CAPTCHA');
-            generateCaptcha();
-            if (document.getElementById('captchaInput')) {
+        if (user) {
+            const status = (user[2] || '').toLowerCase();
+            if (status === 'blocked') {
+                showError(errorMsg, 'Your account is blocked.');
+                // Clear login fields and generate new CAPTCHA on blocked account
+                document.getElementById('login-account').value = '';
+                document.getElementById('login-clientid').value = '';
                 document.getElementById('captchaInput').value = '';
-            }
-            return;
-        }
-
-        try {
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network response was not ok');
-
-            const data = await response.text();
-            const rows = data.trim().split('\n').map(row => {
-                const cells = row.split(',');
-                return cells.map(cell => cell.trim().replace(/^"|"$/g, ''));
-            });
-
-            // Find user in spreadsheet data based on account and clientid
-            const user = rows.find(r => r[0] === account && r[1] === clientid);
-
-            if (user) {
-                const status = (user[2] || '').toLowerCase();
-                if (status === 'blocked') {
-                    showError(errorMsg, 'Your account is blocked.');
-                    // Clear login fields and generate new CAPTCHA on blocked account
-                    if (document.getElementById('login-account')) {
-                        document.getElementById('login-account').value = '';
-                    }
-                    if (document.getElementById('login-clientid')) {
-                        document.getElementById('login-clientid').value = '';
-                    }
-                    if (document.getElementById('captchaInput')) {
-                        document.getElementById('captchaInput').value = '';
-                    }
-                    generateCaptcha();
-                    return;
-                }
-
-                // Store current user globally
-                currentUser = user;
-
-                // Store in local storage
-                localStorage.setItem('buxiq_account', account);
-
-                // Update UI with user data
-                updateUserUI(user);
-
-                // Show dashboard
-                document.getElementById('login-container')?.classList.add('hidden');
-                document.getElementById('dashboard')?.classList.remove('hidden');
-                if (errorMsg) errorMsg.classList.add('hidden');
-
-                // Initialize offerwalls for this user
-                initializeOfferwallButtons();
-
-                // Load additional data
-                fetchCSV();
-                updateBalance();
-                
-                addToLogs(`Login successful for ${user[4] || 'User'}`);
-                console.log('Manual login successful');
-            } else {
-                showError(errorMsg, 'Invalid credentials');
-                // Clear CAPTCHA input and generate new CAPTCHA on invalid credentials
-                if (document.getElementById('captchaInput')) {
-                    document.getElementById('captchaInput').value = '';
-                }
                 generateCaptcha();
-            }
-        } catch (err) {
-            console.error('Login error:', err);
-            showError(errorMsg, 'Error loading data. Please try again.');
-            // Clear CAPTCHA input and generate new CAPTCHA on error
-            if (document.getElementById('captchaInput')) {
-                document.getElementById('captchaInput').value = '';
-            }
-            generateCaptcha();
-        }
-    }
-
-    // Complete login process for both manual and Google login
-    async function completeLogin(user) {
-        console.log('Completing login for:', user[4] || 'User');
-        
-        // Update user data
-        const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
-        
-        // Update UI
-        const userAvatar = document.getElementById('userAvatar');
-        const userName = document.getElementById('userName');
-        
-        if (userAvatar) userAvatar.src = avatarUrl;
-        if (userName) userName.textContent = user[4] || 'User';
-        
-        // Show dashboard
-        document.getElementById('login-container').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-        
-        const errorMsg = document.getElementById('error-msg');
-        if (errorMsg) errorMsg.classList.add('hidden');
-        
-        // Update balance and level
-        await updateBalance();
-        
-        // Add login success message
-        addToLogs(`Login successful for ${user[4] || 'User'}`);
-    }
-
-    // Helper function to show errors
-    function showError(element, message) {
-        if (element) {
-            element.textContent = message;
-            element.classList.remove('hidden');
-            console.error('Error:', message);
-        } else {
-            alert(message);
-        }
-    }
-
-    // Update user UI after login
-    function updateUserUI(user) {
-        try {
-            console.log('Updating UI for user:', user[4] || 'User');
-            const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
-
-            // Update avatar
-            const userAvatar = document.getElementById('userAvatar');
-            if (userAvatar) userAvatar.src = avatarUrl;
-
-            // Update username
-            const usernameEl = document.getElementById('userName');
-            if (usernameEl) usernameEl.textContent = user[4] || 'User';
-
-            // Update level
-            const levelEl = document.getElementById('userLevel');
-            if (levelEl) levelEl.textContent = user[6] || '1';
-
-            // Update balance
-            updateBalance();
-        } catch (error) {
-            console.error('Error updating user UI:', error);
-        }
-    }
-
-    // Logout function
-    function logout() {
-        console.log('Logging out user');
-        try {
-            if (currentUser) {
-                // If it's a Google user, remove Google data too
-                if (currentUser[7]) {
-                    localStorage.removeItem('buxiq_google_user');
-                }
-            }
-
-            currentUser = null;
-            localStorage.removeItem('buxiq_account');
-
-            document.getElementById('dashboard')?.classList.add('hidden');
-            document.getElementById('login-container')?.classList.remove('hidden');
-            
-            const loginAccount = document.getElementById('login-account');
-            const loginClientid = document.getElementById('login-clientid');
-            const captchaInput = document.getElementById('captchaInput');
-            
-            if (loginAccount) loginAccount.value = '';
-            if (loginClientid) loginClientid.value = '';
-            if (captchaInput) captchaInput.value = '';
-
-            const errorMsg = document.getElementById('error-msg');
-            if (errorMsg) errorMsg.classList.add('hidden');
-
-            generateCaptcha();
-            showSection('earn');
-            updateActiveNavigation('earn');
-
-            // Reset user info display
-            const userAvatar = document.getElementById('userAvatar');
-            const usernameEl = document.getElementById('userName');
-            const levelEl = document.getElementById('userLevel');
-            const balanceEl = document.getElementById('userBalance');
-            
-            if (userAvatar) userAvatar.src = 'https://ui-avatars.com/api/?background=e94560&color=fff&name=Guest&bold=true';
-            if (usernameEl) usernameEl.textContent = 'Guest User';
-            if (levelEl) levelEl.textContent = '0';
-            if (balanceEl) balanceEl.textContent = '$0.00';
-            
-            addToLogs('You have been logged out.');
-            console.log('Logout successful');
-        } catch (error) {
-            console.error('Error during logout:', error);
-        }
-    }
-
-    // Generate CAPTCHA
-    function generateCaptcha() {
-        try {
-            captchaCode = Math.floor(10000 + Math.random() * 90000).toString();
-            const captchaEl = document.getElementById('captcha');
-            if (captchaEl) {
-                captchaEl.textContent = captchaCode;
-            }
-            console.log('CAPTCHA generated:', captchaCode);
-            return captchaCode;
-        } catch (error) {
-            console.error('Error generating CAPTCHA:', error);
-            return '12345';
-        }
-    }
-
-    // Navigation handler
-    function showSection(section) {
-        try {
-            console.log('Showing section:', section);
-            const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help', 'privacy', 'tos'];
-            sections.forEach(sec => {
-                const sectionEl = document.getElementById('section-' + sec);
-                if (sectionEl) {
-                    sectionEl.classList.toggle('hidden', sec !== section);
-                }
-            });
-        } catch (error) {
-            console.error('Error showing section:', error);
-        }
-    }
-
-    // Update balance function
-    async function updateBalance() {
-        try {
-            if (!currentUser) {
-                console.warn('Cannot update balance: no current user.');
                 return;
             }
 
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network error');
+            // Store current user globally
+            currentUser = user;
 
-            const data = await response.text();
-            const rows = data.trim().split('\n').map(row => {
-                const cells = row.split(',');
-                return cells.map(cell => cell.trim().replace(/^"|"$/g, ''));
-            });
+            // Store in local storage
+            localStorage.setItem('buxiq_account', account);
+
+            // Update UI with user data
+            updateUserUI(user);
+
+            // Show dashboard
+            document.getElementById('login-container')?.classList.add('hidden');
+            document.getElementById('dashboard')?.classList.remove('hidden');
+            if (errorMsg) errorMsg.classList.add('hidden');
+
+            // Initialize offerwalls for this user
+            initializeOfferwallButtons();
+
+            // Load additional data
+            fetchCSV(); // For activity logs
+            updateBalance(); // Update balance immediately after login
             
-            // Find user by account and clientid for accuracy
-            const user = rows.find(r => r[0] === currentUser[0] && r[1] === currentUser[1]);
+            addToLogs(`Login successful for ${user[4] || 'User'}`);
+        } else {
+            showError(errorMsg, 'Invalid credentials');
+            // Clear CAPTCHA input and generate new CAPTCHA on invalid credentials
+            document.getElementById('captchaInput').value = '';
+            generateCaptcha();
+        }
+    } catch (err) {
+        console.error('Login error:', err);
+        showError(errorMsg, 'Error loading data. Please try again.');
+        // Clear CAPTCHA input and generate new CAPTCHA on error
+        document.getElementById('captchaInput').value = '';
+        generateCaptcha();
+    } finally {
+        // Ensure captchaInput is cleared if it was a temporary auto-login value
+        if (isAutoLogin && document.getElementById('captchaInput').value === 'auto_login_temp') {
+            document.getElementById('captchaInput').value = '';
+        }
+    }
+}
 
-            const balanceEl = document.getElementById('userBalance');
-            const levelEl = document.getElementById('userLevel');
+// Complete login process for both manual and Google login
+async function completeLogin(user) {
+    // Update user data
+    const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
+    
+    // Update UI
+    document.getElementById('userAvatar').src = avatarUrl;
+    document.getElementById('userName').textContent = user[4] || 'User';
+    
+    // Show dashboard
+    document.getElementById('login-container').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('error-msg').classList.add('hidden');
+    
+    // Update balance and level
+    await updateBalance();
+    
+    // Add login success message
+    addToLogs(`Login successful for ${user[4] || 'User'}`);
+}
 
-            if (user) {
-                // Fix NaN issue by ensuring we have a valid number
-                const balance = parseFloat(user[3] || '0');
-                if (!isNaN(balance)) {
-                    if (balanceEl) balanceEl.textContent = `$${balance.toFixed(2)}`;
-                } else {
-                    if (balanceEl) balanceEl.textContent = '$0.00';
-                }
-                
-                // Update level
-                if (levelEl) levelEl.textContent = user[6] || '1';
-                
-                // Update currentUser with latest data
-                currentUser = user;
-                console.log('Balance updated:', balance);
+// Helper function to show errors
+function showError(element, message) {
+    if (element) {
+        element.textContent = message;
+        element.classList.remove('hidden');
+    } else {
+        alert(message);
+    }
+}
+
+// Update user UI after login
+function updateUserUI(user) {
+    try {
+        const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
+
+        // Update avatar
+        const userAvatar = document.getElementById('userAvatar');
+        if (userAvatar) userAvatar.src = avatarUrl;
+
+        // Update username
+        const usernameEl = document.getElementById('userName');
+        if (usernameEl) usernameEl.textContent = user[4] || 'User';
+
+        // Update level
+        const levelEl = document.getElementById('userLevel');
+        if (levelEl) levelEl.textContent = user[6] || '1';
+
+        // Update balance
+        updateBalance();
+    } catch (error) {
+        console.error('Error updating user UI:', error);
+    }
+}
+
+// Logout function
+function logout() {
+    try {
+        if (currentUser) {
+            // If it's a Google user, remove Google data too
+            if (currentUser[7]) { // Google ID exists
+                localStorage.removeItem('buxiq_google_user');
+            }
+        }
+
+        currentUser = null;
+        localStorage.removeItem('buxiq_account');
+
+        document.getElementById('dashboard')?.classList.add('hidden');
+        document.getElementById('login-container')?.classList.remove('hidden');
+        document.getElementById('login-account').value = '';
+        document.getElementById('login-clientid').value = '';
+        document.getElementById('captchaInput').value = '';
+
+        const errorMsg = document.getElementById('error-msg');
+        if (errorMsg) errorMsg.classList.add('hidden');
+
+        generateCaptcha();
+        showSection('earn'); // Return to default 'earn' section on logout
+
+        // Reset user info display
+        const userAvatar = document.getElementById('userAvatar');
+        const usernameEl = document.getElementById('userName');
+        const levelEl = document.getElementById('userLevel');
+        const balanceEl = document.getElementById('userBalance');
+        
+        if (userAvatar) userAvatar.src = 'https://ui-avatars.com/api/?background=e94560&color=fff&name=Guest&bold=true';
+        if (usernameEl) usernameEl.textContent = 'Guest User';
+        if (levelEl) levelEl.textContent = '0';
+        if (balanceEl) balanceEl.textContent = '$0.00';
+        
+        addToLogs('You have been logged out.');
+    } catch (error) {
+        console.error('Error during logout:', error);
+    }
+}
+
+// Generate CAPTCHA
+function generateCaptcha() {
+    try {
+        captchaCode = Math.floor(10000 + Math.random() * 90000).toString();
+        const captchaEl = document.getElementById('captcha');
+        if (captchaEl) {
+            captchaEl.textContent = captchaCode;
+        }
+        return captchaCode;
+    } catch (error) {
+        console.error('Error generating CAPTCHA:', error);
+        return '12345'; // Fallback CAPTCHA
+    }
+}
+
+// Navigation handler
+function showSection(section) {
+    try {
+        const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help'];
+        sections.forEach(sec => {
+            const sectionEl = document.getElementById('section-' + sec);
+            if (sectionEl) {
+                sectionEl.classList.toggle('hidden', sec !== section);
+            }
+        });
+    } catch (error) {
+        console.error('Error showing section:', error);
+    }
+}
+
+// Update balance function (can be called separately to refresh)
+async function updateBalance() {
+    try {
+        if (!currentUser) {
+            console.warn('Cannot update balance: no current user.');
+            return;
+        }
+
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network error');
+
+        const data = await response.text();
+        const rows = data.trim().split('\n').map(r => r.split(','));
+        // Find user by account and clientid for accuracy
+        const user = rows.find(r => r[0] === currentUser[0] && r[1] === currentUser[1]);
+
+        const balanceEl = document.getElementById('userBalance');
+        const levelEl = document.getElementById('userLevel');
+
+        if (user) {
+            // Fix NaN issue by ensuring we have a valid number
+            const balance = parseFloat(user[3] || '0');
+            if (!isNaN(balance)) {
+                if (balanceEl) balanceEl.textContent = `$${balance.toFixed(2)}`;
             } else {
-                // If user not found, reset balance display to 0
                 if (balanceEl) balanceEl.textContent = '$0.00';
-                if (levelEl) levelEl.textContent = '0';
-                console.warn('User not found when updating balance');
             }
-        } catch (err) {
-            console.error('Error updating balance:', err);
+            
+            // Update level
+            if (levelEl) levelEl.textContent = user[6] || '1';
+            
+            // Update currentUser with latest data
+            currentUser = user;
+        } else {
+            // If user not found (e.g., after logout), reset balance display to 0
+            if (balanceEl) balanceEl.textContent = '$0.00';
+            if (levelEl) levelEl.textContent = '0';
         }
+    } catch (err) {
+        console.error('Error updating balance:', err);
     }
+}
 
-    // Fetch CSV for activity logs
-    async function fetchCSV() {
-        try {
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3p3daAnCETfJtrUUvaiNqoUreYkn9FIHus6rEyq-e8E8oLaV51L_NrVWjHp1CyTv3UqBqryq3aH-0/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network error');
+// Fetch CSV for activity logs
+async function fetchCSV() {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3p3daAnCETfJtrUUvaiNqoUreYkn9FIHus6rEyq-e8E8oLaV51L_NrVWjHp1CyTv3UqBqryq3aH-0/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network error');
 
-            const data = await response.text();
-            const rows = data.trim().split('\n').slice(1); // skip header
-            const logsContainer = document.getElementById('logs');
-
-            if (!logsContainer) return;
-            
-            // Clear existing logs except the initial message
-            const initialMessage = logsContainer.querySelector('.wm-list-item');
-            logsContainer.innerHTML = '';
-            if (initialMessage && rows.length === 0) {
-                logsContainer.appendChild(initialMessage);
-            }
-
-            let hasLogs = false;
-            rows.forEach((row) => {
-                const cols = row.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
-                // Ensure necessary columns exist and are not empty
-                if (cols.length >= 7 && cols[2] && cols[6]) {
-                    hasLogs = true;
-                    const username = cols[2];
-                    const amount = parseFloat(cols[6]).toFixed(2);
-                    const logDiv = document.createElement('div');
-                    logDiv.className = 'wm-list-item';
-                    logDiv.innerHTML = `
-                        <div class="icon"><i class="fas fa-user"></i></div>
-                        <div>${username} earned $${amount}</div>
-                    `;
-                    logsContainer.appendChild(logDiv);
-                }
-            });
-
-            if (!hasLogs && initialMessage) {
-                logsContainer.appendChild(initialMessage);
-            }
-            
-            console.log('Activity logs loaded:', hasLogs ? rows.length : 0, 'entries');
-        } catch (err) {
-            console.error('Error fetching activity logs:', err);
-            const logsContainer = document.getElementById('logs');
-            if (logsContainer) {
-                logsContainer.innerHTML = '<div class="wm-list-item"><div class="icon"><i class="fas fa-exclamation-triangle"></i></div><div>Error loading activity logs.</div></div>';
-            }
-        }
-    }
-
-    // Load leaderboard from CSV
-    async function loadLeaderboard() {
-        try {
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
-            if (!response.ok) throw new Error('Network error');
-
-            const data = await response.text();
-            const rows = data.trim().split('\n').slice(1); // skip header
-            
-            // Sort users by balance (descending)
-            const users = rows.map(row => {
-                const cols = row.split(',').map(c => c.trim().replace(/^"|"$/g, ''));
-                return {
-                    username: cols[4] || 'Unknown',
-                    balance: parseFloat(cols[3] || 0),
-                    level: cols[6] || '1'
-                };
-            }).filter(user => !isNaN(user.balance))
-              .sort((a, b) => b.balance - a.balance)
-              .slice(0, 10); // Top 10 users
-            
-            const leaderboardBody = document.getElementById('leaderboardBody');
-            if (!leaderboardBody) return;
-            
-            leaderboardBody.innerHTML = '';
-            
-            users.forEach((user, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${user.username}</td>
-                    <td>$${user.balance.toFixed(2)}</td>
-                    <td>${user.level}</td>
-                `;
-                leaderboardBody.appendChild(row);
-            });
-            
-            console.log('Leaderboard loaded with', users.length, 'users');
-        } catch (err) {
-            console.error('Error loading leaderboard:', err);
-        }
-    }
-
-    // Helper function to add messages to logs
-    function addToLogs(message) {
+        const data = await response.text();
+        const rows = data.trim().split('\n').slice(1); // skip header
         const logsContainer = document.getElementById('logs');
+
         if (!logsContainer) return;
         
-        const logEntry = document.createElement('div');
-        logEntry.className = 'wm-list-item';
-        logEntry.innerHTML = `
-            <div class="icon"><i class="fas fa-info-circle"></i></div>
-            <div>${new Date().toLocaleTimeString()} - ${message}</div>
-        `;
-        
-        // Remove initial placeholder if it exists
-        const initialMessage = logsContainer.querySelector('.wm-list-item:first-child');
-        if (initialMessage && initialMessage.textContent.includes('activity log will appear here')) {
-            logsContainer.removeChild(initialMessage);
+        // Clear existing logs except the initial message
+        const initialMessage = logsContainer.querySelector('.wm-list-item');
+        logsContainer.innerHTML = '';
+        if (initialMessage && rows.length === 0) {
+            logsContainer.appendChild(initialMessage);
         }
-        
-        logsContainer.appendChild(logEntry);
-        logsContainer.scrollTop = logsContainer.scrollHeight;
-        console.log('Log added:', message);
-    }
 
-    // Bonus Code Redemption
-    async function redeemBonusCode() {
-        const username = document.getElementById('username')?.value?.trim();
-        const bonusCode = document.getElementById('bonusCode')?.value?.trim();
-        
-        if (!username || !bonusCode) {
-            alert('Please fill in all fields');
-            return;
-        }
-        
-        try {
-            // Send a request to the Google Apps Script web app to fetch data from the Google Sheets
-            const response = await fetch(`https://script.google.com/macros/s/AKfycbxmqOnPJLPuHD6u_DD66bwY0R4MYQ8v9uF1Mv0pm8Sg9APSS4R4oXzbs3zin2FoTMK5/exec?username=${username}&bonusCode=${bonusCode}`);
-            const result = await response.text();
-
-            console.log('Bonus redemption result:', result);
-
-            if (result.includes("Error")) {
-                alert(result);
-            } else {
-                const [amountLocal, amountUsd] = result.split(',');
-                document.getElementById('amountLocal').value = amountLocal;
-                document.getElementById('amountUsd').value = amountUsd;
-                sendPostback(amountLocal, amountUsd, username, bonusCode);
-                alert('Bonus code redeemed successfully!');
+        let hasLogs = false;
+        rows.forEach((row, index) => {
+            const cols = row.split(',').map(c => c.trim());
+            // Ensure necessary columns exist and are not empty
+            if (cols.length >= 7 && cols[2] && cols[6]) {
+                hasLogs = true;
+                const username = cols[2];
+                const amount = parseFloat(cols[6]).toFixed(2); // Format amount to 2 decimal places
+                const logDiv = document.createElement('div');
+                logDiv.className = 'wm-list-item';
+                logDiv.innerHTML = `
+                    <div class="icon"><i class="fas fa-user"></i></div>
+                    <div>${username} earned $${amount}</div>
+                `;
+                logsContainer.appendChild(logDiv);
             }
-        } catch (error) {
-            console.error('Error redeeming bonus code:', error);
-            alert('Error redeeming bonus code. Please try again.');
+        });
+
+        if (!hasLogs && initialMessage) {
+            // Keep the initial message if no logs
+        }
+    } catch (err) {
+        console.error('Error fetching activity logs:', err);
+        const logsContainer = document.getElementById('logs');
+        if (logsContainer) {
+            logsContainer.innerHTML = '<div class="wm-list-item"><div class="icon"><i class="fas fa-exclamation-triangle"></i></div><div>Error loading activity logs.</div></div>';
         }
     }
+}
 
-    // Postback Function
-    function sendPostback(amountLocal, amountUsd, username, bonusCode) {
-        const timestamp = new Date().getTime();
-        const postbackUrl = `https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status=success&trans_id=${timestamp}&user_id=${username}&bonusCode=${bonusCode}&sub_id=&sub_id_2=&amount_local=${amountLocal}&amount_usd=${amountUsd}&offer_id=offer001&hash=secure_hash_value&ip_click=192.168.1.1`;
+// Load leaderboard from CSV
+async function loadLeaderboard() {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv');
+        if (!response.ok) throw new Error('Network error');
 
-        fetch(postbackUrl)
-            .then(response => response.json())
-            .then(data => console.log('Postback Success:', data))
-            .catch(error => console.error('Postback Error:', error));
+        const data = await response.text();
+        const rows = data.trim().split('\n').slice(1); // skip header
+        
+        // Sort users by balance (descending)
+        const users = rows.map(row => {
+            const cols = row.split(',');
+            return {
+                username: cols[4] || 'Unknown',
+                balance: parseFloat(cols[3] || 0),
+                level: cols[6] || '1'
+            };
+        }).sort((a, b) => b.balance - a.balance).slice(0, 10); // Top 10 users
+        
+        const leaderboardBody = document.getElementById('leaderboardBody');
+        if (!leaderboardBody) return;
+        
+        leaderboardBody.innerHTML = '';
+        
+        users.forEach((user, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${user.username}</td>
+                <td>$${user.balance.toFixed(2)}</td>
+                <td>${user.level}</td>
+            `;
+            leaderboardBody.appendChild(row);
+        });
+    } catch (err) {
+        console.error('Error loading leaderboard:', err);
     }
+}
 
-    // Game function
-    function playGame() {
-        const betAmount = parseFloat(document.getElementById('betAmount').value);
-        const balance = parseFloat(document.getElementById('userBalance').textContent.replace('$', ''));
-        
-        if (isNaN(betAmount) || betAmount < 0.25) {
-            alert('Please enter a valid bet amount (minimum $0.25)');
-            return;
-        }
-        
-        if (betAmount > balance) {
-            alert('Insufficient balance for this bet');
-            return;
-        }
-        
-        const gameRoller = document.getElementById('gameRoller');
-        const rollerContent = document.getElementById('rollerContent');
-        const gameResult = document.getElementById('gameResult');
-        
-        // Reset previous result
-        gameResult.style.display = 'none';
-        gameResult.className = 'game-result';
-        
-        // Animate roller
-        rollerContent.textContent = 'Rolling...';
-        gameRoller.style.background = 'linear-gradient(135deg, #8faad6 0%, #6b8cc0 100%)';
-        
-        // Simulate rolling animation
-        setTimeout(() => {
-            // Generate random outcome (60% chance to win)
-            const isWin = Math.random() < 0.6;
-            const winMultiplier = isWin ? (Math.random() * 2 + 1).toFixed(2) : 0;
-            const winAmount = isWin ? (betAmount * winMultiplier).toFixed(2) : 0;
-            
-            // Update UI with result
-            if (isWin) {
-                rollerContent.textContent = `WIN! x${winMultiplier}`;
-                gameRoller.style.background = 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)';
-                gameResult.textContent = `You won $${winAmount}!`;
-                gameResult.className = 'game-result win';
-            } else {
-                rollerContent.textContent = 'LOSE!';
-                gameRoller.style.background = 'linear-gradient(135deg, #F44336 0%, #C62828 100%)';
-                gameResult.textContent = `You lost $${betAmount.toFixed(2)}`;
-                gameResult.className = 'game-result lose';
-            }
-            
-            gameResult.style.display = 'block';
-            
-            // Show cooldown message
-            const cooldownMessage = document.getElementById('cooldownMessage');
-            cooldownMessage.style.display = 'block';
-            
-            // Start cooldown timer
-            let cooldownTime = 60;
-            const cooldownTimer = document.getElementById('cooldownTimer');
-            const timerInterval = setInterval(() => {
-                cooldownTime--;
-                const minutes = Math.floor(cooldownTime / 60);
-                const seconds = cooldownTime % 60;
-                cooldownTimer.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                
-                if (cooldownTime <= 0) {
-                    clearInterval(timerInterval);
-                    cooldownMessage.style.display = 'none';
-                }
-            }, 1000);
-            
-        }, 2000);
+// Helper function to add messages to logs
+function addToLogs(message) {
+    const logsContainer = document.getElementById('logs');
+    const logEntry = document.createElement('div');
+    logEntry.className = 'wm-list-item';
+    logEntry.innerHTML = `
+        <div class="icon"><i class="fas fa-info-circle"></i></div>
+        <div>${new Date().toLocaleTimeString()} - ${message}</div>
+    `;
+    
+    // Remove initial placeholder if it exists
+    const initialMessage = logsContainer.querySelector('.wm-list-item:first-child');
+    if (initialMessage && initialMessage.textContent.includes('activity log will appear here')) {
+        logsContainer.removeChild(initialMessage);
     }
+    
+    logsContainer.appendChild(logEntry);
+    logsContainer.scrollTop = logsContainer.scrollHeight;
+}
 
-    // Add error handling for uncaught errors
-    window.addEventListener('error', function(e) {
-        console.error('Global error:', e.error);
-    });
+// Bonus Code Redemption
+async function redeemBonusCode() {
+    const username = document.getElementById('username')?.value?.trim();
+    const bonusCode = document.getElementById('bonusCode')?.value?.trim();
+    
+    if (!username || !bonusCode) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
+    try {
+        // Send a request to the Google Apps Script web app to fetch data from the Google Sheets
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbxmqOnPJLPuHD6u_DD66bwY0R4MYQ8v9uF1Mv0pm8Sg9APSS4R4oXzbs3zin2FoTMK5/exec?username=${username}&bonusCode=${bonusCode}`);
+        const result = await response.text();
 
-    // Export functions for global access (if needed)
-    window.buxiqApp = {
-        generateCaptcha,
-        handleLogin,
-        logout,
-        showSection,
-        updateBalance
-    };
-</script>
+        console.log('Bonus redemption result:', result); // For debugging
+
+        if (result.includes("Error")) {
+            alert(result);
+        } else {
+            const [amountLocal, amountUsd] = result.split(','); // Expecting data in format "amountLocal,amountUsd"
+            document.getElementById('amountLocal').value = amountLocal;
+            document.getElementById('amountUsd').value = amountUsd;
+            sendPostback(amountLocal, amountUsd, username, bonusCode); // Call the postback function
+            alert('Bonus code redeemed successfully!');
+        }
+    } catch (error) {
+        console.error('Error redeeming bonus code:', error);
+        alert('Error redeeming bonus code. Please try again.');
+    }
+}
+
+// Postback Function
+function sendPostback(amountLocal, amountUsd, username, bonusCode) {
+    const timestamp = new Date().getTime();
+    const postbackUrl = `https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status=success&trans_id=${timestamp}&user_id=${username}&bonusCode=${bonusCode}&sub_id=&sub_id_2=&amount_local=${amountLocal}&amount_usd=${amountUsd}&offer_id=offer001&hash=secure_hash_value&ip_click=192.168.1.1`;
+
+    fetch(postbackUrl)
+        .then(response => response.json())
+        .then(data => console.log('Postback Success:', data))
+        .catch(error => console.error('Postback Error:', error));
+}
+    </script>
 </body>
 </html>
