@@ -41,6 +41,23 @@
       font-weight: bold;
       color: #34495e;
     }
+    .status {
+      text-align: center;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
     @media (max-width: 600px) {
       .container {
         padding: 15px;
@@ -52,7 +69,7 @@
   <div class="container">
     <h1>Transaction Details</h1>
     <div id="details"></div>
-    <p id="status-message"></p>
+    <div id="status-message" class="status"></div>
   </div>
 
   <script>
@@ -61,40 +78,56 @@
     const displayDiv = document.getElementById('details');
     const statusMessage = document.getElementById('status-message');
 
-    // Google Apps Script URL with placeholders
-    const postbackUrl = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec?status={status}&trans_id={trans_id}&user_id={user_id}&sub_id={subid}&sub_id_2={subid_2}&amount_local={amount_local}&amount_usd={amount_usd}&offer_id={offer_id}&hash={secure_hash}&ip_click={ip_click}';
+    // Your Google Apps Script Web App URL
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec';
 
-    // Keys for URL params
-    const keys = [
-      'status', 'trans_id', 'user_id', 'sub_id', 'sub_id_2',
-      'amount_local', 'amount_usd', 'offer_id', 'hash', 'ip_click'
-    ];
+    // Collect all parameters for the postback
+    const postbackParams = {
+      status: params.get('status') || 'completed',
+      trans_id: params.get('trans_id') || params.get('transaction_id') || 'TX_' + Date.now(),
+      user_id: params.get('user_id') || params.get('userId') || 'unknown',
+      sub_id: params.get('sub_id') || params.get('subid') || 'N/A',
+      sub_id_2: params.get('sub_id_2') || params.get('subid_2') || 'N/A',
+      amount_local: params.get('amount_local') || '0.00',
+      amount_usd: params.get('amount_usd') || params.get('amount') || '0.00',
+      offer_id: params.get('offer_id') || 'N/A',
+      hash: params.get('hash') || params.get('secure_hash') || 'N/A',
+      ip_click: params.get('ip_click') || 'N/A',
+      secret: 'WLpo8elcEL6kOd2' // Your secret key
+    };
 
-    // Build the actual URL with the real parameter values
-    let getUrl = postbackUrl;
-    keys.forEach(key => {
-      const value = params.get(key) || 'N/A';
-      getUrl = getUrl.replace(`{${key}}`, encodeURIComponent(value));
-
-      // Display data on the page
-      const div = document.createElement('div');
-      div.className = 'data-item';
-      div.innerHTML = `<span>${key.replace(/_/g, ' ')}:</span> ${value}`;
-      displayDiv.appendChild(div);
+    // Display the data on the page
+    Object.keys(postbackParams).forEach(key => {
+      if (key !== 'secret') { // Don't display secret
+        const div = document.createElement('div');
+        div.className = 'data-item';
+        div.innerHTML = `<span>${key.replace(/_/g, ' ')}:</span> ${postbackParams[key]}`;
+        displayDiv.appendChild(div);
+      }
     });
 
     // Function to send the GET request
     const sendPostback = async () => {
       try {
-        const response = await fetch(getUrl);
+        // Build URL with parameters
+        const url = new URL(scriptUrl);
+        Object.keys(postbackParams).forEach(key => {
+          url.searchParams.append(key, postbackParams[key]);
+        });
+
+        const response = await fetch(url);
+        const result = await response.text();
 
         if (response.ok) {
-          statusMessage.innerHTML = '<span style="color: green;">Postback Sent Successfully!</span>';
+          statusMessage.textContent = '✅ ' + result;
+          statusMessage.className = 'status success';
         } else {
-          statusMessage.innerHTML = '<span style="color: red;">Failed to Send Postback.</span>';
+          statusMessage.textContent = '❌ Failed to send postback: ' + result;
+          statusMessage.className = 'status error';
         }
       } catch (error) {
-        statusMessage.innerHTML = '<span style="color: red;">Error sending postback: ' + error.message + '</span>';
+        statusMessage.textContent = '❌ Error sending postback: ' + error.message;
+        statusMessage.className = 'status error';
       }
     };
 
