@@ -847,20 +847,44 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLwW7NEXLMSDPh1A_PJbTjAucIuji6JtsgVu2xAdaMzXthTKsgk2xyWy83Dx8dO53Rrg/exec';
 
         // Object with offerwall URLs and open functions
-        const offerwallButtons = {
-            'openOfferWallCPX': (accountNumber) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
-            'openOfferWallpockets': (accountNumber) => `https://uf.pocketsfull.ai/earn?appId=522&key=0c413ee8-8c9e-44bf-9ef9-9f23967f01b3&uid=${accountNumber}`,
-            'openOfferWalles': (accountNumber) => `comingsoon`,
-            'openOfferWallexcentiv': (accountNumber) => `https://excentiv.com/offerwall/?userid=${accountNumber}&key=q1v8KGQfCjmNeXnhsHyo`,
-            'openOfferWallwannads': (accountNumber) => `https://earn.wannads.com/surveywall?apiKey=67d3d43d63631681386947&userId=${accountNumber}`,
-            'openOfferWallmychips': (accountNumber) => `https://sdk.mychips.io/content?content_id=de0b103a-d478-44e3-adcb-6b2013ee8a8c&user_id=${accountNumber}&ad_unit_id=${adUnit}`,
-            'openOfferWallSPARKWALL': (accountNumber) => `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
-            'openOfferWallowm': (accountNumber) => `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${accountNumber}`,
-            'openOfferWalltw': (accountNumber) => `https://timewall.io/users/login?oid=0d54afcf2e6ff561&uid=${accountNumber}`,
-            'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`,
-            'openOfferWallnotik': (accountNumber) => `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${accountNumber}`
-            'openOfferWallprimewall': (accountNumber) => `https://primewall.io/offer/Yz3Uj8/${accountNumber}`
-        };
+const offerwallButtons = {
+    'openOfferWallCPX': (accountNumber) => 
+        `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
+    
+    'openOfferWallpockets': (accountNumber) => 
+        `https://uf.pocketsfull.ai/earn?appId=522&key=0c413ee8-8c9e-44bf-9ef9-9f23967f01b3&uid=${accountNumber}`,
+    
+    'openOfferWalles': (accountNumber) => 
+        `comingsoon`,
+    
+    'openOfferWallexcentiv': (accountNumber) => 
+        `https://excentiv.com/offerwall/?userid=${accountNumber}&key=q1v8KGQfCjmNeXnhsHyo`,
+    
+    'openOfferWallwannads': (accountNumber) => 
+        `https://earn.wannads.com/surveywall?apiKey=67d3d43d63631681386947&userId=${accountNumber}`,
+    
+    'openOfferWallmychips': (accountNumber, adUnit) => 
+        `https://sdk.mychips.io/content?content_id=de0b103a-d478-44e3-adcb-6b2013ee8a8c&user_id=${accountNumber}&ad_unit_id=${adUnit}`,
+    
+    'openOfferWallSPARKWALL': (accountNumber) => 
+        `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
+    
+    'openOfferWallowm': (accountNumber) => 
+        `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${accountNumber}`,
+    
+    'openOfferWalltw': (accountNumber) => 
+        `https://timewall.io/users/login?oid=0d54afcf2e6ff561&uid=${accountNumber}`,
+    
+    'openOfferWallbuxiq': () => 
+        `https://bux-iq.netlify.app/cashout.html`,
+    
+    'openOfferWallnotik': (accountNumber) => 
+        `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${accountNumber}`,
+    
+    'openOfferWallprimewall': (accountNumber) => 
+        `https://primewall.io/offer/Yz3Uj8/${accountNumber}`
+};
+
 
         // DOM Content Loaded - Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
