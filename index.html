@@ -705,6 +705,11 @@
                         <div class="wm-button primary" id="openOfferWalles">WAITING FOR APPROVAL</div>
                     </div>
 
+                    <div class="wm-offer-item">
+                        <img src="https://pocketsfull.ai/assets/images/logo.png" alt="CPX Research Logo" style="width: 250px;">
+                        <div class="wm-button primary" id="openOfferWallpockets">Open OfferWall</div>
+                    </div>
+
                     
                     
                 </div>
@@ -833,6 +838,7 @@
         // Object with offerwall URLs and open functions
         const offerwallButtons = {
             'openOfferWallCPX': (accountNumber) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
+            'openOfferWallpockets': (accountNumber) => `https://uf.pocketsfull.ai/earn?appId=522&key=0c413ee8-8c9e-44bf-9ef9-9f23967f01b3&uid=${accountNumber}`,
             'openOfferWalles': (accountNumber) => `comingsoon`,
             'openOfferWallexcentiv': (accountNumber) => `https://excentiv.com/offerwall/?userid=${accountNumber}&key=q1v8KGQfCjmNeXnhsHyo`,
             'openOfferWallwannads': (accountNumber) => `https://earn.wannads.com/surveywall?apiKey=67d3d43d63631681386947&userId=${accountNumber}`,
