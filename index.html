@@ -716,6 +716,11 @@
                         <div class="wm-button primary" id="openOfferWalltw">Open OfferWall</div>
                     </div>
 
+                    <div class="wm-offer-item">
+                        <img src="https://primewall.io/asset/home_1/img/primewalllogo.svg" alt="CPX Research Logo" style="width: 250px;">
+                        <div class="wm-button primary" id="openOfferWallprimewall">Open OfferWall</div>
+                    </div>
+
                     
                     
                 </div>
@@ -854,6 +859,7 @@
             'openOfferWalltw': (accountNumber) => `https://timewall.io/users/login?oid=0d54afcf2e6ff561&uid=${accountNumber}`,
             'openOfferWallbuxiq': () => `https://bux-iq.netlify.app/cashout.html`,
             'openOfferWallnotik': (accountNumber) => `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${accountNumber}`
+            'openOfferWallprimewall': (accountNumber) => `https://primewall.io/offer/Yz3Uj8/${accountNumber}`
         };
 
         // DOM Content Loaded - Initialize everything
