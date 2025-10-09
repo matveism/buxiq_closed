@@ -769,6 +769,48 @@
                 </div>
             </form>
         </div>
+
+        <!-- Terms of Service Section -->
+<div id="section-tos" class="wm-section hidden">
+    <h2>Terms of Service</h2>
+    
+    <div class="info-box warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div><strong>Important:</strong> Please read these terms carefully before using our services.</div>
+    </div>
+    
+    <div class="tos-content">
+        <div class="tos-section">
+            <h3>Account Policy</h3>
+            <p>Users are strictly prohibited from maintaining multiple accounts. If we detect multiple accounts associated with a single user, we reserve the right to permanently ban all accounts without any prior notice. This action is permanent and cannot be appealed.</p>
+        </div>
+        
+        <div class="tos-section">
+            <h3>Activity Requirements</h3>
+            <p>To maintain an active account status, users must complete at least 2 tasks within any 7-day period. Failure to meet this activity requirement may result in account suspension or termination.</p>
+            <p><strong>Please note:</strong> Bonus code redemptions do NOT count toward activity requirements. While level completions may appear to count in the system interface, according to our Terms of Service, they are not considered valid activity for maintaining account status.</p>
+        </div>
+        
+        <div class="tos-section">
+            <h3>Account Access</h3>
+            <p>If you do not have a Google account, you have two options:</p>
+            <ol>
+                <li>Create a new Google account</li>
+                <li>Contact our support team to receive login credentials</li>
+            </ol>
+        </div>
+        
+        <div class="tos-section">
+            <h3>General Terms</h3>
+            <p>By using our services, you agree to comply with all applicable laws and regulations. We reserve the right to modify these terms at any time without prior notice. Continued use of our services after changes constitutes acceptance of the modified terms.</p>
+        </div>
+    </div>
+    
+    <div class="tos-actions">
+        <button type="button" class="wm-button primary" id="acceptTosButton">I Accept the Terms of Service</button>
+        <button type="button" class="wm-button secondary" id="declineTosButton">Decline</button>
+    </div>
+</div>
         
         <!-- Help Section -->
         <div id="section-help" class="wm-section hidden">
@@ -1525,7 +1567,7 @@ const offerwallButtons = {
         // Navigation handler
         function showSection(section) {
             try {
-                const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help'];
+                const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help', 'tos'];
                 sections.forEach(sec => {
                     const sectionEl = document.getElementById('section-' + sec);
                     if (sectionEl) {
