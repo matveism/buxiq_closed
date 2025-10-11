@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bux IQ - Premium Rewards Platform</title>
+    <title>Bux iQ - Premium Rewards Platform</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     
     <!-- Google OAuth -->
@@ -18,28 +17,31 @@
     
     <style>
     :root {
-        /* New Gradient-Inspired Dark Colors */
-        --primary-dark: #0f0a1c; /* Very dark, slight purple-blue */
-        --primary-main: #170d2d; /* Darker purple-blue */
-        --primary-light: #251249; /* Lighter purple-blue accent */
-        /* Secondary colors based on the pink gradient end */
-        --secondary-dark: #8b005d; /* Darker pink/magenta */
-        --secondary-main: #e94560; /* Bright pink */
+        /* Deep Blue Gradient Colors */
+        --primary-dark: #0a0f2d;
+        --primary-main: #0f1a41;
+        --primary-light: #1a2a5e;
+        --primary-lighter: #253776;
         
-        /* Backgrounds set to be extremely dark for contrast */
-        --background-default: #05050a; /* NEARLY BLACK for maximum contrast */
-        --background-paper: #0f0a1c; /* Same as primary-dark for background elements */
-
+        /* Accent Colors */
+        --accent-primary: #3a86ff;
+        --accent-secondary: #5aa9e6;
+        --accent-success: #4cc9f0;
+        
+        /* Backgrounds */
+        --bg-default: #050816;
+        --bg-paper: #0a1029;
+        --bg-elevated: #101935;
+        
+        /* Text Colors */
         --text-primary: #ffffff;
-        --text-secondary: #b0b0b0;
-        --divider: #362953; /* Darker, purple-tinged divider */
+        --text-secondary: #b3c5ef;
+        --text-muted: #8a9cc9;
         
-        /* New variables for enhanced design */
-        --success-color: #4CAF50;
-        --warning-color: #FF9800;
-        --info-color: #2196F3;
-        --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        --transition: all 0.3s ease;
+        /* UI Elements */
+        --border-color: #1e2b52;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     * {
@@ -49,11 +51,12 @@
     }
     
     body {
-        background-color: var(--background-default);
+        background: linear-gradient(135deg, var(--bg-default) 0%, var(--primary-dark) 100%);
         color: var(--text-primary);
-        font-family: 'Montserrat Alternates', sans-serif;
+        font-family: 'Inter', sans-serif;
         overflow-x: hidden;
         line-height: 1.6;
+        min-height: 100vh;
     }
     
     #root {
@@ -62,115 +65,275 @@
         flex-direction: column;
     }
     
-    /* Logs Section */
-    .wm-logs {
-        background: var(--primary-dark);
-        border: 1px solid var(--divider);
-        border-radius: 8px; /* Increased from 3px for consistency */
-        height: 120px;
-        overflow-y: auto;
-        padding: 12px; /* Increased padding for better readability */
-        font-size: 12px;
-        margin: 8px 0;
-        font-family: 'Courier New', monospace; /* Better for logs */
-        box-shadow: var(--shadow);
-    }
-    
-    /* Windows Mobile Header */
-    .wm-header {
-        background: var(--primary-dark);
-        color: white;
+    /* Header */
+    .app-header {
+        background: var(--bg-paper);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 1.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 12px 16px; /* Slightly increased padding */
-        border-bottom: 1px solid var(--divider);
         position: sticky;
         top: 0;
         z-index: 100;
+        backdrop-filter: blur(10px);
         box-shadow: var(--shadow);
     }
     
-    .wm-header .start {
-        font-weight: 600;
-        font-size: 14px;
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
     }
     
-    .wm-header .title {
+    .logo {
+        height: 40px;
+        width: auto;
+    }
+    
+    .app-title {
+        font-size: 1.5rem;
         font-weight: 700;
-        font-size: 18px;
-        text-align: center;
-        flex: 1;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     
-    .wm-header .time {
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .time-display {
         font-weight: 500;
-        font-size: 14px;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
     }
     
     /* Main Content */
-    .wm-content {
-        padding: 16px;
-        padding-bottom: 80px; /* Space for footer */
+    .app-content {
+        flex: 1;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /* Dashboard Grid */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    @media (max-width: 1024px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    /* Cards */
+    .card {
+        background: var(--bg-paper);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-header {
+        margin-bottom: 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    
+    .card-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    /* Activity Log */
+    .activity-log {
+        background: var(--bg-elevated);
+        border-radius: 8px;
+        height: 180px;
+        overflow-y: auto;
+        padding: 1rem;
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .activity-item:last-child {
+        border-bottom: none;
+    }
+    
+    .activity-icon {
+        margin-right: 0.75rem;
+        color: var(--accent-primary);
+        width: 20px;
+        text-align: center;
+    }
+    
+    /* User Profile */
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .user-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 3px solid var(--accent-primary);
+        object-fit: cover;
+    }
+    
+    .user-details {
         flex: 1;
     }
     
+    .user-name {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .user-level {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+    
+    .user-stats {
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    .stat {
+        text-align: center;
+    }
+    
+    .stat-value {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--accent-primary);
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        color: white;
+        box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(58, 134, 255, 0.4);
+    }
+    
+    .btn-secondary {
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+    }
+    
+    .btn-secondary:hover {
+        background: var(--primary-light);
+    }
+    
+    .btn-full {
+        width: 100%;
+    }
+    
     /* Tabs */
-    .wm-tabs {
+    .tabs-container {
         display: flex;
         overflow-x: auto;
-        margin-bottom: 16px;
-        border-bottom: 1px solid var(--divider);
-        padding-bottom: 8px;
-        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        scrollbar-width: none;
     }
     
-    .wm-tabs::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Chrome/Safari */
+    .tabs-container::-webkit-scrollbar {
+        display: none;
     }
     
-    .wm-tab {
-        padding: 10px 18px; /* Slightly increased padding */
-        margin-right: 8px;
-        border-radius: 20px;
-        background: var(--background-paper);
+    .tab {
+        padding: 0.75rem 1.25rem;
+        margin-right: 0.5rem;
+        border-radius: 8px;
+        background: var(--bg-elevated);
         cursor: pointer;
         font-weight: 500;
         white-space: nowrap;
         transition: var(--transition);
         border: 1px solid transparent;
+        color: var(--text-secondary);
     }
     
-    .wm-tab.active {
-        background: var(--secondary-main);
+    .tab.active {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
         color: white;
-        box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+        box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
     }
     
-    .wm-tab:hover:not(.active) {
-        border-color: var(--secondary-main);
+    .tab:hover:not(.active) {
+        border-color: var(--accent-primary);
+        color: var(--text-primary);
     }
     
-    /* Status Bar */
-    .wm-status-bar {
-        background: var(--primary-main);
-        padding: 12px 16px; /* Increased padding */
-        border-radius: 12px; /* Increased from 8px for consistency */
-        margin-bottom: 16px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        box-shadow: var(--shadow);
-        border-left: 4px solid var(--secondary-main); /* Accent border */
-    }
-    
-    /* Sections */
-    .wm-section {
+    /* Section Management */
+    .section {
         display: block;
-        animation: fadeIn 0.5s ease; /* Smooth transition */
+        animation: fadeIn 0.5s ease;
     }
     
-    .wm-section.hidden {
+    .section.hidden {
         display: none;
     }
     
@@ -179,887 +342,707 @@
         to { opacity: 1; transform: translateY(0); }
     }
     
-    /* Section Headers */
-    h2 {
-        margin: 16px 0 12px;
-        font-size: 22px; /* Slightly increased */
-        color: var(--text-primary);
-        position: relative;
-        padding-bottom: 8px;
-    }
-    
-    h2::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 50px;
-        height: 3px;
-        background: var(--secondary-main);
-        border-radius: 3px;
-    }
-    
-    /* Lists */
-    .wm-list {
-        background: var(--background-paper);
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
-    }
-    
-    .wm-list-item {
-        display: flex;
-        align-items: center;
-        padding: 14px 16px; /* Increased padding */
-        border-bottom: 1px solid var(--divider);
-        transition: var(--transition);
-    }
-    
-    .wm-list-item:last-child {
-        border-bottom: none;
-    }
-    
-    .wm-list-item:hover {
-        background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .wm-list-item .icon {
-        margin-right: 12px;
-        color: var(--secondary-main);
-        width: 24px;
-        text-align: center;
-        font-size: 18px; /* Slightly larger icons */
-    }
-    
-    /* User Info */
-    .wm-user-info {
-        display: flex;
-        align-items: center;
-        background: var(--background-paper);
-        padding: 20px; /* Increased padding */
-        border-radius: 12px;
-        margin-bottom: 16px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
-    }
-    
-    .wm-user-avatar {
-        width: 70px; /* Slightly increased */
-        height: 70px;
-        border-radius: 50%;
-        margin-right: 16px;
-        border: 3px solid var(--secondary-main); /* Thicker border */
-        object-fit: cover;
-    }
-    
-    .wm-user-details {
-        flex: 1;
-    }
-    
-    .wm-user-details > div:first-child {
-        font-weight: 600;
-        margin-bottom: 8px;
-        font-size: 18px; /* Slightly larger */
-    }
-    
-    .wm-user-stats {
-        display: flex;
-        justify-content: space-between;
-    }
-    
-    .wm-stat {
-        text-align: center;
-    }
-    
-    .wm-stat-value {
-        font-weight: 700;
-        font-size: 20px; /* Slightly larger */
-        color: var(--secondary-main);
-    }
-    
-    .wm-stat-label {
-        font-size: 12px;
-        color: var(--text-secondary);
-    }
-    
-    /* Buttons */
-    .wm-button {
-        background: var(--primary-main);
-        color: white;
-        border: none;
-        padding: 14px 18px; /* Increased padding */
-        border-radius: 10px; /* Slightly increased */
-        font-family: 'Montserrat Alternates', sans-serif;
-        font-weight: 600;
-        cursor: pointer;
-        text-align: center;
-        display: block;
-        margin-bottom: 12px;
-        transition: var(--transition);
-        width: 100%;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-    
-    .wm-button.primary {
-        background: var(--secondary-main);
-        box-shadow: 0 4px 8px rgba(233, 69, 96, 0.3);
-    }
-    
-    .wm-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-    
-    .wm-button.primary:hover {
-        box-shadow: 0 6px 12px rgba(233, 69, 96, 0.4);
-    }
-    
     /* Offer Grid */
-    .wm-offer-grid {
+    .offer-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Slightly increased min width */
-        gap: 16px;
-        margin-bottom: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
     }
     
-    .wm-offer-item {
-        background: var(--background-paper);
-        border-radius: 12px;
-        padding: 16px;
+    .offer-item {
+        background: var(--bg-elevated);
+        border-radius: 10px;
+        padding: 1.25rem;
         text-align: center;
         transition: var(--transition);
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
+        border: 1px solid var(--border-color);
     }
     
-    .wm-offer-item:hover {
+    .offer-item:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        border-color: var(--accent-primary);
     }
     
-    .wm-offer-item img {
+    .offer-image {
         max-width: 100%;
         height: 60px;
         object-fit: contain;
-        margin-bottom: 12px;
+        margin-bottom: 0.75rem;
     }
     
     /* Leaderboard */
-    .wm-leaderboard {
-        background: var(--background-paper);
-        border-radius: 12px;
+    .leaderboard {
+        background: var(--bg-elevated);
+        border-radius: 10px;
         overflow: hidden;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
     }
     
-    .wm-leaderboard table {
+    .leaderboard table {
         width: 100%;
         border-collapse: collapse;
     }
     
-    .wm-leaderboard th {
-        background: var(--primary-main);
-        padding: 14px 12px; /* Increased padding */
+    .leaderboard th {
+        background: var(--primary-light);
+        padding: 1rem;
         text-align: left;
         font-weight: 600;
+        color: var(--text-secondary);
     }
     
-    .wm-leaderboard td {
-        padding: 14px 12px; /* Increased padding */
-        border-bottom: 1px solid var(--divider);
+    .leaderboard td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
     }
     
-    .wm-leaderboard tr:last-child td {
+    .leaderboard tr:last-child td {
         border-bottom: none;
     }
     
-    .wm-leaderboard tr:hover td {
+    .leaderboard tr:hover td {
         background: rgba(255, 255, 255, 0.05);
     }
     
-    /* Login Form */
-    .wm-login-form {
-        margin-top: 20px;
-        padding: 24px; /* Increased padding */
-        background: var(--background-paper);
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
+    /* Forms */
+    .form-group {
+        margin-bottom: 1.25rem;
     }
     
-    .wm-login-form label {
+    .form-label {
         display: block;
-        margin-bottom: 10px; /* Slightly increased */
+        margin-bottom: 0.5rem;
         font-weight: 500;
+        color: var(--text-secondary);
     }
     
-    .wm-input {
+    .form-input {
         width: 100%;
-        padding: 14px; /* Increased padding */
-        border-radius: 10px; /* Slightly increased */
-        border: 1px solid var(--divider);
-        background: var(--primary-dark);
-        color: white;
-        font-family: 'Montserrat Alternates', sans-serif;
-        margin-bottom: 16px;
-        transition: var(--transition);
-        font-size: 16px; /* Better readability */
-    }
-    
-    .wm-input:focus {
-        outline: none;
-        border-color: var(--secondary-main);
-        box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
-    }
-    
-    .wm-captcha {
-        font-family: 'Courier New', monospace;
-        font-size: 24px;
-        font-weight: bold;
-        letter-spacing: 8px;
-        padding: 12px 20px; /* Increased padding */
-        background: rgba(233, 69, 96, 0.1);
-        border: 1px solid rgba(233, 69, 96, 0.3);
+        padding: 0.75rem 1rem;
         border-radius: 8px;
-        margin-bottom: 12px; /* Slightly increased */
+        border: 1px solid var(--border-color);
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+        font-family: 'Inter', sans-serif;
+        transition: var(--transition);
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+    }
+    
+    .captcha-display {
+        font-family: 'Courier New', monospace;
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 6px;
+        padding: 0.75rem 1rem;
+        background: rgba(58, 134, 255, 0.1);
+        border: 1px solid rgba(58, 134, 255, 0.3);
+        border-radius: 8px;
+        margin-bottom: 1rem;
         text-align: center;
-        user-select: none; /* Prevent text selection */
+        user-select: none;
     }
     
-    /* Google Login Button */
-    .google-login-btn {
-        margin-bottom: 16px;
-    }
-    
+    /* Divider */
     .divider {
         display: flex;
         align-items: center;
         text-align: center;
-        margin: 20px 0;
-        color: var(--text-secondary);
+        margin: 1.5rem 0;
+        color: var(--text-muted);
     }
     
     .divider::before,
     .divider::after {
         content: '';
         flex: 1;
-        border-bottom: 1px solid var(--divider);
+        border-bottom: 1px solid var(--border-color);
     }
     
     .divider span {
-        padding: 0 12px; /* Slightly increased */
+        padding: 0 1rem;
     }
     
-    /* Bonus Section */
-    .bonus-code-section {
-        padding: 16px;
-    }
-    
-    .info-box {
-        background: rgba(233, 69, 96, 0.1);
-        border: 1px solid var(--secondary-main);
-        border-radius: 10px; /* Slightly increased */
-        padding: 16px; /* Increased padding */
-        margin-bottom: 16px;
+    /* Alert Box */
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
         display: flex;
         align-items: flex-start;
     }
     
-    .info-box i {
-        color: var(--secondary-main);
-        margin-right: 10px; /* Slightly increased */
+    .alert-warning {
+        background: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.3);
+        color: #ffc107;
+    }
+    
+    .alert-icon {
+        margin-right: 0.75rem;
         margin-top: 2px;
-        font-size: 18px; /* Slightly larger */
-    }
-    
-    .bonus-form {
-        background: var(--background-paper);
-        padding: 20px; /* Increased padding */
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
-    }
-    
-    .form-group {
-        margin-bottom: 16px;
-    }
-    
-    .form-row {
-        display: flex;
-        gap: 16px;
-    }
-    
-    .form-row .form-group {
-        flex: 1;
     }
     
     /* FAQ Items */
-    .wm-faq-item {
-        background: var(--background-paper);
-        border-radius: 12px;
-        padding: 20px; /* Increased padding */
-        margin-bottom: 16px;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--divider);
+    .faq-item {
+        background: var(--bg-elevated);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
         transition: var(--transition);
+        border: 1px solid var(--border-color);
     }
     
-    .wm-faq-item:hover {
+    .faq-item:hover {
         transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
     
-    .wm-faq-item h4 {
-        margin-bottom: 10px; /* Slightly increased */
-        color: var(--secondary-main);
-        font-size: 18px; /* Slightly larger */
-    }
-    
-    .wm-faq-item p {
-        margin-bottom: 10px; /* Slightly increased */
-        line-height: 1.6;
-    }
-    
-    /* Footer Navigation */
-    .wm-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: var(--primary-dark);
-        display: flex;
-        justify-content: space-around;
-        padding: 10px 0; /* Slightly increased */
-        border-top: 1px solid var(--divider);
-        z-index: 100;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .wm-footer-button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: var(--text-secondary);
-        font-size: 12px;
-        cursor: pointer;
-        transition: var(--transition);
-        padding: 4px 8px;
-        border-radius: 8px;
-    }
-    
-    .wm-footer-button.active {
-        color: var(--secondary-main);
-        background: rgba(233, 69, 96, 0.1);
-    }
-    
-    .wm-footer-button:hover:not(.active) {
-        color: var(--text-primary);
-        background: rgba(255, 255, 255, 0.05);
-    }
-    
-    .wm-footer-button i {
-        font-size: 20px;
-        margin-bottom: 4px;
+    .faq-question {
+        margin-bottom: 0.75rem;
+        color: var(--accent-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
     }
     
     /* Iframe Container */
-    .wm-iframe-container {
+    .iframe-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.95); /* Slightly darker */
+        background: rgba(5, 8, 22, 0.95);
         z-index: 9999;
         display: none;
     }
     
-    .wm-iframe-header {
+    .iframe-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 16px;
-        background: var(--primary-dark);
+        padding: 1rem 1.5rem;
+        background: var(--bg-paper);
         color: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
     
-    .wm-iframe-content {
+    .iframe-content {
         height: calc(100% - 60px);
-        padding: 0 16px 16px; /* Added padding */
+        padding: 0 1.5rem 1.5rem;
     }
     
     #dashboardIframe {
         width: 100%;
         height: 100%;
         border: none;
-        border-radius: 8px; /* Added border radius */
+        border-radius: 8px;
     }
     
     /* Custom scrollbar */
     ::-webkit-scrollbar {
-        width: 8px; /* Slightly wider */
+        width: 6px;
     }
     
     ::-webkit-scrollbar-track {
         background: var(--primary-dark);
-        border-radius: 4px;
+        border-radius: 3px;
     }
     
     ::-webkit-scrollbar-thumb {
-        background: var(--secondary-dark);
-        border-radius: 4px;
+        background: var(--primary-light);
+        border-radius: 3px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-main);
-    }
-    
-    /* Loading animation */
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
-    
-    .loading {
-        animation: pulse 1.5s ease-in-out infinite;
-    }
-    
-    /* Hidden class */
-    .hidden {
-        display: none !important;
-    }
-    
-    /* Error message */
-    .error-msg {
-        color: var(--secondary-main);
-        text-align: center;
-        margin-top: 8px;
-        padding: 12px; /* Increased padding */
-        background: rgba(233, 69, 96, 0.1);
-        border-radius: 8px;
-        border: 1px solid rgba(233, 69, 96, 0.3);
-    }
-    
-    /* Success message */
-    .success-msg {
-        color: var(--success-color);
-        text-align: center;
-        margin-top: 8px;
-        padding: 12px;
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 8px;
-        border: 1px solid rgba(76, 175, 80, 0.3);
+        background: var(--accent-primary);
     }
     
     /* Responsive adjustments */
     @media (max-width: 768px) {
-        .wm-header {
-            padding: 10px 12px; /* Adjusted for mobile */
+        .app-header {
+            padding: 1rem;
         }
         
-        .wm-content {
-            padding: 12px;
-            padding-bottom: 80px;
+        .app-content {
+            padding: 1rem;
         }
         
-        .wm-offer-grid {
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Adjusted for mobile */
+        .dashboard-grid {
+            grid-template-columns: 1fr;
         }
         
-        .form-row {
+        .user-profile {
             flex-direction: column;
-            gap: 0;
+            text-align: center;
+        }
+        
+        .user-stats {
+            justify-content: center;
+        }
+        
+        .offer-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
     
     @media (max-width: 480px) {
-        .wm-header .title {
-            font-size: 16px; /* Smaller on very small screens */
+        .app-title {
+            font-size: 1.25rem;
         }
         
-        .wm-tab {
-            padding: 8px 12px; /* Smaller tabs */
-            font-size: 14px;
+        .tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
         }
         
-        .wm-offer-grid {
-            grid-template-columns: repeat(2, 1fr); /* Two columns on very small screens */
+        .offer-grid {
+            grid-template-columns: 1fr;
         }
+    }
+    
+    /* Utility classes */
+    .hidden {
+        display: none !important;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .mb-1 {
+        margin-bottom: 0.5rem;
+    }
+    
+    .mb-2 {
+        margin-bottom: 1rem;
+    }
+    
+    .mb-3 {
+        margin-bottom: 1.5rem;
+    }
+    
+    .mt-1 {
+        margin-top: 0.5rem;
+    }
+    
+    .mt-2 {
+        margin-top: 1rem;
+    }
+    
+    .mt-3 {
+        margin-top: 1.5rem;
     }
 </style>
 </head>
 <body>
-    <!-- Windows Mobile Header -->
-    <div class="wm-header">
-        <div class="start">Start</div>
-        <img src="https://i.postimg.cc/4NknP3nc/Gemini-Generated-Image-q4ctjgq4ctjgq4ct-removebg-preview-1.png" width="260px" alt="BUXiQ Logo">
-
-        <div class="time" id="headerTime">12:00 PM</div>
-    </div>
-    <div class="info-box">
-                <i class="fas fa-exclamation-triangle"></i>
+    <div id="root">
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/4NknP3nc/Gemini-Generated-Image-q4ctjgq4ctjgq4ct-removebg-preview-1.png" alt="BUXiQ Logo" class="logo">
+                
+            </div>
+            <div class="header-actions">
+                <div class="time-display" id="headerTime">12:00 PM</div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="app-content">
+            <!-- Alert Banner -->
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle alert-icon"></i>
                 <div>NEW! $1 = (1) pts & 50% user gets only!</div>
             </div>
-    <!-- Main Content -->
-    <div class="wm-content">
-        <!-- Tabs -->
-        <div class="wm-tabs">
-            <div class="wm-tab active" data-section="earn">Home</div>
-            <div class="wm-tab" data-section="shop">Shop</div>
-            <div class="wm-tab" data-section="leaders">Leaders</div>
-            <div class="wm-tab" data-section="profile">Earn</div>
-            <div class="wm-tab" data-section="bonus">Bonus</div>
-            <div class="wm-tab" data-section="tos">Tos</div>
-            <div class="wm-tab" data-section="help">Help</div>
-        </div>
-        
-        <!-- Status Bar -->
-        <div class="wm-status-bar">
-            <div>$1 . 00 => 1 pts</div>
-            <div id="serverTime">Server Time: 00:00:00</div>
-        </div>
-        
-        <!-- Home Section -->
-        <div id="section-earn" class="wm-section">
-            <h2>Welcome to Bux iQ</h2>
             
-            <div class="wm-logs" id="logs">
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fas fa-info-circle"></i></div>
-                    <div>Your activity log will appear here</div>
-                </div>
+            <!-- Tabs Navigation -->
+            <div class="tabs-container">
+                <div class="tab active" data-section="dashboard">Dashboard</div>
+                <div class="tab" data-section="earn">Earn</div>
+                <div class="tab" data-section="shop">Shop</div>
+                <div class="tab" data-section="leaders">Leaders</div>
+                <div class="tab" data-section="bonus">Bonus</div>
+                <div class="tab" data-section="tos">Terms</div>
+                <div class="tab" data-section="help">Help</div>
             </div>
-            <div class="wm-user-info" id="userInfo">
-                <img src="https://ui-avatars.com/api/?background=2c5aa0&color=fff&name=Guest&bold=true" class="wm-user-avatar" id="userAvatar" alt="User Avatar">
-                <div class="wm-user-details">
-                    <div id="userName">Guest User</div>
-                    <div class="wm-user-stats">
-                        <div class="wm-stat">
-                            <div class="wm-stat-value" id="userBalance">$0.00</div>
-                            <div class="wm-stat-label">Balance</div>
+            
+            <!-- Dashboard Section -->
+            <div id="section-dashboard" class="section">
+                <div class="dashboard-grid">
+                    <div>
+                        <!-- Activity Log -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Activity Log</h2>
+                                <div class="card-actions">
+                                    <button class="btn btn-secondary" id="refreshLogs">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="activity-log" id="logs">
+                                <div class="activity-item">
+                                    <div class="activity-icon"><i class="fas fa-info-circle"></i></div>
+                                    <div>Your activity log will appear here</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="wm-stat">
-                            <div class="wm-stat-value" id="userLevel">0</div>
-                            <div class="wm-stat-label">Level</div>
+                        
+                        <!-- User Profile -->
+                        <div class="card">
+                            <div class="user-profile">
+                                <img src="https://ui-avatars.com/api/?background=3a86ff&color=fff&name=Guest&bold=true" class="user-avatar" id="userAvatar" alt="User Avatar">
+                                <div class="user-details">
+                                    <div class="user-name" id="userName">Guest User</div>
+                                    <div class="user-level">Level <span id="userLevel">0</span></div>
+                                    <div class="user-stats">
+                                        <div class="stat">
+                                            <div class="stat-value" id="userBalance">$0.00</div>
+                                            <div class="stat-label">Balance</div>
+                                        </div>
+                                        <div class="stat">
+                                            <div class="stat-value" id="userPoints">0</div>
+                                            <div class="stat-label">Points</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-full" id="loginButton">Login to Earn Rewards</button>
+                        </div>
+                        
+                        <!-- How It Works -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">How It Works</h2>
+                            </div>
+                            <div class="offer-grid">
+                                <div class="offer-item">
+                                    <i class="fas fa-tasks" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>Complete Surveys</h3>
+                                </div>
+                                <div class="offer-item">
+                                    <i class="fas fa-star" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>Earn Stars</h3>
+                                </div>
+                                <div class="offer-item">
+                                    <i class="fas fa-gift" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>Redeem Rewards</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <!-- Cashout Options -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Cashout Options</h2>
+                            </div>
+                            <div class="offer-grid">
+                                <div class="offer-item">
+                                    <i class="fab fa-amazon" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>Amazon UK</h3>
+                                </div>
+                                <div class="offer-item">
+                                    <i class="fab fa-bitcoin" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>LTC Crypto</h3>
+                                </div>
+                                <div class="offer-item">
+                                    <i class="fas fa-plus" style="font-size: 2rem; color: var(--accent-primary); margin-bottom: 0.5rem;"></i>
+                                    <h3>More Soon!</h3>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Server Status -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Server Status</h2>
+                            </div>
+                            <div class="text-center mb-2">
+                                <div class="stat-value">Online</div>
+                                <div class="stat-label">All Systems Operational</div>
+                            </div>
+                            <div id="serverTime" class="text-center">Server Time: 00:00:00</div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="wm-button primary" style="width: 100%;" id="loginButton">Login to Earn</div>
-            
-            <h2>How It Works</h2>
-            <div class="wm-list">
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fas fa-tasks"></i></div>
-                    <div>Complete Surveys</div>
-                </div>
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fas fa-star"></i></div>
-                    <div>Earn Stars</div>
-                </div>
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fas fa-gift"></i></div>
-                    <div>Redeem Rewards</div>
-                </div>
-            </div>
-            
-            <h2>Cashout Options</h2>
-            <div class="wm-list">
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fab fa-amazon"></i></div>
-                    <div>Amazon UK Voucher</div>
-                </div>
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fab fa-bitcoin"></i></div>
-                    <div>LTC Crypto</div>
-                </div>
-                <div class="wm-list-item">
-                    <div class="icon"><i class="fas fa-plus"></i></div>
-                    <div>More Coming Soon!</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Shop Section -->
-        <div id="section-shop" class="wm-section hidden">
-            <h2>Shop Rewards</h2>
-            <div class="wm-offer-grid">
-                <div class="wm-offer-item">
-                    <img src="https://i.postimg.cc/pT1vSNkk/Gemini-Generated-Image-mqybpwmqybpwmqyb-removebg-preview.png" width="125px" alt="BUXiQ Logo">
-                    <div class="wm-button primary" id="openOfferWallbuxiq">Cashout</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Leaders Section -->
-        <div id="section-leaders" class="wm-section hidden">
-            <h2>Leaderboard</h2>
-            <div class="wm-leaderboard">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Username</th>
-                            <th>Earnings</th>
-                            <th>Level</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboardBody">
-                        <tr>
-                            <td>1</td>
-                            <td>Loading...</td>
-                            <td>$0.00</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <!-- Profile/Earn Section -->
-        <div id="section-profile" class="wm-section hidden">
-            <div id="login-container">
-                <h2>Login</h2>
-                
-                <!-- Google Login Button -->
-                <div id="g_id_onload"
-                    data-client_id="387422659555-007kjhq0c41f2lq39e075ib5mtpf3q9o.apps.googleusercontent.com"
-                    data-context="signin"
-                    data-ux_mode="popup"
-                    data-callback="handleGoogleCredentialResponse"
-                    data-auto_prompt="false">
-                </div>
-
-                <div class="g_id_signin google-login-btn" 
-                     data-type="standard" 
-                     data-theme="filled_blue" 
-                     data-text="signin_with" 
-                     data-shape="rectangular" 
-                     data-logo_alignment="left">
-                </div>
-                
-                <div class="divider">
-                    <span>OR</span>
-                </div>
-                
-                <!-- Manual Login -->
-                <div class="wm-login-form">
-                    <label for="login-account">Account #</label>
-                    <input type="text" id="login-account" class="wm-input" placeholder="Enter your account number">
-                    
-                    <label for="login-clientid">Client ID</label>
-                    <input type="text" id="login-clientid" class="wm-input" placeholder="Enter your client ID">
-                    
-                    <label>CAPTCHA</label>
-                    <div class="wm-captcha" id="captcha"></div>
-                    <input type="text" id="captchaInput" class="wm-input" placeholder="Enter CAPTCHA">
-                    
-                    <div class="wm-button primary" style="width: 100%;" id="loginFormButton">Login</div>
-                </div>
-                <div id="error-msg" class="hidden error-msg"></div>
-            </div>
-            
-            <div id="dashboard" class="hidden">
-                <h2>Earning Portal</h2>
-                <p style="margin-bottom: 12px; text-align: center;">Complete offers and surveys to earn rewards</p>
-                
-                <div class="wm-offer-grid" id="offerwall-grid">
-                    <div class="wm-offer-item">
-                        <img src="https://i.postimg.cc/LshWhq2y/Gemini-Generated-Image-rueqf9rueqf9rueq-removebg-preview.png" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWallCPX">Open OfferWall</div>
+            <!-- Earn Section -->
+            <div id="section-earn" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Earning Portal</h2>
                     </div>
+                    <div id="login-container">
+                        <h3 class="text-center mb-2">Login to Access Offer Walls</h3>
+                        
+                        <!-- Google Login Button -->
+                        <div id="g_id_onload"
+                            data-client_id="387422659555-007kjhq0c41f2lq39e075ib5mtpf3q9o.apps.googleusercontent.com"
+                            data-context="signin"
+                            data-ux_mode="popup"
+                            data-callback="handleGoogleCredentialResponse"
+                            data-auto_prompt="false">
+                        </div>
 
-                    <div class="wm-offer-item">
-                        <img src="https://i.postimg.cc/6q7RvXyX/Gemini-Generated-Image-p6bmmsp6bmmsp6bm-removebg-preview.png" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWallexcentiv">Open OfferWall</div>
-                    </div>
-
-                    <div class="wm-offer-item">
-                        <img src="https://i.postimg.cc/76hXmjf9/Gemini-Generated-Image-gwivdggwivdggwiv-removebg-preview.png" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWalles">WAITING FOR APPROVAL</div>
-                    </div>
-
-                    <div class="wm-offer-item">
-                        <img src="https://pocketsfull.ai/assets/images/logo.png" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWallpockets">Open OfferWall</div>
-                    </div>
-
-                    <div class="wm-offer-item">
-                        <img src="https://siteowner.timewall.io/img/logo/TimeWall_logo_homepage_mobile.png" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWalltw">Open OfferWall</div>
-                    </div>
-
-                    <div class="wm-offer-item">
-                        <img src="https://revtoo.com/assets/offerwall/images/revtoo-dark.svg" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWallrevtoo">Open OfferWall</div>
-                    </div>
-
-                    <div class="wm-offer-item">
-                        <img src="https://primewall.io/asset/home_1/img/primewalllogo.svg" alt="CPX Research Logo" style="width: 250px;">
-                        <div class="wm-button primary" id="openOfferWallprimewall">Open OfferWall</div>
-                    </div>
-
-                    
-                    
-                </div>
-                
-                <div class="wm-button" style="width: 100%; margin-top: 12px;" id="logoutBtn">Logout</div>
-            </div>
-        </div>
-        
-        <!-- Bonus Section -->
-        <div id="section-bonus" class="wm-section hidden">
-            <h2>Redeem Bonus Code</h2>
-            
-            <div class="info-box">
-                <i class="fas fa-exclamation-triangle"></i>
-                <div>WHO FIRST REDEEMED HIS/HER PTS! EACH BONUS CODE WILL BE MARKED AS UNUSED - FIRST COME FIRST SERVED!!!</div>
-            </div>
-            
-            <form class="bonus-form" id="redeemForm">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" class="wm-input" required placeholder="Enter your username">
-                </div>
-                
-                <div class="form-group">
-                    <label for="bonusCode">Bonus Code</label>
-                    <input type="text" id="bonusCode" class="wm-input" required placeholder="Enter bonus code">
-                </div>
-                
-                <button type="button" class="wm-button primary" id="redeemBonusButton">Redeem Bonus Code</button>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="amountLocal">Amount (Local)</label>
-                        <input type="text" id="amountLocal" class="wm-input" readonly placeholder="0">
+                        <div class="g_id_signin mb-2" 
+                             data-type="standard" 
+                             data-theme="filled_blue" 
+                             data-text="signin_with" 
+                             data-shape="rectangular" 
+                             data-logo_alignment="left">
+                        </div>
+                        
+                        <div class="divider">
+                            <span>OR</span>
+                        </div>
+                        
+                        <!-- Manual Login -->
+                        <form class="mt-2">
+                            <div class="form-group">
+                                <label for="login-account" class="form-label">Account #</label>
+                                <input type="text" id="login-account" class="form-input" placeholder="Enter your account number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="login-clientid" class="form-label">Client ID</label>
+                                <input type="text" id="login-clientid" class="form-input" placeholder="Enter your client ID">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">CAPTCHA</label>
+                                <div class="captcha-display" id="captcha"></div>
+                                <input type="text" id="captchaInput" class="form-input" placeholder="Enter CAPTCHA">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary btn-full" id="loginFormButton">Login</button>
+                        </form>
+                        <div id="error-msg" class="hidden mt-2" style="color: #ff6b6b; text-align: center; padding: 0.75rem; background: rgba(255, 107, 107, 0.1); border-radius: 8px;"></div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="amountUsd">Amount (USD)</label>
-                        <input type="text" id="amountUsd" class="wm-input" readonly placeholder="$0.00">
+                    <div id="dashboard" class="hidden">
+                        <p class="text-center mb-3">Complete offers and surveys to earn rewards</p>
+                        
+                        <div class="offer-grid" id="offerwall-grid">
+                            <div class="offer-item">
+                                <img src="https://i.postimg.cc/LshWhq2y/Gemini-Generated-Image-rueqf9rueqf9rueq-removebg-preview.png" alt="CPX Research Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWallCPX">Open OfferWall</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://i.postimg.cc/6q7RvXyX/Gemini-Generated-Image-p6bmmsp6bmmsp6bm-removebg-preview.png" alt="Excentiv Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWallexcentiv">Open OfferWall</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://i.postimg.cc/76hXmjf9/Gemini-Generated-Image-gwivdggwivdggwiv-removebg-preview.png" alt="ES Logo" class="offer-image">
+                                <button class="btn btn-secondary" id="openOfferWalles">WAITING FOR APPROVAL</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://pocketsfull.ai/assets/images/logo.png" alt="PocketsFull Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWallpockets">Open OfferWall</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://siteowner.timewall.io/img/logo/TimeWall_logo_homepage_mobile.png" alt="TimeWall Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWalltw">Open OfferWall</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://revtoo.com/assets/offerwall/images/revtoo-dark.svg" alt="RevToo Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWallrevtoo">Open OfferWall</button>
+                            </div>
+
+                            <div class="offer-item">
+                                <img src="https://primewall.io/asset/home_1/img/primewalllogo.svg" alt="PrimeWall Logo" class="offer-image">
+                                <button class="btn btn-primary" id="openOfferWallprimewall">Open OfferWall</button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-secondary btn-full mt-2" id="logoutBtn">Logout</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            
+            <!-- Shop Section -->
+            <div id="section-shop" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Shop Rewards</h2>
+                    </div>
+                    <div class="offer-grid">
+                        <div class="offer-item">
+                            <img src="https://i.postimg.cc/pT1vSNkk/Gemini-Generated-Image-mqybpwmqybpwmqyb-removebg-preview.png" alt="BUXiQ Logo" class="offer-image">
+                            <button class="btn btn-primary" id="openOfferWallbuxiq">Cashout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leaders Section -->
+            <div id="section-leaders" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Leaderboard</h2>
+                    </div>
+                    <div class="leaderboard">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Username</th>
+                                    <th>Earnings</th>
+                                    <th>Level</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboardBody">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Loading...</td>
+                                    <td>$0.00</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bonus Section -->
+            <div id="section-bonus" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Redeem Bonus Code</h2>
+                    </div>
+                    
+                    <div class="alert alert-warning mb-3">
+                        <i class="fas fa-exclamation-triangle alert-icon"></i>
+                        <div>WHO FIRST REDEEMED HIS/HER PTS! EACH BONUS CODE WILL BE MARKED AS UNUSED - FIRST COME FIRST SERVED!!!</div>
+                    </div>
+                    
+                    <form id="redeemForm">
+                        <div class="form-group">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" class="form-input" required placeholder="Enter your username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bonusCode" class="form-label">Bonus Code</label>
+                            <input type="text" id="bonusCode" class="form-input" required placeholder="Enter bonus code">
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary btn-full" id="redeemBonusButton">Redeem Bonus Code</button>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label for="amountLocal" class="form-label">Amount (Local)</label>
+                                <input type="text" id="amountLocal" class="form-input" readonly placeholder="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="amountUsd" class="form-label">Amount (USD)</label>
+                                <input type="text" id="amountUsd" class="form-input" readonly placeholder="$0.00">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-        <!-- Terms of Service Section -->
-<div id="section-tos" class="wm-section hidden">
-    <h2>Terms of Service</h2>
-    
-    <div class="info-box warning">
-        <i class="fas fa-exclamation-triangle"></i>
-        <div><strong>Important:</strong> Please read these terms carefully before using our services.</div>
-    </div>
-    
-    <div class="tos-content">
-        <div class="tos-section">
-            <h3>Account Policy</h3>
-            <p>Users are strictly prohibited from maintaining multiple accounts. If we detect multiple accounts associated with a single user, we reserve the right to permanently ban all accounts without any prior notice. This action is permanent and cannot be appealed.</p>
-        </div>
-        
-        <div class="tos-section">
-            <h3>Activity Requirements</h3>
-            <p>To maintain an active account status, users must complete at least 2 tasks within any 7-day period. Failure to meet this activity requirement may result in account suspension or termination.</p>
-            <p><strong>Please note:</strong> Bonus code redemptions do NOT count toward activity requirements. While level completions may appear to count in the system interface, according to our Terms of Service, they are not considered valid activity for maintaining account status.</p>
-        </div>
-        
-        <div class="tos-section">
-            <h3>Account Access</h3>
-            <p>If you do not have a Google account, you have two options:</p>
-            <ol>
-                <li>Create a new Google account</li>
-                <li>Contact our support team to receive login credentials</li>
-            </ol>
-        </div>
-        
-        <div class="tos-section">
-            <h3>General Terms</h3>
-            <p>By using our services, you agree to comply with all applicable laws and regulations. We reserve the right to modify these terms at any time without prior notice. Continued use of our services after changes constitutes acceptance of the modified terms.</p>
-        </div>
-    </div>
-    
-    <div class="tos-actions">
-        <button type="button" class="wm-button primary" id="acceptTosButton">I Accept the Terms of Service</button>
-        <button type="button" class="wm-button secondary" id="declineTosButton">Decline</button>
-    </div>
-</div>
-        
-        <!-- Help Section -->
-        <div id="section-help" class="wm-section hidden">
-            <h2>Help & Support</h2>
-            
-            <div class="wm-faq-item">
-                <h4>How do I earn points?</h4>
-                <p>1. IF YOU DID NOT LOGGED IN YET LOGIN FIRST AND THEN EITHER CLICK LOGIN TO EARN IF YOU ARE IN THE HOME PAGE.</p>
-                <p>2. CLICK EITHER TAB ABOVE, EITHER BELOW, BUTTON or TAB EARN.</p>
-                <p>3. YOU ALL SEE OFFERWALLS AND YOU CLICK ON THEM DO OFFERS OR SURVEYS!</p>
+            <!-- Terms of Service Section -->
+            <div id="section-tos" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Terms of Service</h2>
+                    </div>
+                    
+                    <div class="alert alert-warning mb-3">
+                        <i class="fas fa-exclamation-triangle alert-icon"></i>
+                        <div><strong>Important:</strong> Please read these terms carefully before using our services.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h3 class="faq-question">Account Policy</h3>
+                        <p>Users are strictly prohibited from maintaining multiple accounts. If we detect multiple accounts associated with a single user, we reserve the right to permanently ban all accounts without any prior notice. This action is permanent and cannot be appealed.</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h3 class="faq-question">Activity Requirements</h3>
+                        <p>To maintain an active account status, users must complete at least 2 tasks within any 7-day period. Failure to meet this activity requirement may result in account suspension or termination.</p>
+                        <p><strong>Please note:</strong> Bonus code redemptions do NOT count toward activity requirements. While level completions may appear to count in the system interface, according to our Terms of Service, they are not considered valid activity for maintaining account status.</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h3 class="faq-question">Account Access</h3>
+                        <p>If you do not have a Google account, you have two options:</p>
+                        <ol>
+                            <li>Create a new Google account</li>
+                            <li>Contact our support team to receive login credentials</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h3 class="faq-question">General Terms</h3>
+                        <p>By using our services, you agree to comply with all applicable laws and regulations. We reserve the right to modify these terms at any time without prior notice. Continued use of our services after changes constitutes acceptance of the modified terms.</p>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="btn btn-primary" id="acceptTosButton">I Accept the Terms of Service</button>
+                        <button type="button" class="btn btn-secondary" id="declineTosButton">Decline</button>
+                    </div>
+                </div>
             </div>
             
-            <div class="wm-faq-item">
-                <h4>How can I redeem rewards?</h4>
-                <p>YOU MAY CLICK EITHER ABOVE, OR, BELOW TAB OR BUTTON "SHOP".</p>
+            <!-- Help Section -->
+            <div id="section-help" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Help & Support</h2>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">How do I earn points?</h3>
+                        <p>1. IF YOU DID NOT LOGGED IN YET LOGIN FIRST AND THEN EITHER CLICK LOGIN TO EARN IF YOU ARE IN THE HOME PAGE.</p>
+                        <p>2. CLICK EITHER TAB ABOVE, EITHER BELOW, BUTTON or TAB EARN.</p>
+                        <p>3. YOU ALL SEE OFFERWALLS AND YOU CLICK ON THEM DO OFFERS OR SURVEYS!</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">How can I redeem rewards?</h3>
+                        <p>YOU MAY CLICK EITHER ABOVE, OR, BELOW TAB OR BUTTON "SHOP".</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">HOW TO REDEEM BONUS CODE?</h3>
+                        <p>CLICK TAB OR BUTTON<strong> BONUS</strong> YOU MUST FILL OUT A FORM PUT YOUR ACCOUNT# AND ENTER BONUS CODE.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3 class="faq-question">Who do I contact for support?</h3>
+                        <p>Our ADMIN is available from 10 am - 5 pm PST. Click the button below to contact us.</p>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-full mt-2" id="contact-support-btn">Contact Support</button>
+                </div>
             </div>
-            
-            <div class="wm-faq-item">
-                <h4>HOW TO REDEEM BONUS CODE?</h4>
-                <p>CLICK TAB OR BUTTON<strong> BONUS</strong> YOU MUST FILL OUT A FORM PUT YOUR ACCOUNT# AND ENTER BONUS CODE.</p>
-            </div>
-            
-            <div class="wm-faq-item">
-                <h4>Who do I contact for support?</h4>
-                <p>Our ADMIN is available from 10 am - 5 pm PST. Click the button below to contact us.</p>
-            </div>
-            
-            <div class="wm-button primary" style="width: 100%;" id="contact-support-btn">Contact Support</div>
-        </div>
-    </div>
-    
-    <!-- Footer Navigation -->
-    <div class="wm-footer">
-        <div class="wm-footer-button active" data-section="earn">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </div>
-        <div class="wm-footer-button" data-section="shop">
-            <i class="fas fa-shopping-bag"></i>
-            <span>Shop</span>
-        </div>
-        <div class="wm-footer-button" data-section="leaders">
-            <i class="fas fa-trophy"></i>
-            <span>Leaders</span>
-        </div>
-        <div class="wm-footer-button" data-section="profile">
-            <i class="fas fa-money-bill-wave"></i>
-            <span>Earn</span>
-        </div>
-        <div class="wm-footer-button" data-section="bonus">
-            <i class="fas fa-star"></i>
-            <span>BONUS</span>
-        </div>
-        <div class="wm-footer-button" data-section="help">
-            <i class="fas fa-question-circle"></i>
-            <span>Help</span>
-        </div>
-        <div class="wm-footer-button" data-section="tos">
-            <i class="fas fa-question-circle"></i>
-            <span>Tos</span>
-        </div>
+        </main>
     </div>
     
     <!-- Iframe Container -->
-    <div class="wm-iframe-container" id="iframeContainer">
-        <div class="wm-iframe-header">
+    <div class="iframe-container" id="iframeContainer">
+        <div class="iframe-header">
             <div>Offer Wall</div>
-            <div class="wm-button" id="closeIframe">Close</div>
+            <button class="btn btn-secondary" id="closeIframe">Close</button>
         </div>
-        <div class="wm-iframe-content">
+        <div class="iframe-content">
             <iframe id="dashboardIframe" src=""></iframe>
         </div>
     </div>
@@ -1077,19 +1060,19 @@
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLwW7NEXLMSDPh1A_PJbTjAucIuji6JtsgVu2xAdaMzXthTKsgk2xyWy83Dx8dO53Rrg/exec';
 
         // Object with offerwall URLs and open functions
-const offerwallButtons = {
-    'openOfferWallCPX': (accountNumber) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
-    'openOfferWallexcentiv': (accountNumber) => `https://excentiv.com/offerwall/?userid=${accountNumber}&key=q1v8KGQfCjmNeXnhsHyo`,
-    'openOfferWallwannads': (accountNumber) => `https://earn.wannads.com/surveywall?apiKey=67d3d43d63631681386947&userId=${accountNumber}`,
-    'openOfferWallmc': (accountNumber) => `https://sdk.mychips.io/content?content_id=16cbcd08-387a-498f-b4bd-9f4d2c6883a7&user_id=${accountNumber}&ad_unit_id=${adUnit}`,
-    'openOfferWallSPARKWALL': (accountNumber) => `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
-    'openOfferWallowm': (accountNumber) => `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${accountNumber}`,
-    'openOfferWalltw': (accountNumber) => `https://timewall.io/users/login?oid=0d54afcf2e6ff561&uid=${accountNumber}`,
-    'openOfferWallprimewall': (accountNumber) => `https://primewall.io/offer/Yz3Uj8/${accountNumber}`,
-    'openOfferWallrevtoo': (accountNumber) => `https://revtoo.com/offerwall/pmfo7u4ued9x4w5i0tvkrey32rcnwy/${accountNumber}`,
-    'openOfferWallbuxiq': (accountNumber) => `https://bux-iq.netlify.app/cashout.html`,
-    'openOfferWallnotik': (accountNumber) => `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${accountNumber}`
-};
+        const offerwallButtons = {
+            'openOfferWallCPX': (accountNumber) => `https://offers.cpx-research.com/index.php?app_id=26219&ext_user_id=${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
+            'openOfferWallexcentiv': (accountNumber) => `https://excentiv.com/offerwall/?userid=${accountNumber}&key=q1v8KGQfCjmNeXnhsHyo`,
+            'openOfferWallwannads': (accountNumber) => `https://earn.wannads.com/surveywall?apiKey=67d3d43d63631681386947&userId=${accountNumber}`,
+            'openOfferWallmc': (accountNumber) => `https://sdk.mychips.io/content?content_id=16cbcd08-387a-498f-b4bd-9f4d2c6883a7&user_id=${accountNumber}&ad_unit_id=${adUnit}`,
+            'openOfferWallSPARKWALL': (accountNumber) => `https://spark-wall.com/offerwall/G2kA8XaPF2jjstApSCZsK6aE6qudMN/${accountNumber}&username=${accountNumber}&subid_1=&subid_2`,
+            'openOfferWallowm': (accountNumber) => `https://offerwallmedia.com/offerwall/vfox4w1tpz3gflta3gblkkqp8b2aoj/${accountNumber}`,
+            'openOfferWalltw': (accountNumber) => `https://timewall.io/users/login?oid=0d54afcf2e6ff561&uid=${accountNumber}`,
+            'openOfferWallprimewall': (accountNumber) => `https://primewall.io/offer/Yz3Uj8/${accountNumber}`,
+            'openOfferWallrevtoo': (accountNumber) => `https://revtoo.com/offerwall/pmfo7u4ued9x4w5i0tvkrey32rcnwy/${accountNumber}`,
+            'openOfferWallbuxiq': (accountNumber) => `https://bux-iq.netlify.app/cashout.html`,
+            'openOfferWallnotik': (accountNumber) => `https://notik.me/coins?api_key=eQpYGMydTs5GP0DfFPQrJotOwKo6V0Hy&pub_id=LJ2g&app_id=GxEBh1Hn3m&user_id=${accountNumber}`
+        };
 
         // DOM Content Loaded - Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
@@ -1120,45 +1103,22 @@ const offerwallButtons = {
         // Initialize all event listeners
         function initializeEventListeners() {
             // Tab click handlers
-            document.querySelectorAll('.wm-tab').forEach(tab => {
+            document.querySelectorAll('.tab').forEach(tab => {
                 tab.addEventListener('click', e => {
                     e.preventDefault();
                     showSection(tab.dataset.section);
                     
                     // Update active tab
-                    document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    
-                    // Update footer buttons
-                    document.querySelectorAll('.wm-footer-button').forEach(b => {
-                        b.classList.toggle('active', b.dataset.section === tab.dataset.section);
-                    });
-                });
-            });
-
-            // Footer navigation handlers
-            document.querySelectorAll('.wm-footer-button').forEach(button => {
-                button.addEventListener('click', e => {
-                    e.preventDefault();
-                    showSection(button.dataset.section);
-                    
-                    // Update active tab
-                    document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
-                    document.querySelector(`.wm-tab[data-section="${button.dataset.section}"]`).classList.add('active');
-                    
-                    // Update active footer button
-                    document.querySelectorAll('.wm-footer-button').forEach(b => b.classList.remove('active'));
-                    button.classList.add('active');
                 });
             });
 
             // Login button
             document.getElementById('loginButton')?.addEventListener('click', () => {
-                showSection('profile');
-                document.querySelectorAll('.wm-tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('.wm-tab[data-section="profile"]').classList.add('active');
-                document.querySelectorAll('.wm-footer-button').forEach(b => b.classList.remove('active'));
-                document.querySelector('.wm-footer-button[data-section="profile"]').classList.add('active');
+                showSection('earn');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab[data-section="earn"]').classList.add('active');
             });
 
             // Login form handler
@@ -1177,6 +1137,9 @@ const offerwallButtons = {
 
             // Bonus redeem button
             document.getElementById('redeemBonusButton')?.addEventListener('click', redeemBonusCode);
+
+            // Refresh logs button
+            document.getElementById('refreshLogs')?.addEventListener('click', fetchCSV);
 
             // Initialize offerwall buttons
             initializeOfferwallButtons();
@@ -1201,7 +1164,7 @@ const offerwallButtons = {
 
             if (!currentUser) {
                 alert('Please login first to access offerwalls');
-                showSection('profile');
+                showSection('earn');
                 return;
             }
 
@@ -1285,7 +1248,7 @@ const offerwallButtons = {
                 restoreManualSession(savedAccount);
             } else {
                 // Show default section if no session
-                showSection('earn');
+                showSection('dashboard');
             }
         }
 
@@ -1310,7 +1273,7 @@ const offerwallButtons = {
                     if (status === 'blocked') {
                         // Clear blocked user session
                         localStorage.removeItem('buxiq_google_user');
-                        showSection('earn');
+                        showSection('dashboard');
                         return;
                     }
                     
@@ -1638,7 +1601,7 @@ const offerwallButtons = {
         // Complete login process for both manual and Google login
         async function completeLogin(user) {
             // Update user data
-            const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
+            const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=3a86ff&color=fff`;
             
             // Update UI
             document.getElementById('userAvatar').src = avatarUrl;
@@ -1669,7 +1632,7 @@ const offerwallButtons = {
         // Update user UI after login
         function updateUserUI(user) {
             try {
-                const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=e94560&color=fff`;
+                const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=3a86ff&color=fff`;
 
                 // Update avatar
                 const userAvatar = document.getElementById('userAvatar');
@@ -1713,7 +1676,7 @@ const offerwallButtons = {
                 if (errorMsg) errorMsg.classList.add('hidden');
 
                 generateCaptcha();
-                showSection('earn'); // Return to default 'earn' section on logout
+                showSection('dashboard'); // Return to default 'dashboard' section on logout
 
                 // Reset user info display
                 const userAvatar = document.getElementById('userAvatar');
@@ -1721,7 +1684,7 @@ const offerwallButtons = {
                 const levelEl = document.getElementById('userLevel');
                 const balanceEl = document.getElementById('userBalance');
                 
-                if (userAvatar) userAvatar.src = 'https://ui-avatars.com/api/?background=e94560&color=fff&name=Guest&bold=true';
+                if (userAvatar) userAvatar.src = 'https://ui-avatars.com/api/?background=3a86ff&color=fff&name=Guest&bold=true';
                 if (usernameEl) usernameEl.textContent = 'Guest User';
                 if (levelEl) levelEl.textContent = '0';
                 if (balanceEl) balanceEl.textContent = '$0.00';
@@ -1750,7 +1713,7 @@ const offerwallButtons = {
         // Navigation handler
         function showSection(section) {
             try {
-                const sections = ['earn', 'shop', 'leaders', 'profile', 'bonus', 'help', 'tos'];
+                const sections = ['dashboard', 'earn', 'shop', 'leaders', 'bonus', 'help', 'tos'];
                 sections.forEach(sec => {
                     const sectionEl = document.getElementById('section-' + sec);
                     if (sectionEl) {
@@ -1818,7 +1781,7 @@ const offerwallButtons = {
                 if (!logsContainer) return;
                 
                 // Clear existing logs except the initial message
-                const initialMessage = logsContainer.querySelector('.wm-list-item');
+                const initialMessage = logsContainer.querySelector('.activity-item');
                 logsContainer.innerHTML = '';
                 if (initialMessage && rows.length === 0) {
                     logsContainer.appendChild(initialMessage);
@@ -1833,9 +1796,9 @@ const offerwallButtons = {
                         const username = cols[2];
                         const amount = parseFloat(cols[6]).toFixed(2); // Format amount to 2 decimal places
                         const logDiv = document.createElement('div');
-                        logDiv.className = 'wm-list-item';
+                        logDiv.className = 'activity-item';
                         logDiv.innerHTML = `
-                            <div class="icon"><i class="fas fa-user"></i></div>
+                            <div class="activity-icon"><i class="fas fa-user"></i></div>
                             <div>${username} earned $${amount}</div>
                         `;
                         logsContainer.appendChild(logDiv);
@@ -1849,7 +1812,7 @@ const offerwallButtons = {
                 console.error('Error fetching activity logs:', err);
                 const logsContainer = document.getElementById('logs');
                 if (logsContainer) {
-                    logsContainer.innerHTML = '<div class="wm-list-item"><div class="icon"><i class="fas fa-exclamation-triangle"></i></div><div>Error loading activity logs.</div></div>';
+                    logsContainer.innerHTML = '<div class="activity-item"><div class="activity-icon"><i class="fas fa-exclamation-triangle"></i></div><div>Error loading activity logs.</div></div>';
                 }
             }
         }
@@ -1897,14 +1860,14 @@ const offerwallButtons = {
         function addToLogs(message) {
             const logsContainer = document.getElementById('logs');
             const logEntry = document.createElement('div');
-            logEntry.className = 'wm-list-item';
+            logEntry.className = 'activity-item';
             logEntry.innerHTML = `
-                <div class="icon"><i class="fas fa-info-circle"></i></div>
+                <div class="activity-icon"><i class="fas fa-info-circle"></i></div>
                 <div>${new Date().toLocaleTimeString()} - ${message}</div>
             `;
             
             // Remove initial placeholder if it exists
-            const initialMessage = logsContainer.querySelector('.wm-list-item:first-child');
+            const initialMessage = logsContainer.querySelector('.activity-item:first-child');
             if (initialMessage && initialMessage.textContent.includes('activity log will appear here')) {
                 logsContainer.removeChild(initialMessage);
             }
