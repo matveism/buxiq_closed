@@ -1405,7 +1405,7 @@
         let gameInterval;
         let cashoutMultiplier = 0;
         let currentBetAmount = 0;
-        let crashPoint = -1;
+        let crashPoint = 0;
         let gameHistory = [];
         
         // Hard-coded multipliers with limited high values
@@ -1824,7 +1824,7 @@
                 action: action,
                 user_id: userId,
                 username: username,
-                bet_amount: betAmount,
+                bet_amount: -betAmount,
                 win_amount: winAmount,
                 multiplier: multiplier,
                 timestamp: timestamp,
