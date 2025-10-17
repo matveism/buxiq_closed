@@ -27,6 +27,8 @@
         --accent-primary: #3a86ff;
         --accent-secondary: #5aa9e6;
         --accent-success: #4cc9f0;
+        --accent-warning: #ffbe0b;
+        --accent-purple: #8338ec;
         
         /* Backgrounds */
         --bg-default: #050816;
@@ -41,6 +43,7 @@
         /* UI Elements */
         --border-color: #1e2b52;
         --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        --shadow-glow: 0 0 20px rgba(58, 134, 255, 0.3);
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -57,6 +60,89 @@
         overflow-x: hidden;
         line-height: 1.6;
         min-height: 100vh;
+        position: relative;
+    }
+    
+    /* Background Pattern */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 15% 50%, rgba(58, 134, 255, 0.1) 0%, transparent 20%),
+            radial-gradient(circle at 85% 30%, rgba(90, 169, 230, 0.1) 0%, transparent 20%),
+            radial-gradient(circle at 50% 80%, rgba(76, 201, 240, 0.1) 0%, transparent 20%);
+        background-size: 100% 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    /* Animated Background Elements */
+    .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+    
+    .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(58, 134, 255, 0.15) 0%, transparent 70%);
+        animation: float 20s infinite linear;
+    }
+    
+    .bg-circle:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+    }
+    
+    .bg-circle:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        top: 60%;
+        left: 80%;
+        animation-delay: -5s;
+    }
+    
+    .bg-circle:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        top: 80%;
+        left: 10%;
+        animation-delay: -10s;
+    }
+    
+    .bg-circle:nth-child(4) {
+        width: 250px;
+        height: 250px;
+        top: 20%;
+        left: 70%;
+        animation-delay: -15s;
+    }
+    
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+            transform: translate(30px, -50px) rotate(120deg);
+        }
+        66% {
+            transform: translate(-20px, 20px) rotate(240deg);
+        }
+        100% {
+            transform: translate(0, 0) rotate(360deg);
+        }
     }
     
     #root {
@@ -67,7 +153,7 @@
     
     /* Header */
     .app-header {
-        background: var(--bg-paper);
+        background: rgba(10, 16, 41, 0.8);
         border-bottom: 1px solid var(--border-color);
         padding: 1rem 1.5rem;
         display: flex;
@@ -89,14 +175,26 @@
     .logo {
         height: 70px;
         width: auto;
+        filter: drop-shadow(0 0 10px rgba(58, 134, 255, 0.5));
     }
     
     .app-title {
         font-size: 1.5rem;
         font-weight: 700;
-        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-success));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: shimmer 3s linear infinite;
+    }
+    
+    @keyframes shimmer {
+        0% {
+            background-position: 0% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
     }
     
     .header-actions {
@@ -109,6 +207,10 @@
         font-weight: 500;
         color: var(--text-secondary);
         font-size: 0.9rem;
+        background: rgba(16, 25, 53, 0.7);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
     }
     
     /* Main Content */
@@ -136,17 +238,29 @@
     
     /* Cards */
     .card {
-        background: var(--bg-paper);
-        border-radius: 12px;
+        background: linear-gradient(135deg, var(--bg-paper) 0%, var(--bg-elevated) 100%);
+        border-radius: 16px;
         padding: 1.5rem;
         box-shadow: var(--shadow);
         border: 1px solid var(--border-color);
         transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
     }
     
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), var(--shadow-glow);
     }
     
     .card-header {
@@ -160,6 +274,13 @@
         font-size: 1.25rem;
         font-weight: 600;
         color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .card-title i {
+        color: var(--accent-primary);
     }
     
     .card-actions {
@@ -170,12 +291,13 @@
     /* Activity Log */
     .activity-log {
         background: var(--bg-elevated);
-        border-radius: 8px;
+        border-radius: 12px;
         height: 180px;
         overflow-y: auto;
         padding: 1rem;
         font-size: 0.875rem;
         margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
     }
     
     .activity-item {
@@ -183,6 +305,13 @@
         align-items: center;
         padding: 0.75rem 0;
         border-bottom: 1px solid var(--border-color);
+        transition: var(--transition);
+    }
+    
+    .activity-item:hover {
+        background: rgba(58, 134, 255, 0.05);
+        border-radius: 8px;
+        padding-left: 0.5rem;
     }
     
     .activity-item:last-child {
@@ -210,6 +339,7 @@
         border-radius: 50%;
         border: 3px solid var(--accent-primary);
         object-fit: cover;
+        box-shadow: 0 0 15px rgba(58, 134, 255, 0.5);
     }
     
     .user-details {
@@ -225,6 +355,9 @@
     .user-level {
         color: var(--text-muted);
         font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .user-stats {
@@ -240,6 +373,7 @@
         font-weight: 700;
         font-size: 1.5rem;
         color: var(--accent-primary);
+        text-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
     }
     
     .stat-label {
@@ -256,13 +390,30 @@
         justify-content: center;
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 500;
         font-family: 'Inter', sans-serif;
         cursor: pointer;
         transition: var(--transition);
         border: none;
         font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+    
+    .btn:hover::before {
+        left: 100%;
     }
     
     .btn-primary {
@@ -284,6 +435,7 @@
     
     .btn-secondary:hover {
         background: var(--primary-light);
+        border-color: var(--accent-primary);
     }
     
     .btn-full {
@@ -297,6 +449,10 @@
         margin-bottom: 1.5rem;
         padding-bottom: 0.5rem;
         scrollbar-width: none;
+        background: rgba(10, 16, 41, 0.7);
+        border-radius: 12px;
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
     }
     
     .tabs-container::-webkit-scrollbar {
@@ -314,6 +470,9 @@
         transition: var(--transition);
         border: 1px solid transparent;
         color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
     
     .tab.active {
@@ -351,12 +510,16 @@
     }
     
     .offer-item {
-        background: var(--bg-elevated);
-        border-radius: 10px;
+        background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--primary-light) 100%);
+        border-radius: 12px;
         padding: 1.25rem;
         text-align: center;
         transition: var(--transition);
         border: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
     .offer-item:hover {
@@ -370,13 +533,15 @@
         height: 60px;
         object-fit: contain;
         margin-bottom: 0.75rem;
+        filter: brightness(0) invert(1);
     }
     
     /* Leaderboard */
     .leaderboard {
         background: var(--bg-elevated);
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
+        border: 1px solid var(--border-color);
     }
     
     .leaderboard table {
@@ -420,7 +585,7 @@
     .form-input {
         width: 100%;
         padding: 0.75rem 1rem;
-        border-radius: 8px;
+        border-radius: 10px;
         border: 1px solid var(--border-color);
         background: var(--bg-elevated);
         color: var(--text-primary);
@@ -442,7 +607,7 @@
         padding: 0.75rem 1rem;
         background: rgba(58, 134, 255, 0.1);
         border: 1px solid rgba(58, 134, 255, 0.3);
-        border-radius: 8px;
+        border-radius: 10px;
         margin-bottom: 1rem;
         text-align: center;
         user-select: none;
@@ -471,16 +636,32 @@
     /* Alert Box */
     .alert {
         padding: 1rem;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
         display: flex;
         align-items: flex-start;
+        border: 1px solid;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .alert::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
     }
     
     .alert-warning {
         background: rgba(255, 193, 7, 0.1);
-        border: 1px solid rgba(255, 193, 7, 0.3);
+        border-color: rgba(255, 193, 7, 0.3);
         color: #ffc107;
+    }
+    
+    .alert-warning::before {
+        background: #ffc107;
     }
     
     .alert-icon {
@@ -491,7 +672,7 @@
     /* FAQ Items */
     .faq-item {
         background: var(--bg-elevated);
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1rem;
         transition: var(--transition);
@@ -541,7 +722,7 @@
         width: 100%;
         height: 100%;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
     }
     
     /* Custom scrollbar */
@@ -638,9 +819,30 @@
     .mt-3 {
         margin-top: 1.5rem;
     }
+    
+    /* Level Badge */
+    .level-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent-warning), var(--accent-purple));
+        color: white;
+        border-radius: 20px;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
 </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+        <div class="bg-circle"></div>
+    </div>
+    
     <div id="root">
         <!-- App Header -->
         <header class="app-header">
@@ -663,13 +865,34 @@
             
             <!-- Tabs Navigation -->
             <div class="tabs-container">
-                <div class="tab active" data-section="dashboard">Dashboard</div>
-                <div class="tab" data-section="earn">Earn</div>
-                <div class="tab" data-section="shop">Shop</div>
-                <div class="tab" data-section="leaders">Leaders</div>
-                <div class="tab" data-section="bonus">Bonus</div>
-                <div class="tab" data-section="tos">Terms</div>
-                <div class="tab" data-section="help">Help</div>
+                <div class="tab active" data-section="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="tab" data-section="earn">
+                    <i class="fas fa-coins"></i>
+                    <span>Earn</span>
+                </div>
+                <div class="tab" data-section="shop">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Shop</span>
+                </div>
+                <div class="tab" data-section="leaders">
+                    <i class="fas fa-trophy"></i>
+                    <span>Leaders</span>
+                </div>
+                <div class="tab" data-section="bonus">
+                    <i class="fas fa-gift"></i>
+                    <span>Bonus</span>
+                </div>
+                <div class="tab" data-section="tos">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Terms</span>
+                </div>
+                <div class="tab" data-section="help">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </div>
             </div>
             
             <!-- Dashboard Section -->
@@ -679,7 +902,10 @@
                         <!-- Activity Log -->
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="card-title">Activity Log</h2>
+                                <h2 class="card-title">
+                                    <i class="fas fa-list-alt"></i>
+                                    Activity Log
+                                </h2>
                                 <div class="card-actions">
                                     <button class="btn btn-secondary" id="refreshLogs">
                                         <i class="fas fa-sync-alt"></i>
@@ -700,7 +926,10 @@
                                 <img src="https://ui-avatars.com/api/?background=3a86ff&color=fff&name=Guest&bold=true" class="user-avatar" id="userAvatar" alt="User Avatar">
                                 <div class="user-details">
                                     <div class="user-name" id="userName">Guest User</div>
-                                    <div class="user-level">Level <span id="userLevel">0</span></div>
+                                    <div class="user-level">
+                                        <span>Level</span>
+                                        <span class="level-badge" id="userLevel">0</span>
+                                    </div>
                                     <div class="user-stats">
                                         <div class="stat">
                                             <div class="stat-value" id="userBalance">$0.00</div>
@@ -713,13 +942,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-full" id="loginButton">Login to Earn Rewards</button>
+                            <button class="btn btn-primary btn-full" id="loginButton">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login to Earn Rewards
+                            </button>
                         </div>
                         
                         <!-- How It Works -->
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="card-title">How It Works</h2>
+                                <h2 class="card-title">
+                                    <i class="fas fa-play-circle"></i>
+                                    How It Works
+                                </h2>
                             </div>
                             <div class="offer-grid">
                                 <div class="offer-item">
@@ -742,7 +977,10 @@
                         <!-- Cashout Options -->
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="card-title">Cashout Options</h2>
+                                <h2 class="card-title">
+                                    <i class="fas fa-wallet"></i>
+                                    Cashout Options
+                                </h2>
                             </div>
                             <div class="offer-grid">
                                 <div class="offer-item">
@@ -763,10 +1001,13 @@
                         <!-- Server Status -->
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="card-title">Server Status</h2>
+                                <h2 class="card-title">
+                                    <i class="fas fa-server"></i>
+                                    Server Status
+                                </h2>
                             </div>
                             <div class="text-center mb-2">
-                                <div class="stat-value">Online</div>
+                                <div class="stat-value" style="color: var(--accent-success);">Online</div>
                                 <div class="stat-label">All Systems Operational</div>
                             </div>
                             <div id="serverTime" class="text-center">Server Time: 00:00:00</div>
@@ -779,7 +1020,10 @@
             <div id="section-earn" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Earning Portal</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-coins"></i>
+                            Earning Portal
+                        </h2>
                     </div>
                     <div id="login-container">
                         <h3 class="text-center mb-2">Login to Access Offer Walls</h3>
@@ -823,7 +1067,10 @@
                                 <input type="text" id="captchaInput" class="form-input" placeholder="Enter CAPTCHA">
                             </div>
                             
-                            <button type="button" class="btn btn-primary btn-full" id="loginFormButton">Login</button>
+                            <button type="button" class="btn btn-primary btn-full" id="loginFormButton">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login
+                            </button>
                         </form>
                         <div id="error-msg" class="hidden mt-2" style="color: #ff6b6b; text-align: center; padding: 0.75rem; background: rgba(255, 107, 107, 0.1); border-radius: 8px;"></div>
                     </div>
@@ -868,7 +1115,10 @@
                             </div>
                         </div>
                         
-                        <button class="btn btn-secondary btn-full mt-2" id="logoutBtn">Logout</button>
+                        <button class="btn btn-secondary btn-full mt-2" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
                     </div>
                 </div>
             </div>
@@ -877,7 +1127,10 @@
             <div id="section-shop" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Shop Rewards</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-shopping-bag"></i>
+                            Shop Rewards
+                        </h2>
                     </div>
                     <div class="offer-grid">
                         <div class="offer-item">
@@ -892,7 +1145,10 @@
             <div id="section-leaders" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Leaderboard</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-trophy"></i>
+                            Leaderboard
+                        </h2>
                     </div>
                     <div class="leaderboard">
                         <table>
@@ -921,7 +1177,10 @@
             <div id="section-bonus" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Redeem Bonus Code</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-gift"></i>
+                            Redeem Bonus Code
+                        </h2>
                     </div>
                     
                     <div class="alert alert-warning mb-3">
@@ -940,7 +1199,10 @@
                             <input type="text" id="bonusCode" class="form-input" required placeholder="Enter bonus code">
                         </div>
                         
-                        <button type="button" class="btn btn-primary btn-full" id="redeemBonusButton">Redeem Bonus Code</button>
+                        <button type="button" class="btn btn-primary btn-full" id="redeemBonusButton">
+                            <i class="fas fa-gift"></i>
+                            Redeem Bonus Code
+                        </button>
                         
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
                             <div class="form-group">
@@ -961,7 +1223,10 @@
             <div id="section-tos" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Terms of Service</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-file-contract"></i>
+                            Terms of Service
+                        </h2>
                     </div>
                     
                     <div class="alert alert-warning mb-3">
@@ -1005,7 +1270,10 @@
             <div id="section-help" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Help & Support</h2>
+                        <h2 class="card-title">
+                            <i class="fas fa-question-circle"></i>
+                            Help & Support
+                        </h2>
                     </div>
                     
                     <div class="faq-item">
@@ -1030,7 +1298,10 @@
                         <p>Our ADMIN is available from 10 am - 5 pm PST. Click the button below to contact us.</p>
                     </div>
                     
-                    <button class="btn btn-primary btn-full mt-2" id="contact-support-btn">Contact Support</button>
+                    <button class="btn btn-primary btn-full mt-2" id="contact-support-btn">
+                        <i class="fas fa-headset"></i>
+                        Contact Support
+                    </button>
                 </div>
             </div>
         </main>
