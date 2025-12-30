@@ -1409,330 +1409,46 @@
                 </div>
             </div>
             
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help & Support</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        .card-header {
-            background: linear-gradient(to right, #4a00e0, #8e2de2);
-            color: white;
-            padding: 20px;
-        }
-        
-        .card-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .card-title i {
-            font-size: 1.8rem;
-        }
-        
-        .card-body {
-            padding: 20px;
-        }
-        
-        .faq-item {
-            margin-bottom: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .faq-question {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            margin: 0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.1rem;
-            transition: background 0.3s;
-        }
-        
-        .faq-question:hover {
-            background: #e9ecef;
-        }
-        
-        .faq-question i {
-            transition: transform 0.3s;
-        }
-        
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
-        }
-        
-        .faq-item.active .faq-answer {
-            padding: 20px;
-            max-height: 500px;
-        }
-        
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-        
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, #4a00e0, #8e2de2);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(to right, #3a00b0, #7a1dc2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .mt-2 {
-            margin-top: 20px;
-        }
-        
-        h3 {
-            color: #4a00e0;
-        }
-        
-        p {
-            margin-bottom: 10px;
-        }
-        
-        ul {
-            padding-left: 20px;
-            margin: 10px 0;
-        }
-        
-        li {
-            margin-bottom: 8px;
-        }
-        
-        .info-box {
-            background: #e8f4fd;
-            border-left: 4px solid #2196F3;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-        
-        .warning-box {
-            background: #fff8e1;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-        
-        .level-indicator {
-            display: flex;
-            margin: 10px 0;
-        }
-        
-        .level {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .level-1 { background: #ff5252; }
-        .level-2 { background: #ff9800; }
-        .level-3 { background: #4caf50; }
-        
-        .stars {
-            display: flex;
-            margin: 10px 0;
-        }
-        
-        .star {
-            color: #ffc107;
-            font-size: 1.5rem;
-            margin-right: 5px;
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div id="section-help" class="section">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">
-                        <i class="fas fa-question-circle"></i>
-                        Help & Support
-                    </h2>
-                </div>
-                
-                <div class="card-body">
-                    <div class="faq-item active">
-                        <h3 class="faq-question">
-                            How do I earn points?
-                            <i class="fas fa-chevron-down"></i>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>1. If you haven't logged in yet, log in first and then click "Login to Earn" on the home page.</p>
-                            <p>2. Click either the "Earn" tab or button at the top or bottom of the page.</p>
-                            <p>3. You'll see offerwalls - click on them to complete offers or surveys and earn points!</p>
-                        </div>
+            <!-- Help Section -->
+            <div id="section-help" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-question-circle"></i>
+                            Help & Support
+                        </h2>
                     </div>
                     
                     <div class="faq-item">
-                        <h3 class="faq-question">
-                            How can I redeem rewards?
-                            <i class="fas fa-chevron-down"></i>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>Click the "Shop" tab or button at the top or bottom of the page to browse and redeem available rewards.</p>
-                        </div>
+                        <h3 class="faq-question">How do I earn points?</h3>
+                        <p>1. IF YOU DID NOT LOGGED IN YET LOGIN FIRST AND THEN EITHER CLICK LOGIN TO EARN IF YOU ARE IN THE HOME PAGE.</p>
+                        <p>2. CLICK EITHER TAB ABOVE, EITHER BELOW, BUTTON or TAB EARN.</p>
+                        <p>3. YOU ALL SEE OFFERWALLS AND YOU CLICK ON THEM DO OFFERS OR SURVEYS!</p>
                     </div>
                     
                     <div class="faq-item">
-                        <h3 class="faq-question">
-                            How to redeem bonus codes?
-                            <i class="fas fa-chevron-down"></i>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>Click the <strong>Bonus</strong> tab or button, fill out the form with your account number, and enter the bonus code.</p>
-                            <div class="warning-box">
-                                <p><strong>Important:</strong> Bonus codes now have stricter eligibility requirements.</p>
-                                <p>You need to complete at least 10 tasks within an 8-hour range to be eligible for bonus codes.</p>
-                                <p>Check your eligibility status by looking at the stars displayed in the bonus section:</p>
-                                <div class="stars">
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="far fa-star star"></i>
-                                    <i class="far fa-star star"></i>
-                                </div>
-                                <p>The more stars you have, the closer you are to being eligible for bonus codes.</p>
-                            </div>
-                        </div>
+                        <h3 class="faq-question">How can I redeem rewards?</h3>
+                        <p>YOU MAY CLICK EITHER ABOVE, OR, BELOW TAB OR BUTTON "SHOP".</p>
                     </div>
                     
                     <div class="faq-item">
-                        <h3 class="faq-question">
-                            Automatic Activity System
-                            <i class="fas fa-chevron-down"></i>
-                        </h3>
-                        <div class="faq-answer">
-                            <div class="info-box">
-                                <p>We've added an automatic activity system that checks your account every 8 hours:</p>
-                                <ul>
-                                    <li>If you stay active, your points remain safe.</li>
-                                    <li>If you don't have any activity for 8 hours, a small portion of your points will be temporarily held.</li>
-                                    <li>The held amount depends on your Level - lower levels hold more.</li>
-                                    <li>Once you reach Level 3 or higher, your balance will no longer be affected by inactivity.</li>
-                                </ul>
-                                <p><strong>💡 Tip:</strong> Stay active and level up to keep all your points unlocked!</p>
-                            </div>
-                            
-                            <h4>Level Impact on Point Holding</h4>
-                            <div class="level-indicator">
-                                <div class="level level-1">1</div>
-                                <div>Level 1: Highest percentage of points held for inactivity</div>
-                            </div>
-                            <div class="level-indicator">
-                                <div class="level level-2">2</div>
-                                <div>Level 2: Moderate percentage of points held for inactivity</div>
-                            </div>
-                            <div class="level-indicator">
-                                <div class="level level-3">3</div>
-                                <div>Level 3+: No points held for inactivity</div>
-                            </div>
-                        </div>
+                        <h3 class="faq-question">HOW TO REDEEM BONUS CODE?</h3>
+                        <p>CLICK TAB OR BUTTON<strong> BONUS</strong> YOU MUST FILL OUT A FORM PUT YOUR ACCOUNT# AND ENTER BONUS CODE.</p>
                     </div>
                     
                     <div class="faq-item">
-                        <h3 class="faq-question">
-                            Who do I contact for support?
-                            <i class="fas fa-chevron-down"></i>
-                        </h3>
-                        <div class="faq-answer">
-                            <p>Our support team is available from 10 am - 5 pm PST. Click the button below to contact us.</p>
-                        </div>
+                        <h3 class="faq-question">Who do I contact for support?</h3>
+                        <p>Our ADMIN is available from 10 am - 5 pm PST. Click the button below to contact us.</p>
                     </div>
                     
-                    <button class="btn btn-primary mt-2" id="contact-support-btn">
+                    <button class="btn btn-primary btn-full mt-2" id="contact-support-btn">
                         <i class="fas fa-headset"></i>
                         Contact Support
                     </button>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-
-    <script>
-        // Accordion functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
-            });
-        });
-        
-        // Contact support button functionality
-        document.getElementById('contact-support-btn').addEventListener('click', () => {
-            alert('Contact support feature would open here. In a real application, this would open a contact form or chat interface.');
-        });
-    </script>
-</body>
-</html>
     
     <!-- Iframe Container -->
     <div class="iframe-container" id="iframeContainer">
