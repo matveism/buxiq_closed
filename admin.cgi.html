@@ -2,1228 +2,624 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bux iQ - Admin Panel</title>
-    
-    <!-- Fonts - Windows Mobile Style Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Tahoma:wght@400;700&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Bux IQ - Admin Panel</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/wppiqAy.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-    :root {
-        /* Windows Mobile 6.5 Color Palette - Retro Dark Theme */
-        --primary-dark: #0F3A5F;
-        --primary-main: #1F4E78;
-        --primary-light: #2B5B84;
-        --primary-lighter: #3A6B94;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        }
         
-        /* Accent Colors - Classic Windows Blue */
-        --accent-primary: #1F4E78;
-        --accent-secondary: #2B5B84;
-        --accent-success: #4A7C59;
-        --accent-warning: #8B6914;
-        --accent-purple: #4A4E68;
+        body {
+            background: #5d7ca6;
+            color: #000;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
         
-        /* Backgrounds - Very Dark Retro */
-        --bg-default: #0A0A0A;
-        --bg-paper: #1A1A1A;
-        --bg-elevated: #2A2A2A;
+        .wm-header {
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            color: white;
+            height: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid #0f1f3a;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
         
-        /* Text Colors - Low Brightness */
-        --text-primary: #E0E0E0;
-        --text-secondary: #B0B0B0;
-        --text-muted: #808080;
+        .wm-header .start { font-size: 16px; display: flex; align-items: center; }
+        .wm-header .title { font-size: 16px; font-weight: bold; text-align: center; flex-grow: 1; }
+        .wm-header .time { font-size: 14px; }
         
-        /* UI Elements - Classic Beveled Style */
-        --border-light: #606060;
-        --border-dark: #202020;
-        --shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.8);
-        --bevel-light: #505050;
-        --bevel-dark: #101010;
-        --transition: all 0.2s ease;
+        .wm-content {
+            margin-top: 32px;
+            margin-bottom: 52px;
+            padding: 8px;
+            background: #5d7ca6;
+            min-height: calc(100vh - 84px);
+        }
         
-        /* Retro Textures */
-        --texture-scanlines: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='scanlines' patternUnits='userSpaceOnUse' width='100' height='4'%3E%3Cline x1='0' y1='0' x2='100' y2='0' stroke='%23000000' stroke-width='1' opacity='0.1'/%3E%3Cline x1='0' y1='2' x2='100' y2='2' stroke='%23000000' stroke-width='1' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23scanlines)'/%3E%3C/svg%3E");
-    }
-    
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    body {
-        background: 
-            linear-gradient(135deg, var(--bg-default) 0%, #050505 100%),
-            var(--texture-scanlines);
-        color: var(--text-primary);
-        font-family: 'Segoe UI', 'Tahoma', sans-serif;
-        overflow-x: hidden;
-        line-height: 1.4;
-        min-height: 100vh;
-        position: relative;
-        font-size: 13px;
-    }
-    
-    /* CRT Effect for Retro Feel */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-            repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    #root {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        z-index: 2;
-    }
-    
-    /* Windows Mobile 6.5 Header */
-    .app-header {
-        background: 
-            linear-gradient(to bottom, 
-                var(--primary-dark) 0%, 
-                var(--primary-main) 50%, 
-                var(--primary-light) 100%);
-        border-bottom: 2px solid var(--bevel-light);
-        padding: 8px 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        /* Classic 3D Beveled Border */
-        border-left: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-top: 2px solid var(--bevel-light);
-        box-shadow: var(--shadow-dark);
-    }
-    
-    .logo-container {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .logo {
-        height: 56px;
-        width: auto;
-        /* Retro aged/vintage effect */
-        filter: 
-            sepia(0.3) 
-            contrast(1.1) 
-            brightness(0.8) 
-            blur(0.5px)
-            drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
-        opacity: 0.85;
-        /* Add retro pixelated effect */
-        image-rendering: pixelated;
-        image-rendering: -moz-crisp-edges;
-        image-rendering: crisp-edges;
-    }
-    
-    .app-title {
-        font-family: 'Segoe UI', 'Tahoma', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--text-primary);
-        letter-spacing: 0px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        position: relative;
-    }
-    
-    .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .time-display {
-        font-weight: 500;
-        color: var(--text-primary);
-        font-size: 11px;
-        background: var(--bg-elevated);
-        padding: 4px 8px;
-        border: 2px solid var(--border-dark);
-        font-family: 'Segoe UI', sans-serif;
-        /* Classic beveled button style */
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-    }
-    
-    /* Main Content */
-    .app-content {
-        flex: 1;
-        padding: 8px;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-    }
-    
-    /* Windows Mobile 6.5 Cards */
-    .card {
-        background: 
-            linear-gradient(to bottom, 
-                var(--bg-elevated) 0%, 
-                var(--bg-paper) 100%);
-        border-radius: 0px;
-        padding: 12px;
-        /* Classic 3D Beveled Borders */
-        border: 2px solid var(--border-dark);
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-        box-shadow: var(--shadow-dark);
-        transition: var(--transition);
-        position: relative;
-        margin-bottom: 8px;
-    }
-    
-    .card:hover {
-        background: 
-            linear-gradient(to bottom, 
-                #2A2A2A 0%, 
-                var(--bg-paper) 100%);
-        /* Inset effect on hover */
-        border-left: 2px solid var(--bevel-dark);
-        border-top: 2px solid var(--bevel-dark);
-        border-right: 2px solid var(--bevel-light);
-        border-bottom: 2px solid var(--bevel-light);
-    }
-    
-    .card-header {
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid var(--border-dark);
-        padding-bottom: 4px;
-    }
-    
-    .card-title {
-        font-family: 'Segoe UI', 'Tahoma', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text-primary);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    
-    .card-title i {
-        color: var(--accent-primary);
-    }
-    
-    .card-actions {
-        display: flex;
-        gap: 4px;
-    }
-    
-    /* Windows Mobile 6.5 Tabs */
-    .tabs-container {
-        display: flex;
-        overflow-x: auto;
-        margin-bottom: 8px;
-        padding-bottom: 2px;
-        scrollbar-width: none;
-        background: var(--bg-elevated);
-        border-radius: 0px;
-        padding: 2px;
-        /* Beveled border */
-        border: 2px solid var(--border-dark);
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-        box-shadow: var(--shadow-dark);
-    }
-    
-    .tabs-container::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .tab {
-        padding: 6px 10px;
-        margin-right: 2px;
-        border-radius: 0px;
-        background: var(--bg-paper);
-        cursor: pointer;
-        font-weight: 500;
-        white-space: nowrap;
-        transition: none;
-        /* Beveled tab style */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--border-dark);
-        color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 11px;
-    }
-    
-    .tab.active {
-        background: linear-gradient(to bottom, var(--primary-light) 0%, var(--primary-main) 100%);
-        color: var(--text-primary);
-        font-weight: 600;
-        /* Active tab - different bevel */
-        border-left: 1px solid var(--bevel-dark);
-        border-top: 1px solid var(--bevel-dark);
-        border-right: 1px solid var(--bevel-light);
-        border-bottom: 1px solid var(--bevel-light);
-    }
-    
-    .tab:hover:not(.active) {
-        background: var(--bg-elevated);
-        color: var(--text-primary);
-    }
-    
-    /* Section Management */
-    .section {
-        display: block;
-        animation: fadeIn 0.3s ease;
-    }
-    
-    .section.hidden {
-        display: none;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    /* Windows Mobile 6.5 Buttons - Classic 3D Style */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        padding: 6px 12px;
-        border-radius: 0px;
-        font-weight: 500;
-        font-family: 'Segoe UI', sans-serif;
-        cursor: pointer;
-        transition: none;
-        border: 2px solid var(--border-dark);
-        font-size: 11px;
-        position: relative;
-        overflow: hidden;
-        text-decoration: none;
-        /* Classic 3D Beveled Button Effect */
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-        color: var(--text-primary);
-    }
-    
-    .btn:active {
-        /* Pressed state - inverted bevel */
-        border-left: 2px solid var(--bevel-dark);
-        border-top: 2px solid var(--bevel-dark);
-        border-right: 2px solid var(--bevel-light);
-        border-bottom: 2px solid var(--bevel-light);
-        box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.8);
-        background: linear-gradient(to bottom, var(--bg-paper) 0%, var(--bg-elevated) 100%);
-        transform: translate(1px, 1px);
-    }
-    
-    .btn-primary {
-        background: linear-gradient(to bottom, var(--primary-light) 0%, var(--primary-main) 100%);
-        color: var(--text-primary);
-        font-weight: 600;
-    }
-    
-    .btn-primary:active {
-        background: linear-gradient(to bottom, var(--primary-main) 0%, var(--primary-dark) 100%);
-    }
-    
-    .btn-secondary {
-        background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-        color: var(--text-primary);
-    }
-    
-    .btn-secondary:active {
-        background: linear-gradient(to bottom, var(--bg-paper) 0%, var(--bg-elevated) 100%);
-    }
-    
-    .btn-danger {
-        background: linear-gradient(to bottom, #8B2E2E 0%, #6B1E1E 100%);
-        color: var(--text-primary);
-    }
-    
-    .btn-success {
-        background: linear-gradient(to bottom, var(--accent-success) 0%, #3A6C49 100%);
-        color: var(--text-primary);
-    }
-    
-    .btn-full {
-        width: 100%;
-    }
-    
-    /* Forms */
-    .form-group {
-        margin-bottom: 8px;
-    }
-    
-    .form-label {
-        display: block;
-        margin-bottom: 2px;
-        font-weight: 500;
-        color: var(--text-secondary);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 11px;
-    }
-    
-    .form-input {
-        width: 100%;
-        padding: 4px 6px;
-        border-radius: 0px;
-        border: 2px solid var(--border-dark);
-        background: var(--bg-paper);
-        color: var(--text-primary);
-        font-family: 'Segoe UI', sans-serif;
-        transition: none;
-        font-size: 11px;
-        /* Beveled input style */
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-    }
-    
-    .form-input:focus {
-        outline: none;
-        border-color: var(--accent-primary);
-        /* Inset focus effect */
-        border-left: 2px solid var(--bevel-dark);
-        border-top: 2px solid var(--bevel-dark);
-        border-right: 2px solid var(--bevel-light);
-        border-bottom: 2px solid var(--bevel-light);
-        box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    
-    .form-input:read-only {
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--text-muted);
-        cursor: not-allowed;
-    }
-    
-    /* Alert Box - Retro Style */
-    .alert {
-        padding: 8px;
-        border-radius: 0px;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: flex-start;
-        border: 2px solid;
-        position: relative;
-        overflow: hidden;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 11px;
-        /* Beveled alert box */
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-    }
-    
-    .alert-warning {
-        background: linear-gradient(to bottom, #2A241A 0%, #1A1410 100%);
-        border-color: var(--accent-warning);
-        color: var(--accent-warning);
-    }
-    
-    .alert-success {
-        background: linear-gradient(to bottom, #1A2A1A 0%, #101A10 100%);
-        border-color: var(--accent-success);
-        color: var(--accent-success);
-    }
-    
-    .alert-error {
-        background: linear-gradient(to bottom, #2A1A1A 0%, #1A1010 100%);
-        border-color: #8B2E2E;
-        color: #D46B6B;
-    }
-    
-    .alert-icon {
-        margin-right: 6px;
-        margin-top: 2px;
-        font-size: 12px;
-    }
-    
-    /* Stats Container */
-    .stats-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-        margin-bottom: 8px;
-    }
-    
-    .stat-card {
-        background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-        border-radius: 0px;
-        padding: 8px;
-        text-align: center;
-        /* Beveled borders */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    .stat-value {
-        font-family: 'Segoe UI', 'Tahoma', sans-serif;
-        font-weight: 700;
-        font-size: 16px;
-        color: var(--accent-primary);
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    
-    .stat-label {
-        font-size: 9px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0px;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    
-    /* Search Box */
-    .search-box {
-        background: var(--bg-paper);
-        border-radius: 0px;
-        padding: 6px;
-        margin-bottom: 8px;
-        display: flex;
-        gap: 6px;
-        /* Beveled borders */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    .search-input {
-        flex: 1;
-        border: none;
-        outline: none;
-        font-size: 11px;
-        background: transparent;
-        color: var(--text-primary);
-        font-family: 'Segoe UI', sans-serif;
-    }
-    
-    .search-input::placeholder {
-        color: var(--text-muted);
-    }
-    
-    /* Windows Mobile 6.5 Tables */
-    .wm-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 11px;
-        background: var(--bg-paper);
-        /* Beveled table border */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    .wm-table th {
-        background: var(--bg-elevated);
-        padding: 6px;
-        text-align: left;
-        font-weight: 600;
-        color: var(--text-secondary);
-        border-bottom: 1px solid var(--border-dark);
-        border-right: 1px solid var(--border-dark);
-    }
-    
-    .wm-table th:last-child {
-        border-right: none;
-    }
-    
-    .wm-table td {
-        padding: 6px;
-        border-bottom: 1px solid var(--border-dark);
-        border-right: 1px solid var(--border-dark);
-    }
-    
-    .wm-table td:last-child {
-        border-right: none;
-    }
-    
-    .wm-table tr:last-child td {
-        border-bottom: none;
-    }
-    
-    .wm-table tr:hover td {
-        background: var(--bg-elevated);
-    }
-    
-    /* User Avatar */
-    .user-avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 0px;
-        border: 1px solid var(--accent-primary);
-        object-fit: cover;
-        /* Retro box shadow */
-        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-    }
-    
-    /* Status Badges */
-    .status-badge {
-        padding: 2px 6px;
-        font-size: 9px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0px;
-        font-family: 'Segoe UI', sans-serif;
-        /* Beveled badge */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    .status-active {
-        background: linear-gradient(to bottom, var(--accent-success) 0%, #3A6C49 100%);
-        color: var(--text-primary);
-    }
-    
-    .status-blocked {
-        background: linear-gradient(to bottom, #8B2E2E 0%, #6B1E1E 100%);
-        color: var(--text-primary);
-    }
-    
-    .status-unused {
-        background: linear-gradient(to bottom, var(--accent-primary) 0%, var(--primary-dark) 100%);
-        color: var(--text-primary);
-    }
-    
-    .status-redeemed {
-        background: linear-gradient(to bottom, var(--accent-purple) 0%, #3A3A5A 100%);
-        color: var(--text-primary);
-    }
-    
-    /* Action Buttons */
-    .action-buttons {
-        display: flex;
-        gap: 4px;
-    }
-    
-    .action-buttons .btn {
-        margin-bottom: 0;
-        width: auto;
-        flex: 1;
-    }
-    
-    /* Field Info */
-    .field-info {
-        background: rgba(31, 78, 120, 0.1);
-        border: 1px solid var(--accent-primary);
-        border-radius: 0px;
-        padding: 8px;
-        margin: 8px 0;
-        font-size: 10px;
-        color: var(--text-secondary);
-        font-family: 'Segoe UI', sans-serif;
-        /* Beveled info box */
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    /* Formula Box */
-    .formula-box {
-        background: rgba(31, 78, 120, 0.1);
-        border: 1px solid var(--accent-primary);
-        border-radius: 0px;
-        padding: 6px;
-        margin: 4px 0;
-        font-size: 9px;
-        color: var(--text-secondary);
-        font-family: 'Courier New', monospace;
-        /* Beveled formula box */
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    /* Modal Overlay */
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 2000;
-        display: none;
-    }
-    
-    /* Edit Modal */
-    .edit-modal {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: var(--bg-paper);
-        border-radius: 0px;
-        padding: 12px;
-        z-index: 2001;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-        display: none;
-        min-width: 300px;
-        max-width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-        /* Beveled modal */
-        border: 2px solid var(--border-dark);
-        border-left: 2px solid var(--bevel-light);
-        border-top: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-bottom: 2px solid var(--bevel-dark);
-    }
-    
-    .edit-modal h3 {
-        margin-bottom: 8px;
-        color: var(--text-primary);
-        border-bottom: 1px solid var(--border-dark);
-        padding-bottom: 4px;
-        font-family: 'Segoe UI', 'Tahoma', sans-serif;
-        font-size: 14px;
-    }
-    
-    /* Notification */
-    .notification {
-        position: fixed;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--bg-paper);
-        color: var(--text-primary);
-        padding: 8px 12px;
-        border-radius: 0px;
-        z-index: 1001;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-        display: none;
-        font-weight: bold;
-        max-width: 90%;
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 11px;
-        /* Beveled notification */
-        border: 1px solid var(--border-dark);
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    .notification.success {
-        background: linear-gradient(to bottom, var(--accent-success) 0%, #3A6C49 100%);
-    }
-    
-    .notification.error {
-        background: linear-gradient(to bottom, #8B2E2E 0%, #6B1E1E 100%);
-    }
-    
-    .notification.warning {
-        background: linear-gradient(to bottom, var(--accent-warning) 0%, #6B5414 100%);
-    }
-    
-    /* Loading Overlay */
-    .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 2000;
-        display: none;
-    }
-    
-    .loading-spinner {
-        color: var(--text-primary);
-        font-size: 16px;
-        text-align: center;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    
-    /* Footer */
-    .wm-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: var(--bg-elevated);
-        display: flex;
-        justify-content: space-around;
-        padding: 6px 0;
-        border-top: 1px solid var(--border-dark);
-        z-index: 100;
-        /* Beveled footer */
-        border-left: 2px solid var(--bevel-light);
-        border-right: 2px solid var(--bevel-dark);
-        border-top: 2px solid var(--bevel-light);
-    }
-    
-    .wm-footer-button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: var(--text-secondary);
-        font-size: 10px;
-        cursor: pointer;
-        transition: none;
-        width: 64px;
-        height: 40px;
-        justify-content: center;
-        font-family: 'Segoe UI', sans-serif;
-    }
-    
-    .wm-footer-button.active {
-        color: var(--accent-primary);
-    }
-    
-    .wm-footer-button i {
-        font-size: 16px;
-        margin-bottom: 2px;
-    }
-    
-    /* Utility classes */
-    .hidden {
-        display: none !important;
-    }
-    
-    .text-center {
-        text-align: center;
-    }
-    
-    .mb-1 {
-        margin-bottom: 4px;
-    }
-    
-    .mb-2 {
-        margin-bottom: 6px;
-    }
-    
-    .mb-3 {
-        margin-bottom: 8px;
-    }
-    
-    .mt-1 {
-        margin-top: 4px;
-    }
-    
-    .mt-2 {
-        margin-top: 6px;
-    }
-    
-    .mt-3 {
-        margin-top: 8px;
-    }
-    
-    /* Custom scrollbar - Retro Style */
-    ::-webkit-scrollbar {
-        width: 12px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--bg-paper);
-        border: 1px solid var(--border-dark);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--primary-dark) 100%);
-        border: 1px solid var(--border-dark);
-        /* Beveled scrollbar thumb */
-        border-left: 1px solid var(--bevel-light);
-        border-top: 1px solid var(--bevel-light);
-        border-right: 1px solid var(--bevel-dark);
-        border-bottom: 1px solid var(--bevel-dark);
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(to bottom, var(--primary-main) 0%, var(--primary-dark) 100%);
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .app-header {
+        .wm-tabs {
+            display: flex;
+            background: #4a6a9c;
+            border-bottom: 1px solid #2c4163;
+            overflow-x: auto;
+        }
+        
+        .wm-tab {
+            padding: 8px 16px;
+            background: #6b8cc0;
+            border: 1px solid #4a6a9c;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 2px;
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .wm-tab.active {
+            background: #8faad6;
+            color: #000;
+        }
+        
+        .wm-section {
+            background: #d4dff2;
+            border: 1px solid #8faad6;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a3b3ce;
+        }
+        
+        .wm-section h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e3a6b;
+            border-bottom: 1px solid #8faad6;
+            padding-bottom: 4px;
+        }
+        
+        .wm-button {
+            background: linear-gradient(to bottom, #f0f0f0 0%, #d4d4d4 100%);
+            border: 1px solid #808080;
+            border-radius: 3px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #000;
+            cursor: pointer;
+            box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #a0a0a0;
+            margin: 4px 0;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .wm-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .wm-button.primary {
+            background: linear-gradient(to bottom, #4a6a9c 0%, #2c4163 100%);
+            color: white;
+            border-color: #1e3a6b;
+        }
+        
+        .wm-button.danger {
+            background: linear-gradient(to bottom, #d9534f 0%, #c9302c 100%);
+            color: white;
+            border-color: #ac2925;
+        }
+        
+        .wm-button.success {
+            background: linear-gradient(to bottom, #5cb85c 0%, #449d44 100%);
+            color: white;
+            border-color: #398439;
+        }
+        
+        .wm-input {
+            background: white;
+            border: 1px solid #808080;
+            border-radius: 3px;
             padding: 6px 8px;
+            font-size: 14px;
+            width: 100%;
+            box-shadow: inset 1px 1px 0 #e0e0e0;
+            margin: 4px 0;
         }
         
-        .app-content {
-            padding: 6px;
-        }
-        
-        .stats-container {
-            grid-template-columns: 1fr;
-        }
-        
-        .action-buttons {
-            flex-direction: column;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .app-title {
-            font-size: 12px;
-        }
-        
-        .tab {
-            padding: 4px 6px;
-            font-size: 9px;
+        .wm-input:read-only {
+            background: #f5f5f5;
+            color: #666;
+            cursor: not-allowed;
         }
         
         .wm-table {
-            font-size: 9px;
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
         }
         
-        .wm-table th,
-        .wm-table td {
-            padding: 4px;
+        .wm-table th {
+            background: #4a6a9c;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-weight: bold;
         }
-    }
-    
-    /* Remove modern animations and effects */
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    /* Only keep essential transitions for button states */
-    .btn:active {
-        transition: none;
-    }
-    
-    .section {
-        transition: none;
-    }
-</style>
+        
+        .wm-table td {
+            padding: 8px;
+            border-bottom: 1px solid #d4dff2;
+        }
+        
+        .wm-table tr:nth-child(even) {
+            background: #f0f5ff;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4a6a9c;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 3px;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: none;
+            font-weight: bold;
+        }
+        
+        .notification.success { background: #5cb85c; }
+        .notification.error { background: #d9534f; }
+        .notification.warning { background: #f0ad4e; }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+        
+        .loading-spinner {
+            color: white;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 4px; font-weight: bold; color: #1e3a6b; }
+        
+        .form-note {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+            margin-top: 2px;
+        }
+        
+        .formula-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 11px;
+            color: #856404;
+        }
+        
+        .wm-footer {
+            background: linear-gradient(to bottom, #2c5aa0 0%, #1e3a6b 100%);
+            height: 52px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8px;
+            border-top: 1px solid #0f1f3a;
+            z-index: 1000;
+        }
+        
+        .wm-footer-button {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            width: 64px;
+            height: 42px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .wm-footer-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        .wm-footer-button i { font-size: 16px; margin-bottom: 2px; }
+        .wm-footer-button.active { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        
+        .action-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            object-fit: cover;
+            border: 1px solid #8faad6;
+        }
+        
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status-active { background: #5cb85c; }
+        .status-inactive { background: #f0ad4e; }
+        .status-suspended { background: #d9534f; }
+        .status-blocked { background: #d9534f; }
+        .status-redeemed { background: #6f42c1; }
+        .status-unused { background: #17a2b8; }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e3a6b;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #4a6a9c;
+            text-transform: uppercase;
+        }
+        
+        .search-box {
+            background: white;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 6px 8px;
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        
+        .edit-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #4a6a9c;
+            border-radius: 5px;
+            padding: 20px;
+            z-index: 2001;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            display: none;
+            min-width: 400px;
+            max-width: 90%;
+        }
+        
+        .edit-modal h3 {
+            margin-bottom: 15px;
+            color: #1e3a6b;
+            border-bottom: 1px solid #8faad6;
+            padding-bottom: 8px;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+        }
+        
+        .field-info {
+            background: #e8f4ff;
+            border: 1px solid #8faad6;
+            border-radius: 3px;
+            padding: 8px;
+            margin: 8px 0;
+            font-size: 12px;
+            color: #1e3a6b;
+        }
+    </style>
 </head>
 <body>
-    <div id="root">
-        <!-- Windows Mobile 6.5 Header -->
-        <header class="app-header">
-            <div class="logo-container">
-                <img src="https://i.postimg.cc/XvtmtjZL/Gemini-Generated-Image-e6decve6decve6de-removebg-preview.png" width="40px" alt="BUXiQ Logo" class="logo">
-                <div class="app-title">Bux iQ Admin</div>
+    <!-- Header -->
+    <div class="wm-header">
+        <div class="start">Bux IQ</div>
+        <div class="title">Admin Panel</div>
+        <div class="time" id="current-time">12:00 PM</div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="wm-content">
+        <!-- Login Section -->
+        <div id="login-section" class="wm-section">
+            <h2>Admin Login</h2>
+            <div class="wm-login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="wm-input" placeholder="Enter admin username" value="admin_buxiq">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="wm-input" placeholder="Enter password" value="admin123">
+                </div>
+                <button id="login-btn" class="wm-button primary">Login</button>
             </div>
-            <div class="header-actions">
-                <div class="time-display" id="headerTime">12:00 PM</div>
-            </div>
-        </header>
+        </div>
         
-        <!-- Main Content -->
-        <main class="app-content">
-            <!-- Login Section -->
-            <div id="login-section" class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-lock"></i>
-                            Admin Login
-                        </h2>
+        <!-- Admin Panel -->
+        <div id="admin-panel" class="hidden">
+            <!-- Tabs -->
+            <div class="wm-tabs">
+                <div class="wm-tab active" data-tab="users">Users</div>
+                <div class="wm-tab" data-tab="add-user">Add User</div>
+                <div class="wm-tab" data-tab="bonus-codes">Bonus Codes</div>
+                <div class="wm-tab" data-tab="add-bonus">Add Bonus</div>
+            </div>
+            
+            <!-- Users Tab -->
+            <div id="users-tab" class="wm-section">
+                <h2>User Management</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-users">0</div>
+                        <div class="stat-label">Total Users</div>
                     </div>
-                    <div class="wm-login-form">
-                        <div class="form-group">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" id="username" class="form-input" placeholder="Enter admin username" value="admin_buxiq">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" class="form-input" placeholder="Enter password" value="admin123">
-                        </div>
-                        <button id="login-btn" class="btn btn-primary btn-full">
-                            <i class="fas fa-sign-in-alt"></i> Login
-                        </button>
+                    <div class="stat-card">
+                        <div class="stat-value" id="active-users">0</div>
+                        <div class="stat-label">Active Users</div>
                     </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="user-search" class="search-input" placeholder="Search users by Account #, Client ID, or Status...">
+                    <button class="wm-button" onclick="searchUsers()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span>Showing <span id="users-count">0</span> users</span>
+                    <button id="refresh-users" class="wm-button success">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div class="wm-table-container">
+                    <table class="wm-table">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Account #</th>
+                                <th>Client ID</th>
+                                <th>Status</th>
+                                <th>Balance</th>
+                                <th>Promo</th>
+                                <th>Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body">
+                            <tr><td colspan="8" style="text-align: center;">Loading users...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             
-            <!-- Admin Panel -->
-            <div id="admin-panel" class="hidden">
-                <!-- Tabs -->
-                <div class="tabs-container">
-                    <div class="tab active" data-tab="users">
-                        <i class="fas fa-users"></i>
-                        <span>Users</span>
-                    </div>
-                    <div class="tab" data-tab="add-user">
-                        <i class="fas fa-user-plus"></i>
-                        <span>Add User</span>
-                    </div>
-                    <div class="tab" data-tab="bonus-codes">
-                        <i class="fas fa-gift"></i>
-                        <span>Bonus Codes</span>
-                    </div>
-                    <div class="tab" data-tab="add-bonus">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Add Bonus</span>
-                    </div>
+            <!-- Add User Tab -->
+            <div id="add-user-tab" class="wm-section hidden">
+                <h2>Add New User</h2>
+                <div class="field-info">
+                    <strong>💡 User Information:</strong><br>
+                    • Balance and Level are automatically calculated using formulas<br>
+                    • Promo codes are managed automatically<br>
+                    • Only Account #, Client ID, Status and Avatar can be edited
                 </div>
-                
-                <!-- Users Tab -->
-                <div id="users-tab" class="section">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <i class="fas fa-users"></i>
-                                User Management
-                            </h2>
-                            <div class="card-actions">
-                                <button class="btn btn-success" id="refresh-users">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="stats-container">
-                            <div class="stat-card">
-                                <div class="stat-value" id="total-users">0</div>
-                                <div class="stat-label">Total Users</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="active-users">0</div>
-                                <div class="stat-label">Active Users</div>
-                            </div>
-                        </div>
-                        
-                        <div class="search-box">
-                            <input type="text" id="user-search" class="search-input" placeholder="Search users by Account #, Client ID, or Status...">
-                            <button class="btn" onclick="searchUsers()">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 10px; color: var(--text-muted);">Showing <span id="users-count">0</span> users</span>
-                        </div>
-                        
-                        <div class="wm-table-container">
-                            <table class="wm-table">
-                                <thead>
-                                    <tr>
-                                        <th>Avatar</th>
-                                        <th>Account #</th>
-                                        <th>Client ID</th>
-                                        <th>Status</th>
-                                        <th>Balance</th>
-                                        <th>Promo</th>
-                                        <th>Level</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="users-table-body">
-                                    <tr><td colspan="8" style="text-align: center; padding: 12px;">Loading users...</td></tr>
-                                </tbody>
-                            </table>
+                <div class="wm-login-form">
+                    <div class="form-group">
+                        <label for="new-account">Account # *</label>
+                        <input type="text" id="new-account" class="wm-input" placeholder="Enter account number (e.g., MD0656)">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-client-id">Client ID *</label>
+                        <input type="text" id="new-client-id" class="wm-input" placeholder="Enter client ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-status">Status</label>
+                        <select id="new-status" class="wm-input">
+                            <option value="Active">Active</option>
+                            <option value="Blocked">Blocked</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-balance">Balance Formula</label>
+                        <div class="formula-box">
+                            =LET(<br>
+                            &nbsp;&nbsp;data, IMPORTRANGE("1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!A2:F"),<br>
+                            &nbsp;&nbsp;points, SUM(FILTER(INDEX(data,,6), UPPER(TRIM(INDEX(data,,3))) = "ACCOUNT#")),<br>
+                            &nbsp;&nbsp;hold, IFERROR(SUM(FILTER(INDEX(data,,6), INDEX(data,,1) = "ACCOUNT#")), 0),<br>
+                            &nbsp;&nbsp;available, points - hold,<br>
+                            &nbsp;&nbsp;userUSD, (available / 1),<br>
+                            &nbsp;&nbsp;usdToGbp, IFERROR(GOOGLEFINANCE("CURRENCY:USDGBP"), 0.77),<br>
+                            &nbsp;&nbsp;userGBP, userUSD * usdToGbp,<br>
+                            &nbsp;&nbsp;outputUSD, "$" & TEXT(userUSD, "#0.00"),<br>
+                            &nbsp;&nbsp;outputGBP, "£" & TEXT(userGBP, "#0.00"),<br>
+                            &nbsp;&nbsp;finalOutput, TEXT(available, "#0.00") & " PTS / " & outputUSD & " / " & outputGBP & " / Hold: " & TEXT(hold, "#0.00"),<br>
+                            &nbsp;&nbsp;finalOutput<br>
+                            )
                         </div>
                     </div>
-                </div>
-                
-                <!-- Add User Tab -->
-                <div id="add-user-tab" class="section hidden">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <i class="fas fa-user-plus"></i>
-                                Add New User
-                            </h2>
-                        </div>
-                        
-                        <div class="alert alert-warning mb-2">
-                            <i class="fas fa-exclamation-triangle alert-icon"></i>
-                            <div><strong>User Information:</strong> Balance and Level are automatically calculated using formulas. Promo codes are managed automatically.</div>
-                        </div>
-                        
-                        <div class="wm-login-form">
-                            <div class="form-group">
-                                <label for="new-account" class="form-label">Account # *</label>
-                                <input type="text" id="new-account" class="form-input" placeholder="Enter account number (e.g., MD0656)">
-                            </div>
-                            <div class="form-group">
-                                <label for="new-client-id" class="form-label">Client ID *</label>
-                                <input type="text" id="new-client-id" class="form-input" placeholder="Enter client ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="new-status" class="form-label">Status</label>
-                                <select id="new-status" class="form-input">
-                                    <option value="Active">Active</option>
-                                    <option value="Blocked">Blocked</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Balance Formula</label>
-                                <div class="formula-box">
-                                    =LET(data, IMPORTRANGE("1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!A2:F"),points, SUM(FILTER(INDEX(data,,6), UPPER(TRIM(INDEX(data,,3))) = "ACCOUNT#")),hold, IFERROR(SUM(FILTER(INDEX(data,,6), INDEX(data,,1) = "ACCOUNT#")), 0),available, points - hold,userUSD, (available / 1),usdToGbp, IFERROR(GOOGLEFINANCE("CURRENCY:USDGBP"), 0.77),userGBP, userUSD * usdToGbp,outputUSD, "$" & TEXT(userUSD, "#0.00"),outputGBP, "£" & TEXT(userGBP, "#0.00"),finalOutput, TEXT(available, "#0.00") & " PTS / " & outputUSD & " / " & outputGBP & " / Hold: " & TEXT(hold, "#0.00"),finalOutput)
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-promo" class="form-label">Promo Code</label>
-                                <input type="text" id="new-promo" class="form-input" placeholder="Enter promo code" readonly>
-                                <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Promo codes are managed automatically</div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Level Formula</label>
-                                <div class="formula-box">
-                                    =COUNTIF(ARRAYFORMULA(UPPER(TRIM(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!C2:C")))), "ACCOUNT#") * 0.25
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-avatar" class="form-label">User Avatar URL</label>
-                                <input type="text" id="new-avatar" class="form-input" placeholder="Enter avatar URL" value="https://i.imgur.com/wppiqAy.png">
-                            </div>
-                            <button id="add-user-btn" class="btn btn-primary btn-full">
-                                <i class="fas fa-plus"></i> Add User
-                            </button>
+                    <div class="form-group">
+                        <label for="new-promo">Promo Code</label>
+                        <input type="text" id="new-promo" class="wm-input" placeholder="Enter promo code" readonly>
+                        <div class="form-note">Promo codes are managed automatically</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-level">Level Formula</label>
+                        <div class="formula-box">
+                            =COUNTIF(ARRAYFORMULA(UPPER(TRIM(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!C2:C")))), "ACCOUNT#") * 0.25
                         </div>
                     </div>
-                </div>
-
-                <!-- Bonus Codes Tab -->
-                <div id="bonus-codes-tab" class="section hidden">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <i class="fas fa-gift"></i>
-                                Bonus Codes Management
-                            </h2>
-                            <div class="card-actions">
-                                <button class="btn btn-success" id="refresh-bonus">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="stats-container">
-                            <div class="stat-card">
-                                <div class="stat-value" id="total-bonus">0</div>
-                                <div class="stat-label">Total Bonus Codes</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-value" id="active-bonus">0</div>
-                                <div class="stat-label">Active Bonus Codes</div>
-                            </div>
-                        </div>
-                        
-                        <div class="search-box">
-                            <input type="text" id="bonus-search" class="search-input" placeholder="Search bonus codes by Account #, Client ID, or Status...">
-                            <button class="btn" onclick="searchBonus()">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 10px; color: var(--text-muted);">Showing <span id="bonus-count">0</span> bonus codes</span>
-                        </div>
-                        
-                        <div class="wm-table-container">
-                            <table class="wm-table">
-                                <thead>
-                                    <tr>
-                                        <th>Account #</th>
-                                        <th>Client ID</th>
-                                        <th>Status</th>
-                                        <th>Balance</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="bonus-table-body">
-                                    <tr><td colspan="5" style="text-align: center; padding: 12px;">Loading bonus codes...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="form-group">
+                        <label for="new-avatar">User Avatar URL</label>
+                        <input type="text" id="new-avatar" class="wm-input" placeholder="Enter avatar URL" value="https://i.imgur.com/wppiqAy.png">
                     </div>
-                </div>
-
-                <!-- Add Bonus Tab -->
-                <div id="add-bonus-tab" class="section hidden">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">
-                                <i class="fas fa-plus-circle"></i>
-                                Add New Bonus Code
-                            </h2>
-                        </div>
-                        
-                        <div class="alert alert-warning mb-2">
-                            <i class="fas fa-exclamation-triangle alert-icon"></i>
-                            <div><strong>Bonus Code Information:</strong> Account # = The bonus code itself. Client ID = The amount users will receive. Status = Automatically set to "Active". Balance = Automatically set to "UNUSED".</div>
-                        </div>
-                        
-                        <div class="wm-login-form">
-                            <div class="form-group">
-                                <label for="new-bonus-account" class="form-label">Account # (Code) *</label>
-                                <input type="text" id="new-bonus-account" class="form-input" placeholder="Enter bonus code (e.g., WELCOME10)">
-                                <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">This is the actual bonus code users will enter</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-bonus-client-id" class="form-label">Client ID (Amount) *</label>
-                                <input type="number" id="new-bonus-client-id" class="form-input" placeholder="Enter bonus amount" value="10.00" step="0.01">
-                                <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Amount users will receive when they redeem this code</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-bonus-status" class="form-label">Status</label>
-                                <input type="text" id="new-bonus-status" class="form-input" value="Active" readonly>
-                                <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Status is automatically managed</div>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-bonus-balance" class="form-label">Balance</label>
-                                <input type="text" id="new-bonus-balance" class="form-input" value="UNUSED" readonly>
-                                <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Balance shows usage status</div>
-                            </div>
-                            <button id="add-bonus-btn" class="btn btn-primary btn-full">
-                                <i class="fas fa-gift"></i> Add Bonus Code
-                            </button>
-                        </div>
-                    </div>
+                    <button id="add-user-btn" class="wm-button primary">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
                 </div>
             </div>
-        </main>
+
+            <!-- Bonus Codes Tab -->
+            <div id="bonus-codes-tab" class="wm-section hidden">
+                <h2>Bonus Codes Management</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-bonus">0</div>
+                        <div class="stat-label">Total Bonus Codes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="active-bonus">0</div>
+                        <div class="stat-label">Active Bonus Codes</div>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="bonus-search" class="search-input" placeholder="Search bonus codes by Account #, Client ID, or Status...">
+                    <button class="wm-button" onclick="searchBonus()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span>Showing <span id="bonus-count">0</span> bonus codes</span>
+                    <button id="refresh-bonus" class="wm-button success">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+                <div class="wm-table-container">
+                    <table class="wm-table">
+                        <thead>
+                            <tr>
+                                <th>Account #</th>
+                                <th>Client ID</th>
+                                <th>Status</th>
+                                <th>Balance</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bonus-table-body">
+                            <tr><td colspan="5" style="text-align: center;">Loading bonus codes...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add Bonus Tab -->
+            <div id="add-bonus-tab" class="wm-section hidden">
+                <h2>Add New Bonus Code</h2>
+                <div class="field-info">
+                    <strong>💡 Bonus Code Information:</strong><br>
+                    • Account # = The bonus code itself (e.g., WELCOME10)<br>
+                    • Client ID = The amount users will receive<br>
+                    • Status = Automatically set to "Active"<br>
+                    • Balance = Automatically set to "UNUSED"
+                </div>
+                <div class="wm-login-form">
+                    <div class="form-group">
+                        <label for="new-bonus-account">Account # (Code) *</label>
+                        <input type="text" id="new-bonus-account" class="wm-input" placeholder="Enter bonus code (e.g., WELCOME10)">
+                        <div class="form-note">This is the actual bonus code users will enter</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-bonus-client-id">Client ID (Amount) *</label>
+                        <input type="number" id="new-bonus-client-id" class="wm-input" placeholder="Enter bonus amount" value="10.00" step="0.01">
+                        <div class="form-note">Amount users will receive when they redeem this code</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-bonus-status">Status</label>
+                        <input type="text" id="new-bonus-status" class="wm-input" value="Active" readonly>
+                        <div class="form-note">Status is automatically managed</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-bonus-balance">Balance</label>
+                        <input type="text" id="new-bonus-balance" class="wm-input" value="UNUSED" readonly>
+                        <div class="form-note">Balance shows usage status</div>
+                    </div>
+                    <button id="add-bonus-btn" class="wm-button primary">
+                        <i class="fas fa-gift"></i> Add Bonus Code
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Footer -->
@@ -1262,46 +658,58 @@
     <div class="edit-modal" id="edit-user-modal">
         <h3>Edit User: <span id="edit-user-account"></span></h3>
         <div class="form-group">
-            <label for="edit-user-account-input" class="form-label">Account # *</label>
-            <input type="text" id="edit-user-account-input" class="form-input">
+            <label for="edit-user-account-input">Account # *</label>
+            <input type="text" id="edit-user-account-input" class="wm-input">
         </div>
         <div class="form-group">
-            <label for="edit-user-client-id" class="form-label">Client ID *</label>
-            <input type="text" id="edit-user-client-id" class="form-input">
+            <label for="edit-user-client-id">Client ID *</label>
+            <input type="text" id="edit-user-client-id" class="wm-input">
         </div>
         <div class="form-group">
-            <label for="edit-user-status" class="form-label">Status</label>
-            <select id="edit-user-status" class="form-input">
+            <label for="edit-user-status">Status</label>
+            <select id="edit-user-status" class="wm-input">
                 <option value="Active">Active</option>
                 <option value="Blocked">Blocked</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="form-label">Balance Formula</label>
+            <label for="edit-user-balance">Balance Formula</label>
             <div class="formula-box">
-                =LET(data, IMPORTRANGE("1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!A2:F"),points, SUM(FILTER(INDEX(data,,6), UPPER(TRIM(INDEX(data,,3))) = "ACCOUNT#")),hold, IFERROR(SUM(FILTER(INDEX(data,,6), INDEX(data,,1) = "ACCOUNT#")), 0),available, points - hold,userUSD, (available / 1),usdToGbp, IFERROR(GOOGLEFINANCE("CURRENCY:USDGBP"), 0.77),userGBP, userUSD * usdToGbp,outputUSD, "$" & TEXT(userUSD, "#0.00"),outputGBP, "£" & TEXT(userGBP, "#0.00"),finalOutput, TEXT(available, "#0.00") & " PTS / " & outputUSD & " / " & outputGBP & " / Hold: " & TEXT(hold, "#0.00"),finalOutput)
+                =LET(<br>
+                &nbsp;&nbsp;data, IMPORTRANGE("1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!A2:F"),<br>
+                &nbsp;&nbsp;points, SUM(FILTER(INDEX(data,,6), UPPER(TRIM(INDEX(data,,3))) = "ACCOUNT#")),<br>
+                &nbsp;&nbsp;hold, IFERROR(SUM(FILTER(INDEX(data,,6), INDEX(data,,1) = "ACCOUNT#")), 0),<br>
+                &nbsp;&nbsp;available, points - hold,<br>
+                &nbsp;&nbsp;userUSD, (available / 1),<br>
+                &nbsp;&nbsp;usdToGbp, IFERROR(GOOGLEFINANCE("CURRENCY:USDGBP"), 0.77),<br>
+                &nbsp;&nbsp;userGBP, userUSD * usdToGbp,<br>
+                &nbsp;&nbsp;outputUSD, "$" & TEXT(userUSD, "#0.00"),<br>
+                &nbsp;&nbsp;outputGBP, "£" & TEXT(userGBP, "#0.00"),<br>
+                &nbsp;&nbsp;finalOutput, TEXT(available, "#0.00") & " PTS / " & outputUSD & " / " & outputGBP & " / Hold: " & TEXT(hold, "#0.00"),<br>
+                &nbsp;&nbsp;finalOutput<br>
+                )
             </div>
         </div>
         <div class="form-group">
-            <label for="edit-user-promo" class="form-label">Promo Code</label>
-            <input type="text" id="edit-user-promo" class="form-input" readonly>
-            <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Promo codes are managed automatically</div>
+            <label for="edit-user-promo">Promo Code</label>
+            <input type="text" id="edit-user-promo" class="wm-input" readonly>
+            <div class="form-note">Promo codes are managed automatically</div>
         </div>
         <div class="form-group">
-            <label class="form-label">Level Formula</label>
+            <label for="edit-user-level">Level Formula</label>
             <div class="formula-box">
                 =COUNTIF(ARRAYFORMULA(UPPER(TRIM(IMPORTRANGE("https://docs.google.com/spreadsheets/d/1hUZQ0tNEAki1kxbthf5MjBrjCIJUoxc0u-3A-Oq2H64", "user_logs!C2:C")))), "ACCOUNT#") * 0.25
             </div>
         </div>
         <div class="form-group">
-            <label for="edit-user-avatar" class="form-label">User Avatar URL</label>
-            <input type="text" id="edit-user-avatar" class="form-input">
+            <label for="edit-user-avatar">User Avatar URL</label>
+            <input type="text" id="edit-user-avatar" class="wm-input">
         </div>
         <div class="action-buttons">
-            <button id="save-user-edit-btn" class="btn btn-primary">
+            <button id="save-user-edit-btn" class="wm-button primary">
                 <i class="fas fa-save"></i> Save Changes
             </button>
-            <button id="cancel-user-edit-btn" class="btn btn-secondary">
+            <button id="cancel-user-edit-btn" class="wm-button">
                 <i class="fas fa-times"></i> Cancel
             </button>
         </div>
@@ -1311,30 +719,30 @@
     <div class="edit-modal" id="edit-bonus-modal">
         <h3>Edit Bonus Code: <span id="edit-bonus-account"></span></h3>
         <div class="form-group">
-            <label for="edit-bonus-account-input" class="form-label">Account # (Code) *</label>
-            <input type="text" id="edit-bonus-account-input" class="form-input">
-            <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">This is the actual bonus code users will enter</div>
+            <label for="edit-bonus-account-input">Account # (Code) *</label>
+            <input type="text" id="edit-bonus-account-input" class="wm-input">
+            <div class="form-note">This is the actual bonus code users will enter</div>
         </div>
         <div class="form-group">
-            <label for="edit-bonus-client-id" class="form-label">Client ID (Amount) *</label>
-            <input type="number" id="edit-bonus-client-id" class="form-input" step="0.01">
-            <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Amount users will receive when they redeem this code</div>
+            <label for="edit-bonus-client-id">Client ID (Amount) *</label>
+            <input type="number" id="edit-bonus-client-id" class="wm-input" step="0.01">
+            <div class="form-note">Amount users will receive when they redeem this code</div>
         </div>
         <div class="form-group">
-            <label for="edit-bonus-status" class="form-label">Status</label>
-            <input type="text" id="edit-bonus-status" class="form-input" value="Active" readonly>
-            <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Status is automatically managed</div>
+            <label for="edit-bonus-status">Status</label>
+            <input type="text" id="edit-bonus-status" class="wm-input" value="Active" readonly>
+            <div class="form-note">Status is automatically managed</div>
         </div>
         <div class="form-group">
-            <label for="edit-bonus-balance" class="form-label">Balance</label>
-            <input type="text" id="edit-bonus-balance" class="form-input" value="UNUSED" readonly>
-            <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Balance shows usage status</div>
+            <label for="edit-bonus-balance">Balance</label>
+            <input type="text" id="edit-bonus-balance" class="wm-input" value="UNUSED" readonly>
+            <div class="form-note">Balance shows usage status</div>
         </div>
         <div class="action-buttons">
-            <button id="save-bonus-edit-btn" class="btn btn-primary">
+            <button id="save-bonus-edit-btn" class="wm-button primary">
                 <i class="fas fa-save"></i> Save Changes
             </button>
-            <button id="cancel-bonus-edit-btn" class="btn btn-secondary">
+            <button id="cancel-bonus-edit-btn" class="wm-button">
                 <i class="fas fa-times"></i> Cancel
             </button>
         </div>
@@ -1408,7 +816,7 @@
             document.getElementById('bonus-search').addEventListener('input', searchBonus);
             
             // Tab navigation
-            document.querySelectorAll('.tab').forEach(tab => {
+            document.querySelectorAll('.wm-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     switchTab(this.dataset.tab);
                 });
@@ -1427,7 +835,7 @@
         // Update current time
         function updateTime() {
             const now = new Date();
-            document.getElementById('headerTime').textContent = 
+            document.getElementById('current-time').textContent = 
                 now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         }
         
@@ -1467,12 +875,12 @@
             addBonusTab.classList.add('hidden');
             
             // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
+            document.querySelectorAll('.wm-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
             // Activate selected tab
-            document.querySelector(`.tab[data-tab="${tabName}"]`).classList.add('active');
+            document.querySelector(`.wm-tab[data-tab="${tabName}"]`).classList.add('active');
             
             // Show selected tab
             if (tabName === 'users') {
@@ -1592,7 +1000,7 @@
             usersTableBody.innerHTML = '';
             
             if (users.length === 0) {
-                usersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 12px;">No users found</td></tr>';
+                usersTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No users found</td></tr>';
                 usersCountSpan.textContent = '0';
                 return;
             }
@@ -1617,11 +1025,11 @@
                     <td>${user.level || 'Calculated'}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn" onclick="openEditModal('user', '${user.account}')">
-                                <i class="fas fa-edit"></i>
+                            <button class="wm-button" onclick="openEditModal('user', '${user.account}')">
+                                <i class="fas fa-edit"></i> Edit
                             </button>
-                            <button class="btn btn-danger" onclick="deleteUser('${user.account}')">
-                                <i class="fas fa-trash"></i>
+                            <button class="wm-button danger" onclick="deleteUser('${user.account}')">
+                                <i class="fas fa-trash"></i> Delete
                             </button>
                         </div>
                     </td>
@@ -1637,7 +1045,7 @@
             bonusTableBody.innerHTML = '';
             
             if (bonusCodes.length === 0) {
-                bonusTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 12px;">No bonus codes found</td></tr>';
+                bonusTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No bonus codes found</td></tr>';
                 bonusCountSpan.textContent = '0';
                 return;
             }
@@ -1655,11 +1063,11 @@
                     <td><strong>${bonus.balance || 'UNUSED'}</strong></td>
                     <td>
                         <div class="action-buttons">
-                            <button class="btn" onclick="openEditModal('bonus', '${bonus.account}')">
-                                <i class="fas fa-edit"></i>
+                            <button class="wm-button" onclick="openEditModal('bonus', '${bonus.account}')">
+                                <i class="fas fa-edit"></i> Edit
                             </button>
-                            <button class="btn btn-danger" onclick="deleteBonus('${bonus.account}')">
-                                <i class="fas fa-trash"></i>
+                            <button class="wm-button danger" onclick="deleteBonus('${bonus.account}')">
+                                <i class="fas fa-trash"></i> Delete
                             </button>
                         </div>
                     </td>
