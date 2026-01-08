@@ -3,44 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bux iQ - Classic Cashout System</title>
+    <title>Quantum Rewards - Professional Cashout</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Windows Mobile 6.5 Color Palette - Retro Dark Theme */
-            --primary-dark: #0F3A5F;
-            --primary-main: #1F4E78;
-            --primary-light: #2B5B84;
-            --primary-lighter: #3A6B94;
-            
-            /* Accent Colors - Classic Windows Blue */
-            --accent-primary: #1F4E78;
-            --accent-secondary: #2B5B84;
-            --accent-success: #4A7C59;
-            --accent-warning: #8B6914;
-            --accent-purple: #4A4E68;
-            
-            /* Backgrounds - Very Dark Retro */
-            --bg-default: #0A0A0A;
-            --bg-paper: #1A1A1A;
-            --bg-elevated: #2A2A2A;
-            
-            /* Text Colors - Low Brightness */
-            --text-primary: #E0E0E0;
-            --text-secondary: #B0B0B0;
-            --text-muted: #808080;
-            
-            /* UI Elements - Classic Beveled Style */
-            --border-light: #606060;
-            --border-dark: #202020;
-            --shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.8);
-            --bevel-light: #505050;
-            --bevel-dark: #101010;
-            --transition: all 0.2s ease;
-            
-            /* Retro Textures */
-            --texture-scanlines: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='scanlines' patternUnits='userSpaceOnUse' width='100' height='4'%3E%3Cline x1='0' y1='0' x2='100' y2='0' stroke='%23000000' stroke-width='1' opacity='0.1'/%3E%3Cline x1='0' y1='2' x2='100' y2='2' stroke='%23000000' stroke-width='1' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23scanlines)'/%3E%3C/svg%3E");
+            --primary-dark: #1a1a2e;
+            --primary-main: #16213e;
+            --primary-light: #0f3460;
+            --secondary-dark: #533483;
+            --secondary-main: #e94560;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --background-default: #0a0a12;
+            --background-paper: #121226;
+            --divider: #2a2a4a;
         }
         
         * {
@@ -50,1217 +29,1219 @@
         }
         
         body {
-            background: 
-                linear-gradient(135deg, var(--bg-default) 0%, #050505 100%),
-                var(--texture-scanlines);
+            background-color: var(--background-default);
             color: var(--text-primary);
-            font-family: 'Segoe UI', 'Tahoma', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            line-height: 1.4;
-            min-height: 100vh;
-            position: relative;
-            font-size: 13px;
-        }
-        
-        /* CRT Effect for Retro Feel */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 0, 0, 0.15),
-                    rgba(0, 0, 0, 0.15) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
-            pointer-events: none;
-            z-index: 1;
+            line-height: 1.6;
         }
         
         #root {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 2;
         }
         
-        /* Windows Mobile 6.5 Header */
-        .app-header {
-            background: 
-                linear-gradient(to bottom, 
-                    var(--primary-dark) 0%, 
-                    var(--primary-main) 50%, 
-                    var(--primary-light) 100%);
-            border-bottom: 2px solid var(--bevel-light);
-            padding: 8px 12px;
+        /* Header */
+        .wm-header {
+            background: var(--primary-dark);
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--divider);
             position: sticky;
             top: 0;
             z-index: 100;
-            /* Classic 3D Beveled Border */
-            border-left: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-top: 2px solid var(--bevel-light);
-            box-shadow: var(--shadow-dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .logo {
-            height: 56px;
-            width: auto;
-            /* Retro aged/vintage effect */
-            filter: 
-                sepia(0.3) 
-                contrast(1.1) 
-                brightness(0.8) 
-                blur(0.5px)
-                drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.8));
-            opacity: 0.85;
-            /* Add retro pixelated effect */
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
-        }
-        
-        .app-title {
-            font-family: 'Segoe UI', 'Tahoma', sans-serif;
-            font-size: 16px;
+        .wm-header .start {
             font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: 0px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            position: relative;
         }
         
-        .header-actions {
+        .wm-header .title {
+            font-weight: 700;
+            font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 8px;
         }
         
-        .time-display {
+        .wm-header .title i {
+            margin-right: 8px;
+            color: var(--secondary-main);
+        }
+        
+        .wm-header .time {
             font-weight: 500;
-            color: var(--text-primary);
-            font-size: 11px;
-            background: var(--bg-elevated);
-            padding: 4px 8px;
-            border: 2px solid var(--border-dark);
-            font-family: 'Segoe UI', sans-serif;
-            /* Classic beveled button style */
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
         }
         
         /* Main Content */
-        .app-content {
-            flex: 1;
-            padding: 8px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+        .wm-content {
+            padding: 16px;
+            padding-bottom: 80px; /* Space for footer */
         }
         
-        /* Windows Mobile 6.5 Cards */
-        .card {
-            background: 
-                linear-gradient(to bottom, 
-                    var(--bg-elevated) 0%, 
-                    var(--bg-paper) 100%);
-            border-radius: 0px;
-            padding: 12px;
-            /* Classic 3D Beveled Borders */
-            border: 2px solid var(--border-dark);
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
-            box-shadow: var(--shadow-dark);
-            transition: var(--transition);
+        /* Progress Steps */
+        .progress-container {
+            margin-bottom: 24px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
             position: relative;
         }
         
-        .card:hover {
-            background: 
-                linear-gradient(to bottom, 
-                    #2A2A2A 0%, 
-                    var(--bg-paper) 100%);
-            /* Inset effect on hover */
-            border-left: 2px solid var(--bevel-dark);
-            border-top: 2px solid var(--bevel-dark);
-            border-right: 2px solid var(--bevel-light);
-            border-bottom: 2px solid var(--bevel-light);
+        .progress-step {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--background-paper);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid var(--divider);
+            z-index: 2;
+            transition: all 0.3s ease;
         }
         
-        .card-header {
-            margin-bottom: 8px;
+        .progress-step.active {
+            background-color: var(--secondary-main);
+            border-color: var(--secondary-main);
+            color: white;
+        }
+        
+        .progress-step.completed {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+        
+        .progress-connector {
+            flex: 1;
+            height: 2px;
+            background-color: var(--divider);
+            position: relative;
+            top: -18px;
+            z-index: 1;
+        }
+        
+        .progress-connector.active {
+            background-color: var(--secondary-main);
+        }
+        
+        .step-labels {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-dark);
-            padding-bottom: 4px;
+            margin-top: 8px;
         }
         
-        .card-title {
-            font-family: 'Segoe UI', 'Tahoma', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .card-title i {
-            color: var(--accent-primary);
-        }
-        
-        .card-actions {
-            display: flex;
-            gap: 4px;
-        }
-        
-        /* Windows Mobile 6.5 Buttons - Classic 3D Style */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 6px 12px;
-            border-radius: 0px;
-            font-weight: 500;
-            font-family: 'Segoe UI', sans-serif;
-            cursor: pointer;
-            transition: none;
-            border: 2px solid var(--border-dark);
-            font-size: 11px;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            /* Classic 3D Beveled Button Effect */
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-            color: var(--text-primary);
-        }
-        
-        .btn:active {
-            /* Pressed state - inverted bevel */
-            border-left: 2px solid var(--bevel-dark);
-            border-top: 2px solid var(--bevel-dark);
-            border-right: 2px solid var(--bevel-light);
-            border-bottom: 2px solid var(--bevel-light);
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.8);
-            background: linear-gradient(to bottom, var(--bg-paper) 0%, var(--bg-elevated) 100%);
-            transform: translate(1px, 1px);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--primary-main) 100%);
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        .btn-primary:active {
-            background: linear-gradient(to bottom, var(--primary-main) 0%, var(--primary-dark) 100%);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-            color: var(--text-primary);
-        }
-        
-        .btn-secondary:active {
-            background: linear-gradient(to bottom, var(--bg-paper) 0%, var(--bg-elevated) 100%);
-        }
-        
-        .btn-full {
-            width: 100%;
-        }
-        
-        /* Windows Mobile 6.5 Tabs */
-        .tabs-container {
-            display: flex;
-            overflow-x: auto;
-            margin-bottom: 8px;
-            padding-bottom: 2px;
-            scrollbar-width: none;
-            background: var(--bg-elevated);
-            border-radius: 0px;
-            padding: 2px;
-            /* Beveled border */
-            border: 2px solid var(--border-dark);
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
-            box-shadow: var(--shadow-dark);
-        }
-        
-        .tabs-container::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .tab {
-            padding: 6px 10px;
-            margin-right: 2px;
-            border-radius: 0px;
-            background: var(--bg-paper);
-            cursor: pointer;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: none;
-            /* Beveled tab style */
-            border: 1px solid var(--border-dark);
-            border-left: 1px solid var(--bevel-light);
-            border-top: 1px solid var(--bevel-light);
-            border-right: 1px solid var(--bevel-dark);
-            border-bottom: 1px solid var(--border-dark);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 11px;
-        }
-        
-        .tab.active {
-            background: linear-gradient(to bottom, var(--primary-light) 0%, var(--primary-main) 100%);
-            color: var(--text-primary);
-            font-weight: 600;
-            /* Active tab - different bevel */
-            border-left: 1px solid var(--bevel-dark);
-            border-top: 1px solid var(--bevel-dark);
-            border-right: 1px solid var(--bevel-light);
-            border-bottom: 1px solid var(--bevel-light);
-        }
-        
-        .tab:hover:not(.active) {
-            background: var(--bg-elevated);
-            color: var(--text-primary);
-        }
-        
-        /* Section Management */
-        .section {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .section.hidden {
-            display: none;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Forms */
-        .form-group {
-            margin-bottom: 8px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 2px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 11px;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 4px 6px;
-            border-radius: 0px;
-            border: 2px solid var(--border-dark);
-            background: var(--bg-paper);
-            color: var(--text-primary);
-            font-family: 'Segoe UI', sans-serif;
-            transition: none;
-            font-size: 11px;
-            /* Beveled input style */
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            /* Inset focus effect */
-            border-left: 2px solid var(--bevel-dark);
-            border-top: 2px solid var(--bevel-dark);
-            border-right: 2px solid var(--bevel-light);
-            border-bottom: 2px solid var(--bevel-light);
-            box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-        
-        /* Cashout Grid */
-        .cashout-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        
-        .cashout-item {
-            background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--bg-paper) 100%);
-            border-radius: 0px;
-            padding: 8px;
-            text-align: center;
-            transition: none;
-            /* Beveled borders */
-            border: 1px solid var(--border-dark);
-            border-left: 1px solid var(--bevel-light);
-            border-top: 1px solid var(--bevel-light);
-            border-right: 1px solid var(--bevel-dark);
-            border-bottom: 1px solid var(--bevel-dark);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .cashout-item:hover {
-            background: linear-gradient(to bottom, #2A2A2A 0%, var(--bg-paper) 100%);
-            /* Inset on hover */
-            border-left: 1px solid var(--bevel-dark);
-            border-top: 1px solid var(--bevel-dark);
-            border-right: 1px solid var(--bevel-light);
-            border-bottom: 1px solid var(--bevel-light);
-        }
-        
-        .cashout-image {
-            max-width: 100%;
-            height: 40px;
-            object-fit: contain;
-            margin-bottom: 4px;
-            /* Retro image effect */
-            filter: brightness(0.8) contrast(1.2) sepia(0.2);
-            image-rendering: pixelated;
-        }
-        
-        /* Alert Box - Retro Style */
-        .alert {
-            padding: 8px;
-            border-radius: 0px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            border: 2px solid;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 11px;
-            /* Beveled alert box */
-            border-left: 2px solid var(--bevel-light);
-            border-top: 2px solid var(--bevel-light);
-            border-right: 2px solid var(--bevel-dark);
-            border-bottom: 2px solid var(--bevel-dark);
-        }
-        
-        .alert-warning {
-            background: linear-gradient(to bottom, #2A241A 0%, #1A1410 100%);
-            border-color: var(--accent-warning);
-            color: var(--accent-warning);
-        }
-        
-        .alert-success {
-            background: linear-gradient(to bottom, #1A2A1A 0%, #0A1A0A 100%);
-            border-color: var(--accent-success);
-            color: var(--accent-success);
-        }
-        
-        .alert-icon {
-            margin-right: 6px;
-            margin-top: 2px;
+        .step-label {
             font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            width: 33.33%;
         }
         
-        /* User Profile */
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-        
-        .user-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 0px;
-            border: 2px solid var(--accent-primary);
-            object-fit: cover;
-            /* Retro box shadow */
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        }
-        
-        .user-details {
-            flex: 1;
-        }
-        
-        .user-name {
-            font-family: 'Segoe UI', 'Tahoma', sans-serif;
+        .step-label.active {
+            color: var(--text-primary);
             font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 2px;
         }
         
-        .user-level {
-            color: var(--text-muted);
-            font-size: 10px;
+        /* Form Steps */
+        .form-step {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-step.hidden {
+            display: none;
+        }
+        
+        /* Sections */
+        .wm-section {
+            background: var(--background-paper);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            margin-bottom: 16px;
+            font-size: 20px;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 4px;
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            color: var(--secondary-main);
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .wm-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--divider);
+            background: var(--primary-dark);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .wm-input:focus {
+            outline: none;
+            border-color: var(--secondary-main);
+        }
+        
+        .input-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            border-top: 1px solid var(--divider);
+            padding-top: 16px;
+        }
+        
+        .wm-button {
+            background: var(--primary-main);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .wm-button.primary {
+            background: var(--secondary-main);
+        }
+        
+        .wm-button.success {
+            background: var(--success-color);
+        }
+        
+        .wm-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .wm-button:disabled {
+            background: var(--divider);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .wm-button i {
+            margin: 0 4px;
+        }
+        
+        /* Rewards Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .reward-card {
+            background: var(--primary-dark);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reward-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .reward-card.selected {
+            border-color: var(--secondary-main);
+            box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.3);
+        }
+        
+        .reward-card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .reward-card.locked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .reward-card.locked::after {
+            content: '\f023';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: var(--text-secondary);
+            z-index: 2;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: var(--secondary-dark);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 4px;
+        }
+        
+        /* Confirmation Section */
+        .confirmation-details {
+            background: var(--primary-dark);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .reward-summary {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .reward-summary img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 12px;
+            border-radius: 8px;
         }
         
         .user-stats {
             display: flex;
             gap: 12px;
+            margin-bottom: 16px;
         }
         
-        .stat {
+        .stat-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
             text-align: center;
         }
         
         .stat-value {
-            font-family: 'Segoe UI', 'Tahoma', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            color: var(--accent-primary);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-        
-        .stat-label {
-            font-size: 9px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0px;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        
-        /* Divider */
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 8px 0;
-            color: var(--text-muted);
-        }
-        
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--border-dark);
-        }
-        
-        .divider span {
-            padding: 0 8px;
-            font-family: 'Segoe UI', sans-serif;
-            font-size: 10px;
-        }
-        
-        /* Custom scrollbar - Retro Style */
-        ::-webkit-scrollbar {
-            width: 12px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-paper);
-            border: 1px solid var(--border-dark);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--bg-elevated) 0%, var(--primary-dark) 100%);
-            border: 1px solid var(--border-dark);
-            /* Beveled scrollbar thumb */
-            border-left: 1px solid var(--bevel-light);
-            border-top: 1px solid var(--bevel-light);
-            border-right: 1px solid var(--bevel-dark);
-            border-bottom: 1px solid var(--bevel-dark);
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, var(--primary-main) 0%, var(--primary-dark) 100%);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .app-header {
-                padding: 6px 8px;
-            }
-            
-            .app-content {
-                padding: 6px;
-            }
-            
-            .cashout-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .app-title {
-                font-size: 12px;
-            }
-            
-            .tab {
-                padding: 4px 6px;
-                font-size: 9px;
-            }
-            
-            .cashout-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Utility classes */
-        .hidden {
-            display: none !important;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-1 {
+            font-weight: bold;
+            font-size: 18px;
             margin-bottom: 4px;
         }
         
-        .mb-2 {
-            margin-bottom: 6px;
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
         }
         
-        .mb-3 {
-            margin-bottom: 8px;
-        }
-        
-        .mt-1 {
-            margin-top: 4px;
-        }
-        
-        .mt-2 {
-            margin-top: 6px;
-        }
-        
-        .mt-3 {
-            margin-top: 8px;
-        }
-        
-        /* Level Badge - Retro Style */
-        .level-badge {
-            display: inline-flex;
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, var(--accent-warning) 0%, #5A4A14 100%);
-            color: var(--text-primary);
-            border-radius: 0px;
-            padding: 2px 6px;
-            font-size: 9px;
-            font-weight: 600;
-            font-family: 'Segoe UI', sans-serif;
-            /* Beveled badge */
-            border: 1px solid var(--border-dark);
-            border-left: 1px solid var(--bevel-light);
-            border-top: 1px solid var(--bevel-light);
-            border-right: 1px solid var(--bevel-dark);
-            border-bottom: 1px solid var(--bevel-dark);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
         }
         
-        /* Remove modern animations and effects */
-        * {
-            animation: none !important;
-            transition: none !important;
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
         
-        /* Only keep essential transitions for button states */
-        .btn:active {
-            transition: none;
+        .modal-content {
+            background: var(--background-paper);
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s;
         }
         
-        .section {
-            transition: none;
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .modal-header i {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--secondary-main);
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .code-display {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px;
+            background: var(--primary-dark);
+            border-radius: 8px;
+            text-align: center;
+            margin: 16px 0;
+            letter-spacing: 2px;
+            border: 1px dashed var(--divider);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .modal-actions .wm-button {
+            flex: 1;
+        }
+        
+        /* Footer Navigation */
+        .wm-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid var(--divider);
+            z-index: 100;
+        }
+        
+        .wm-footer-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .wm-footer-button.active {
+            color: var(--secondary-main);
+        }
+        
+        .wm-footer-button i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        /* Messages */
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .message.error {
+            background: rgba(233, 69, 96, 0.1);
+            color: var(--secondary-main);
+            border: 1px solid rgba(233, 69, 96, 0.3);
+        }
+        
+        .message.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .message.info {
+            background: rgba(15, 52, 96, 0.1);
+            color: var(--primary-light);
+            border: 1px solid rgba(15, 52, 96, 0.3);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        .security-badge i {
+            margin-right: 6px;
+            color: var(--success-color);
         }
     </style>
 </head>
 <body>
-    <div id="root">
-        <!-- Windows Mobile 6.5 Header -->
-        <header class="app-header">
-            <div class="logo-container">
-                <img src="https://i.postimg.cc/XvtmtjZL/Gemini-Generated-Image-e6decve6decve6de-removebg-preview.png" width="60px" alt="BUXiQ Logo" class="logo">
-                <div class="app-title">Bux iQ - Classic Cashout</div>
-            </div>
-            <div class="header-actions">
-                <div class="time-display" id="headerTime">12:00 PM</div>
-            </div>
-        </header>
-        
-        <!-- Main Content -->
-        <main class="app-content">
-            <!-- Alert Banner -->
-            <div class="alert alert-warning">
-                <i class="fas fa-exclamation-triangle alert-icon"></i>
-                <div>NEW! $1 = (1) pts & 50% user gets only!</div>
-            </div>
-            
-            <!-- Windows Mobile 6.5 Tabs Navigation -->
-            <div class="tabs-container">
-                <div class="tab active" data-section="dashboard">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </div>
-                <div class="tab" data-section="earn">
-                    <i class="fas fa-coins"></i>
-                    <span>Earn</span>
-                </div>
-                <div class="tab" data-section="cashout">
-                    <i class="fas fa-wallet"></i>
-                    <span>Cashout</span>
-                </div>
-                <div class="tab" data-section="history">
-                    <i class="fas fa-history"></i>
-                    <span>History</span>
-                </div>
-                <div class="tab" data-section="help">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Help</span>
-                </div>
-            </div>
-            
-            <!-- Dashboard Section -->
-            <div id="section-dashboard" class="section">
-                <div class="card">
-                    <div class="user-profile">
-                        <img src="https://ui-avatars.com/api/?background=1F4E78&color=E0E0E0&name=Guest&bold=true" class="user-avatar" id="userAvatar" alt="User Avatar">
-                        <div class="user-details">
-                            <div class="user-name" id="userName">Guest User</div>
-                            <div class="user-level">
-                                <span>Balance</span>
-                                <span class="level-badge" id="userBalance">$0.00</span>
-                            </div>
-                            <div class="user-stats">
-                                <div class="stat">
-                                    <div class="stat-value" id="userPoints">0</div>
-                                    <div class="stat-label">Points</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-value" id="userLevel">0</div>
-                                    <div class="stat-label">Level</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-full" id="loginButton">
-                        <i class="fas fa-sign-in-alt"></i>
-                        Login to Access Cashout
-                    </button>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-info-circle"></i>
-                            Classic Cashout System
-                        </h2>
-                    </div>
-                    <p style="margin-bottom: 8px;">Our retro-styled cashout system allows you to redeem your points for real rewards. No level requirements - just points!</p>
-                    <p style="color: var(--text-muted); font-size: 11px;">Point requirements are fetched directly from our CSV database and support decimal values.</p>
-                </div>
-            </div>
-            
-            <!-- Earn Section -->
-            <div id="section-earn" class="section hidden">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-coins"></i>
-                            Earning Portal
-                        </h2>
-                    </div>
-                    <p class="text-center mb-3">Complete offers and surveys to earn points for cashout</p>
-                    
-                    <div class="cashout-grid">
-                        <div class="cashout-item">
-                            <i class="fas fa-tasks" style="font-size: 18px; color: var(--accent-primary); margin-bottom: 4px;"></i>
-                            <h3>Complete Surveys</h3>
-                        </div>
-                        <div class="cashout-item">
-                            <i class="fas fa-star" style="font-size: 18px; color: var(--accent-primary); margin-bottom: 4px;"></i>
-                            <h3>Earn Points</h3>
-                        </div>
-                        <div class="cashout-item">
-                            <i class="fas fa-gift" style="font-size: 18px; color: var(--accent-primary); margin-bottom: 4px;"></i>
-                            <h3>Cashout Rewards</h3>
-                        </div>
-                    </div>
-                    
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle alert-icon"></i>
-                        <div>Login to access earning opportunities</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cashout Section -->
-            <div id="section-cashout" class="section hidden">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-wallet"></i>
-                            Classic Cashout
-                        </h2>
-                        <div class="card-actions">
-                            <button class="btn btn-secondary" id="refreshCashout">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div id="cashout-login" class="hidden">
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle alert-icon"></i>
-                            <div>Please login to access the cashout system</div>
-                        </div>
-                        <button class="btn btn-primary btn-full" id="cashoutLoginButton">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Login to Cashout
-                        </button>
-                    </div>
-                    
-                    <div id="cashout-content">
-                        <div class="user-stats" style="margin-bottom: 12px;">
-                            <div class="stat">
-                                <div class="stat-value" id="cashoutBalance">0</div>
-                                <div class="stat-label">Your Points</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value" id="cashoutLevel">0</div>
-                                <div class="stat-label">Your Level</div>
-                            </div>
-                        </div>
-                        
-                        <div class="alert alert-success">
-                            <i class="fas fa-info-circle alert-icon"></i>
-                            <div>No level requirements! Redeem any reward if you have enough points.</div>
-                        </div>
-                        
-                        <div class="cashout-grid" id="cashoutOptions">
-                            <!-- Cashout options will be loaded here -->
-                            <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
-                                <div style="font-size: 11px; color: var(--text-muted);">Loading cashout options...</div>
-                            </div>
-                        </div>
-                        
-                        <div id="cashout-message" class="alert hidden">
-                            <i class="fas fa-info-circle alert-icon"></i>
-                            <div id="cashout-message-text"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- History Section -->
-            <div id="section-history" class="section hidden">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-history"></i>
-                            Cashout History
-                        </h2>
-                    </div>
-                    <div id="history-content">
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle alert-icon"></i>
-                            <div>Please login to view your cashout history</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Help Section -->
-            <div id="section-help" class="section hidden">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-question-circle"></i>
-                            Cashout Help
-                        </h2>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <h3 style="font-size: 13px; color: var(--accent-primary); margin-bottom: 4px;">How to Cashout</h3>
-                        <p style="font-size: 11px;">1. Earn points by completing offers and surveys</p>
-                        <p style="font-size: 11px;">2. Go to the Cashout tab</p>
-                        <p style="font-size: 11px;">3. Select your preferred reward</p>
-                        <p style="font-size: 11px;">4. Confirm your selection</p>
-                        <p style="font-size: 11px;">5. Receive your reward code</p>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <h3 style="font-size: 13px; color: var(--accent-primary); margin-bottom: 4px;">Point Requirements</h3>
-                        <p style="font-size: 11px;">Point requirements are fetched directly from our database and may change. Decimal values are supported (e.g., 10.5 points).</p>
-                    </div>
-                    
-                    <div>
-                        <h3 style="font-size: 13px; color: var(--accent-primary); margin-bottom: 4px;">No Level Restrictions</h3>
-                        <p style="font-size: 11px;">Unlike other systems, we don't impose level requirements. If you have enough points, you can redeem any reward!</p>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <!-- Windows Mobile Header -->
+    <div class="wm-header">
+        <div class="start">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="title">
+            <i class="fas fa-gem"></i> Quantum Rewards
+        </div>
+        <div class="time" id="current-time">12:00 PM</div>
     </div>
 
-    <script>
-        // Global variables
-        let currentUser = null;
-        let cashoutData = [];
-        const CASHOUT_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPFdYsa7nBY6co_sbvqxVR1l9fEHDX7bNbqTqoBhlDXrwuApwFRMKH42Jkqa2zt6FwvN6SEJHqgJOD/pub?gid=0&single=true&output=csv';
-        const USER_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv';
+    <!-- Main Content -->
+    <div class="wm-content">
+        <!-- Progress Steps -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-step active">
+                    <span>1</span>
+                </div>
+                <div class="progress-connector"></div>
+                <div class="progress-step">
+                    <span>2</span>
+                </div>
+                <div class="progress-connector"></div>
+                <div class="progress-step">
+                    <span>3</span>
+                </div>
+            </div>
+            <div class="step-labels">
+                <div class="step-label active">Verify Account</div>
+                <div class="step-label">Select Reward</div>
+                <div class="step-label">Confirm & Claim</div>
+            </div>
+        </div>
 
-        // DOM Content Loaded - Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update header time
-            updateHeaderTime();
-            setInterval(updateHeaderTime, 60000);
-            
-            // Check for existing session
-            checkExistingSession();
-            
-            // Initialize event listeners
-            initializeEventListeners();
-            
-            // Load cashout data
-            loadCashoutData();
-        });
-
-        // Initialize all event listeners
-        function initializeEventListeners() {
-            // Tab click handlers
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', e => {
-                    e.preventDefault();
-                    showSection(tab.dataset.section);
-                    
-                    // Update active tab
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                });
-            });
-
-            // Login buttons
-            document.getElementById('loginButton')?.addEventListener('click', () => {
-                showSection('earn');
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('.tab[data-section="earn"]').classList.add('active');
-            });
-
-            document.getElementById('cashoutLoginButton')?.addEventListener('click', () => {
-                showSection('earn');
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('.tab[data-section="earn"]').classList.add('active');
-            });
-
-            // Refresh cashout button
-            document.getElementById('refreshCashout')?.addEventListener('click', loadCashoutData);
-        }
-
-        // Update header time
-        function updateHeaderTime() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const displayHours = hours % 12 || 12;
-            
-            document.getElementById('headerTime').textContent = `${displayHours}:${minutes} ${ampm}`;
-        }
-
-        // Check for existing user session
-        function checkExistingSession() {
-            const savedAccount = localStorage.getItem('buxiq_account');
-            const savedGoogleUser = localStorage.getItem('buxiq_google_user');
-            
-            if (savedGoogleUser) {
-                // Handle Google user session restoration
-                restoreGoogleSession(savedGoogleUser);
-            } else if (savedAccount) {
-                // Handle manual login session restoration
-                restoreManualSession(savedAccount);
-            }
-        }
-
-        // Restore Google session
-        async function restoreGoogleSession(savedGoogleUser) {
-            try {
-                const googleUser = JSON.parse(savedGoogleUser);
-                const user = await fetchUserData(googleUser.account);
+        <!-- Form Steps -->
+        <!-- Step 1: Account Verification -->
+        <div class="form-step">
+            <div class="wm-section">
+                <h2><i class="fas fa-user-check"></i> Account Verification</h2>
+                <div class="form-group">
+                    <label for="account">Account ID</label>
+                    <input type="text" id="account" class="wm-input" placeholder="Enter your account ID">
+                    <div class="input-hint">Enter your registered account ID to verify eligibility</div>
+                </div>
                 
-                if (user) {
-                    currentUser = user;
-                    updateUserUI(user);
-                    updateCashoutUI();
-                }
-            } catch (err) {
-                console.error('Error restoring Google session:', err);
-            }
-        }
-
-        // Restore manual session
-        async function restoreManualSession(account) {
-            try {
-                const user = await fetchUserData(account);
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i> Your information is securely encrypted
+                </div>
                 
-                if (user) {
-                    currentUser = user;
-                    updateUserUI(user);
-                    updateCashoutUI();
-                }
-            } catch (err) {
-                console.error('Error restoring manual session:', err);
-            }
-        }
+                <div id="message-step1" class="message"></div>
+            </div>
+        </div>
 
-        // Fetch user data from CSV
-        async function fetchUserData(accountId) {
-            try {
-                const response = await fetch(USER_DATA_URL);
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const data = await response.text();
-                const rows = data.trim().split('\n').map(row => row.split(','));
-
-                // Find user by account number
-                return rows.find(r => r[0] === accountId);
-            } catch (err) {
-                console.error('Error fetching user data:', err);
-                return null;
-            }
-        }
-
-        // Update user UI
-        function updateUserUI(user) {
-            try {
-                const avatarUrl = user[5] || `https://ui-avatars.com/api/?name=${encodeURIComponent(user[4] || 'User')}&background=1F4E78&color=E0E0E0`;
-
-                // Update avatar
-                const userAvatar = document.getElementById('userAvatar');
-                if (userAvatar) userAvatar.src = avatarUrl;
-
-                // Update username
-                const usernameEl = document.getElementById('userName');
-                if (usernameEl) usernameEl.textContent = user[4] || 'User';
-
-                // Update balance
-                const balance = parseFloat(user[3] || 0);
-                const balanceEl = document.getElementById('userBalance');
-                if (balanceEl) balanceEl.textContent = `$${balance.toFixed(2)}`;
-
-                // Update points (assuming 1:1 conversion for now)
-                const pointsEl = document.getElementById('userPoints');
-                if (pointsEl) pointsEl.textContent = Math.floor(balance);
-
-                // Update level
-                const levelEl = document.getElementById('userLevel');
-                if (levelEl) levelEl.textContent = user[6] || '1';
-            } catch (error) {
-                console.error('Error updating user UI:', error);
-            }
-        }
-
-        // Update cashout UI based on login status
-        function updateCashoutUI() {
-            const cashoutLogin = document.getElementById('cashout-login');
-            const cashoutContent = document.getElementById('cashout-content');
-            
-            if (currentUser) {
-                // User is logged in
-                if (cashoutLogin) cashoutLogin.classList.add('hidden');
-                if (cashoutContent) cashoutContent.classList.remove('hidden');
+        <!-- Step 2: Reward Selection -->
+        <div class="form-step hidden">
+            <div class="wm-section">
+                <h2><i class="fas fa-gift"></i> Select Your Reward</h2>
+                <p style="margin-bottom: 16px; color: var(--text-secondary);">Choose from our exclusive rewards catalog. Your current balance will be shown after verification.</p>
                 
-                // Update cashout stats
-                const balance = parseFloat(currentUser[3] || 0);
-                const cashoutBalance = document.getElementById('cashoutBalance');
-                const cashoutLevel = document.getElementById('cashoutLevel');
-                
-                if (cashoutBalance) cashoutBalance.textContent = Math.floor(balance);
-                if (cashoutLevel) cashoutLevel.textContent = currentUser[6] || '1';
-                
-                // Display cashout options
-                displayCashoutOptions();
-            } else {
-                // User is not logged in
-                if (cashoutLogin) cashoutLogin.classList.remove('hidden');
-                if (cashoutContent) cashoutContent.classList.add('hidden');
-            }
-        }
-
-        // Load cashout data from CSV
-        async function loadCashoutData() {
-            try {
-                const response = await fetch(CASHOUT_CSV_URL);
-                if (!response.ok) throw new Error('Failed to fetch cashout data');
-                
-                const text = await response.text();
-                const rows = text.trim().split('\n').map(row => row.split(','));
-                const headers = rows.shift().map(h => h.trim().toLowerCase());
-
-                cashoutData = rows.map(row => {
-                    const obj = {};
-                    headers.forEach((header, i) => {
-                        obj[header] = row[i] ? row[i].trim() : '';
-                    });
-                    return obj;
-                });
-
-                console.log('Loaded cashout data:', cashoutData);
-                displayCashoutOptions();
-            } catch (error) {
-                console.error('Error loading cashout data:', error);
-                showCashoutMessage('Failed to load cashout options. Please try again later.', 'warning');
-            }
-        }
-
-        // Display cashout options
-        function displayCashoutOptions() {
-            const cashoutOptions = document.getElementById('cashoutOptions');
-            if (!cashoutOptions) return;
-            
-            if (cashoutData.length === 0) {
-                cashoutOptions.innerHTML = `
+                <div id="rewards-container" class="grid-container">
+                    <!-- Rewards will be loaded here -->
                     <div style="grid-column: 1 / -1; text-align: center; padding: 20px;">
-                        <div style="font-size: 11px; color: var(--text-muted);">No cashout options available</div>
+                        <div class="loading"></div>
+                        <p style="color: var(--text-secondary); margin-top: 8px;">Loading rewards catalog...</p>
                     </div>
-                `;
-                return;
-            }
-
-            cashoutOptions.innerHTML = cashoutData.map(reward => {
-                // Extract point requirement - support decimal values
-                const pointsRequired = parseFloat(reward.amount || reward.points || "0");
-                const userPoints = currentUser ? Math.floor(parseFloat(currentUser[3] || 0)) : 0;
-                const canRedeem = userPoints >= pointsRequired;
+                </div>
                 
-                return `
-                <div class="cashout-item ${!canRedeem ? 'locked' : ''}" 
-                     data-reward-id="${reward.id || ''}"
-                     data-reward-name="${reward.rewardname || 'Reward'}" 
-                     data-reward-amount="${pointsRequired}"
-                     data-reward-logo="${reward.rewardlogourl || ''}">
-                    <img src="${reward.rewardlogourl || 'https://via.placeholder.com/40'}" 
-                         alt="${reward.rewardname || 'Reward'}" 
-                         class="cashout-image">
-                    <h3 style="font-size: 12px; margin-bottom: 4px;">${reward.rewardname || 'Reward'}</h3>
-                    <p style="font-size: 10px; color: ${canRedeem ? 'var(--accent-success)' : 'var(--text-muted)'}; margin-bottom: 4px;">
-                        ${pointsRequired} points
-                    </p>
-                    <button class="btn ${canRedeem ? 'btn-primary' : 'btn-secondary'}" 
-                            style="font-size: 10px; padding: 4px 8px;"
-                            ${!canRedeem ? 'disabled' : ''}>
-                        ${canRedeem ? 'Redeem' : 'Insufficient Points'}
+                <div id="message-step2" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="form-step hidden">
+            <div class="wm-section">
+                <h2><i class="fas fa-clipboard-check"></i> Confirm Your Redemption</h2>
+                
+                <div class="confirmation-details">
+                    <div class="reward-summary">
+                        <img id="selected-reward-logo" src="https://via.placeholder.com/60" alt="Reward">
+                        <div>
+                            <h3 id="selected-reward-name" style="font-weight: bold; font-size: 18px;">Reward Name</h3>
+                            <p id="selected-reward-amount" style="color: var(--text-secondary);">0 points</p>
+                            <p id="selected-reward-level" style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Level required: 0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-stats">
+                        <div class="stat-box">
+                            <div class="stat-value" id="user-balance">0</div>
+                            <div class="stat-label">Your Balance</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="user-level">0</div>
+                            <div class="stat-label">Your Level</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="note">Special Instructions (Optional)</label>
+                        <textarea id="note" rows="3" class="wm-input" placeholder="Any special delivery instructions or notes..."></textarea>
+                    </div>
+                </div>
+                
+                <div id="message-step3" class="message"></div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="button-container">
+            <button id="prev-btn" class="wm-button hidden">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button id="next-btn" class="wm-button primary">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <div class="wm-footer">
+        <div class="wm-footer-button active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-gift"></i>
+            <span>Rewards</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </div>
+        <div class="wm-footer-button">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </div>
+    </div>
+
+    <!-- Claim Modal -->
+    <div id="claim-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <div class="modal-title">Redemption Successful!</div>
+            </div>
+            
+            <div style="text-align: center;">
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-dark); display: flex; align-items: center; justify-content: center;">
+                        <img id="modal-reward-logo" src="https://via.placeholder.com/50" alt="Reward" style="width: 50px; height: 50px; object-fit: contain;">
+                    </div>
+                </div>
+                <h3 id="modal-reward-name" style="font-size: 18px; font-weight: bold; margin-bottom: 4px;">Reward Name</h3>
+                <p id="modal-reward-amount" style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">0 points</p>
+                
+                <div style="margin-bottom: 16px;">
+                    <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">Your redemption code:</p>
+                    <div id="claim-code-display" class="code-display">CODE-HERE</div>
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px;">This code will be valid for 30 days</p>
+                </div>
+                
+                <div class="modal-actions">
+                    <button id="copy-code" class="wm-button success">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                    <button id="close-modal" class="wm-button">
+                        <i class="fas fa-times"></i> Close
                     </button>
                 </div>
-                `;
-            }).join('');
+            </div>
+        </div>
+    </div>
 
-            // Add event listeners to redeem buttons
-            document.querySelectorAll('.cashout-item:not(.locked) button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const cashoutItem = this.closest('.cashout-item');
-                    const rewardName = cashoutItem.getAttribute('data-reward-name');
-                    const pointsRequired = cashoutItem.getAttribute('data-reward-amount');
-                    
-                    redeemReward(rewardName, pointsRequired);
-                });
-            });
-        }
-
-        // Redeem reward
-        function redeemReward(rewardName, pointsRequired) {
-            if (!currentUser) {
-                showCashoutMessage('Please login to redeem rewards', 'warning');
-                return;
+    <!-- Main Script -->
+    <script>
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update time in header
+            function updateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                document.getElementById('current-time').textContent = timeString;
             }
             
-            const userPoints = Math.floor(parseFloat(currentUser[3] || 0));
+            updateTime();
+            setInterval(updateTime, 60000);
             
-            if (userPoints < pointsRequired) {
-                showCashoutMessage(`Insufficient points. You need ${pointsRequired} points but only have ${userPoints}.`, 'warning');
-                return;
-            }
-            
-            // Simulate redemption process
-            showCashoutMessage(`Processing redemption for ${rewardName}...`, 'success');
-            
-            // In a real implementation, you would send this to your backend
-            setTimeout(() => {
-                showCashoutMessage(`Success! You've redeemed ${rewardName} for ${pointsRequired} points. Your reward code has been sent to your account.`, 'success');
-                
-                // Update user points (in a real app, this would come from the backend)
-                const newBalance = userPoints - pointsRequired;
-                if (currentUser) {
-                    currentUser[3] = newBalance.toString();
-                    updateUserUI(currentUser);
-                    updateCashoutUI();
-                }
-            }, 2000);
-        }
+            // Initialize the reward system
+            initRewardSystem();
+        });
 
-        // Show cashout message
-        function showCashoutMessage(message, type) {
-            const messageEl = document.getElementById('cashout-message');
-            const messageText = document.getElementById('cashout-message-text');
-            
-            if (messageEl && messageText) {
-                messageText.textContent = message;
-                messageEl.className = `alert ${type === 'success' ? 'alert-success' : 'alert-warning'}`;
-                messageEl.classList.remove('hidden');
-                
-                // Auto-hide after 5 seconds
-                setTimeout(() => {
-                    messageEl.classList.add('hidden');
-                }, 5000);
-            }
-        }
+        // Reward System
+        function initRewardSystem() {
+            // Reward data from Google Sheets
+            const rewardsCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQPFdYsa7nBY6co_sbvqxVR1l9fEHDX7bNbqTqoBhlDXrwuApwFRMKH42Jkqa2zt6FwvN6SEJHqgJOD/pub?gid=0&single=true&output=csv';
+            const userDataCSVURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQHuo-I6k4RbAnXvz_FvCzshqg7Cm5dqAXwNkvDLpgpZH84OGUSbX6TiOUfMrCHv3CiNnLnx0IhzNZC/pub?gid=0&single=true&output=csv';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyvw4LiShTvgnTTLRLISnTYJRhqeStmZgL9YD_ZuQEJubcDPH8bSbGpHPCVHDfx0dbW/exec';
 
-        // Navigation handler
-        function showSection(section) {
-            try {
-                const sections = ['dashboard', 'earn', 'cashout', 'history', 'help'];
-                sections.forEach(sec => {
-                    const sectionEl = document.getElementById('section-' + sec);
-                    if (sectionEl) {
-                        sectionEl.classList.toggle('hidden', sec !== section);
+            let currentStep = 1;
+            const totalSteps = 3;
+            let selectedReward = null;
+            let userBalance = 0;
+            let userLevel = 0;
+            let rewardsData = [];
+
+            // DOM Elements
+            const nextBtn = document.getElementById("next-btn");
+            const prevBtn = document.getElementById("prev-btn");
+            const messageBoxes = {
+                step1: document.getElementById("message-step1"),
+                step2: document.getElementById("message-step2"),
+                step3: document.getElementById("message-step3")
+            };
+            const progressSteps = document.querySelectorAll(".progress-step");
+            const progressConnectors = document.querySelectorAll(".progress-connector");
+            const stepLabels = document.querySelectorAll(".step-label");
+            const rewardsContainer = document.getElementById("rewards-container");
+            const selectedRewardName = document.getElementById("selected-reward-name");
+            const selectedRewardAmount = document.getElementById("selected-reward-amount");
+            const selectedRewardLogo = document.getElementById("selected-reward-logo");
+            const selectedRewardLevel = document.getElementById("selected-reward-level");
+            const userBalanceDisplay = document.getElementById("user-balance");
+            const userLevelDisplay = document.getElementById("user-level");
+            const claimModal = document.getElementById("claim-modal");
+            const closeModalBtn = document.getElementById("close-modal");
+            const copyCodeBtn = document.getElementById("copy-code");
+            const claimCodeDisplay = document.getElementById("claim-code-display");
+            const modalRewardName = document.getElementById("modal-reward-name");
+            const modalRewardAmount = document.getElementById("modal-reward-amount");
+            const modalRewardLogo = document.getElementById("modal-reward-logo");
+
+            // Event Listeners
+            if (nextBtn) nextBtn.addEventListener("click", handleStep);
+            if (prevBtn) prevBtn.addEventListener("click", prevStep);
+            if (closeModalBtn) closeModalBtn.addEventListener("click", () => claimModal.classList.remove("active"));
+            if (copyCodeBtn) copyCodeBtn.addEventListener("click", copyClaimCode);
+
+            // Functions
+            function updateStepUI() {
+                // Show/hide form steps
+                document.querySelectorAll('.form-step').forEach((step, index) => {
+                    if (index + 1 === currentStep) {
+                        step.classList.remove("hidden");
+                    } else {
+                        step.classList.add("hidden");
                     }
                 });
-                
-                // Update cashout UI when showing cashout section
-                if (section === 'cashout') {
-                    updateCashoutUI();
+
+                // Update progress steps
+                progressSteps.forEach((step, index) => {
+                    if (index + 1 < currentStep) {
+                        step.classList.remove("active");
+                        step.classList.add("completed");
+                        step.innerHTML = '<i class="fas fa-check"></i>';
+                    } else if (index + 1 === currentStep) {
+                        step.classList.add("active");
+                        step.classList.remove("completed");
+                        step.innerHTML = `<span>${index + 1}</span>`;
+                    } else {
+                        step.classList.remove("active", "completed");
+                        step.innerHTML = `<span>${index + 1}</span>`;
+                    }
+                });
+
+                // Update progress connectors
+                progressConnectors.forEach((connector, index) => {
+                    if (index + 1 < currentStep) {
+                        connector.classList.add("active");
+                    } else {
+                        connector.classList.remove("active");
+                    }
+                });
+
+                // Update step labels
+                stepLabels.forEach((label, index) => {
+                    if (index + 1 <= currentStep) {
+                        label.classList.add("active");
+                    } else {
+                        label.classList.remove("active");
+                    }
+                });
+
+                // Update next/prev buttons
+                if (nextBtn) {
+                    if (currentStep === totalSteps) {
+                        nextBtn.innerHTML = '<i class="fas fa-gift"></i> Redeem Now';
+                        nextBtn.classList.add("success");
+                        if (prevBtn) prevBtn.classList.remove("hidden");
+                    } else if (currentStep === 1) {
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                        nextBtn.classList.remove("success");
+                        if (prevBtn) prevBtn.classList.add("hidden");
+                    } else {
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                        nextBtn.classList.remove("success");
+                        if (prevBtn) prevBtn.classList.remove("hidden");
+                    }
                 }
-            } catch (error) {
-                console.error('Error showing section:', error);
             }
+
+            async function loadRewardsData() {
+                try {
+                    const response = await fetch(rewardsCSVURL);
+                    if (!response.ok) throw new Error('Failed to fetch rewards data');
+                    const text = await response.text();
+                    const rows = text.trim().split('\n').map(row => row.split(','));
+                    const headers = rows.shift().map(h => h.trim().toLowerCase());
+
+                    rewardsData = rows.map(row => {
+                        const obj = {};
+                        headers.forEach((header, i) => {
+                            obj[header] = row[i] ? row[i].trim() : '';
+                        });
+                        return obj;
+                    });
+
+                    displayRewards();
+                } catch (error) {
+                    console.error('Error loading rewards:', error);
+                    if (rewardsContainer) {
+                        rewardsContainer.innerHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--secondary-main);">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 8px;"></i>
+                                <p>Failed to load rewards. Please try again later.</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            function displayRewards() {
+                if (!rewardsContainer) return;
+                
+                if (rewardsData.length === 0) {
+                    rewardsContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--text-secondary);">
+                            <i class="fas fa-box-open" style="font-size: 24px; margin-bottom: 8px;"></i>
+                            <p>No rewards available at this time.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                rewardsContainer.innerHTML = rewardsData.map(reward => {
+                    const requiredLevel = parseInt(reward.level || reward.minlevel || "0");
+                    const isLocked = userLevel < requiredLevel;
+                    
+                    return `
+                    <div class="reward-card ${isLocked ? 'locked' : ''}" 
+                         data-reward-name="${reward.rewardname || 'Reward'}" 
+                         data-reward-amount="${reward.amount || '0'}"
+                         data-reward-logo="${reward.rewardlogourl || ''}"
+                         data-claim-code="${reward.claimcode || ''}"
+                         data-required-level="${requiredLevel}">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <img src="${reward.rewardlogourl || 'https://via.placeholder.com/40'}" 
+                                 alt="${reward.rewardname || 'Reward'}" 
+                                 style="width: 40px; height: 40px; object-fit: contain; margin-right: 8px; border-radius: 6px;">
+                            <div style="flex: 1;">
+                                <h3 style="font-weight: bold; font-size: 14px;">${reward.rewardname || 'Reward'}</h3>
+                                <p style="color: var(--text-secondary); font-size: 12px;">${reward.amount || '0'}</p>
+                                ${requiredLevel > 0 ? `<span class="level-badge">Level ${requiredLevel}+</span>` : ''}
+                            </div>
+                        </div>
+                        <div style="padding-top: 8px; border-top: 1px solid var(--divider); display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 10px; ${isLocked ? 'color: var(--secondary-main);' : 'color: var(--text-secondary);'}">${isLocked ? 'Level locked' : 'Available'}</span>
+                            <span style="font-size: 10px; ${isLocked ? 'color: var(--text-secondary);' : 'color: var(--primary-light);'}">
+                                ${isLocked ? 'Locked' : 'Select'} <i class="fas ${isLocked ? 'fa-lock' : 'fa-chevron-right'}" style="margin-left: 2px;"></i>
+                            </span>
+                        </div>
+                    </div>
+                `}).join('');
+
+                // Add click event to reward cards (only for unlocked ones)
+                document.querySelectorAll('.reward-card:not(.locked)').forEach(card => {
+                    card.addEventListener('click', function() {
+                        // Remove selected class from all cards
+                        document.querySelectorAll('.reward-card').forEach(c => {
+                            c.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked card
+                        this.classList.add('selected');
+                        
+                        // Set selected reward
+                        selectedReward = {
+                            name: this.getAttribute('data-reward-name'),
+                            amount: this.getAttribute('data-reward-amount'),
+                            logo: this.getAttribute('data-reward-logo'),
+                            claimCode: this.getAttribute('data-claim-code'),
+                            requiredLevel: parseInt(this.getAttribute('data-required-level') || "0")
+                        };
+                        
+                        clearMessage('step2');
+                    });
+                });
+            }
+
+            async function fetchUserData(accountId) {
+                try {
+                    const res = await fetch(userDataCSVURL);
+                    if (!res.ok) throw new Error('Failed to fetch user data');
+                    const text = await res.text();
+                    const rows = text.trim().split('\n').map(row => row.split(','));
+                    const headers = rows.shift().map(h => h.trim().toLowerCase());
+
+                    const users = rows.map(row => {
+                        const obj = {};
+                        headers.forEach((header, i) => {
+                            obj[header] = row[i] ? row[i].trim() : '';
+                        });
+                        return obj;
+                    });
+
+                    return users.find(u => u['account#'] && u['account#'].toLowerCase() === accountId.toLowerCase());
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                    showError("step1", "Failed to load user data. Please try again later.");
+                    return null;
+                }
+            }
+
+            async function handleStep() {
+                clearMessages();
+
+                // Validate current step before proceeding
+                if (currentStep === 1) {
+                    const account = document.getElementById("account")?.value.trim();
+                    if (!account) {
+                        showError("step1", "Please enter your Account ID.");
+                        return;
+                    }
+                    
+                    // Validate account ID format (basic validation)
+                    if (account.length < 3) {
+                        showError("step1", "Please enter a valid Account ID.");
+                        return;
+                    }
+                    
+                    // Fetch user data
+                    if (nextBtn) {
+                        nextBtn.disabled = true;
+                        nextBtn.innerHTML = '<div class="loading"></div> Verifying...';
+                    }
+                    
+                    const user = await fetchUserData(account);
+                    
+                    if (nextBtn) {
+                        nextBtn.disabled = false;
+                        nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+                    }
+                    
+                    if (!user) {
+                        showError("step1", "Account ID not found. Please check and try again.");
+                        return;
+                    }
+                    
+                    userBalance = parseInt(user.balance || "0");
+                    userLevel = parseInt(user.level || "0");
+                    
+                    if (userBalanceDisplay) userBalanceDisplay.textContent = userBalance;
+                    if (userLevelDisplay) userLevelDisplay.textContent = userLevel;
+                    
+                    // Show success message
+                    showSuccess("step1", `Account verified successfully! Your balance: ${userBalance} points, Level: ${userLevel}`);
+                    
+                    // Reload rewards with user's level
+                    displayRewards();
+                }
+
+                if (currentStep === 2) {
+                    if (!selectedReward) {
+                        showError("step2", "Please select a reward to continue.");
+                        return;
+                    }
+                    
+                    // Check if user has the required level
+                    if (userLevel < selectedReward.requiredLevel) {
+                        showError("step2", `You need to be at least level ${selectedReward.requiredLevel} to redeem this reward. Your current level is ${userLevel}.`);
+                        return;
+                    }
+                    
+                    // Update the selected reward display
+                    if (selectedRewardName) selectedRewardName.textContent = selectedReward.name;
+                    if (selectedRewardAmount) selectedRewardAmount.textContent = selectedReward.amount;
+                    if (selectedRewardLogo) {
+                        selectedRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
+                        selectedRewardLogo.alt = selectedReward.name;
+                    }
+                    if (selectedRewardLevel) {
+                        selectedRewardLevel.textContent = `Level required: ${selectedReward.requiredLevel}`;
+                    }
+                    
+                    // Show success message
+                    showSuccess("step2", `${selectedReward.name} selected. Click Next to continue.`);
+                }
+
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    updateStepUI();
+                } else {
+                    // Final submit logic
+                    const account = document.getElementById("account")?.value.trim();
+                    const note = document.getElementById("note")?.value.trim();
+                    
+                    // Check if user has enough balance (if needed)
+                    const rewardCost = parseInt(selectedReward.amount.replace(/[^0-9]/g, '')) || 0;
+                    
+                    if (userBalance < rewardCost) {
+                        showError("step3", "Insufficient balance for this reward.");
+                        return;
+                    }
+                    
+                    // Check level requirement again (just in case)
+                    if (userLevel < selectedReward.requiredLevel) {
+                        showError("step3", `You need to be at least level ${selectedReward.requiredLevel} to redeem this reward. Your current level is ${userLevel}.`);
+                        return;
+                    }
+                    
+                    // Show the claim code modal
+                    showClaimModal();
+                }
+            }
+
+            function showClaimModal() {
+                if (!selectedReward) return;
+                
+                if (modalRewardName) modalRewardName.textContent = selectedReward.name;
+                if (modalRewardAmount) modalRewardAmount.textContent = selectedReward.amount;
+                if (modalRewardLogo) {
+                    modalRewardLogo.src = selectedReward.logo || 'https://via.placeholder.com/50';
+                    modalRewardLogo.alt = selectedReward.name;
+                }
+                if (claimCodeDisplay) claimCodeDisplay.textContent = selectedReward.claimCode || 'CODE-NOT-FOUND';
+                
+                if (claimModal) claimModal.classList.add("active");
+                
+                // Submit to Google Sheets
+                submitRedemption();
+            }
+
+            async function submitRedemption() {
+                const account = document.getElementById("account")?.value.trim();
+                const note = document.getElementById("note")?.value.trim();
+                if (!account || !selectedReward) return;
+
+                try {
+                    const response = await fetch(rewardsCSVURL);
+                    const csvData = await response.text();
+                    const rewards = parseCSV(csvData);
+
+                    const rewardData = rewards.find(r => 
+                        r.rewardname && r.rewardname.trim().toLowerCase() === selectedReward.name.trim().toLowerCase()
+                    );
+                    
+                    let amountUSD = '0';
+                    let amountLocal = '0';
+                    let amountPoints = 0;
+                    
+                    if (rewardData) {
+                        amountUSD = rewardData.amount_usd || rewardData.usd_amount || '0';
+                        amountLocal = rewardData.amount_local || rewardData.local_amount || '0';
+                        
+                        if (amountUSD === '0' && rewardData.amount) {
+                            amountUSD = rewardData.amount;
+                            amountLocal = rewardData.amount;
+                        }
+
+                        amountPoints = Math.floor(parseFloat(amountUSD) * 400);
+                    }
+
+                    const transID = "reward_" + Date.now();
+                    const secureHash = generateHash(`${account}${transID}${selectedReward.name}${amountUSD}${amountLocal}${note}`);
+
+                    const params = new URLSearchParams({
+                        user_id: account,
+                        cashout_type: selectedReward.name,
+                        amount_usd: -Math.abs(parseFloat(amountUSD)),
+                        amount_local: -Math.abs(parseFloat(amountLocal)),
+                        amount_points: -Math.abs(amountPoints),
+                        trans_id: transID,
+                        status: "reward_claimed",
+                        note: note || '',
+                        offer_id: btoa(`reward=${selectedReward.name}`),
+                        secure_hash: secureHash
+                    });
+
+                    await fetch(`${scriptURL}?${params.toString()}`);
+                } catch (err) {
+                    console.error('Error in redemption:', err);
+                }
+            }
+
+            function parseCSV(csv) {
+                const lines = csv.split('\n');
+                if (lines.length < 2) return [];
+                
+                const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/ /g, '_'));
+                
+                return lines.slice(1).map(line => {
+                    const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+                    return headers.reduce((obj, header, i) => {
+                        obj[header] = values[i] || '';
+                        return obj;
+                    }, {});
+                });
+            }
+
+            function copyClaimCode() {
+                if (!claimCodeDisplay) return;
+                
+                const code = claimCodeDisplay.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    if (copyCodeBtn) {
+                        copyCodeBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            copyCodeBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+                        }, 2000);
+                    }
+                });
+            }
+
+            function prevStep() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateStepUI();
+                    clearMessages();
+                }
+            }
+
+            function generateHash(inputString) {
+                let hash = 0;
+                for (let i = 0; i < inputString.length; i++) {
+                    const char = inputString.charCodeAt(i);
+                    hash = (hash << 5) - hash + char;
+                }
+                return hash.toString(16);
+            }
+
+            function showError(step, msg) {
+                const box = messageBoxes[step];
+                if (box) {
+                    box.textContent = msg;
+                    box.className = "message error";
+                }
+            }
+
+            function showSuccess(step, msg) {
+                const box = messageBoxes[step];
+                if (box) {
+                    box.textContent = msg;
+                    box.className = "message success";
+                }
+            }
+
+            function clearMessage(step) {
+                const box = messageBoxes[step];
+                if (box) {
+                    box.textContent = "";
+                    box.className = "message";
+                }
+            }
+
+            function clearMessages() {
+                Object.values(messageBoxes).forEach(box => {
+                    if (box) {
+                        box.textContent = "";
+                        box.className = "message";
+                    }
+                });
+            }
+
+            // Initial load
+            updateStepUI();
+            loadRewardsData();
         }
     </script>
 </body>
